@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime">
+      <HintPath>..\lib\Antlr4.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +43,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PreAdamantLexer.partial.cs" />
+    <Compile Include="PreAdamantLexer.cs">
+      <DependentUpon>PreAdamantLexer.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\Conditional.cs" />
+    <Compile Include="Preprocessor\PreprocessorLineLexer.cs">
+      <DependentUpon>PreprocessorLineLexer.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorLineParser.cs">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorLineParserBaseListener.cs">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorLineParserBaseVisitor.cs">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorLineParserListener.cs">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorLineParserVisitor.cs">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Preprocessor\PreprocessorState.cs" />
+    <Compile Include="Preprocessor\PreprocessorVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d744b741-f097-4f46-b886-cb4ccc390efc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PreAdamantCommon.g4" />
+    <None Include="PreAdamantLexer.g4" />
+    <None Include="PreAdamantLexer.tokens">
+      <DependentUpon>PreAdamantLexer.g4</DependentUpon>
+    </None>
+    <None Include="Preprocessor\PreprocessorLineLexer.g4" />
+    <None Include="Preprocessor\PreprocessorLineLexer.tokens">
+      <DependentUpon>PreprocessorLineLexer.g4</DependentUpon>
+    </None>
+    <None Include="Preprocessor\PreprocessorLineParser.g4" />
+    <None Include="Preprocessor\PreprocessorLineParser.tokens">
+      <DependentUpon>PreprocessorLineParser.g4</DependentUpon>
+    </None>
+    <None Include="Unicode.g4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
