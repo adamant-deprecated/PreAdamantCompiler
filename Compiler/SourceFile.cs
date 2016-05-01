@@ -7,12 +7,15 @@ namespace PreAdamant.Compiler
 	{
 		private readonly FileInfo fileInfo;
 
-		public SourceFile(FileInfo fileInfo)
+		public SourceFile(string package, string name, FileInfo fileInfo)
 		{
+			Package = package;
+			Name = name;
 			this.fileInfo = fileInfo;
 		}
 
-		public override string Name => fileInfo.FullName;
+		public override string Package { get; }
+		public override string Name { get; }
 
 		public string Path => fileInfo.FullName;
 

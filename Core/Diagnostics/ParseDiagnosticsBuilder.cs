@@ -5,24 +5,20 @@ namespace PreAdamant.Compiler.Core.Diagnostics
 	public class ParseDiagnosticsBuilder
 	{
 		public readonly ISourceText SourceFile;
-		private List<Diagnostic> diagnostics = new List<Diagnostic>();
+		private readonly IList<Diagnostic> diagnostics;
+		public bool Any { get; private set; }
 
-		public ParseDiagnosticsBuilder(ISourceText sourceFile)
+		public ParseDiagnosticsBuilder(ISourceText sourceFile, IList<Diagnostic> diagnostics)
 		{
 			SourceFile = sourceFile;
+			this.diagnostics = diagnostics;
 		}
 
-		public IReadOnlyList<Diagnostic> Complete()
+		// TODO make methods for specific errors?
+		public Diagnostic AntlrParseError(TextPosition position, string message)
 		{
-			var result = diagnostics;
-			diagnostics = null;
-			result.Sort();
-			return result;
-		}
-
-		public Diagnostic ParseError(TextPosition position, string message)
-		{
-			var diagnostic = new Diagnostic(DiagnosticLevel.CompilationError, CompilerPhase.Parsing, SourceFile, position, message);
+			Any = true;
+			var diagnostic = new Diagnostic(DiagnosticLevel.FatalCompilationError, CompilerPhase.Parsing, SourceFile, position, message);
 			diagnostics.Add(diagnostic);
 			return diagnostic;
 		}

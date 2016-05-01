@@ -9,12 +9,14 @@ namespace PreAdamant.Compiler
 	{
 		private readonly TextReader reader;
 
-		public SourceReader(string name, TextReader reader)
+		public SourceReader(string package, string name, TextReader reader)
 		{
 			this.reader = reader;
+			Package = package;
 			Name = name;
 		}
 
+		public override string Package { get; }
 		public override string Name { get; }
 		internal override PreAdamantParser NewParser()
 		{

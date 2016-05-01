@@ -6,6 +6,7 @@ namespace PreAdamant.Compiler
 {
 	public abstract class SourceText : ISourceText
 	{
+		public abstract string Package { get; }
 		public abstract string Name { get; }
 		internal abstract PreAdamantParser NewParser();
 

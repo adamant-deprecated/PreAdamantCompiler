@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GatherErrorsListener.cs" />
     <Compile Include="PreAdamantParser.partial.cs" />
     <Compile Include="PackageReferenceContext.cs" />
     <Compile Include="PackageContext.cs" />

@@ -20,19 +20,19 @@ namespace PreAdamant.Compiler.Tests
 		private readonly PreAdamantCompiler compiler = new PreAdamantCompiler();
 		private readonly PackageReferenceContext runtimeDependency = new PackageReferenceContext("System.Runtime", null, true);
 
-		private string WorkPath;
+		private string workPath;
 
 		[TestFixtureSetUp]
 		public void SetUp()
 		{
-			WorkPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-			Directory.CreateDirectory(WorkPath);
+			workPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+			Directory.CreateDirectory(workPath);
 		}
 
 		[TestFixtureTearDown]
 		public void TearDown()
 		{
-			Directory.Delete(WorkPath, true);
+			Directory.Delete(workPath, true);
 		}
 
 		[Test, TestCaseSource(nameof(TestCases))]
@@ -40,8 +40,7 @@ namespace PreAdamant.Compiler.Tests
 		{
 			var dependencies = config.Runtime ? new[] { runtimeDependency } : Enumerable.Empty<PackageReferenceContext>();
 			var package = new PackageContext($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, dependencies);
-			var unit = compiler.Parse(package, new SourceReader(config.FileName, reader));
-			package = package.With(new[] { unit });
+			compiler.Parse(package, new SourceReader("Test", config.FileName, reader));
 			if(package.Diagnostics.Count > 0)
 				Assert.Fail(ToString(package.Diagnostics));
 			compiler.Compile(package, Enumerable.Empty<PackageContext>());
@@ -52,8 +51,8 @@ namespace PreAdamant.Compiler.Tests
 			var cppSourceName = package.Name + ".cpp";
 			CreateFile(cppSourceName, cppSource);
 			CreateFile(CppRuntime.FileName, CppRuntime.Source);
-			var targetPath = Path.Combine(WorkPath, package.Name + ".exe");
-			var result = CppCompiler.Invoke(Path.Combine(WorkPath, cppSourceName), targetPath);
+			var targetPath = Path.Combine(workPath, package.Name + ".exe");
+			var result = CppCompiler.Invoke(Path.Combine(workPath, cppSourceName), targetPath);
 			if(result.ExitCode != 0)
 			{
 				result.WriteOutputToConsole();
@@ -64,7 +63,7 @@ namespace PreAdamant.Compiler.Tests
 			using(var process = new Process())
 			{
 				process.StartInfo.FileName = targetPath;
-				process.StartInfo.WorkingDirectory = Path.GetDirectoryName(WorkPath);
+				process.StartInfo.WorkingDirectory = Path.GetDirectoryName(workPath);
 				process.StartInfo.CreateNoWindow = true;
 				process.StartInfo.UseShellExecute = false;
 				process.StartInfo.RedirectStandardOutput = true;
@@ -87,13 +86,13 @@ namespace PreAdamant.Compiler.Tests
 
 		private void CreateFile(string fileName, string content)
 		{
-			using(var file = File.CreateText(Path.Combine(WorkPath, fileName)))
+			using(var file = File.CreateText(Path.Combine(workPath, fileName)))
 			{
 				file.Write(content);
 			}
 		}
 
-		private static string ToString(IReadOnlyList<Diagnostic> diagnostics)
+		private static string ToString(IEnumerable<Diagnostic> diagnostics)
 		{
 			var builder = new StringBuilder();
 			ISourceText file = null;
