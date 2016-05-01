@@ -4,6 +4,7 @@ using Antlr4.Runtime.Tree;
 namespace PreAdamant.Compiler.Lexer.Preprocessor
 {
 	// TODO emit errors for space between # and command
+	// TODO it might make sense to use a Listener instead of a visitor
 	public class PreprocessorVisitor : PreprocessorLineParserBaseVisitor<Void>
 	{
 		private readonly PreprocessorState state;

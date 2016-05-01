@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime">
+      <HintPath>..\lib\Antlr4.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PreAdamantParser.partial.cs" />
+    <Compile Include="PackageReferenceContext.cs" />
+    <Compile Include="PackageContext.cs" />
     <Compile Include="PreAdamantParser.cs">
       <DependentUpon>PreAdamantParser.g4</DependentUpon>
     </Compile>
@@ -62,6 +68,20 @@
     <None Include="PreAdamantParser.tokens">
       <DependentUpon>PreAdamantParser.g4</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D744B741-F097-4F46-B886-CB4CCC390EFC}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lexer\Lexer.csproj">
+      <Project>{1A618712-732A-422A-A8CE-C7951AA0AF3F}</Project>
+      <Name>Lexer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
