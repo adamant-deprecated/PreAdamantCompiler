@@ -40,7 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PreAdamantParser.cs">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantParserBaseListener.cs">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantParserBaseVisitor.cs">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantParserListener.cs">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantParserVisitor.cs">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PreAdamantParser.g4" />
+    <None Include="PreAdamantParser.tokens">
+      <DependentUpon>PreAdamantParser.g4</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
