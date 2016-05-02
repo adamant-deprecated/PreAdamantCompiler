@@ -46,7 +46,7 @@ ConditionalSymbol
 	: IdentifierStartChar IdentifierPartChar*
 	;
 
-// Operators
+// Operators // TODO These should match the language operators
 And : '&&';
 Or : '||';
 Not : '!';

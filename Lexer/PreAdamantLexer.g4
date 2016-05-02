@@ -2,8 +2,6 @@ lexer grammar PreAdamantLexer;
 
 import PreAdamantCommon; // defines Whitespace, Newline and InputChar
 
-channels { DocComments }
-
 options
 {
 	language=CSharp;
@@ -13,7 +11,7 @@ options
 // Comments
 //*************
 SingleLineDocComment
-	: '///' InputChar* -> channel(DocComments)
+	: '///' InputChar* -> skip
 	;
 
 SingleLineComment
@@ -90,8 +88,6 @@ If : 'if';
 Else : 'else';
 For : 'for';
 In : 'in';
-Foreach : 'foreach';
-Yield : 'yeild';
 Switch : 'switch';
 Break : 'break';
 Continue : 'continue';
@@ -117,7 +113,7 @@ AsResult : 'as?';
 Public : 'public';
 Private : 'private';
 Protected : 'protected';
-Package : 'package';
+Internal : 'internal';
 
 // Safety
 Safe : 'safe';
@@ -150,6 +146,18 @@ DecimalType : 'decimal' IntLiteral?;
 SizeType : 'size';
 OffsetType : 'offset';
 UnsafeArrayType : 'UnsafeArray';
+
+//*************
+// Reserved Words
+//*************
+ReservedWord
+	: 'yield'
+	| 'bit_and'
+	| 'bit_or'
+	| 'bit_xor'
+	| 'bit_not'
+	| 'bit_shift_left'
+	| 'bit_shift_right';
 
 //*************
 // Literals
@@ -211,12 +219,6 @@ And : 'and';
 Xor : 'xor';
 Or : 'or';
 Not : 'not';
-BitAnd : 'bit_and';
-BitOr : 'bit_or';
-BitXor : 'bit_xor';
-BitNot : 'bit_not';
-BitShiftLeft : 'bit_shift_left';
-BitShiftRight : 'bit_shift_right';
 
 Assign : '=';
 AddAssign : '+=';

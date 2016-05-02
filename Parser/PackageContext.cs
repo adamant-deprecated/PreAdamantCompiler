@@ -39,5 +39,10 @@ namespace PreAdamant.Compiler.Parser
 			compilationUnit.Parent = this;
 			compilationUnits.Add(compilationUnit);
 		}
+
+		public void BindDependencies(IEnumerable<PackageContext> compiledPackages)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

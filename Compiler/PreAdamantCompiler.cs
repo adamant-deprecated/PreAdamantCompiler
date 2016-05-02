@@ -38,7 +38,8 @@ namespace PreAdamant.Compiler
 
 		public void Compile(PackageContext package, IEnumerable<PackageContext> compiledPackages)
 		{
-			throw new NotImplementedException();
+			package.BindDependencies(compiledPackages);
+			// TODO run analysis
 		}
 
 		public string EmitCpp(PackageContext compiledPackage)

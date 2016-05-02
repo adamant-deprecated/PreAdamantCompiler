@@ -52,7 +52,7 @@ modifier
 	: token='public'
 	| token='private'
 	| token='protected'
-	| token='package'
+	| token='internal'
 	| token='safe'
 	| token='unsafe'
 	| token='abstract'
