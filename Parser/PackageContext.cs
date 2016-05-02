@@ -23,7 +23,6 @@ namespace PreAdamant.Compiler.Parser
 
 		public PackageContext(string name, bool isApp, IEnumerable<PackageReferenceContext> dependencies)
 		{
-			// TODO set compilationUnits  parent
 			Requires.NotNullOrEmpty(name, nameof(name));
 			Dependencies = dependencies.ToList();
 			Requires.That(Dependencies.Select(d => d.AliasName).Distinct().Count() == Dependencies.Count, nameof(dependencies), "Dependency names/alias must be unique");
@@ -42,7 +41,9 @@ namespace PreAdamant.Compiler.Parser
 
 		public void BindDependencies(IEnumerable<PackageContext> compiledPackages)
 		{
-			throw new System.NotImplementedException();
+			var packagesLookup = compiledPackages.ToLookup(p => p.Name);
+			foreach(var dependency in Dependencies)
+				dependency.Package = packagesLookup[dependency.Name].Single();
 		}
 	}
 }

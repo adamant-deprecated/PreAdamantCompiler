@@ -8,6 +8,8 @@ namespace PreAdamant.Compiler.Parser
 		public readonly string Name;
 		public readonly string Alias;
 		public readonly bool Trusted;
+		public string AliasName => Alias ?? Name;
+		public PackageContext Package { get; set; }
 
 		public PackageReferenceContext(string name, string alias, bool trusted)
 		{
@@ -17,7 +19,5 @@ namespace PreAdamant.Compiler.Parser
 			Alias = alias;
 			Trusted = trusted;
 		}
-
-		public string AliasName => Alias ?? Name;
 	}
 }
