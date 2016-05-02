@@ -162,15 +162,65 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBaseTypes([NotNull] PreAdamantParser.BaseTypesContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.modifier"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.accessModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterModifier([NotNull] PreAdamantParser.ModifierContext context);
+	void EnterAccessModifier([NotNull] PreAdamantParser.AccessModifierContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.modifier"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.accessModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitModifier([NotNull] PreAdamantParser.ModifierContext context);
+	void ExitAccessModifier([NotNull] PreAdamantParser.AccessModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.safetyModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSafetyModifier([NotNull] PreAdamantParser.SafetyModifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.safetyModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSafetyModifier([NotNull] PreAdamantParser.SafetyModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.classInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClassInheritanceModifier([NotNull] PreAdamantParser.ClassInheritanceModifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.classInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClassInheritanceModifier([NotNull] PreAdamantParser.ClassInheritanceModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.methodInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.methodInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAsyncModifier([NotNull] PreAdamantParser.AsyncModifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAsyncModifier([NotNull] PreAdamantParser.AsyncModifierContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.typeParameters"/>.
 	/// </summary>

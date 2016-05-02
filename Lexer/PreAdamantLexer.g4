@@ -140,8 +140,6 @@ ByteType : 'byte';
 IntType : 'int' IntLiteral?;
 UIntType : 'uint' IntLiteral?;
 FloatType : 'float' IntLiteral?;
-FixedType : 'fixed' IntLiteral '.' IntLiteral;
-DecimalType : 'decimal' IntLiteral?;
 SizeType : 'size';
 OffsetType : 'offset';
 UnsafeArrayType : 'UnsafeArray';
@@ -157,7 +155,10 @@ ReservedWord
 	| 'bit_not'
 	| 'bit_shift_left'
 	| 'bit_shift_right'
-	| 'partial';
+	| 'partial'
+	| 'fixed' IntLiteral '.' IntLiteral // Fixed type
+	| 'decimal' IntLiteral? // Decimal Type
+	; 
 
 //*************
 // Literals

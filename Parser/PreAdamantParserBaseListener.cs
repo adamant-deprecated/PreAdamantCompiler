@@ -178,17 +178,77 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBaseTypes([NotNull] PreAdamantParser.BaseTypesContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.modifier"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.accessModifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterModifier([NotNull] PreAdamantParser.ModifierContext context) { }
+	public virtual void EnterAccessModifier([NotNull] PreAdamantParser.AccessModifierContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.modifier"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.accessModifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitModifier([NotNull] PreAdamantParser.ModifierContext context) { }
+	public virtual void ExitAccessModifier([NotNull] PreAdamantParser.AccessModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.safetyModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSafetyModifier([NotNull] PreAdamantParser.SafetyModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.safetyModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSafetyModifier([NotNull] PreAdamantParser.SafetyModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.classInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterClassInheritanceModifier([NotNull] PreAdamantParser.ClassInheritanceModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.classInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitClassInheritanceModifier([NotNull] PreAdamantParser.ClassInheritanceModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.methodInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.methodInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsyncModifier([NotNull] PreAdamantParser.AsyncModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsyncModifier([NotNull] PreAdamantParser.AsyncModifierContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.typeParameters"/>.
 	/// <para>The default implementation does nothing.</para>

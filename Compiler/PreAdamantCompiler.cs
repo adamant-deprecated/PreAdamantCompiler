@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Antlr4.Runtime.Atn;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Emit.Cpp;

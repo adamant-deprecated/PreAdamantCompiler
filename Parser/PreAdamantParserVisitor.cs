@@ -109,11 +109,41 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBaseTypes([NotNull] PreAdamantParser.BaseTypesContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.modifier"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.accessModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitModifier([NotNull] PreAdamantParser.ModifierContext context);
+	Result VisitAccessModifier([NotNull] PreAdamantParser.AccessModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.safetyModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSafetyModifier([NotNull] PreAdamantParser.SafetyModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.classInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClassInheritanceModifier([NotNull] PreAdamantParser.ClassInheritanceModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.methodInheritanceModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsyncModifier([NotNull] PreAdamantParser.AsyncModifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.typeParameters"/>.
 	/// </summary>

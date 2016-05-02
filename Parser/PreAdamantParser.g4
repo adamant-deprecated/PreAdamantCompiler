@@ -28,11 +28,11 @@ namespaceName
 
 declaration
 	: 'namespace' namespaceName '{' usingDirective* declaration* '}'  #NamespaceDeclaration
-	| attribute* modifier* 'class' identifier typeParameters? baseTypes?
+	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'class' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #ClassDeclaration
-	| attribute* modifier* kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';' #VariableDeclaration
-	| attribute* modifier* identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
+	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';' #VariableDeclaration
+	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
 	;
 
 contract
@@ -48,20 +48,37 @@ baseTypes
 	: (':' baseType=name? (':' interfaces+=name (',' interfaces+=name)*)?)
 	;
 
-modifier
+accessModifier
 	: token='public'
 	| token='private'
 	| token='protected'
 	| token='internal'
-	| token='safe'
+	;
+
+safetyModifier
+	: token='safe'
 	| token='unsafe'
-	| token='abstract'
-	| token='implicit'
-	| token='explicit'
+	;
+
+classInheritanceModifier
+	: token='abstract'
 	| token='sealed'
+	;
+
+methodInheritanceModifier
+	: token='abstract'
 	| token='override'
-	| token='async'
-	| token='extern'
+	| token='sealed'
+	| token='sealed' token='override'
+	;
+
+conversionModifier
+	: token='implicit'
+	| token='explicit'
+	;
+
+asyncModifier
+	: token='async'
 	;
 
 typeParameters
@@ -85,8 +102,6 @@ identifierOrPredefinedType
 	| token=IntType
 	| token=UIntType
 	| token=FloatType
-	//| token=FixedType
-	//| token=DecimalType
 	| token=SizeType
 	| token=OffsetType
 	| token=UnsafeArrayType
@@ -149,15 +164,15 @@ typeParameterConstraint
 	;
 
 member
-	: attribute* modifier* 'new' identifier? parameterList ('->' returnType=referenceType)? constructorInitializer? contract* methodBody						#Constructor
-	| attribute* modifier* 'delete' parameterList methodBody																									#Destructor
-	| attribute* modifier* 'conversion' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody						#ConversionMethod
-	| attribute* modifier* kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';'																#Field
-	| attribute* modifier* kind=('get'|'set') identifier typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody	#Accessor
-	| attribute* modifier* kind=('get'|'set') '[' ']' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody		#Indexer
-	| attribute* modifier* identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody			#Method
-	| attribute* modifier* 'operator' overloadableOperator parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody      #OperatorOverload
-	| attribute* modifier* 'class' identifier typeParameters? baseTypes?
+	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType=referenceType)? constructorInitializer? contract* methodBody																	#Constructor
+	| attribute* accessModifier safetyModifier? 'delete' parameterList methodBody																																				#Destructor
+	| attribute* accessModifier safetyModifier? conversionModifier 'conversion' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
+	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';'																														#Field
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') identifier typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody		#Accessor
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') '[' ']' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody		#Indexer
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody				#Method
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? 'operator' overloadableOperator parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody		#OperatorOverload
+	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'class' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #NestedClassDeclaration
 	;

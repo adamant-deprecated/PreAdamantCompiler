@@ -15,6 +15,8 @@ Doc Comments | Documentation comments are not distinguished from regular comment
 Yield | Yield used to easily write methods returning iterators.
 Bitwise Operations | All bitwise operations on numbers
 Partial Classes |
+Fixed Point Types |
+Decimal Types |
 
 ## Included in Pre-Adamant
 
