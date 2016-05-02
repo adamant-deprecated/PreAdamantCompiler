@@ -56,7 +56,6 @@ modifier
 	| token='safe'
 	| token='unsafe'
 	| token='abstract'
-	| token='partial'
 	| token='implicit'
 	| token='explicit'
 	| token='sealed'

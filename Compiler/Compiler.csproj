@@ -54,6 +54,10 @@
       <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Emit.Cpp\Emit.Cpp.csproj">
+      <Project>{630F91E3-F9E3-494D-8985-313C4D372696}</Project>
+      <Name>Emit.Cpp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lexer\Lexer.csproj">
       <Project>{1A618712-732A-422A-A8CE-C7951AA0AF3F}</Project>
       <Name>Lexer</Name>

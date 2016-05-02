@@ -76,7 +76,6 @@ Set : 'set';
 // Modifiers
 Sealed : 'sealed';
 Override : 'override';
-Partial : 'partial';
 Abstract : 'abstract';
 Params : 'params';
 Extern : 'extern';
@@ -157,7 +156,8 @@ ReservedWord
 	| 'bit_xor'
 	| 'bit_not'
 	| 'bit_shift_left'
-	| 'bit_shift_right';
+	| 'bit_shift_right'
+	| 'partial';
 
 //*************
 // Literals

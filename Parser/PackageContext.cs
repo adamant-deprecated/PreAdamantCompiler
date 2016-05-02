@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Antlr4.Runtime;
-using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Core.Diagnostics;
+using static PreAdamant.Compiler.Parser.PreAdamantParser;
+using Requires = PreAdamant.Compiler.Common.Requires;
 
 namespace PreAdamant.Compiler.Parser
 {
@@ -15,8 +16,8 @@ namespace PreAdamant.Compiler.Parser
 	{
 		public readonly string Name;
 		public readonly bool IsApp;
-		private readonly List<PreAdamantParser.CompilationUnitContext> compilationUnits;
-		public IReadOnlyList<PreAdamantParser.CompilationUnitContext> CompilationUnits => compilationUnits;
+		private readonly List<CompilationUnitContext> compilationUnits;
+		public IReadOnlyList<CompilationUnitContext> CompilationUnits => compilationUnits;
 		public readonly IReadOnlyList<PackageReferenceContext> Dependencies;
 		public readonly IList<Diagnostic> Diagnostics;
 		// TODO Language version
@@ -28,12 +29,12 @@ namespace PreAdamant.Compiler.Parser
 			Requires.That(Dependencies.Select(d => d.AliasName).Distinct().Count() == Dependencies.Count, nameof(dependencies), "Dependency names/alias must be unique");
 
 			Name = name;
-			compilationUnits = new List<PreAdamantParser.CompilationUnitContext>();
+			compilationUnits = new List<CompilationUnitContext>();
 			IsApp = isApp;
 			Diagnostics = new List<Diagnostic>();
 		}
 
-		public void Add(PreAdamantParser.CompilationUnitContext compilationUnit)
+		public void Add(CompilationUnitContext compilationUnit)
 		{
 			compilationUnit.Parent = this;
 			compilationUnits.Add(compilationUnit);

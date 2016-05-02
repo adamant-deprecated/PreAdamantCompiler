@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Antlr4.Runtime.Atn;
 using PreAdamant.Compiler.Core.Diagnostics;
+using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Parser;
 
 namespace PreAdamant.Compiler
@@ -42,9 +43,10 @@ namespace PreAdamant.Compiler
 			// TODO run analysis
 		}
 
-		public string EmitCpp(PackageContext compiledPackage)
+		public string EmitCpp(PackageContext package)
 		{
-			throw new NotImplementedException();
+			var emitter = new PackageEmitter(package);
+			return emitter.Emit();
 		}
 	}
 }
