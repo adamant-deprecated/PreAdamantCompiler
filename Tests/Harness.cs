@@ -48,10 +48,10 @@ namespace PreAdamant.Compiler.Tests
 				Assert.Fail(ToString(package.Diagnostics));
 
 			var cppSource = compiler.EmitCpp(package);
-			var cppSourceName = package.Name + ".cpp";
+			var cppSourceName = config.TestName + ".cpp";
 			CreateFile(cppSourceName, cppSource);
 			CreateFile(CppRuntime.FileName, CppRuntime.Source);
-			var targetPath = Path.Combine(workPath, package.Name + ".exe");
+			var targetPath = Path.Combine(workPath, config.TestName + ".exe");
 			var result = CppCompiler.Invoke(Path.Combine(workPath, cppSourceName), targetPath);
 			if(result.ExitCode != 0)
 			{

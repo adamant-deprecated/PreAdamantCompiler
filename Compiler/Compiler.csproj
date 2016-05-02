@@ -50,6 +50,10 @@
     <Compile Include="SourceText.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Analyzer\Analyzer.csproj">
+      <Project>{3514772B-EE43-434B-8CA4-8186E060DDBF}</Project>
+      <Name>Analyzer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
       <Name>Core</Name>

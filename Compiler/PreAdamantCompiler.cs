@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime.Atn;
+using Antlr4.Runtime.Tree;
+using PreAdamant.Compiler.Analyzer;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Parser;
@@ -31,7 +33,7 @@ namespace PreAdamant.Compiler
 
 			// TODO should really be about ones that prevent further processing?
 			if(!diagnostics.Any)
-				package.Add(compilationUnit);
+				package.AddChild(compilationUnit);
 
 			return compilationUnit;
 		}
@@ -39,7 +41,11 @@ namespace PreAdamant.Compiler
 		public void Compile(PackageContext package, IEnumerable<PackageContext> compiledPackages)
 		{
 			package.BindDependencies(compiledPackages);
-			// TODO run analysis
+
+			var treeWalker = new ParseTreeWalker();
+			treeWalker.Walk(new SymbolsBuilder(), package);
+
+			// TODO rest of analysis
 		}
 
 		public string EmitCpp(PackageContext package)

@@ -61,6 +61,7 @@
     <EmbeddedResource Include="Initial\2_ReturnConstantWithNamespace.adam" />
     <EmbeddedResource Include="Initial\3_ReturnStringLength.adam" />
     <EmbeddedResource Include="Initial\4_HelloWorld.adam" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
