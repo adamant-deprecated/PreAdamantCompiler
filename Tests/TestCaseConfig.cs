@@ -11,7 +11,7 @@ namespace PreAdamant.Compiler.Tests
 		public string Description;
 		public string FileName;
 		public bool Runtime;
-		public int? Result;
+		public int Result;
 		public bool VerifyConsoleOutput;
 		public string ExpectedConsoleOutput;
 

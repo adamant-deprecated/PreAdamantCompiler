@@ -35,7 +35,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			//Emit(source, package.GlobalNamespace.GetMembers());
 			source.EndBlock();
 
-			//EmitEntryPoint(source);
+			EmitEntryPoint(source);
 
 			return source.ToString();
 		}
@@ -138,28 +138,29 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//		.Exhaustive();
 		//}
 
-		//private void EmitEntryPoint(SourceFileBuilder source)
-		//{
-		//	var entryPoint = package.EntryPoints.SingleOrDefault();
-		//	if(entryPoint == null) return;
+		private void EmitEntryPoint(SourceFileBuilder source)
+		{
+			//var entryPoint = package.EntryPoints.SingleOrDefault();
+			//if(entryPoint == null) return;
 
-		//	source.WriteLine();
-		//	source.WriteIndentedLine("int main(int argc, char *argv[])");
-		//	source.BeginBlock();
-		//	var entryPointName = CodeFor(entryPoint.QualifiedName());
-		//	if(entryPoint.ReturnType.Type is VoidType)
-		//	{
-		//		source.WriteIndentedLine($"{entryPointName}();");
-		//		source.WriteIndentedLine("return 0;");
-		//	}
-		//	else
-		//	{
-		//		source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
-		//		source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
-		//		source.WriteIndentedLine("delete exitCodePtr;");
-		//		source.WriteIndentedLine("return exitCode;");
-		//	}
-		//	source.EndBlock();
-		//}
+			source.WriteLine();
+			source.WriteIndentedLine("int main(int argc, char *argv[])");
+			source.BeginBlock();
+			source.WriteIndentedLine("return -1;");
+			//var entryPointName = CodeFor(entryPoint.QualifiedName());
+			//if(entryPoint.ReturnType.Type is VoidType)
+			//{
+			//	source.WriteIndentedLine($"{entryPointName}();");
+			//	source.WriteIndentedLine("return 0;");
+			//}
+			//else
+			//{
+			//	source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
+			//	source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
+			//	source.WriteIndentedLine("delete exitCodePtr;");
+			//	source.WriteIndentedLine("return exitCode;");
+			//}
+			source.EndBlock();
+		}
 	}
 }

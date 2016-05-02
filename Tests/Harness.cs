@@ -77,8 +77,7 @@ namespace PreAdamant.Compiler.Tests
 				process.BeginErrorReadLine();
 				process.WaitForExit();
 
-				if(config.Result != null)
-					Assert.AreEqual(config.Result, process.ExitCode, "Exit Code");
+				Assert.AreEqual(config.Result, process.ExitCode, "Exit Code");
 				if(config.VerifyConsoleOutput)
 					Assert.AreEqual(config.ExpectedConsoleOutput, outputBuffer.ToString());
 			}
