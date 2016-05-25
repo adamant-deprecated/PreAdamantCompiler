@@ -57,14 +57,20 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					{
 						var func = funcSymbol.Declarations.Single();
 
-						// TODO write correct return type
-						// TODO write correct parameter types
-						source.WriteIndentedLine($"{CodeFor(func.returnType)} {func.Name}()");
+						var @params = func.parameterList()._parameters.Select(CodeFor);
+						source.WriteIndentedLine($"{CodeFor(func.returnType)} {func.Name}({string.Join(", ", @params)})");
 						source.BeginBlock();
 						Emit(source, func.methodBody());
 						source.EndBlock();
 					})
 					.Exhaustive();
+		}
+
+		private static object CodeFor(ParameterContext parameter)
+		{
+			return parameter.Match().Returning<string>()
+				.With<NamedParameterContext>(param => $"{CodeFor(param.referenceType())} {param.identifier().GetText()}")
+				.Exhaustive();
 		}
 
 		private static void Emit(SourceFileBuilder source, MethodBodyContext methodBody)
@@ -80,6 +86,10 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				{
 					var code = @return.expression() != null ? $"return {CodeFor(@return.expression())};" : "return;";
 					source.WriteIndentedLine(code);
+				})
+				.With<ExpressionStatementContext>(expStatement =>
+				{
+					source.WriteIndentedLine(CodeFor(expStatement.expression()) + ";");
 				})
 				.Exhaustive();
 		}
@@ -111,6 +121,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var unsafeArray = $"new uint8_t[{encodedValue.Length}]{{{bytes}}}";
 					return $"new ::__Adamant::Runtime::string(new size_t({encodedValue.Length}), {unsafeArray})";
 				})
+				.With<CallExpressionContext>(call =>
+				{
+					var args = call.argumentList()._expressions.Select(CodeFor);
+					return $"{CodeFor(call.expression())}({string.Join(", ", args)})";
+				})
+				.With<NameExpressionContext>(name =>
+				{
+					// TODO we really need name binding to look this name up
+					return name.GetText();
+				})
 				.Exhaustive();
 		}
 
@@ -131,7 +151,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			var valueType = CodeFor(type.ValueType);
 			if(valueType == "void") return valueType;
-			return valueType + (type.IsMutable ? "*" : " const* const");
+			return valueType + (type.IsMutable ? "*" : " const * const");
 		}
 
 		private static string CodeFor(ValueTypeContext type)
@@ -139,18 +159,6 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return type.Match().Returning<string>()
 				.With<NamedTypeContext>(namedType => CodeFor(namedType.name()))
 				.Exhaustive();
-
-			//return type.Symbol.Match().Returning<string>()
-			//	.With<PredefinedSymbol>(symbol =>
-			//	{
-			//		var code = symbol.Name;
-			//		switch(code)
-			//		{
-
-			//		}
-			//		return code;
-			//	})
-			//	.Exhaustive();
 		}
 
 		private static string CodeFor(NameContext name)
@@ -201,7 +209,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					source.WriteIndentedLine("return 0;");
 					break;
 				case "int32_t*":
-				case "int32_t const* const":
+				case "int32_t const * const":
 					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
 					source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
 					source.WriteIndentedLine("delete exitCodePtr;");
