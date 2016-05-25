@@ -273,7 +273,7 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// <return>The visitor result.</return>
 	public virtual Result VisitGenericName([NotNull] PreAdamantParser.GenericNameContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.SimpleNameName"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.UnqualifiedName"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -281,7 +281,7 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context) { return VisitChildren(context); }
+	public virtual Result VisitUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.QualifiedName"/>.
 	/// <para>
@@ -613,7 +613,7 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// <return>The visitor result.</return>
 	public virtual Result VisitArgumentList([NotNull] PreAdamantParser.ArgumentListContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.BlockMethodBody"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -621,7 +621,17 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitMethodBody([NotNull] PreAdamantParser.MethodBodyContext context) { return VisitChildren(context); }
+	public virtual Result VisitBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.NoMethodBody"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.overloadableOperator"/>.
 	/// <para>

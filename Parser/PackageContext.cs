@@ -67,5 +67,21 @@ namespace PreAdamant.Compiler.Parser
 			var typedVisitor = visitor as IContextVisitor<TResult>;
 			return typedVisitor != null ? typedVisitor.VisitPackage(this) : visitor.VisitChildren(this);
 		}
+
+		public IEnumerable<Symbol<FunctionDeclarationContext>> EntryPoints()
+		{
+			var symbols = new Stack<Symbol>();
+			symbols.Push(Symbol);
+			while(symbols.Count > 0)
+			{
+				var symbol = symbols.Pop();
+				foreach(var child in symbol.Children)
+					symbols.Push(child);
+
+				Symbol<FunctionDeclarationContext>  funcSymbol;
+				if(symbol.Name == "Main" && (funcSymbol = symbol as Symbol<FunctionDeclarationContext>) != null)
+					yield return funcSymbol;
+			}
+		}
 	}
 }

@@ -19,7 +19,9 @@ namespace PreAdamant.Compiler.Parser
 		public static Symbol<T> For<T>(Symbol parent, string name, T declaration)
 			where T : ParserRuleContext
 		{
-			return new Symbol<T>(parent, name, declaration);
+			var symbol = new Symbol<T>(parent, name, declaration);
+			parent?.children.Add(symbol);
+			return symbol;
 		}
 	}
 

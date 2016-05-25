@@ -44,6 +44,7 @@ namespace PreAdamant.Compiler
 
 			var treeWalker = new ParseTreeWalker();
 			treeWalker.Walk(new SymbolsBuilder(), package);
+			treeWalker.Walk(new BindSymbols(), package);
 
 			// TODO rest of analysis
 		}

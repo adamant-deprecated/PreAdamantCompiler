@@ -66,6 +66,10 @@
     <None Include="Resources\Runtime.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d744b741-f097-4f46-b886-cb4ccc390efc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
       <Name>Parser</Name>

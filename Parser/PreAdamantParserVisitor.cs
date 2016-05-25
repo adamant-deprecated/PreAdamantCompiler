@@ -183,12 +183,12 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitGenericName([NotNull] PreAdamantParser.GenericNameContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>SimpleNameName</c>
+	/// Visit a parse tree produced by the <c>UnqualifiedName</c>
 	/// labeled alternative in <see cref="PreAdamantParser.name"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context);
+	Result VisitUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>QualifiedName</c>
 	/// labeled alternative in <see cref="PreAdamantParser.name"/>.
@@ -412,11 +412,19 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitArgumentList([NotNull] PreAdamantParser.ArgumentListContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Visit a parse tree produced by the <c>BlockMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitMethodBody([NotNull] PreAdamantParser.MethodBodyContext context);
+	Result VisitBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>NoMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.overloadableOperator"/>.
 	/// </summary>

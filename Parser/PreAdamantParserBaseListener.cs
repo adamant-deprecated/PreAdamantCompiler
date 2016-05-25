@@ -322,17 +322,17 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitGenericName([NotNull] PreAdamantParser.GenericNameContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.SimpleNameName"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.UnqualifiedName"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context) { }
+	public virtual void EnterUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.SimpleNameName"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.UnqualifiedName"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context) { }
+	public virtual void ExitUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.QualifiedName"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -730,17 +730,29 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArgumentList([NotNull] PreAdamantParser.ArgumentListContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.BlockMethodBody"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMethodBody([NotNull] PreAdamantParser.MethodBodyContext context) { }
+	public virtual void EnterBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.BlockMethodBody"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMethodBody([NotNull] PreAdamantParser.MethodBodyContext context) { }
+	public virtual void ExitBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.NoMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.NoMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.overloadableOperator"/>.
 	/// <para>The default implementation does nothing.</para>

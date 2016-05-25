@@ -1843,22 +1843,22 @@ public partial class PreAdamantParser : Parser {
 			base.CopyFrom(context);
 		}
 	}
-	public partial class SimpleNameNameContext : NameContext {
+	public partial class UnqualifiedNameContext : NameContext {
 		public SimpleNameContext simpleName() {
 			return GetRuleContext<SimpleNameContext>(0);
 		}
-		public SimpleNameNameContext(NameContext context) { CopyFrom(context); }
+		public UnqualifiedNameContext(NameContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
-			if (typedListener != null) typedListener.EnterSimpleNameName(this);
+			if (typedListener != null) typedListener.EnterUnqualifiedName(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
-			if (typedListener != null) typedListener.ExitSimpleNameName(this);
+			if (typedListener != null) typedListener.ExitUnqualifiedName(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPreAdamantParserVisitor<TResult> typedVisitor = visitor as IPreAdamantParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitSimpleNameName(this);
+			if (typedVisitor != null) return typedVisitor.VisitUnqualifiedName(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -1904,7 +1904,7 @@ public partial class PreAdamantParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			{
-			_localctx = new SimpleNameNameContext(_localctx);
+			_localctx = new UnqualifiedNameContext(_localctx);
 			Context = _localctx;
 			_prevctx = _localctx;
 
@@ -4433,28 +4433,54 @@ public partial class PreAdamantParser : Parser {
 	}
 
 	public partial class MethodBodyContext : ParserRuleContext {
+		public MethodBodyContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_methodBody; } }
+	 
+		public MethodBodyContext() { }
+		public virtual void CopyFrom(MethodBodyContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class BlockMethodBodyContext : MethodBodyContext {
+		public StatementContext _statement;
+		public IList<StatementContext> _statements = new List<StatementContext>();
 		public StatementContext[] statement() {
 			return GetRuleContexts<StatementContext>();
 		}
 		public StatementContext statement(int i) {
 			return GetRuleContext<StatementContext>(i);
 		}
-		public MethodBodyContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_methodBody; } }
+		public BlockMethodBodyContext(MethodBodyContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
-			if (typedListener != null) typedListener.EnterMethodBody(this);
+			if (typedListener != null) typedListener.EnterBlockMethodBody(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
-			if (typedListener != null) typedListener.ExitMethodBody(this);
+			if (typedListener != null) typedListener.ExitBlockMethodBody(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPreAdamantParserVisitor<TResult> typedVisitor = visitor as IPreAdamantParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitMethodBody(this);
+			if (typedVisitor != null) return typedVisitor.VisitBlockMethodBody(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class NoMethodBodyContext : MethodBodyContext {
+		public NoMethodBodyContext(MethodBodyContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
+			if (typedListener != null) typedListener.EnterNoMethodBody(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPreAdamantParserListener typedListener = listener as IPreAdamantParserListener;
+			if (typedListener != null) typedListener.ExitNoMethodBody(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParserVisitor<TResult> typedVisitor = visitor as IPreAdamantParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNoMethodBody(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -4468,6 +4494,7 @@ public partial class PreAdamantParser : Parser {
 			State = 794;
 			switch (TokenStream.La(1)) {
 			case LeftBrace:
+				_localctx = new BlockMethodBodyContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 785; Match(LeftBrace);
@@ -4477,7 +4504,8 @@ public partial class PreAdamantParser : Parser {
 				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << New) | (1L << Delete) | (1L << Self) | (1L << Uninitialized) | (1L << Var) | (1L << Let) | (1L << If) | (1L << For) | (1L << Continue) | (1L << Return) | (1L << Try) | (1L << TryPanic) | (1L << TryResult) | (1L << Throw) | (1L << Unsafe) | (1L << Void))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (String - 64)) | (1L << (ByteType - 64)) | (1L << (IntType - 64)) | (1L << (UIntType - 64)) | (1L << (FloatType - 64)) | (1L << (SizeType - 64)) | (1L << (OffsetType - 64)) | (1L << (UnsafeArrayType - 64)) | (1L << (BooleanLiteral - 64)) | (1L << (IntLiteral - 64)) | (1L << (NullLiteral - 64)) | (1L << (StringLiteral - 64)) | (1L << (CharLiteral - 64)) | (1L << (Semicolon - 64)) | (1L << (LeftBrace - 64)) | (1L << (LeftParen - 64)) | (1L << (Asterisk - 64)) | (1L << (AddressOf - 64)) | (1L << (Plus - 64)) | (1L << (Minus - 64)) | (1L << (Pipe - 64)) | (1L << (Not - 64)) | (1L << (Identifier - 64)) | (1L << (EscapedIdentifier - 64)))) != 0)) {
 					{
 					{
-					State = 786; statement();
+					State = 786; ((BlockMethodBodyContext)_localctx)._statement = statement();
+					((BlockMethodBodyContext)_localctx)._statements.Add(((BlockMethodBodyContext)_localctx)._statement);
 					}
 					}
 					State = 791;
@@ -4488,6 +4516,7 @@ public partial class PreAdamantParser : Parser {
 				}
 				break;
 			case Semicolon:
+				_localctx = new NoMethodBodyContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
 				State = 793; Match(Semicolon);

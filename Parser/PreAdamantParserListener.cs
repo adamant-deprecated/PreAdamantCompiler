@@ -286,17 +286,17 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitGenericName([NotNull] PreAdamantParser.GenericNameContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>SimpleNameName</c>
+	/// Enter a parse tree produced by the <c>UnqualifiedName</c>
 	/// labeled alternative in <see cref="PreAdamantParser.name"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context);
+	void EnterUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>SimpleNameName</c>
+	/// Exit a parse tree produced by the <c>UnqualifiedName</c>
 	/// labeled alternative in <see cref="PreAdamantParser.name"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitSimpleNameName([NotNull] PreAdamantParser.SimpleNameNameContext context);
+	void ExitUnqualifiedName([NotNull] PreAdamantParser.UnqualifiedNameContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>QualifiedName</c>
 	/// labeled alternative in <see cref="PreAdamantParser.name"/>.
@@ -676,15 +676,29 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArgumentList([NotNull] PreAdamantParser.ArgumentListContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Enter a parse tree produced by the <c>BlockMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMethodBody([NotNull] PreAdamantParser.MethodBodyContext context);
+	void EnterBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.methodBody"/>.
+	/// Exit a parse tree produced by the <c>BlockMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMethodBody([NotNull] PreAdamantParser.MethodBodyContext context);
+	void ExitBlockMethodBody([NotNull] PreAdamantParser.BlockMethodBodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>NoMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>NoMethodBody</c>
+	/// labeled alternative in <see cref="PreAdamantParser.methodBody"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNoMethodBody([NotNull] PreAdamantParser.NoMethodBodyContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.overloadableOperator"/>.
 	/// </summary>

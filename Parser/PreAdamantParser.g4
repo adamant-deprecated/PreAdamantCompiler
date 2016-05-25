@@ -113,7 +113,7 @@ simpleName
 	;
 
 name
-	: simpleName								#SimpleNameName
+	: simpleName								#UnqualifiedName
 	| leftName=name '.' rightName=simpleName	#QualifiedName
 	;
 
@@ -202,8 +202,8 @@ argumentList
 	;
 
 methodBody
-	: '{' statement* '}'
-	| ';'
+	: '{' (statements+=statement)* '}'	#BlockMethodBody
+	| ';'								#NoMethodBody
 	;
 
 overloadableOperator
