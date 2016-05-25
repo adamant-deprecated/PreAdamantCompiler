@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Parser;
@@ -57,7 +58,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 						// TODO write correct return type
 						// TODO write correct parameter types
-						source.WriteIndentedLine($"{TypeOf(func.returnType)} {func.Name}()");
+						source.WriteIndentedLine($"{CodeFor(func.returnType)} {func.Name}()");
 						source.BeginBlock();
 						Emit(source, func.methodBody());
 						source.EndBlock();
@@ -85,13 +86,13 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		private static string CodeFor(ExpressionContext expression)
 		{
 			return expression.Match().Returning<string>()
+				.With<IntLiteralExpressionContext>(literal =>
+				{
+					// TODO use the correctly calculated type for this
+					return $"new int32_t({literal.Value})";
+				})
 				.Exhaustive();
 			//	return expression.Match().Returning<string>()
-			//		.With<IntegerLiteral>(literal =>
-			//		{
-			//			// TODO use the correctly calculated type for this
-			//			return $"new int32_t({literal.Value})";
-			//		})
 			//		.With<StringLiteral>(literal =>
 			//		{
 			//			var encodedValue = Encoding.UTF8.GetBytes(literal.Value);
@@ -124,43 +125,61 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return symbol.Name.Replace(".", "__");
 		}
 
+		private static string CodeFor(ReferenceTypeContext type)
+		{
+			var valueType = CodeFor(type.ValueType);
+			if(valueType == "void") return valueType;
+			return valueType + (type.IsMutable ? "*" : " const* const");
+		}
+
+		private static string CodeFor(ValueTypeContext type)
+		{
+			return type.Match().Returning<string>()
+				.With<NamedTypeContext>(namedType => CodeFor(namedType.name()))
+				.Exhaustive();
+
+			//return type.Symbol.Match().Returning<string>()
+			//	.With<PredefinedSymbol>(symbol =>
+			//	{
+			//		var code = symbol.Name;
+			//		switch(code)
+			//		{
+
+			//		}
+			//		return code;
+			//	})
+			//	.Exhaustive();
+		}
+
 		private static string CodeFor(NameContext name)
 		{
 			return name.Match().Returning<string>()
-				.With<UnqualifiedNameContext>(unqualifiedName => unqualifiedName.simpleName().Match().Returning<string>()
-					.With<IdentifierNameContext>(identName => identName.identifierOrPredefinedType().token.Text)
-					.Exhaustive())
+				.With<UnqualifiedNameContext>(unqualifiedName => CodeFor(unqualifiedName.simpleName()))
+				.With<QualifiedNameContext>(qualifiedName => { throw new NotImplementedException(); })
 				.Exhaustive();
 		}
 
-		private static string TypeOf(ReferenceTypeContext type)
+		private static string CodeFor(SimpleNameContext simpleName)
 		{
-			return type.ValueType.Match().Returning<string>()
-				.With<NamedTypeContext>(valueType => CodeFor(valueType.name()))
+			return simpleName.Match().Returning<string>()
+				.With<IdentifierNameContext>(identifierName =>
+				{
+					var code = identifierName.GetText();
+					switch(code)
+					{
+						case "void":
+							break;
+						case "int":
+						case "uint":
+							code += "32_t";
+							break;
+						default:
+							throw new NotImplementedException($"CodeFor identifier name {code}");
+					}
+					return code;
+				})
 				.Exhaustive();
 		}
-		//private static string TypeOf(ReferenceType type)
-		//{
-		//	return type.Type.Match().Returning<string>()
-		//		.With<VoidType>(voidType => "void")
-		//		.With<IntType>(intType =>
-		//		{
-		//			var coreType = intType.IsSigned ? "int" : "uint";
-		//			return $"{coreType}{intType.BitLength}_t*";
-		//		})
-		//		.Exhaustive();
-		//}
-		//private static string TypeOf(ValueType type)
-		//{
-		//	return type.Match().Returning<string>()
-		//		.With<VoidType>(voidType => "void")
-		//		.With<IntType>(intType =>
-		//		{
-		//			var coreType = intType.IsSigned ? "int" : "uint";
-		//			return $"{coreType}{intType.BitLength}_t";
-		//		})
-		//		.Exhaustive();
-		//}
 
 		private void EmitEntryPoint(SourceFileBuilder source)
 		{
@@ -172,17 +191,22 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			source.BeginBlock();
 			var entryPointName = QualifiedName(entryPoint);
 			var entryFunction = entryPoint.Declarations.Single();
-			if(entryFunction.IsVoidReturn)
+			var returnType = CodeFor(entryFunction.returnType);
+			switch(returnType)
 			{
-				source.WriteIndentedLine($"{entryPointName}();");
-				source.WriteIndentedLine("return 0;");
-			}
-			else
-			{
-				source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
-				source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
-				source.WriteIndentedLine("delete exitCodePtr;");
-				source.WriteIndentedLine("return exitCode;");
+				case "void":
+					source.WriteIndentedLine($"{entryPointName}();");
+					source.WriteIndentedLine("return 0;");
+					break;
+				case "int32_t*":
+				case "int32_t const* const":
+					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
+					source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
+					source.WriteIndentedLine("delete exitCodePtr;");
+					source.WriteIndentedLine("return exitCode;");
+					break;
+				default:
+					throw new NotSupportedException($"Entry point return type of `{returnType}` not supported");
 			}
 			source.EndBlock();
 		}

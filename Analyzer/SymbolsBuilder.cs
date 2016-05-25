@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PreAdamant.Compiler.Parser;
+using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Analyzer
 {
@@ -22,24 +24,36 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
-		public override void EnterClassDeclaration(PreAdamantParser.ClassDeclarationContext context)
+		public override void EnterClassDeclaration(ClassDeclarationContext context)
 		{
 			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
 			symbols.Push(context.Symbol);
 		}
 
-		public override void ExitClassDeclaration(PreAdamantParser.ClassDeclarationContext context)
+		public override void ExitClassDeclaration(ClassDeclarationContext context)
 		{
 			symbols.Pop();
 		}
 
-		public override void EnterFunctionDeclaration(PreAdamantParser.FunctionDeclarationContext context)
+		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
 		{
 			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
 			symbols.Push(context.Symbol);
 		}
 
-		public override void ExitFunctionDeclaration(PreAdamantParser.FunctionDeclarationContext context)
+		public override void ExitFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			symbols.Pop();
+		}
+
+		public override void EnterNamespaceDeclaration(NamespaceDeclarationContext context)
+		{
+			var symbol = context.Names.Aggregate(CurrentSymbol, (current, name) => Symbol.For(current, name, context));
+			context.Symbol = (Symbol<NamespaceDeclarationContext>)symbol;
+			symbols.Push(context.Symbol);
+		}
+
+		public override void ExitNamespaceDeclaration(NamespaceDeclarationContext context)
 		{
 			symbols.Pop();
 		}

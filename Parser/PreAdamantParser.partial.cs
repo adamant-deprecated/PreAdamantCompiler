@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Lexer;
 
@@ -29,8 +30,12 @@ namespace PreAdamant.Compiler.Parser
 			public Symbol<FunctionDeclarationContext> Symbol { get; set; }
 			public string Name => identifier().Name;
 			public bool HasBody => methodBody().Exists;
-			public ReferenceType ReturnType { get; set; }
-			public bool IsVoidReturn => ReturnType == null;
+		}
+
+		public partial class NamespaceDeclarationContext
+		{
+			public Symbol<NamespaceDeclarationContext> Symbol { get; set; }
+			public IEnumerable<string> Names => namespaceName()._identifiers.Select(i => i.GetText());
 		}
 
 		public partial class IdentifierContext
@@ -97,6 +102,19 @@ namespace PreAdamant.Compiler.Parser
 		{
 			public override bool Exists => true;
 			public override IEnumerable<StatementContext> Statements => _statements;
+		}
+
+		public partial class IntLiteralExpressionContext
+		{
+			private BigInteger? value;
+			public BigInteger Value
+			{
+				get
+				{
+					if(value == null) value = BigInteger.Parse(IntLiteral().GetText());
+					return value.Value;
+				}
+			}
 		}
 	}
 }
