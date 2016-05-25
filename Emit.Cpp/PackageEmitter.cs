@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Parser;
 using static PreAdamant.Compiler.Parser.PreAdamantParser;
@@ -91,25 +92,26 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					// TODO use the correctly calculated type for this
 					return $"new int32_t({literal.Value})";
 				})
+				.With<CastExpressionContext>(cast =>
+				{
+					var type = cast.kind.Text;
+					switch(type)
+					{
+						case "as!":
+							return $"new {CodeFor(cast.valueType())}(*({CodeFor(cast.expression())}))";
+						default:
+							throw new NotSupportedException($"Cast type '{type}' not supported");
+					}
+				})
+				.With<MemberExpressionContext>(memberAccess => $"({CodeFor(memberAccess.expression())})->{memberAccess.identifier().GetText()}")
+				.With<StringLiteralExpressionContext>(literal =>
+				{
+					var encodedValue = Encoding.UTF8.GetBytes(literal.Value);
+					var bytes = string.Join(", ", encodedValue.Select(b => "0x" + b.ToString("X")));
+					var unsafeArray = $"new uint8_t[{encodedValue.Length}]{{{bytes}}}";
+					return $"new ::__Adamant::Runtime::string(new size_t({encodedValue.Length}), {unsafeArray})";
+				})
 				.Exhaustive();
-			//	return expression.Match().Returning<string>()
-			//		.With<StringLiteral>(literal =>
-			//		{
-			//			var encodedValue = Encoding.UTF8.GetBytes(literal.Value);
-			//			var bytes = string.Join(", ", encodedValue.Select(b => "0x" + b.ToString("X")));
-			//			var unsafeArray = $"new uint8_t[{encodedValue.Length}]{{{bytes}}}";
-			//			return $"new ::__Adamant::Runtime::string(new size_t({encodedValue.Length}), {unsafeArray})";
-			//		})
-			//		.With<MemberAccess>(memberAccess => $"({CodeFor(memberAccess.Expression)})->{memberAccess.Member}")
-			//		.With<Cast>(cast =>
-			//		{
-			//			if(cast.CastType != CastType.Panic)
-			//				throw new NotSupportedException($"Cast type '{cast.CastType}' not supported");
-			//			return cast.Type.Match().Returning<string>()
-			//				.With<IntType>(intType => $"new {TypeOf(intType)}(*({CodeFor(cast.Expression)}))")
-			//				.Exhaustive();
-			//		})
-			//		.Exhaustive();
 		}
 
 		private static string QualifiedName(Symbol symbol)

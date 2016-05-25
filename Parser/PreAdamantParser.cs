@@ -5683,7 +5683,7 @@ public partial class PreAdamantParser : Parser {
 		}
 	}
 	public partial class TryExpressionContext : ExpressionContext {
-		public IToken @try;
+		public IToken kind;
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
@@ -5767,7 +5767,7 @@ public partial class PreAdamantParser : Parser {
 		}
 	}
 	public partial class CastExpressionContext : ExpressionContext {
-		public IToken @as;
+		public IToken kind;
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
@@ -5916,10 +5916,10 @@ public partial class PreAdamantParser : Parser {
 				Context = _localctx;
 				_prevctx = _localctx;
 				State = 896;
-				((TryExpressionContext)_localctx).@try = TokenStream.Lt(1);
+				((TryExpressionContext)_localctx).kind = TokenStream.Lt(1);
 				_la = TokenStream.La(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Try) | (1L << TryPanic) | (1L << TryResult))) != 0)) ) {
-					((TryExpressionContext)_localctx).@try = ErrorHandler.RecoverInline(this);
+					((TryExpressionContext)_localctx).kind = ErrorHandler.RecoverInline(this);
 				}
 				else {
 				    Consume();
@@ -6293,10 +6293,10 @@ public partial class PreAdamantParser : Parser {
 						State = 995;
 						if (!(Precpred(Context, 12))) throw new FailedPredicateException(this, "Precpred(Context, 12)");
 						State = 996;
-						((CastExpressionContext)_localctx).@as = TokenStream.Lt(1);
+						((CastExpressionContext)_localctx).kind = TokenStream.Lt(1);
 						_la = TokenStream.La(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << As) | (1L << AsPanic) | (1L << AsResult))) != 0)) ) {
-							((CastExpressionContext)_localctx).@as = ErrorHandler.RecoverInline(this);
+							((CastExpressionContext)_localctx).kind = ErrorHandler.RecoverInline(this);
 						}
 						else {
 						    Consume();

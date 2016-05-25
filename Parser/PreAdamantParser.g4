@@ -259,8 +259,8 @@ expression
 	| expression 'in' expression							#InExpression
 	| 'new' name '(' argumentList ')'						#NewExpression
 	| 'new' baseTypes? '(' argumentList ')' '{' member* '}'	#NewObjectExpression
-	| expression as=('as'|'as!'|'as?') valueType			#CastExpression
-	| try=('try'|'try!'|'try?') expression					#TryExpression
+	| expression kind=('as'|'as!'|'as?') valueType			#CastExpression
+	| kind=('try'|'try!'|'try?') expression					#TryExpression
 	| <assoc=right> condition=expression '?' then=expression ':' else=expression #IfExpression
 	| <assoc=right> lvalue=expression op=('='|'*='|'/='|'+='|'-='|'and='|'xor='|'or=') rvalue=expression #AssignmentExpression
 	| simpleName											#NameExpression

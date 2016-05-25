@@ -116,5 +116,23 @@ namespace PreAdamant.Compiler.Parser
 				}
 			}
 		}
+
+		public partial class StringLiteralExpressionContext
+		{
+			private string value;
+
+			public string Value
+			{
+				get
+				{
+					if(value == null)
+					{
+						var text = StringLiteral().GetText();
+						value = text.Substring(0, text.Length - 2);
+					}
+					return value;
+				}
+			}
+		}
 	}
 }
