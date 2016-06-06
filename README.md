@@ -17,7 +17,7 @@ The Pre-Adamant Language is a modified form of the Adamant 1.0 Language.  The se
 It is still undecided whether the following features of Adamant will be included in Pre-Adamant.
 
 Feature      | Description
---------------------------
+-------------|------------
 Operator Overloading |
 Properties |
 Overload Number of Parameters |
