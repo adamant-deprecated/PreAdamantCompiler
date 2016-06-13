@@ -57,7 +57,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					{
 						var func = funcSymbol.Declarations.Single();
 
-						var @params = func.parameterList()._parameters.Select(CodeFor);
+						var @params = func.Parameters.Select(CodeFor);
 						source.WriteIndentedLine($"{CodeFor(func.returnType)} {func.Name}({string.Join(", ", @params)})");
 						source.BeginBlock();
 						Emit(source, func.methodBody());

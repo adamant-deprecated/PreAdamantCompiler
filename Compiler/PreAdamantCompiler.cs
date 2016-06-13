@@ -27,6 +27,7 @@ namespace PreAdamant.Compiler
 			parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
 
 			var compilationUnit = parser.compilationUnit();
+			compilationUnit.SourceText = sourceText;
 			// TODO in the exploratory compiler, these lines checked method modifier restrictions
 			//var syntaxCheck = new SyntaxCheckVisitor(builder);
 			//tree.Accept(syntaxCheck);

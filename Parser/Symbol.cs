@@ -23,6 +23,17 @@ namespace PreAdamant.Compiler.Parser
 			parent?.children.Add(symbol);
 			return symbol;
 		}
+
+		public string FullyQualifiedName
+		{
+			get
+			{
+				if(Parent == null) return Name;
+				if(Parent is Symbol<PackageContext>) return Parent.FullyQualifiedName + "::" + Name;
+
+				return Parent.FullyQualifiedName + "." + Name;
+			}
+		}
 	}
 
 	public class Symbol<T> : Symbol

@@ -330,8 +330,6 @@ public partial class PreAdamantParser : Parser {
 	}
 
 	public partial class NamespaceNameContext : ParserRuleContext {
-		public IdentifierContext _identifier;
-		public IList<IdentifierContext> _identifiers = new List<IdentifierContext>();
 		public IdentifierContext[] identifier() {
 			return GetRuleContexts<IdentifierContext>();
 		}
@@ -366,8 +364,7 @@ public partial class PreAdamantParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 100; _localctx._identifier = identifier();
-			_localctx._identifiers.Add(_localctx._identifier);
+			State = 100; identifier();
 			State = 105;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.La(1);
@@ -375,8 +372,7 @@ public partial class PreAdamantParser : Parser {
 				{
 				{
 				State = 101; Match(Dot);
-				State = 102; _localctx._identifier = identifier();
-				_localctx._identifiers.Add(_localctx._identifier);
+				State = 102; identifier();
 				}
 				}
 				State = 107;
@@ -3982,8 +3978,6 @@ public partial class PreAdamantParser : Parser {
 	}
 
 	public partial class ParameterListContext : ParserRuleContext {
-		public ParameterContext _parameter;
-		public IList<ParameterContext> _parameters = new List<ParameterContext>();
 		public ParameterContext[] parameter() {
 			return GetRuleContexts<ParameterContext>();
 		}
@@ -4022,8 +4016,7 @@ public partial class PreAdamantParser : Parser {
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 717; Match(LeftParen);
-				State = 718; _localctx._parameter = parameter();
-				_localctx._parameters.Add(_localctx._parameter);
+				State = 718; parameter();
 				State = 723;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.La(1);
@@ -4031,8 +4024,7 @@ public partial class PreAdamantParser : Parser {
 					{
 					{
 					State = 719; Match(Comma);
-					State = 720; _localctx._parameter = parameter();
-					_localctx._parameters.Add(_localctx._parameter);
+					State = 720; parameter();
 					}
 					}
 					State = 725;

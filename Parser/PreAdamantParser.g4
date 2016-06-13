@@ -23,7 +23,7 @@ identifier
 	;
 
 namespaceName
-	: identifiers+=identifier ('.' identifiers+=identifier)*
+	: identifier ('.' identifier)*
 	;
 
 declaration
@@ -178,7 +178,7 @@ member
 	;
 
 parameterList
-	: '(' parameters+=parameter (',' parameters+=parameter)* ')'
+	: '(' parameter (',' parameter)* ')'
 	| '(' ')'
 	;
 

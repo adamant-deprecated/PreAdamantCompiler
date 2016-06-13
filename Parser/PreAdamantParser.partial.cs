@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Antlr4.Runtime;
+using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Lexer;
 
 namespace PreAdamant.Compiler.Parser
@@ -19,6 +20,11 @@ namespace PreAdamant.Compiler.Parser
 		{
 		}
 
+		public partial class CompilationUnitContext
+		{
+			public ISourceText SourceText { get; set; }
+		}
+
 		public partial class ClassDeclarationContext
 		{
 			public Symbol<ClassDeclarationContext> Symbol { get; set; }
@@ -30,12 +36,13 @@ namespace PreAdamant.Compiler.Parser
 			public Symbol<FunctionDeclarationContext> Symbol { get; set; }
 			public string Name => identifier().Name;
 			public bool HasBody => methodBody().Exists;
+			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
 		}
 
 		public partial class NamespaceDeclarationContext
 		{
 			public Symbol<NamespaceDeclarationContext> Symbol { get; set; }
-			public IEnumerable<string> Names => namespaceName()._identifiers.Select(i => i.GetText());
+			public IEnumerable<string> Names => namespaceName().identifier().Select(i => i.GetText());
 		}
 
 		public partial class IdentifierContext
@@ -133,6 +140,16 @@ namespace PreAdamant.Compiler.Parser
 					return value;
 				}
 			}
+		}
+
+		public partial class ParameterContext
+		{
+			public Symbol Symbol { get; set; }
+		}
+
+		public partial class NamedParameterContext
+		{
+			public string Name => identifier().Name;
 		}
 	}
 }

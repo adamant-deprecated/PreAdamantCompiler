@@ -57,5 +57,10 @@ namespace PreAdamant.Compiler.Analyzer
 		{
 			symbols.Pop();
 		}
+
+		public override void EnterNamedParameter(NamedParameterContext context)
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
+		}
 	}
 }

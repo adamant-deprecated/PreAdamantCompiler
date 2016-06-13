@@ -45,9 +45,14 @@
   <ItemGroup>
     <Compile Include="BindSymbols.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SymbolBinder.cs" />
     <Compile Include="SymbolsBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
       <Name>Parser</Name>
