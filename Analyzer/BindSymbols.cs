@@ -77,5 +77,11 @@ namespace PreAdamant.Compiler.Analyzer
 		{
 			throw new NotImplementedException();
 		}
+
+		public override void EnterNameExpression(PreAdamantParser.NameExpressionContext context)
+		{
+			var variableName = context.simpleName().GetText();
+			context.ReferencedSymbol = CurrentBinder.LookupName(variableName);
+		}
 	}
 }

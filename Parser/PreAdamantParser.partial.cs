@@ -151,5 +151,10 @@ namespace PreAdamant.Compiler.Parser
 		{
 			public string Name => identifier().Name;
 		}
+
+		public partial class NameExpressionContext
+		{
+			public Symbol ReferencedSymbol { get; set; }
+		}
 	}
 }

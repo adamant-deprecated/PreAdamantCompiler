@@ -20,5 +20,14 @@ namespace PreAdamant.Compiler.Analyzer
 			this.symbols = symbols.ToList();
 			this.scopeName = scopeName;
 		}
+
+		public Symbol LookupName(string variableName)
+		{
+			var symbol = symbols.SingleOrDefault(s => s.Name == variableName);
+			if(symbol == null && containingBinder != null)
+				symbol = containingBinder.LookupName(variableName);
+
+			return symbol;
+		}
 	}
 }
