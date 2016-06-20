@@ -30,11 +30,17 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				source.WriteIndentedLine($"#include \"{dependency.Package.Name}.cpp\"");
 
 			source.WriteLine();
-
-			source.WriteIndentedLine("// Package");
+			source.WriteIndentedLine("// Package Declaration");
 			source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
 			source.BeginBlock();
-			Emit(source, package.Symbol.Children);
+			EmitDeclaration(source, package.Symbol.Children);
+			source.EndBlock();
+
+			source.WriteLine();
+			source.WriteIndentedLine("// Package Definition");
+			source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
+			source.BeginBlock();
+			EmitDefinition(source, package.Symbol.Children);
 			source.EndBlock();
 
 			EmitEntryPoint(source);
@@ -42,7 +48,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return source.ToString();
 		}
 
-		private static void Emit(SourceFileBuilder source, IEnumerable<Symbol> symbols)
+		#region EmitDeclaration
+		private static void EmitDeclaration(SourceFileBuilder source, IEnumerable<Symbol> symbols)
 		{
 			foreach(var symbol in symbols)
 				symbol.Match()
@@ -50,36 +57,49 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					{
 						source.WriteIndentedLine($"namespace {ns.Name}");
 						source.BeginBlock();
-						Emit(source, ns.Children);
+						EmitDeclaration(source, ns.Children);
+						source.EndBlock();
+					})
+					.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
+					{
+						var func = funcSymbol.Declarations.Single();
+						source.WriteIndentedLine(FunctionSignature(func) + ";");
+					})
+					.Exhaustive();
+		}
+		#endregion
+
+		#region EmitDefinition
+		private static void EmitDefinition(SourceFileBuilder source, IEnumerable<Symbol> symbols)
+		{
+			foreach(var symbol in symbols)
+				symbol.Match()
+					.With<Symbol<NamespaceDeclarationContext>>(ns =>
+					{
+						source.WriteIndentedLine($"namespace {ns.Name}");
+						source.BeginBlock();
+						EmitDefinition(source, ns.Children);
 						source.EndBlock();
 					})
 					.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
 					{
 						var func = funcSymbol.Declarations.Single();
 
-						var @params = func.Parameters.Select(CodeFor);
-						source.WriteIndentedLine($"{CodeFor(func.returnType)} {func.Name}({string.Join(", ", @params)})");
+						source.WriteIndentedLine(FunctionSignature(func));
 						source.BeginBlock();
-						Emit(source, func.methodBody());
+						EmitDefinition(source, func.methodBody());
 						source.EndBlock();
 					})
 					.Exhaustive();
 		}
 
-		private static object CodeFor(ParameterContext parameter)
-		{
-			return parameter.Match().Returning<string>()
-				.With<NamedParameterContext>(param => $"{CodeFor(param.referenceType())} {param.identifier().GetText()}")
-				.Exhaustive();
-		}
-
-		private static void Emit(SourceFileBuilder source, MethodBodyContext methodBody)
+		private static void EmitDefinition(SourceFileBuilder source, MethodBodyContext methodBody)
 		{
 			foreach(var statement in methodBody.Statements)
-				Emit(source, statement);
+				EmitDefinition(source, statement);
 		}
 
-		private static void Emit(SourceFileBuilder source, StatementContext statement)
+		private static void EmitDefinition(SourceFileBuilder source, StatementContext statement)
 		{
 			statement.Match()
 				.With<ReturnStatementContext>(@return =>
@@ -93,7 +113,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				})
 				.Exhaustive();
 		}
+		#endregion
 
+		#region CodeFor Expressions
 		private static string CodeFor(ExpressionContext expression)
 		{
 			return expression.Match().Returning<string>()
@@ -108,7 +130,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					switch(type)
 					{
 						case "as!":
-							return $"new {CodeFor(cast.valueType())}(*({CodeFor(cast.expression())}))";
+							return $"new {TypeName(cast.valueType())}(*({CodeFor(cast.expression())}))";
 						default:
 							throw new NotSupportedException($"Cast type '{type}' not supported");
 					}
@@ -129,7 +151,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				.With<NameExpressionContext>(name => QualifiedName(name.ReferencedSymbol))
 				.Exhaustive();
 		}
+		#endregion
 
+		#region Names
 		private static string QualifiedName(Symbol symbol)
 		{
 			return symbol.Match().Returning<string>()
@@ -142,30 +166,48 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			return symbol.Name.Replace(".", "__");
 		}
+		#endregion
 
-		private static string CodeFor(ReferenceTypeContext type)
+		#region Signatures
+		private static string FunctionSignature(FunctionDeclarationContext func)
 		{
-			var valueType = CodeFor(type.ValueType);
+			var @params = func.Parameters.Select(ParameterSignature);
+			return $"{TypeName(func.returnType)} {func.Name}({string.Join(", ", @params)})";
+		}
+
+		private static string ParameterSignature(ParameterContext parameter)
+		{
+			return parameter.Match().Returning<string>()
+				.With<NamedParameterContext>(param => $"{TypeName(param.referenceType())} {param.identifier().GetText()}")
+				.Exhaustive();
+		}
+		#endregion
+
+		#region TypeNames
+
+		private static string TypeName(ReferenceTypeContext type)
+		{
+			var valueType = TypeName(type.ValueType);
 			if(valueType == "void") return valueType;
 			return valueType + (type.IsMutable ? "*" : " const * const");
 		}
 
-		private static string CodeFor(ValueTypeContext type)
+		private static string TypeName(ValueTypeContext type)
 		{
 			return type.Match().Returning<string>()
-				.With<NamedTypeContext>(namedType => CodeFor(namedType.name()))
+				.With<NamedTypeContext>(namedType => TypeName(namedType.name()))
 				.Exhaustive();
 		}
 
-		private static string CodeFor(NameContext name)
+		private static string TypeName(NameContext name)
 		{
 			return name.Match().Returning<string>()
-				.With<UnqualifiedNameContext>(unqualifiedName => CodeFor(unqualifiedName.simpleName()))
+				.With<UnqualifiedNameContext>(unqualifiedName => TypeName(unqualifiedName.simpleName()))
 				.With<QualifiedNameContext>(qualifiedName => { throw new NotImplementedException(); })
 				.Exhaustive();
 		}
 
-		private static string CodeFor(SimpleNameContext simpleName)
+		private static string TypeName(SimpleNameContext simpleName)
 		{
 			return simpleName.Match().Returning<string>()
 				.With<IdentifierNameContext>(identifierName =>
@@ -186,6 +228,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				})
 				.Exhaustive();
 		}
+		#endregion
 
 		private void EmitEntryPoint(SourceFileBuilder source)
 		{
@@ -193,11 +236,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			if(entryPoint == null) return;
 
 			source.WriteLine();
+			source.WriteIndentedLine("// Entry Point");
 			source.WriteIndentedLine("int main(int argc, char *argv[])");
 			source.BeginBlock();
 			var entryPointName = QualifiedName(entryPoint);
 			var entryFunction = entryPoint.Declarations.Single();
-			var returnType = CodeFor(entryFunction.returnType);
+			var returnType = TypeName(entryFunction.returnType);
 			switch(returnType)
 			{
 				case "void":
