@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Antlr4.Runtime;
 using PreAdamant.Compiler.Parser;
 using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
@@ -35,7 +36,23 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
+		public override void EnterMethod(MethodContext context)
+		{
+			EnterFunctionContext(context);
+		}
+
+		public override void ExitMethod(MethodContext context)
+		{
+			symbols.Pop();
+		}
+
 		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			EnterFunctionContext(context);
+		}
+
+		private void EnterFunctionContext<T>(T context)
+			where T : ParserRuleContext, IFunctionContext<T>
 		{
 			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
 			symbols.Push(context.Symbol);
@@ -59,6 +76,16 @@ namespace PreAdamant.Compiler.Analyzer
 		}
 
 		public override void EnterNamedParameter(NamedParameterContext context)
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
+		}
+
+		public override void EnterSelfParameter(SelfParameterContext context)
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, "self", context);
+		}
+
+		public override void EnterLocalVariableDeclaration(LocalVariableDeclarationContext context)
 		{
 			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
 		}

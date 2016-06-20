@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace PreAdamant.Compiler.Common
 {
@@ -8,6 +9,7 @@ namespace PreAdamant.Compiler.Common
 		private readonly TReturn returnValue;
 		private readonly bool matched;
 
+		[DebuggerHidden]
 		internal MatcherWithReturn(TValue value)
 		{
 			this.value = value;
@@ -15,6 +17,7 @@ namespace PreAdamant.Compiler.Common
 			matched = false;
 		}
 
+		[DebuggerHidden]
 		internal MatcherWithReturn(TValue value, TReturn returnValue)
 		{
 			this.value = value;
@@ -22,6 +25,7 @@ namespace PreAdamant.Compiler.Common
 			matched = true;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithReturn<TValue, TReturn> With<T>(Func<T, TReturn> action)
 			where T : class, TValue
 		{
@@ -34,6 +38,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithReturn<TValue, TReturn> Ignore<T>(TReturn result)
 			where T : class, TValue
 		{
@@ -48,6 +53,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithReturn<TValue, TReturn> Null(Func<TReturn> action)
 		{
 			if(matched) return this;
@@ -56,11 +62,13 @@ namespace PreAdamant.Compiler.Common
 			return new MatcherWithReturn<TValue, TReturn>(value, action());
 		}
 
+		[DebuggerHidden]
 		public TReturn Any(Func<TReturn> action)
 		{
 			return matched ? returnValue : action();
 		}
 
+		[DebuggerHidden]
 		public TReturn Exhaustive()
 		{
 			if(!matched)
@@ -77,6 +85,7 @@ namespace PreAdamant.Compiler.Common
 		private readonly TReturn returnValue;
 		private readonly bool matched;
 
+		[DebuggerHidden]
 		internal MatcherWithReturn(TValue value, TParam param)
 		{
 			this.value = value;
@@ -85,6 +94,7 @@ namespace PreAdamant.Compiler.Common
 			matched = false;
 		}
 
+		[DebuggerHidden]
 		internal MatcherWithReturn(TValue value, TParam param, TReturn returnValue)
 		{
 			this.value = value;
@@ -93,6 +103,7 @@ namespace PreAdamant.Compiler.Common
 			matched = true;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithReturn<TValue, TParam, TReturn> With<T>(Func<T, TParam, TReturn> action)
 			where T : class, TValue
 		{
@@ -105,6 +116,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithReturn<TValue, TParam, TReturn> Null(Func<TParam, TReturn> action)
 		{
 			if(matched) return this;
@@ -113,11 +125,13 @@ namespace PreAdamant.Compiler.Common
 			return new MatcherWithReturn<TValue, TParam, TReturn>(value, param, action(param));
 		}
 
+		[DebuggerHidden]
 		public TReturn Any(Func<TParam, TReturn> action)
 		{
 			return matched ? returnValue : action(param);
 		}
 
+		[DebuggerHidden]
 		public TReturn Exhaustive()
 		{
 			if(!matched)

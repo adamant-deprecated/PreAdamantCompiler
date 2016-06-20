@@ -49,6 +49,7 @@
     <Compile Include="GatherErrorsListener.cs" />
     <Compile Include="IContextListener.cs" />
     <Compile Include="IContextVisitor.cs" />
+    <Compile Include="IFunctionContext.cs" />
     <Compile Include="PreAdamantParser.partial.cs" />
     <Compile Include="PackageReferenceContext.cs" />
     <Compile Include="PackageContext.cs" />

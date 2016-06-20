@@ -53,17 +53,30 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			foreach(var symbol in symbols)
 				symbol.Match()
-					.With<Symbol<NamespaceDeclarationContext>>(ns =>
+					.With<Symbol<NamespaceDeclarationContext>>(nsSymbol =>
 					{
-						source.WriteIndentedLine($"namespace {ns.Name}");
+						source.WriteIndentedLine($"namespace {nsSymbol.Name}");
 						source.BeginBlock();
-						EmitDeclaration(source, ns.Children);
+						EmitDeclaration(source, nsSymbol.Children);
 						source.EndBlock();
 					})
 					.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
 					{
 						var func = funcSymbol.Declarations.Single();
-						source.WriteIndentedLine(FunctionSignature(func) + ";");
+						source.WriteIndentedLine(Signature(func) + ";");
+					})
+					.With<Symbol<ClassDeclarationContext>>(classSymbol =>
+					{
+						var @class = classSymbol.Declarations.Single();
+						source.WriteIndentedLine(Signature(@class));
+						source.BeginBlock();
+						EmitDeclaration(source, classSymbol.Children);
+						source.EndBlockWithSemicolon();
+					})
+					.With<Symbol<MethodContext>>(methodSymbol =>
+					{
+						var method = methodSymbol.Declarations.Single();
+						source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method)};");
 					})
 					.Exhaustive();
 		}
@@ -74,20 +87,33 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			foreach(var symbol in symbols)
 				symbol.Match()
-					.With<Symbol<NamespaceDeclarationContext>>(ns =>
+					.With<Symbol<NamespaceDeclarationContext>>(nsSymbol =>
 					{
-						source.WriteIndentedLine($"namespace {ns.Name}");
+						source.WriteIndentedLine($"namespace {nsSymbol.Name}");
 						source.BeginBlock();
-						EmitDefinition(source, ns.Children);
+						EmitDefinition(source, nsSymbol.Children);
 						source.EndBlock();
 					})
 					.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
 					{
 						var func = funcSymbol.Declarations.Single();
 
-						source.WriteIndentedLine(FunctionSignature(func));
+						source.WriteIndentedLine(Signature(func));
 						source.BeginBlock();
 						EmitDefinition(source, func.methodBody());
+						source.EndBlock();
+					})
+					.With<Symbol<ClassDeclarationContext>>(classSymbol =>
+					{
+						EmitDefinition(source, classSymbol.Children);
+					})
+					.With<Symbol<MethodContext>>(methodSymbol =>
+					{
+						var method = methodSymbol.Declarations.Single();
+
+						source.WriteIndentedLine(Signature(method));
+						source.BeginBlock();
+						EmitDefinition(source, method.methodBody());
 						source.EndBlock();
 					})
 					.Exhaustive();
@@ -111,11 +137,15 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				{
 					source.WriteIndentedLine(CodeFor(expStatement.expression()) + ";");
 				})
+				.With<VariableDeclarationStatementContext>(varDeclarationStatement =>
+				{
+					source.WriteIndentedLine($"{CodeFor(varDeclarationStatement.localVariableDeclaration())};");
+				})
 				.Exhaustive();
 		}
 		#endregion
 
-		#region CodeFor Expressions
+		#region CodeFor
 		private static string CodeFor(ExpressionContext expression)
 		{
 			return expression.Match().Returning<string>()
@@ -149,7 +179,25 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					return $"{CodeFor(call.expression())}({string.Join(", ", args)})";
 				})
 				.With<NameExpressionContext>(name => QualifiedName(name.ReferencedSymbol))
+				.With<NewExpressionContext>(@newExpression =>
+				{
+					var typeName = TypeName(@newExpression.name());
+					var args = @newExpression.argumentList()._expressions.Select(CodeFor);
+					return $"new {typeName}({string.Join(", ", args)})";
+				})
 				.Exhaustive();
+		}
+
+		private static string CodeFor(LocalVariableDeclarationContext declaration)
+		{
+			var isMutable = declaration.IsMutable; // i.e. var vs let
+			var type = TypeName(declaration.referenceType(), isMutable);
+			// TODO deal with destructuring assignment
+			var expression = declaration.expression();
+			var result = $"{type} {declaration.Name}";
+			if(expression != null)
+				result += " = " + CodeFor(expression);
+			return result;
 		}
 		#endregion
 
@@ -160,6 +208,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				// Start with :: becuase we are fully qualified and don't want to ever accidently pick up the wrong thing
 				.With<Symbol<PackageContext>>(package => "::" + PackageName(symbol))
 				.With<Symbol<NamedParameterContext>>(param => symbol.Name)
+				.With<Symbol<LocalVariableDeclarationContext>>(var => var.Name)
 				.Any(() => QualifiedName(symbol.Parent) + "::" + symbol.Name);
 		}
 
@@ -170,27 +219,59 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region Signatures
-		private static string FunctionSignature(FunctionDeclarationContext func)
+		private static string Signature(FunctionDeclarationContext func)
 		{
-			var @params = func.Parameters.Select(ParameterSignature);
-			return $"{TypeName(func.returnType)} {func.Name}({string.Join(", ", @params)})";
+			var @params = func.Parameters.Cast<NamedParameterContext>().Select(Signature);
+			return $"{TypeName(func.returnType, true)} {func.Name}({string.Join(", ", @params)})";
 		}
 
-		private static string ParameterSignature(ParameterContext parameter)
+		private static string Signature(MethodContext method)
 		{
-			return parameter.Match().Returning<string>()
-				.With<NamedParameterContext>(param => $"{TypeName(param.referenceType())} {param.identifier().GetText()}")
-				.Exhaustive();
+			var @params = method.Parameters.OfType<NamedParameterContext>().Select(Signature);
+			var selfParam = method.Parameters.OfType<SelfParameterContext>().SingleOrDefault(); // TODO deal with static methods
+			var constMethod = selfParam.IsMutable ? "" : " const";
+			var @class = method.Symbol.Parent;
+			return $"{TypeName(method.returnType, true)} {QualifiedName(@class)}::{method.Name}({string.Join(", ", @params)}){constMethod}";
+		}
+
+		private static string Signature(NamedParameterContext param)
+		{
+			var isVar = param.isVar != null;
+			return $"{TypeName(param.referenceType(), isVar)} {param.identifier().GetText()}";
+		}
+
+		private static string Signature(ClassDeclarationContext @class)
+		{
+			return $"class {@class.Name}";
+		}
+
+		private static string Signature(AccessModifierContext accessModifier)
+		{
+			switch(accessModifier.token.Type)
+			{
+				case Public:
+				case Internal:
+					return "public";
+				case Private:
+					return "private";
+				case Protected:
+					return "protected";
+				default:
+					throw new NotSupportedException($"Access modifier {accessModifier.token.Text} ({accessModifier.token.Type}) not supported");
+			}
 		}
 		#endregion
 
 		#region TypeNames
-
-		private static string TypeName(ReferenceTypeContext type)
+		private static string TypeName(ReferenceTypeContext type, bool isMutable)
 		{
-			var valueType = TypeName(type.ValueType);
-			if(valueType == "void") return valueType;
-			return valueType + (type.IsMutable ? "*" : " const * const");
+			var typeName = TypeName(type.ValueType);
+			if(typeName == "void") return typeName;
+			// the value is mutable i.e. `mut`
+			typeName += (type.IsMutable ? "*" : " const *");
+			// the reference is mutable i.e. `let` vs `var`
+			if(!isMutable) typeName += " const";
+			return typeName;
 		}
 
 		private static string TypeName(ValueTypeContext type)
@@ -223,7 +304,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 							code += "32_t";
 							break;
 						default:
-							throw new NotImplementedException($"CodeFor identifier name {code}");
+							code = QualifiedName(identifierName.ReferencedSymbol);
+							break;
 					}
 					return code;
 				})
@@ -242,7 +324,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			source.BeginBlock();
 			var entryPointName = QualifiedName(entryPoint);
 			var entryFunction = entryPoint.Declarations.Single();
-			var returnType = TypeName(entryFunction.returnType);
+			var returnType = TypeName(entryFunction.returnType, true);
 			switch(returnType)
 			{
 				case "void":
@@ -250,7 +332,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					source.WriteIndentedLine("return 0;");
 					break;
 				case "int32_t*":
-				case "int32_t const * const":
+				case "int32_t const *":
 					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
 					source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
 					source.WriteIndentedLine("delete exitCodePtr;");

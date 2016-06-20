@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Antlr4.Runtime;
 using PreAdamant.Compiler.Parser;
+using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Analyzer
 {
@@ -26,19 +28,19 @@ namespace PreAdamant.Compiler.Analyzer
 			binders.Pop();
 		}
 
-		public override void EnterCompilationUnit(PreAdamantParser.CompilationUnitContext context)
+		public override void EnterCompilationUnit(CompilationUnitContext context)
 		{
 			var container = CurrentBinder;
 			var binder = new SymbolBinder(container, context.usingDirective().SelectMany(@using => ResolveDirective(@using, container).Children), $"file: {context.SourceText.Name}");
 			binders.Push(binder);
 		}
 
-		public override void ExitCompilationUnit(PreAdamantParser.CompilationUnitContext context)
+		public override void ExitCompilationUnit(CompilationUnitContext context)
 		{
 			binders.Pop();
 		}
 
-		public override void EnterNamespaceDeclaration(PreAdamantParser.NamespaceDeclarationContext context)
+		public override void EnterNamespaceDeclaration(NamespaceDeclarationContext context)
 		{
 			// First search the current namespace, then the imported namespaces, then the containing namespaces, then the context
 			var parentBinders = NamespaceBinder(context.Names.Count() - 1, context.Symbol.Parent, CurrentBinder);
@@ -55,33 +57,59 @@ namespace PreAdamant.Compiler.Analyzer
 			return new SymbolBinder(container, ns.Children, $"namespace: {ns.FullyQualifiedName}");
 		}
 
-		public override void ExitNamespaceDeclaration(PreAdamantParser.NamespaceDeclarationContext context)
+		public override void ExitNamespaceDeclaration(NamespaceDeclarationContext context)
 		{
 			binders.Pop();
 		}
 
-		public override void EnterFunctionDeclaration(PreAdamantParser.FunctionDeclarationContext context)
+		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
 		{
-			var binder = new SymbolBinder(CurrentBinder, context.Parameters.Select(p => p.Symbol), $"function: {context.Symbol.FullyQualifiedName}");
+			EnterFunction(context, "function");
+		}
+
+		private void EnterFunction<T>(T context, string type)
+			where T : ParserRuleContext, IFunctionContext<T>
+		{
+			var parameters = context.Parameters.Select(p => p.Symbol);
+			var locals = context.methodBody()
+							.Statements.OfType<VariableDeclarationStatementContext>()
+							.Select(s => s.localVariableDeclaration().Symbol);
+			var binder = new SymbolBinder(CurrentBinder, parameters.Concat(locals), $"{type}: {context.Symbol.FullyQualifiedName}");
 			binders.Push(binder);
 		}
 
-		public override void ExitFunctionDeclaration(PreAdamantParser.FunctionDeclarationContext context)
+		public override void ExitFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			binders.Pop();
+		}
+
+		public override void EnterMethod(MethodContext context)
+		{
+			EnterFunction(context, "method");
+		}
+
+		public override void ExitMethod(MethodContext context)
 		{
 			binders.Pop();
 		}
 
 		#endregion
 
-		private Symbol ResolveDirective(PreAdamantParser.UsingDirectiveContext @using, SymbolBinder container)
+		private Symbol ResolveDirective(UsingDirectiveContext @using, SymbolBinder container)
 		{
 			throw new NotImplementedException();
 		}
 
-		public override void EnterNameExpression(PreAdamantParser.NameExpressionContext context)
+		public override void EnterNameExpression(NameExpressionContext context)
 		{
 			var variableName = context.simpleName().GetText();
 			context.ReferencedSymbol = CurrentBinder.LookupName(variableName);
+		}
+
+		public override void EnterIdentifierName(IdentifierNameContext context)
+		{
+			var name = context.identifierOrPredefinedType().GetText();
+			context.ReferencedSymbol = CurrentBinder.LookupName(name);
 		}
 	}
 }

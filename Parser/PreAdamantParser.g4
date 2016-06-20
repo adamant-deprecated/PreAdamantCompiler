@@ -183,8 +183,8 @@ parameterList
 	;
 
 parameter
-	: modifiers+=parameterModifier* identifier? ':' referenceType	#namedParameter
-	| modifiers+=parameterModifier* 'own'? 'mut'? token='self'		#selfParameter
+	: isVar='var'? modifiers+=parameterModifier* identifier? ':' referenceType	#namedParameter
+	| isOwn='own'? isMut='mut'? token='self'									#selfParameter
 	;
 
 parameterModifier
@@ -235,7 +235,7 @@ statement
 	;
 
 localVariableDeclaration
-	: kind=('var'|'let') identifier('?')? (':' referenceType)? ('=' expression)?
+	: kind=('var'|'let') identifier('?')? ':' referenceType ('=' expression)? // no type inference in pre-adamant so types are required
 	;
 
 expression

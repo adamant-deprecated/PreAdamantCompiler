@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace PreAdamant.Compiler.Common
 {
@@ -8,12 +9,14 @@ namespace PreAdamant.Compiler.Common
 		private readonly TValue value;
 		private readonly bool matched;
 
+		[DebuggerHidden]
 		internal MatcherWithoutReturn(TValue value, bool matched)
 		{
 			this.value = value;
 			this.matched = matched;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue> With<T>(Action<T> action)
 			where T : class, TValue
 		{
@@ -29,6 +32,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue> With<T1, T2>(Action<TValue> action)
 				where T1 : class, TValue
 				where T2 : class, TValue
@@ -44,6 +48,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue> Ignore<T>()
 			where T : class, TValue
 		{
@@ -58,6 +63,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue> Null(Action action)
 		{
 			if(matched) return this;
@@ -67,6 +73,7 @@ namespace PreAdamant.Compiler.Common
 			return new MatcherWithoutReturn<TValue>(value, true);
 		}
 
+		[DebuggerHidden]
 		public void Any(Action action)
 		{
 			if(matched) return;
@@ -74,6 +81,7 @@ namespace PreAdamant.Compiler.Common
 			action();
 		}
 
+		[DebuggerHidden]
 		public void Exhaustive()
 		{
 			if(!matched)
@@ -88,6 +96,7 @@ namespace PreAdamant.Compiler.Common
 		private readonly TParam param;
 		private readonly bool matched;
 
+		[DebuggerHidden]
 		internal MatcherWithoutReturn(TValue value, TParam param, bool matched)
 		{
 			this.value = value;
@@ -95,6 +104,7 @@ namespace PreAdamant.Compiler.Common
 			this.matched = matched;
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue, TParam> With<T>(Action<T, TParam> action)
 			where T : class, TValue
 		{
@@ -106,6 +116,7 @@ namespace PreAdamant.Compiler.Common
 			return new MatcherWithoutReturn<TValue, TParam>(value, param, true);
 		}
 
+		[DebuggerHidden]
 		public MatcherWithoutReturn<TValue, TParam> Null(Action<TParam> action)
 		{
 			if(matched) return this;
@@ -119,6 +130,7 @@ namespace PreAdamant.Compiler.Common
 			return this;
 		}
 
+		[DebuggerHidden]
 		public void Any(Action<TParam> action)
 		{
 			if(matched) return;
@@ -126,6 +138,7 @@ namespace PreAdamant.Compiler.Common
 			action(param);
 		}
 
+		[DebuggerHidden]
 		public void Exhaustive()
 		{
 			if(!matched)

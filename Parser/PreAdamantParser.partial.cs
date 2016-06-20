@@ -31,7 +31,7 @@ namespace PreAdamant.Compiler.Parser
 			public string Name => identifier().Name;
 		}
 
-		public partial class FunctionDeclarationContext
+		public partial class FunctionDeclarationContext : IFunctionContext<FunctionDeclarationContext>
 		{
 			public Symbol<FunctionDeclarationContext> Symbol { get; set; }
 			public string Name => identifier().Name;
@@ -51,6 +51,11 @@ namespace PreAdamant.Compiler.Parser
 
 			// Remove the `
 			public string Name => name ?? (name = token.Type == PreAdamantParser.EscapedIdentifier ? token.Text.Substring(1) : token.Text);
+		}
+
+		public partial class IdentifierNameContext
+		{
+			public Symbol ReferencedSymbol { get; set; }
 		}
 
 		public partial class ReferenceTypeContext
@@ -152,9 +157,29 @@ namespace PreAdamant.Compiler.Parser
 			public string Name => identifier().Name;
 		}
 
+		public partial class SelfParameterContext
+		{
+			public bool IsMutable => isMut != null;
+		}
+
 		public partial class NameExpressionContext
 		{
 			public Symbol ReferencedSymbol { get; set; }
+		}
+
+		public partial class MethodContext : IFunctionContext<MethodContext>
+		{
+			public Symbol<MethodContext> Symbol { get; set; }
+			public string Name => identifier().Name;
+			public bool HasBody => methodBody().Exists;
+			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
+		}
+
+		public partial class LocalVariableDeclarationContext
+		{
+			public Symbol<LocalVariableDeclarationContext> Symbol { get; set; }
+			public string Name => identifier().Name;
+			public bool IsMutable => kind.Type == Var;
 		}
 	}
 }

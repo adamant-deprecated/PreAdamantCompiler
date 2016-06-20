@@ -1,0 +1,21 @@
+﻿/*---
+{
+	"result": 42
+}
+*/
+namespace Adamant.Compiler.Tests.Initial
+{
+	public class Foo
+	{
+		public Method(self, value: own int) -> own int
+		{
+			return value;
+		}
+	}
+
+	public Main() -> own int
+	{
+		let foo: Foo = new Foo();
+		return foo.Method(42);
+	}
+}

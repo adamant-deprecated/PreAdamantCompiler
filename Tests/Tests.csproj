@@ -56,14 +56,15 @@
     <Compile Include="TestCaseConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Initial\0_Empty.adam" />
-    <EmbeddedResource Include="Initial\1_ReturnConstant.adam" />
-    <EmbeddedResource Include="Initial\2_ReturnConstantWithNamespace.adam" />
-    <EmbeddedResource Include="Initial\3_ReturnStringLength.adam" />
-    <EmbeddedResource Include="Initial\6_HelloWorld.adam" />
+    <EmbeddedResource Include="Initial\00_Empty.adam" />
+    <EmbeddedResource Include="Initial\01_ReturnConstant.adam" />
+    <EmbeddedResource Include="Initial\02_ReturnConstantWithNamespace.adam" />
+    <EmbeddedResource Include="Initial\03_ReturnStringLength.adam" />
+    <EmbeddedResource Include="Initial\20_HelloWorld.adam" />
     <None Include="App.config" />
-    <EmbeddedResource Include="Initial\4_FunctionCall.adam" />
-    <EmbeddedResource Include="Initial\5_FunctionCallWithArgument.adam" />
+    <EmbeddedResource Include="Initial\04_FunctionCall.adam" />
+    <EmbeddedResource Include="Initial\05_FunctionCallWithArgument.adam" />
+    <EmbeddedResource Include="Initial\06_ClassWithMethod.adam" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

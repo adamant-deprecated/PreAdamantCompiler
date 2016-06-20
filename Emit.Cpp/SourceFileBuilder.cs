@@ -71,6 +71,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			firstElement = false;
 		}
 
+		public void EndBlockWithSemicolon()
+		{
+			if(indent.Length == 0)
+				throw new InvalidOperationException("Can't outdent top level");
+
+			indent.Length = indent.Length - 1;
+			code.AppendLine(indent + "};");
+			firstElement = false;
+		}
+
 		public override string ToString()
 		{
 			return code.ToString();
