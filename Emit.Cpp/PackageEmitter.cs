@@ -159,6 +159,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return symbol.Match().Returning<string>()
 				// Start with :: becuase we are fully qualified and don't want to ever accidently pick up the wrong thing
 				.With<Symbol<PackageContext>>(package => "::" + PackageName(symbol))
+				.With<Symbol<NamedParameterContext>>(param => symbol.Name)
 				.Any(() => QualifiedName(symbol.Parent) + "::" + symbol.Name);
 		}
 
