@@ -126,11 +126,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var args = call.argumentList()._expressions.Select(CodeFor);
 					return $"{CodeFor(call.expression())}({string.Join(", ", args)})";
 				})
-				.With<NameExpressionContext>(name =>
-				{
-					// TODO we really need name binding to look this name up
-					return name.GetText();
-				})
+				.With<NameExpressionContext>(name => QualifiedName(name.ReferencedSymbol))
 				.Exhaustive();
 		}
 

@@ -60,8 +60,10 @@
     <EmbeddedResource Include="Initial\1_ReturnConstant.adam" />
     <EmbeddedResource Include="Initial\2_ReturnConstantWithNamespace.adam" />
     <EmbeddedResource Include="Initial\3_ReturnStringLength.adam" />
-    <EmbeddedResource Include="Initial\4_HelloWorld.adam" />
+    <EmbeddedResource Include="Initial\6_HelloWorld.adam" />
     <None Include="App.config" />
+    <EmbeddedResource Include="Initial\4_FunctionCall.adam" />
+    <EmbeddedResource Include="Initial\5_FunctionCallWithArgument.adam" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

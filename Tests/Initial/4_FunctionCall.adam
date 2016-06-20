@@ -1,0 +1,17 @@
+﻿/*---
+{
+	"result": 42
+}
+*/
+namespace Adamant.Compiler.Tests.Initial
+{
+	public Main() -> own int
+	{
+		return Function();
+	}
+
+	public Function() -> own int
+	{
+		return 42;
+	}
+}
