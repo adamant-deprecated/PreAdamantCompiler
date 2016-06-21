@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -18,15 +19,16 @@ namespace PreAdamant.Compiler.Tests
 	{
 		private const string Extension = ".adam";
 		private readonly PreAdamantCompiler compiler = new PreAdamantCompiler();
-		private readonly PackageReferenceContext runtimeDependency = new PackageReferenceContext("System.Runtime", null, true);
 
 		private string workPath;
+		private string dependenciesPath;
 
 		[TestFixtureSetUp]
 		public void SetUp()
 		{
 			workPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 			Directory.CreateDirectory(workPath);
+			dependenciesPath = ConfigurationManager.AppSettings["DependenciesPath"];
 		}
 
 		[TestFixtureTearDown]
@@ -38,21 +40,32 @@ namespace PreAdamant.Compiler.Tests
 		[Test, TestCaseSource(nameof(TestCases))]
 		public void Test(TestCaseConfig config, TextReader reader)
 		{
-			var dependencies = config.Runtime ? new[] { runtimeDependency } : Enumerable.Empty<PackageReferenceContext>();
-			var package = new PackageContext($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, dependencies);
-			compiler.Parse(package, new SourceReader("Test", config.FileName, reader));
-			if(package.Diagnostics.Count > 0)
-				Assert.Fail(ToString(package.Diagnostics));
-			compiler.Compile(package, Enumerable.Empty<PackageContext>());
-			if(package.Diagnostics.Count > 0)
-				Assert.Fail(ToString(package.Diagnostics));
+			var packageReferences = config.Dependencies.Select(d => new PackageReferenceContext(d, null, true)).ToList();
+			var packages = CompileDependencies(packageReferences);
 
-			var cppSource = compiler.EmitCpp(package);
-			var cppSourceName = config.TestName + ".cpp";
-			CreateFile(cppSourceName, cppSource);
+			var testPackage = new PackageContext($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences);
+			Compile(testPackage, new SourceReader("Test", config.FileName, reader), packages);
+			//compiler.Parse(package, new SourceReader("Test", config.FileName, reader));
+			//if(package.Diagnostics.Count > 0)
+			//	Assert.Fail(ToString(package.Diagnostics));
+			//compiler.Compile(package, packages);
+			//if(package.Diagnostics.Count > 0)
+			//	Assert.Fail(ToString(package.Diagnostics));
+
+			packages.Add(testPackage);
+			foreach(var package in packages)
+			{
+				var cppSource = compiler.EmitCpp(package);
+				var cppSourceName = package.Name + ".cpp";
+				CreateFile(cppSourceName, cppSource);
+			}
+
+			//var cppSource = compiler.EmitCpp(testPackage);
+			//var cppSourceName = config.TestName + ".cpp";
+			//CreateFile(cppSourceName, cppSource);
 			CreateFile(CppRuntime.FileName, CppRuntime.Source);
 			var targetPath = Path.Combine(workPath, config.TestName + ".exe");
-			var result = CppCompiler.Invoke(Path.Combine(workPath, cppSourceName), targetPath);
+			var result = CppCompiler.Invoke(Path.Combine(workPath, testPackage.Name + ".cpp"), targetPath);
 			if(result.ExitCode != 0)
 			{
 				result.WriteOutputToConsole();
@@ -81,6 +94,46 @@ namespace PreAdamant.Compiler.Tests
 				if(config.VerifyConsoleOutput)
 					Assert.AreEqual(config.ExpectedConsoleOutput, outputBuffer.ToString());
 			}
+		}
+
+		/// <summary>
+		/// Compiles dependencies. This is simplified from what forge would do
+		/// </summary>
+		private IList<PackageContext> CompileDependencies(List<PackageReferenceContext> packageReferences)
+		{
+			// We compile references in order, assuming that each depends on all packages before it.
+			// So they must be listed in order correctly
+			var pastReferences = new List<PackageReferenceContext>();
+			var dependencies = new List<PackageContext>();
+			foreach(var reference in packageReferences)
+			{
+				var package = new PackageContext(reference.Name, false, pastReferences);
+
+				var packagePath = Path.GetFullPath(Path.Combine(dependenciesPath, package.Name));
+				var sourceFilePaths = Directory.GetFiles(packagePath, "*" + Extension, SearchOption.AllDirectories);
+
+				// Compile all the source files in the package
+				foreach(var sourceFilePath in sourceFilePaths)
+				{
+					var sourceFile = new SourceFile(package.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath));
+					Compile(package, sourceFile, dependencies);
+				}
+
+				dependencies.Add(package);
+				pastReferences.Add(reference);
+			}
+
+			return dependencies;
+		}
+
+		private void Compile(PackageContext package, SourceText sourceText, IEnumerable<PackageContext> dependencies)
+		{
+			compiler.Parse(package, sourceText);
+			if(package.Diagnostics.Count > 0)
+				Assert.Fail(ToString(package.Diagnostics));
+			compiler.Compile(package, dependencies);
+			if(package.Diagnostics.Count > 0)
+				Assert.Fail(ToString(package.Diagnostics));
 		}
 
 		private void CreateFile(string fileName, string content)

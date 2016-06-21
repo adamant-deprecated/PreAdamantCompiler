@@ -5,6 +5,7 @@ using System.Text;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Parser;
 using static PreAdamant.Compiler.Parser.PreAdamantParser;
+using Requires = PreAdamant.Compiler.Common.Requires;
 
 namespace PreAdamant.Compiler.Emit.Cpp
 {
@@ -204,6 +205,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#region Names
 		private static string QualifiedName(Symbol symbol)
 		{
+			Requires.NotNull(symbol, nameof(symbol));
+
 			return symbol.Match().Returning<string>()
 				// Start with :: becuase we are fully qualified and don't want to ever accidently pick up the wrong thing
 				.With<Symbol<PackageContext>>(package => "::" + PackageName(symbol))
@@ -303,7 +306,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 						case "uint":
 							code += "32_t";
 							break;
+						case "string":
+							code = "::__Adamant::Runtime::string";
+							break;
 						default:
+							if(identifierName.ReferencedSymbol == null)
+								throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
 							code = QualifiedName(identifierName.ReferencedSymbol);
 							break;
 					}

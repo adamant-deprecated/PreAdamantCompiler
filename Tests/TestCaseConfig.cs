@@ -7,11 +7,16 @@ namespace PreAdamant.Compiler.Tests
 {
 	public class TestCaseConfig
 	{
+		// These come from the name of the test file
 		public string TestName;
-		public string Description;
 		public string FileName;
-		public bool Runtime;
+
+		// These settings are read from the json header
+		public string Description;
 		public int Result;
+		public string[] Dependencies;
+
+		// These settings are read from the output section after a line of "---"
 		public bool VerifyConsoleOutput;
 		public string ExpectedConsoleOutput;
 
@@ -31,12 +36,15 @@ namespace PreAdamant.Compiler.Tests
 			{
 				// read in expected console output
 				lines.Clear();
-				while((line = (rawLine = reader.ReadLine()).Trim()) != "*/")
+				while((rawLine = reader.ReadLine()).Trim() != "*/")
 					lines.Add(rawLine);
 
 				config.VerifyConsoleOutput = true;
 				config.ExpectedConsoleOutput = string.Join("\r\n", lines);
 			}
+
+			if(config.Dependencies == null)
+				config.Dependencies = new string[0];
 
 			return config;
 		}

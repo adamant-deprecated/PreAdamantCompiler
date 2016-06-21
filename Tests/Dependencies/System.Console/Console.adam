@@ -1,0 +1,9 @@
+﻿namespace System.Console
+{
+	public class Console
+	{
+		public WriteLine(mut self, line: string) -> void
+		{
+		}
+	}
+}

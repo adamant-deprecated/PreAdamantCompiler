@@ -1,8 +1,12 @@
 ﻿/*---
 {
-	"expectedConsoleOutput": "Hello World!"
+	"dependencies": ["System.Console"]
 }
+---
+Hello World
 */
+using System.Console;
+
 namespace Adamant.Compiler.Tests.Initial
 {
 	public Main(console: mut Console) -> void
