@@ -1,0 +1,17 @@
+﻿/*---
+{
+	"result": 12
+}
+*/
+namespace Adamant.Compiler.Tests.Initial
+{
+	public Main() -> own int
+	{
+		return Function("Hello World!");
+	}
+
+	public Function(value: own string) -> own int
+	{
+		return value.ByteLength as! int;
+	}
+}

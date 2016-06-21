@@ -69,6 +69,7 @@
     <None Include="Dependencies\System.Console\Console.adam">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="Initial\07_FunctionCallWithStringArgument.adam" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
