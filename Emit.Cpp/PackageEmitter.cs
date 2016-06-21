@@ -330,18 +330,25 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			source.WriteIndentedLine("// Entry Point");
 			source.WriteIndentedLine("int main(int argc, char *argv[])");
 			source.BeginBlock();
+			var index = 0;
+			foreach(var parameter in entryPoint.Declarations.Single().Parameters.Cast<NamedParameterContext>())
+			{
+				source.WriteIndentedLine($"auto arg_{index++} = new {TypeName(parameter.referenceType().ValueType)}();");
+			}
+			var arguments = string.Join(", ", Enumerable.Range(0, index).Select(i => $"arg_{i}"));
+
 			var entryPointName = QualifiedName(entryPoint);
 			var entryFunction = entryPoint.Declarations.Single();
 			var returnType = TypeName(entryFunction.returnType, true);
 			switch(returnType)
 			{
 				case "void":
-					source.WriteIndentedLine($"{entryPointName}();");
+					source.WriteIndentedLine($"{entryPointName}({arguments});");
 					source.WriteIndentedLine("return 0;");
 					break;
 				case "int32_t*":
 				case "int32_t const *":
-					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}();");
+					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}({arguments});");
 					source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
 					source.WriteIndentedLine("delete exitCodePtr;");
 					source.WriteIndentedLine("return exitCode;");
