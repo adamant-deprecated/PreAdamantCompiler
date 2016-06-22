@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Antlr4.Runtime;
+using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Parser
 {
@@ -24,6 +26,18 @@ namespace PreAdamant.Compiler.Parser
 			return symbol;
 		}
 
+		public static Symbol<NamespaceDeclarationContext> For(Symbol parent, string name, NamespaceDeclarationContext declaration)
+		{
+			var existingSymbol = parent.Lookup(name) as Symbol<NamespaceDeclarationContext>;
+			if(existingSymbol != null)
+			{
+				existingSymbol.AddDeclaration(declaration);
+				return existingSymbol;
+			}
+
+			return For<NamespaceDeclarationContext>(parent, name, declaration);
+		}
+
 		public string FullyQualifiedName
 		{
 			get
@@ -33,6 +47,11 @@ namespace PreAdamant.Compiler.Parser
 
 				return Parent.FullyQualifiedName + "." + Name;
 			}
+		}
+
+		public Symbol Lookup(string name)
+		{
+			return Children.SingleOrDefault(sym => sym.Name == name);
 		}
 	}
 
@@ -46,6 +65,11 @@ namespace PreAdamant.Compiler.Parser
 			: base(parent, name)
 		{
 			declarations = new List<T>() { declaration };
+		}
+
+		public void AddDeclaration(T declaration)
+		{
+			declarations.Add(declaration);
 		}
 	}
 }

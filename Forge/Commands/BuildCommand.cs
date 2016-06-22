@@ -14,7 +14,7 @@ namespace PreAdamant.Compiler.Forge.Commands
 			try
 			{
 				var compiler = new ProjectCompiler(ProjectPath);
-				var emitter = new ProjectEmitter();
+				var emitter = new ProjectEmitter(ProjectPath);
 				compiler.ProjectCompiled += emitter.Emit;
 				var projects = compiler.Compile();
 				return 0;

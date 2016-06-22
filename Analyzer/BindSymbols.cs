@@ -102,7 +102,7 @@ namespace PreAdamant.Compiler.Analyzer
 			foreach(var identifier in @using.namespaceName().identifier())
 			{
 				var name = identifier.Name;
-				symbol = symbol == null ? globalNamespaceBinder.LookupName(name) : symbol.Children.SingleOrDefault(sym => sym.Name == name);
+				symbol = symbol == null ? globalNamespaceBinder.LookupName(name) : symbol.Lookup(name);
 			}
 
 			return symbol;
