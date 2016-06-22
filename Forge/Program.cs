@@ -1,9 +1,14 @@
-﻿namespace PreAdamant.Compiler.Forge
+﻿using System;
+using ManyConsole;
+
+namespace PreAdamant.Compiler.Forge
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static int Main(string[] args)
 		{
+			var commands = ConsoleCommandDispatcher.FindCommandsInSameAssemblyAs(typeof(Program));
+			return ConsoleCommandDispatcher.DispatchCommand(commands, args, Console.Out);
 		}
 	}
 }

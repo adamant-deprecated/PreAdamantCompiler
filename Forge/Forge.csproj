@@ -33,6 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime">
+      <HintPath>..\lib\Antlr4.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ManyConsole, Version=0.4.2.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ManyConsole.0.4.2.19\lib\ManyConsole.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,11 +58,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BuildCommand.cs" />
+    <Compile Include="Commands\CompileCommand.cs" />
+    <Compile Include="Commands\ProjectDirCommand.cs" />
+    <Compile Include="Commands\RunCommand.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Projects.cs" />
+    <Compile Include="CompileFailedException.cs" />
+    <Compile Include="Config\DependencyConfig.cs" />
+    <Compile Include="Config\ProjectConfig.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectCompiler.cs" />
+    <Compile Include="ProjectEmitter.cs" />
+    <Compile Include="ProjectFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D744B741-F097-4F46-B886-CB4CCC390EFC}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Compiler\Compiler.csproj">
+      <Project>{F58BE674-2CB9-4366-BE49-C74EA86FC48F}</Project>
+      <Name>Compiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emit.Cpp\Emit.Cpp.csproj">
+      <Project>{630F91E3-F9E3-494D-8985-313C4D372696}</Project>
+      <Name>Emit.Cpp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parser\Parser.csproj">
+      <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
+      <Name>Parser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
