@@ -166,7 +166,18 @@ namespace PreAdamant.Compiler.Emit.Cpp
 							throw new NotSupportedException($"Cast type '{type}' not supported");
 					}
 				})
-				.With<MemberExpressionContext>(memberAccess => $"({CodeFor(memberAccess.expression())})->{memberAccess.identifier().GetText()}")
+				.With<MemberExpressionContext>(memberAccess =>
+				{
+					var exp = CodeFor(memberAccess.expression());
+					var member = memberAccess.identifier().GetText();
+					var nameExp = memberAccess.expression() as NameExpressionContext;
+					// Handle static methods and the special case of NativeMethods
+					if(nameExp != null && (
+						(nameExp.ReferencedSymbol == null && nameExp.GetText() == "NativeMethods")
+						|| nameExp.ReferencedSymbol is Symbol<ClassDeclarationContext>))
+						return $"{exp}::{member}";
+					return $"({exp})->{member}";
+				})
 				.With<StringLiteralExpressionContext>(literal =>
 				{
 					var encodedValue = Encoding.UTF8.GetBytes(literal.Value);
@@ -179,7 +190,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var args = call.argumentList()._expressions.Select(CodeFor);
 					return $"{CodeFor(call.expression())}({string.Join(", ", args)})";
 				})
-				.With<NameExpressionContext>(name => QualifiedName(name.ReferencedSymbol))
+				.With<NameExpressionContext>(name =>
+				{
+					if(name.ReferencedSymbol == null && name.GetText() == "NativeMethods")
+						return "::__Adamant::Runtime::NativeMethods";
+					return QualifiedName(name.ReferencedSymbol);
+				})
 				.With<NewExpressionContext>(@newExpression =>
 				{
 					var typeName = TypeName(@newExpression.name());

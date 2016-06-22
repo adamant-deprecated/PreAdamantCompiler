@@ -3,7 +3,7 @@
 	"dependencies": ["System.Console"]
 }
 ---
-Hello World
+Hello World!
 */
 using System.Console;
 

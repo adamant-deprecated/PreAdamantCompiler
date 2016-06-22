@@ -61,7 +61,7 @@
     <EmbeddedResource Include="Initial\01_ReturnConstant.adam" />
     <EmbeddedResource Include="Initial\02_ReturnConstantWithNamespace.adam" />
     <EmbeddedResource Include="Initial\03_ReturnStringLength.adam" />
-    <EmbeddedResource Include="Initial\20_HelloWorld.adam" />
+    <EmbeddedResource Include="Initial\08_HelloWorld.adam" />
     <None Include="App.config" />
     <EmbeddedResource Include="Initial\04_FunctionCall.adam" />
     <EmbeddedResource Include="Initial\05_FunctionCallWithArgument.adam" />

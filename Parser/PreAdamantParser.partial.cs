@@ -140,7 +140,7 @@ namespace PreAdamant.Compiler.Parser
 					if(value == null)
 					{
 						var text = StringLiteral().GetText();
-						value = text.Substring(0, text.Length - 2);
+						value = text.Substring(1, text.Length - 2);
 					}
 					return value;
 				}

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -40,7 +42,8 @@ namespace PreAdamant.Compiler.Tests
 					lines.Add(rawLine);
 
 				config.VerifyConsoleOutput = true;
-				config.ExpectedConsoleOutput = string.Join("\r\n", lines);
+				// an extra blank line is always output
+				config.ExpectedConsoleOutput = string.Concat(lines.Select(l => l + Environment.NewLine)) + Environment.NewLine;
 			}
 
 			if(config.Dependencies == null)
