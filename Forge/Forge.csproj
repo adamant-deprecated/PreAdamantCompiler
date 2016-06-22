@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FE24F138-FDD6-4C12-9A47-762D7A5C2381}</ProjectGuid>
+    <ProjectGuid>{643D4E66-A2D7-47F7-BD7F-7EFEE575EE5B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PreAdamant.Compiler.Cmd</RootNamespace>
-    <AssemblyName>pre-adamantc</AssemblyName>
+    <RootNamespace>PreAdamant.Compiler.Forge</RootNamespace>
+    <AssemblyName>pre-forge</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
