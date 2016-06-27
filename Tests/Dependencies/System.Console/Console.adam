@@ -4,7 +4,7 @@
 	{
 		public WriteLine(mut self, line: string) -> void
 		{
-			NativeMethods.ConsoleWriteLine(line);
+			IntrinsicMethods.ConsoleWriteLine(line);
 		}
 	}
 }

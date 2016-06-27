@@ -33,7 +33,7 @@ namespace __Adamant
 				}*/
 		};
 
-		class NativeMethods
+		class IntrinsicMethods
 		{
 			public:
 				static void ConsoleWriteLine(string const * const line)

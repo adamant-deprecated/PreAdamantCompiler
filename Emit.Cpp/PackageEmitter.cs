@@ -171,9 +171,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var exp = CodeFor(memberAccess.expression());
 					var member = memberAccess.identifier().GetText();
 					var nameExp = memberAccess.expression() as NameExpressionContext;
-					// Handle static methods and the special case of NativeMethods
+					// Handle static methods and the special case of IntrinsicMethods
 					if(nameExp != null && (
-						(nameExp.ReferencedSymbol == null && nameExp.GetText() == "NativeMethods")
+						(nameExp.ReferencedSymbol == null && nameExp.GetText() == "IntrinsicMethods")
 						|| nameExp.ReferencedSymbol is Symbol<ClassDeclarationContext>))
 						return $"{exp}::{member}";
 					return $"({exp})->{member}";
@@ -192,8 +192,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				})
 				.With<NameExpressionContext>(name =>
 				{
-					if(name.ReferencedSymbol == null && name.GetText() == "NativeMethods")
-						return "::__Adamant::Runtime::NativeMethods";
+					if(name.ReferencedSymbol == null && name.GetText() == "IntrinsicMethods")
+						return "::__Adamant::Runtime::IntrinsicMethods";
 					return QualifiedName(name.ReferencedSymbol);
 				})
 				.With<NewExpressionContext>(@newExpression =>
