@@ -23,9 +23,9 @@ namespace PreAdamant.Compiler.Tests
 		private string workPath;
 		private string dependenciesPath;
 
-		private static Dictionary<string, List<string>> packageDependencies = new Dictionary<string, List<string>>()
+		private static readonly Dictionary<string, List<string>> packageDependencies = new Dictionary<string, List<string>>()
 		{
-			{"System.Console", new List<string>(){"Native.Shims.CStandardLibrary"}}
+			{"System.Console", new List<string>()}
 		};
 
 		[TestFixtureSetUp]

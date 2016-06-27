@@ -1,6 +1,0 @@
-﻿namespace Native.Shims.CStandardLibrary.IO
-{
-	external
-	{
-	}
-}
