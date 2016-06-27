@@ -118,6 +118,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitFunctionDeclaration([NotNull] PreAdamantParser.FunctionDeclarationContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>ExternalDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExternalDeclaration([NotNull] PreAdamantParser.ExternalDeclarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ExternalDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExternalDeclaration([NotNull] PreAdamantParser.ExternalDeclarationContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>Precondition</c>
 	/// labeled alternative in <see cref="PreAdamantParser.contract"/>.
 	/// </summary>

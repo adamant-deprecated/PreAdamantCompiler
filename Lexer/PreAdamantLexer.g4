@@ -66,6 +66,7 @@ Uninitialized : 'uninitialized';
 Where : 'where';
 Base : 'base';
 Operator : 'operator';
+External : 'external';
 
 // Properties
 Var : 'var';
@@ -78,7 +79,6 @@ Sealed : 'sealed';
 Override : 'override';
 Abstract : 'abstract';
 Params : 'params';
-Extern : 'extern';
 
 // Control Flow
 Do : 'do';

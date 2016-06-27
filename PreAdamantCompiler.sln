@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emit.Cpp", "Emit.Cpp\Emit.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forge", "Forge\Forge.csproj", "{643D4E66-A2D7-47F7-BD7F-7EFEE575EE5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.Framework", "UnitTests.Framework\UnitTests.Framework.csproj", "{FAD4D802-DA7B-4BFD-BA62-EB6A4B6CF7DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{643D4E66-A2D7-47F7-BD7F-7EFEE575EE5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{643D4E66-A2D7-47F7-BD7F-7EFEE575EE5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{643D4E66-A2D7-47F7-BD7F-7EFEE575EE5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD4D802-DA7B-4BFD-BA62-EB6A4B6CF7DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD4D802-DA7B-4BFD-BA62-EB6A4B6CF7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD4D802-DA7B-4BFD-BA62-EB6A4B6CF7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD4D802-DA7B-4BFD-BA62-EB6A4B6CF7DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

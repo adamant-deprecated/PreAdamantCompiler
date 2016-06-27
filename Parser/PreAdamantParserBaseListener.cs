@@ -130,6 +130,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitFunctionDeclaration([NotNull] PreAdamantParser.FunctionDeclarationContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.ExternalDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExternalDeclaration([NotNull] PreAdamantParser.ExternalDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.ExternalDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExternalDeclaration([NotNull] PreAdamantParser.ExternalDeclarationContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.Precondition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

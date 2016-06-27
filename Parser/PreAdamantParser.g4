@@ -33,6 +33,7 @@ declaration
 		'{' member* '}' #ClassDeclaration
 	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';' #VariableDeclaration
 	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
+	| 'external' '{' declaration* '}' #ExternalDeclaration
 	;
 
 contract

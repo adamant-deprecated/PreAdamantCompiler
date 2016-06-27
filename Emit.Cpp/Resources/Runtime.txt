@@ -1,8 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <cstring>
-#include <iostream>
+#include <cstdio>
 
 namespace __Adamant
 {
@@ -10,29 +9,28 @@ namespace __Adamant
 	{
 		class string
 		{
-			protected:
-				uint8_t const * const bytes; // unsafe arrays are just blocks of memory from new[]
 			public:
+				uint8_t const * const Bytes; // unsafe arrays are just blocks of memory from new[]
 				size_t const * const ByteLength;
 
 				string(size_t const * const byteLength, uint8_t const * const bytes)
-					: ByteLength(byteLength), bytes(bytes)
+					: ByteLength(byteLength), Bytes(bytes)
 				{
 				}
 
 				~string()
 				{
 					delete ByteLength;
-					delete[] bytes;
+					delete[] Bytes;
 				}
 
-				char const * ToCString() const
+				/*char const * ToCString() const
 				{
 					char* cString = new char[*ByteLength+1];
-					strncpy(cString, (char const *)bytes, *ByteLength);
+					std::strncpy(cString, (char const *)bytes, *ByteLength);
 					cString[*ByteLength]=0;
 					return cString;
-				}
+				}*/
 		};
 
 		class NativeMethods
@@ -40,9 +38,9 @@ namespace __Adamant
 			public:
 				static void ConsoleWriteLine(string const * const line)
 				{
-					auto temp = line->ToCString();
-					std::cout << temp;
-					delete temp;
+					// stdout is some weird macro/constant and can't be used with std:: in front of it
+					std::fwrite(line->Bytes, 1, *line->ByteLength, stdout);
+					std::fputc('\n', stdout);
 				}
 		};
 	}

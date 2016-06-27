@@ -83,6 +83,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitFunctionDeclaration([NotNull] PreAdamantParser.FunctionDeclarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>ExternalDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExternalDeclaration([NotNull] PreAdamantParser.ExternalDeclarationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>Precondition</c>
 	/// labeled alternative in <see cref="PreAdamantParser.contract"/>.
 	/// </summary>
