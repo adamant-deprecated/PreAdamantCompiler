@@ -66,6 +66,9 @@
     <EmbeddedResource Include="Initial\04_FunctionCall.adam" />
     <EmbeddedResource Include="Initial\05_FunctionCallWithArgument.adam" />
     <EmbeddedResource Include="Initial\06_ClassWithMethod.adam" />
+    <None Include="Dependencies\Native.Shims.CStandardLibrary\IO.adam">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Dependencies\System.Console\Console.adam">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

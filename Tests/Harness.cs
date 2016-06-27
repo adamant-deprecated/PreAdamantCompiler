@@ -23,6 +23,11 @@ namespace PreAdamant.Compiler.Tests
 		private string workPath;
 		private string dependenciesPath;
 
+		private static Dictionary<string, List<string>> packageDependencies = new Dictionary<string, List<string>>()
+		{
+			{"System.Console", new List<string>(){"Native.Shims.CStandardLibrary"}}
+		};
+
 		[TestFixtureSetUp]
 		public void SetUp()
 		{
@@ -40,17 +45,14 @@ namespace PreAdamant.Compiler.Tests
 		[Test, TestCaseSource(nameof(TestCases))]
 		public void Test(TestCaseConfig config, TextReader reader)
 		{
-			var packageReferences = config.Dependencies.Select(d => new PackageReferenceContext(d, null, true)).ToList();
+			var packageReferences = config.Dependencies.SelectMany(d => packageDependencies[d])
+				.Concat(config.Dependencies)
+				.Distinct()
+				.Select(d => new PackageReferenceContext(d, null, true)).ToList();
 			var packages = CompileDependencies(packageReferences);
 
 			var testPackage = new PackageContext($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences);
 			Compile(testPackage, new SourceReader("Test", config.FileName, reader), packages);
-			//compiler.Parse(package, new SourceReader("Test", config.FileName, reader));
-			//if(package.Diagnostics.Count > 0)
-			//	Assert.Fail(ToString(package.Diagnostics));
-			//compiler.Compile(package, packages);
-			//if(package.Diagnostics.Count > 0)
-			//	Assert.Fail(ToString(package.Diagnostics));
 
 			packages.Add(testPackage);
 			foreach(var package in packages)
@@ -60,9 +62,6 @@ namespace PreAdamant.Compiler.Tests
 				CreateFile(cppSourceName, cppSource);
 			}
 
-			//var cppSource = compiler.EmitCpp(testPackage);
-			//var cppSourceName = config.TestName + ".cpp";
-			//CreateFile(cppSourceName, cppSource);
 			CreateFile(CppRuntime.FileName, CppRuntime.Source);
 			var targetPath = Path.Combine(workPath, config.TestName + ".exe");
 			var result = CppCompiler.Invoke(Path.Combine(workPath, testPackage.Name + ".cpp"), targetPath);
