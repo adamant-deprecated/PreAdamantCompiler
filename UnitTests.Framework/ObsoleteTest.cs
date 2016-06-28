@@ -2,7 +2,6 @@
 
 namespace PreAdamant.Compiler.UnitTests.Framework
 {
-
 	public class ObsoleteTest
 	{
 		// The error message on this demonstrates that the compiler isn't really reading the attribute, but is just reading

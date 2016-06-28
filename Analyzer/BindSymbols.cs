@@ -19,8 +19,7 @@ namespace PreAdamant.Compiler.Analyzer
 		#region Name Scopes
 		public override void EnterPackage(PackageContext context)
 		{
-			var dependencyBinder = new SymbolBinder(null, context.Dependencies.SelectMany(r => r.Package.Symbol.Children), $"package dependencies: {context.Name}");
-			globalNamespaceBinder = new SymbolBinder(dependencyBinder, context.Symbol.Children, $"package: {context.Name}");
+			globalNamespaceBinder = new SymbolBinder(null, context.Symbol.Children, $"package: {context.Name}");
 			binders.Push(globalNamespaceBinder);
 		}
 
@@ -103,7 +102,9 @@ namespace PreAdamant.Compiler.Analyzer
 			{
 				var name = identifier.Name;
 				symbol = symbol == null ? globalNamespaceBinder.LookupName(name) : symbol.Lookup(name);
-			}
+				if(symbol == null)
+					throw new Exception($"Could not resolve using statement `using {@using.namespaceName().GetText()}`");
+            }
 
 			return symbol;
 		}

@@ -17,6 +17,12 @@ namespace PreAdamant.Compiler.Analyzer
 		public override void EnterPackage(PackageContext context)
 		{
 			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
+			// Now we are going to pull in all the symbols from dependencies.
+			// Note this is a hack and not how symbols should properly work.
+			// Symbols should be shadowed between packages, but instead we pull everything into a single namespace
+			foreach(var symbol in context.Dependencies.SelectMany(d => d.Package.Symbol.Children))
+				symbol.ImportInto(context.Symbol);
+
 			symbols.Push(context.Symbol);
 		}
 

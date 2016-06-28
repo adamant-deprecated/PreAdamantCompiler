@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NameHiding.cs" />
     <Compile Include="ObsoleteAttribute.cs" />
     <Compile Include="ObsoleteTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tests\Tests.csproj">
+      <Project>{5a49e51a-0957-4abb-bdd4-0b958efa7dce}</Project>
+      <Name>Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

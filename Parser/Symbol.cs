@@ -21,22 +21,30 @@ namespace PreAdamant.Compiler.Parser
 		public static Symbol<T> For<T>(Symbol parent, string name, T declaration)
 			where T : ParserRuleContext
 		{
-			var symbol = new Symbol<T>(parent, name, declaration);
+			return For<T>(parent, name, new[] { declaration });
+		}
+
+		public static Symbol<T> For<T>(Symbol parent, string name, IEnumerable<T> declarations)
+			where T : ParserRuleContext
+		{
+			// In the case that we are adding a namespace, merge with any existing namespace
+			if(typeof(T) == typeof(NamespaceDeclarationContext))
+			{
+				var existingSymbol = parent.Lookup(name) as Symbol<T>;
+				if(existingSymbol != null)
+				{
+					foreach(var declaration in declarations)
+						existingSymbol.AddDeclaration(declaration);
+					return existingSymbol;
+				}
+			}
+
+			var symbol = new Symbol<T>(parent, name, declarations);
 			parent?.children.Add(symbol);
 			return symbol;
 		}
 
-		public static Symbol<NamespaceDeclarationContext> For(Symbol parent, string name, NamespaceDeclarationContext declaration)
-		{
-			var existingSymbol = parent.Lookup(name) as Symbol<NamespaceDeclarationContext>;
-			if(existingSymbol != null)
-			{
-				existingSymbol.AddDeclaration(declaration);
-				return existingSymbol;
-			}
-
-			return For<NamespaceDeclarationContext>(parent, name, declaration);
-		}
+		public abstract Symbol ImportInto(Symbol parent);
 
 		public string FullyQualifiedName
 		{
@@ -67,9 +75,23 @@ namespace PreAdamant.Compiler.Parser
 			declarations = new List<T>() { declaration };
 		}
 
+		public Symbol(Symbol parent, string name, IEnumerable<T> declarations)
+			: base(parent, name)
+		{
+			this.declarations = declarations.ToList();
+		}
 		public void AddDeclaration(T declaration)
 		{
 			declarations.Add(declaration);
+		}
+
+		public override Symbol ImportInto(Symbol parent)
+		{
+			var symbol = For<T>(parent, Name, Declarations);
+			foreach(var child in Children)
+				child.ImportInto(symbol);
+
+			return symbol;
 		}
 	}
 }
