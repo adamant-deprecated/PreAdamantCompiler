@@ -178,7 +178,7 @@ namespace PreAdamant.Compiler.Parser
 		public partial class LocalVariableDeclarationContext
 		{
 			public Symbol<LocalVariableDeclarationContext> Symbol { get; set; }
-			public string Name => identifier().Name;
+			public string Name => identifier().Single().Name;
 			public bool IsMutable => kind.Type == Var;
 		}
 	}

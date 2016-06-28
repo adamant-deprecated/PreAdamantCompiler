@@ -241,7 +241,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		private static string Signature(FunctionDeclarationContext func)
 		{
 			var @params = func.Parameters.Cast<NamedParameterContext>().Select(Signature);
-			return $"{TypeName(func.returnType, true)} {func.Name}({string.Join(", ", @params)})";
+			return $"{TypeName(func.returnType(), true)} {func.Name}({string.Join(", ", @params)})";
 		}
 
 		private static string Signature(MethodContext method)
@@ -250,7 +250,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			var selfParam = method.Parameters.OfType<SelfParameterContext>().SingleOrDefault(); // TODO deal with static methods
 			var constMethod = selfParam.IsMutable ? "" : " const";
 			var @class = method.Symbol.Parent;
-			return $"{TypeName(method.returnType, true)} {QualifiedName(@class)}::{method.Name}({string.Join(", ", @params)}){constMethod}";
+			return $"{TypeName(method.returnType(), true)} {QualifiedName(@class)}::{method.Name}({string.Join(", ", @params)}){constMethod}";
 		}
 
 		private static string Signature(NamedParameterContext param)
@@ -282,6 +282,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region TypeNames
+
+		private static string TypeName(ReturnTypeContext type, bool isMutable)
+		{
+			if(type.referenceType() != null)
+				return TypeName(type.referenceType(), isMutable);
+
+			// This is the case of a non-terminating function i.e. `-> !`
+			return "void";
+		}
+
 		private static string TypeName(ReferenceTypeContext type, bool isMutable)
 		{
 			var typeName = TypeName(type.ValueType);
@@ -355,7 +365,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 			var entryPointName = QualifiedName(entryPoint);
 			var entryFunction = entryPoint.Declarations.Single();
-			var returnType = TypeName(entryFunction.returnType, true);
+			var returnType = TypeName(entryFunction.returnType(), true);
 			switch(returnType)
 			{
 				case "void":

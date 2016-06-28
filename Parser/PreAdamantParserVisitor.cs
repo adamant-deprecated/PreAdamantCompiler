@@ -267,6 +267,12 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReturnType([NotNull] PreAdamantParser.ReturnTypeContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.lifetime"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -509,6 +515,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitForStatement([NotNull] PreAdamantParser.ForStatementContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>WhileStatement</c>
+	/// labeled alternative in <see cref="PreAdamantParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWhileStatement([NotNull] PreAdamantParser.WhileStatementContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>DeleteStatement</c>
 	/// labeled alternative in <see cref="PreAdamantParser.statement"/>.
 	/// </summary>
@@ -669,13 +682,6 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitIfExpression([NotNull] PreAdamantParser.IfExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>PointerMemberExpression</c>
-	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPointerMemberExpression([NotNull] PreAdamantParser.PointerMemberExpressionContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>NewExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
 	/// </summary>
@@ -738,6 +744,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitDotDotExpression([NotNull] PreAdamantParser.DotDotExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>LambdaExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLambdaExpression([NotNull] PreAdamantParser.LambdaExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>CoalesceExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

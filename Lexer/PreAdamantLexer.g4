@@ -143,6 +143,7 @@ FloatType : 'float' IntLiteral?;
 SizeType : 'size';
 OffsetType : 'offset';
 UnsafeArrayType : 'UnsafeArray';
+Panic : '!';
 
 //*************
 // Reserved Words

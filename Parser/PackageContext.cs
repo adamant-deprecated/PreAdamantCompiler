@@ -17,8 +17,9 @@ namespace PreAdamant.Compiler.Parser
 	{
 		public readonly string Name;
 		public readonly bool IsApp;
-		public IEnumerable<CompilationUnitContext> CompilationUnits => children.OfType<CompilationUnitContext>();
-		public IEnumerable<PackageReferenceContext> Dependencies => children.OfType<PackageReferenceContext>();
+		// If no children are added, the children collection is null
+		public IEnumerable<CompilationUnitContext> CompilationUnits => children?.OfType<CompilationUnitContext>() ?? Enumerable.Empty<CompilationUnitContext>();
+		public IEnumerable<PackageReferenceContext> Dependencies => children?.OfType<PackageReferenceContext>() ?? Enumerable.Empty<PackageReferenceContext>();
 		public Symbol<PackageContext> Symbol { get; set; }
 
 		public readonly IList<Diagnostic> Diagnostics;

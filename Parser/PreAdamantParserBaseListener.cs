@@ -466,6 +466,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterReturnType([NotNull] PreAdamantParser.ReturnTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitReturnType([NotNull] PreAdamantParser.ReturnTypeContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.lifetime"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -898,6 +910,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitForStatement([NotNull] PreAdamantParser.ForStatementContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.WhileStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWhileStatement([NotNull] PreAdamantParser.WhileStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.WhileStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWhileStatement([NotNull] PreAdamantParser.WhileStatementContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.DeleteStatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1174,18 +1198,6 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIfExpression([NotNull] PreAdamantParser.IfExpressionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.PointerMemberExpression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterPointerMemberExpression([NotNull] PreAdamantParser.PointerMemberExpressionContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.PointerMemberExpression"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitPointerMemberExpression([NotNull] PreAdamantParser.PointerMemberExpressionContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.NewExpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1293,6 +1305,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitDotDotExpression([NotNull] PreAdamantParser.DotDotExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.LambdaExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLambdaExpression([NotNull] PreAdamantParser.LambdaExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.LambdaExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLambdaExpression([NotNull] PreAdamantParser.LambdaExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.CoalesceExpression"/>.
 	/// <para>The default implementation does nothing.</para>

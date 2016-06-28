@@ -32,7 +32,7 @@ declaration
 		typeParameterConstraintClause*
 		'{' member* '}' #ClassDeclaration
 	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';' #VariableDeclaration
-	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
+	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
 	| 'external' '{' declaration* '}' #ExternalDeclaration
 	;
 
@@ -92,7 +92,7 @@ typeParameter
 	;
 
 typeArguments
-	: '<' referenceType (',' referenceType)* '>'
+	: '<' lifetime? referenceType (',' lifetime? referenceType)* '>'
 	;
 
 identifierOrPredefinedType
@@ -133,6 +133,11 @@ referenceType // these are types with lifetimes
 	| 'own' 'mut' valueType		#OwnedMutableReferenceType
 	;
 
+returnType
+	: referenceType
+	| '!'
+	;
+
 lifetime
 	: '~' identifier
 	| '~' 'self'
@@ -165,14 +170,14 @@ typeParameterConstraint
 	;
 
 member
-	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType=referenceType)? constructorInitializer? contract* methodBody																	#Constructor
+	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType)? constructorInitializer? contract* methodBody																	#Constructor
 	| attribute* accessModifier safetyModifier? 'delete' parameterList methodBody																																				#Destructor
-	| attribute* accessModifier safetyModifier? conversionModifier 'conversion' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
+	| attribute* accessModifier safetyModifier? conversionModifier 'conversion' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
 	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';'																														#Field
-	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') identifier typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody		#Accessor
-	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') '[' ']' typeArguments? parameterList '->' referenceType typeParameterConstraintClause* contract* methodBody		#Indexer
-	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody				#Method
-	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? 'operator' overloadableOperator parameterList '->' returnType=referenceType typeParameterConstraintClause* contract* methodBody		#OperatorOverload
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Accessor
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') '[' ']' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Indexer
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody				#Method
+	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? 'operator' overloadableOperator parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#OperatorOverload
 	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'class' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #NestedClassDeclaration
@@ -231,12 +236,14 @@ statement
 	| 'if' '(' condition=expression ')' then=statement ('else' else=statement)?			#IfStatement
 	| 'if' '(' localVariableDeclaration ')' then=statement ('else' else=statement)?		#LetIfStatement
 	| 'for' '(' (localVariableDeclaration|'_') 'in' expression ')' statement					#ForStatement
+	| 'while' '(' expression ')' statement					#WhileStatement
 	| 'delete' expression ';'								#DeleteStatement
 	| 'continue' ';'										#ContinueStatement
 	;
 
 localVariableDeclaration
 	: kind=('var'|'let') identifier('?')? ':' referenceType ('=' expression)? // no type inference in pre-adamant so types are required
+	| kind=('var'|'let') '[' identifier (',' identifier)* ']' ':' referenceType ('=' expression)? // destructure tuple types
 	;
 
 expression
@@ -244,7 +251,6 @@ expression
 	| '|' expression '|'									#MagnitudeExpression
 	| expression '.' identifier								#MemberExpression
 	| expression '..' expression							#DotDotExpression
-	| expression '->' identifier							#PointerMemberExpression
 	| expression '(' argumentList ')'						#CallExpression
 	| expression '[' argumentList ']'						#ArrayAccessExpression
 	| expression '?'										#NullCheckExpression
@@ -264,6 +270,7 @@ expression
 	| kind=('try'|'try!'|'try?') expression					#TryExpression
 	| <assoc=right> condition=expression '?' then=expression ':' else=expression #IfExpression
 	| <assoc=right> lvalue=expression op=('='|'*='|'/='|'+='|'-='|'and='|'xor='|'or=') rvalue=expression #AssignmentExpression
+	| ((identifier|parameterList) '->' (expression|'{' (statements+=statement)* '}'))	#LambdaExpression
 	| simpleName											#NameExpression
 	// Since new Class.Constructor() is indistiguishable from new Namespace.Class() we can't parse for named constructor calls here
 	| 'null'												#NullLiteralExpression
