@@ -62,11 +62,6 @@ namespace PreAdamant.Compiler.Analyzer
 			binders.Pop();
 		}
 
-		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
-		{
-			EnterFunction(context, "function");
-		}
-
 		private void EnterFunction<T>(T context, string type)
 			where T : ParserRuleContext, IFunctionContext<T>
 		{
@@ -78,7 +73,23 @@ namespace PreAdamant.Compiler.Analyzer
 			binders.Push(binder);
 		}
 
+		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			EnterFunction(context, "function");
+		}
+
 		public override void ExitFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			binders.Pop();
+		}
+
+		public override void EnterClassDeclaration(ClassDeclarationContext context)
+		{
+			var binder = new SymbolBinder(CurrentBinder, context.Symbol.Children, $"class: {context.Symbol.FullyQualifiedName}");
+			binders.Push(binder);
+		}
+
+		public override void ExitClassDeclaration(ClassDeclarationContext context)
 		{
 			binders.Pop();
 		}
@@ -93,6 +104,15 @@ namespace PreAdamant.Compiler.Analyzer
 			binders.Pop();
 		}
 
+		public override void EnterConstructor(ConstructorContext context)
+		{
+			EnterFunction(context, "constructor");
+		}
+
+		public override void ExitConstructor(ConstructorContext context)
+		{
+			binders.Pop();
+		}
 		#endregion
 
 		private Symbol ResolveDirective(UsingDirectiveContext @using)

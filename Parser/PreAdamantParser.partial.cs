@@ -171,6 +171,13 @@ namespace PreAdamant.Compiler.Parser
 			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
 		}
 
+		public partial class ConstructorContext : IFunctionContext<ConstructorContext>
+		{
+			public Symbol<ConstructorContext> Symbol { get; set; }
+			public string Name => identifier() == null ? "new" : $"__new_{identifier().Name}";
+			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
+		}
+
 		public partial class LocalVariableDeclarationContext
 		{
 			public Symbol<LocalVariableDeclarationContext> Symbol { get; set; }
@@ -186,6 +193,12 @@ namespace PreAdamant.Compiler.Parser
 		public partial class SimpleNameContext
 		{
 			public Symbol ReferencedSymbol { get; set; }
+		}
+
+		public partial class FieldContext
+		{
+			public Symbol<FieldContext> Symbol { get; set; }
+			public bool IsMutable => kind.Type == Var;
 		}
 	}
 }

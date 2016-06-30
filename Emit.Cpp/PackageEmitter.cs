@@ -79,6 +79,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 						var method = methodSymbol.Declarations.Single();
 						source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method, false)};");
 					})
+					.With<Symbol<ConstructorContext>>(constructorSymbol =>
+					{
+						var constructor = constructorSymbol.Declarations.Single();
+						source.WriteIndentedLine($"{Signature(constructor.accessModifier())}: {Signature(constructor, false)};");
+					})
+					.With<Symbol<FieldContext>>(fieldSymbol =>
+					{
+						var field = fieldSymbol.Declarations.Single();
+						source.WriteIndentedLine($"{Signature(field.accessModifier())}: {TypeName(field.valueType(), field.IsMutable)} {field.identifier().Name};");
+                    })
 					.Exhaustive();
 		}
 		#endregion
@@ -117,6 +127,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 						EmitDefinition(source, method.methodBody());
 						source.EndBlock();
 					})
+					.With<Symbol<ConstructorContext>>(constructorSymbol =>
+					{
+						var constructor = constructorSymbol.Declarations.Single();
+
+						source.WriteIndentedLine(Signature(constructor, true));
+						source.BeginBlock();
+						EmitDefinition(source, constructor.methodBody());
+						source.EndBlock();
+					})
+					.Ignore<Symbol<FieldContext>>() // TODO still need to put field initlizers in
 					.Exhaustive();
 		}
 
@@ -202,7 +222,16 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var args = @newExpression.argumentList()._expressions.Select(CodeFor);
 					return $"new {typeName}({string.Join(", ", args)})";
 				})
-				.Exhaustive();
+				.With<AssignmentExpressionContext>(assignmentExpression =>
+				{
+					var left = CodeFor(assignmentExpression.lvalue);
+					var right = CodeFor(assignmentExpression.rvalue);
+					return $"{left} {assignmentExpression.op.Text} {right}";
+				})
+				.Any(() =>
+				{
+					throw new Exception($"Match not exhaustive for expression '{expression.GetText()}' of type '{expression.GetType().Name}'");
+				});
 		}
 
 		private static string CodeFor(LocalVariableDeclarationContext declaration)
@@ -254,6 +283,14 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			var name = qualified ? $"{QualifiedName(@class)}::{method.Name}" : method.Name;
 			// Use C++11 return types syntax becuase of problems with fully qualified method names
 			return $"auto {name}({string.Join(", ", @params)}){constMethod} -> {TypeName(method.returnType(), true)}";
+		}
+
+		private static string Signature(ConstructorContext constructor, bool qualified)
+		{
+			var @params = constructor.Parameters.OfType<NamedParameterContext>().Select(Signature);
+			var @class = constructor.Symbol.Parent;
+			var name = qualified ? $"{QualifiedName(@class)}::{@class.Name}" : @class.Name;
+			return $"{name}({string.Join(", ", @params)})";
 		}
 
 		private static string Signature(NamedParameterContext param)

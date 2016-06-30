@@ -1,0 +1,23 @@
+﻿/*---
+{
+	"result": 42
+}
+*/
+namespace Adamant.Compiler.Tests.Classes
+{
+	public class Foo
+	{
+		public var Value: int; // use of var avoids needing to emit an initlizer value for it
+
+		public new(value: int)
+		{
+			Value = value;
+		}
+	}
+
+	public Main() -> own int
+	{
+		let foo: Foo = new Foo(42);
+		return foo.Value;
+	}
+}

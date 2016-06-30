@@ -42,6 +42,14 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
+		#region Function Like
+		private void EnterFunctionContext<T>(T context)
+			where T : ParserRuleContext, IFunctionContext<T>
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
+			symbols.Push(context.Symbol);
+		}
+
 		public override void EnterMethod(MethodContext context)
 		{
 			EnterFunctionContext(context);
@@ -52,22 +60,26 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
-		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
+		public override void EnterConstructor(ConstructorContext context)
 		{
 			EnterFunctionContext(context);
 		}
 
-		private void EnterFunctionContext<T>(T context)
-			where T : ParserRuleContext, IFunctionContext<T>
+		public override void ExitConstructor(ConstructorContext context)
 		{
-			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
-			symbols.Push(context.Symbol);
+			symbols.Pop();
+		}
+
+		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			EnterFunctionContext(context);
 		}
 
 		public override void ExitFunctionDeclaration(FunctionDeclarationContext context)
 		{
 			symbols.Pop();
 		}
+		#endregion
 
 		public override void EnterNamespaceDeclaration(NamespaceDeclarationContext context)
 		{
@@ -79,6 +91,11 @@ namespace PreAdamant.Compiler.Analyzer
 		public override void ExitNamespaceDeclaration(NamespaceDeclarationContext context)
 		{
 			symbols.Pop();
+		}
+
+		public override void EnterField(FieldContext context)
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, context.identifier().Name, context);
 		}
 
 		public override void EnterNamedParameter(NamedParameterContext context)
