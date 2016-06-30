@@ -11,16 +11,15 @@ namespace __Adamant
 		{
 			public:
 				uint8_t const * const Bytes; // unsafe arrays are just blocks of memory from new[]
-				size_t const * const ByteLength;
+				size_t const ByteLength;
 
-				string(size_t const * const byteLength, uint8_t const * const bytes)
+				string(size_t const byteLength, uint8_t const * const bytes)
 					: ByteLength(byteLength), Bytes(bytes)
 				{
 				}
 
 				~string()
 				{
-					delete ByteLength;
 					delete[] Bytes;
 				}
 
@@ -39,7 +38,7 @@ namespace __Adamant
 				static void ConsoleWriteLine(string const * const line)
 				{
 					// stdout is some weird macro/constant and can't be used with std:: in front of it
-					std::fwrite(line->Bytes, 1, *line->ByteLength, stdout);
+					std::fwrite(line->Bytes, 1, line->ByteLength, stdout);
 					std::fputc('\n', stdout);
 				}
 		};

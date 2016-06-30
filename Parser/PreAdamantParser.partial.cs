@@ -55,47 +55,43 @@ namespace PreAdamant.Compiler.Parser
 
 		public partial class IdentifierNameContext
 		{
-			public Symbol ReferencedSymbol { get; set; }
 		}
 
-		public partial class ReferenceTypeContext
+		public partial class TypeNameContext
 		{
-			public virtual ValueTypeContext ValueType { get { throw new NotSupportedException(); } }
+			public virtual Symbol ReferencedSymbol { get; set; }
+		}
+
+		public partial class ValueTypeContext
+		{
+			public virtual TypeNameContext TypeName { get { throw new NotSupportedException(); } }
 			public virtual LifetimeContext Lifetime { get { throw new NotSupportedException(); } }
 			public virtual bool IsOwned { get { throw new NotSupportedException(); } }
 			public virtual bool IsMutable { get { throw new NotSupportedException(); } }
 		}
 
-		public partial class ImmutableReferenceTypeContext
+		public partial class LifetimeTypeContext
 		{
-			public override ValueTypeContext ValueType => valueType();
+			public override TypeNameContext TypeName => typeName();
 			public override LifetimeContext Lifetime => lifetime();
 			public override bool IsOwned => false;
-			public override bool IsMutable => false;
+			public override bool IsMutable => isMut != null;
 		}
 
-		public partial class MutableReferenceTypeContext
+		public partial class OwnedTypeContext
 		{
-			public override ValueTypeContext ValueType => valueType();
-			public override LifetimeContext Lifetime => lifetime();
+			public override TypeNameContext TypeName => typeName();
+			public override LifetimeContext Lifetime => null;
+			public override bool IsOwned => true;
+			public override bool IsMutable => isMut != null;
+		}
+
+		public partial class RefTypeContext
+		{
+			public override TypeNameContext TypeName => typeName();
+			public override LifetimeContext Lifetime => null;
 			public override bool IsOwned => false;
-			public override bool IsMutable => true;
-		}
-
-		public partial class OwnedImmutableReferenceTypeContext
-		{
-			public override ValueTypeContext ValueType => valueType();
-			public override LifetimeContext Lifetime => null;
-			public override bool IsOwned => true;
-			public override bool IsMutable => false;
-		}
-
-		public partial class OwnedMutableReferenceTypeContext
-		{
-			public override ValueTypeContext ValueType => valueType();
-			public override LifetimeContext Lifetime => null;
-			public override bool IsOwned => true;
-			public override bool IsMutable => true;
+			public override bool IsMutable => isMut != null;
 		}
 
 		public partial class MethodBodyContext
@@ -180,6 +176,16 @@ namespace PreAdamant.Compiler.Parser
 			public Symbol<LocalVariableDeclarationContext> Symbol { get; set; }
 			public string Name => identifier().Single().Name;
 			public bool IsMutable => kind.Type == Var;
+		}
+
+		public partial class NameContext
+		{
+			public Symbol ReferencedSymbol { get; set; }
+		}
+
+		public partial class SimpleNameContext
+		{
+			public Symbol ReferencedSymbol { get; set; }
 		}
 	}
 }

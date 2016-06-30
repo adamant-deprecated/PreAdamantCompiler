@@ -13,19 +13,19 @@ namespace PreAdamant.Compiler.Analyzer
 			DefineInt(keywordTypes, "uint", 32, false);
 
 			// void
-			var symbol = Symbol.For(null, "void", default(ClassDeclarationContext), true);
-			keywordTypes.Add("void", symbol);
+			var structSymbol = Symbol.For(null, "void", default(StructDeclarationContext), true);
+			keywordTypes.Add("void", structSymbol);
 
 			// string
-			symbol = Symbol.For(null, "string", default(ClassDeclarationContext), true);
-			keywordTypes.Add("string", symbol);
+			var classSymbol = Symbol.For(null, "string", default(ClassDeclarationContext), true);
+			keywordTypes.Add("string", classSymbol);
 
 			Keyword = keywordTypes;
 		}
 
 		private static void DefineInt(Dictionary<string, Symbol> keywordTypes, string name, int bits, bool signed)
 		{
-			var symbol = Symbol.For(null, name, default(ClassDeclarationContext), true);
+			var symbol = Symbol.For(null, name, default(StructDeclarationContext), true);
 			keywordTypes.Add(name, symbol);
 		}
 

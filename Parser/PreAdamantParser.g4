@@ -31,7 +31,10 @@ declaration
 	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'class' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #ClassDeclaration
-	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';' #VariableDeclaration
+	| attribute* accessModifier safetyModifier? kind=('copy'|'move') 'struct' identifier typeParameters? baseTypes?
+		typeParameterConstraintClause*
+		'{' member* '}' #StructDeclaration
+	| attribute* accessModifier kind=('var'|'let') identifier (':' valueType)? ('=' expression)? ';' #VariableDeclaration
 	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
 	| 'external' '{' declaration* '}' #ExternalDeclaration
 	;
@@ -87,17 +90,16 @@ typeParameters
 	;
 
 typeParameter
-	: identifier isList='...'? (':' baseType=valueType)?
+	: identifier isList='...'? (':' baseType=typeName)?
 	| lifetime
 	;
 
 typeArguments
-	: '<' lifetime? referenceType (',' lifetime? referenceType)* '>'
+	: '<' type (',' type)* '>'
 	;
 
 identifierOrPredefinedType
 	: identifier
-	| token='void'
 	| token='string'
 	| token='byte'
 	| token=IntType
@@ -118,23 +120,27 @@ name
 	| leftName=name '.' rightName=simpleName	#QualifiedName
 	;
 
-valueType
+typeName
 	: name																		#NamedType
-	| valueType '?'																#MaybeType
-	| valueType '*'																#PointerType
-	| ('[' types+=valueType (',' types+=valueType)* ']' | '[' ']')				#TupleType
-	| funcTypeParameterList '->' referenceType									#FunctionType
+	| typeName '?'																#MaybeType
+	| '*' isMut='mut'? typeName													#PointerType
+	| ('[' types+=typeName (',' types+=typeName)* ']' | '[' ']')				#TupleType
+	| funcTypeParameterList '->' returnType										#FunctionType
 	;
 
-referenceType // these are types with lifetimes
-	: lifetime? valueType		#ImmutableReferenceType
-	| lifetime? 'mut' valueType	#MutableReferenceType
-	| 'own' valueType			#OwnedImmutableReferenceType
-	| 'own' 'mut' valueType		#OwnedMutableReferenceType
+valueType // these are types for which there are actual values of that type
+	: lifetime? isMut='mut'? typeName		#LifetimeType
+	| 'own' isMut='mut'? typeName			#OwnedType
+	| 'ref' 'var'? isMut='mut'? typeName	#RefType
+	;
+
+type 
+	: valueType
+	| 'void' 
 	;
 
 returnType
-	: referenceType
+	: type
 	| '!'
 	;
 
@@ -149,7 +155,7 @@ funcTypeParameterList
 	;
 
 funcTypeParameter
-	: parameterModifier* referenceType
+	: parameterModifier* valueType
 	;
 
 constExpression
@@ -165,7 +171,7 @@ typeParameterConstraintClause
 
 typeParameterConstraint
 	: 'new' '(' ')'			#ConstructorConstraint
-	| valueType				#TypeConstraint
+	| typeName				#TypeConstraint
 	| typeParameter			#TypeListParameterConstraint // will only be hit for type lists (i.e. "foo...")
 	;
 
@@ -173,7 +179,7 @@ member
 	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType)? constructorInitializer? contract* methodBody																	#Constructor
 	| attribute* accessModifier safetyModifier? 'delete' parameterList methodBody																																				#Destructor
 	| attribute* accessModifier safetyModifier? conversionModifier 'conversion' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
-	| attribute* accessModifier kind=('var'|'let') identifier (':' referenceType)? ('=' expression)? ';'																														#Field
+	| attribute* accessModifier kind=('var'|'let') identifier (':' valueType)? ('=' expression)? ';'																														#Field
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Accessor
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') '[' ']' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Indexer
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody				#Method
@@ -189,8 +195,8 @@ parameterList
 	;
 
 parameter
-	: isVar='var'? modifiers+=parameterModifier* identifier? ':' referenceType	#namedParameter
-	| isOwn='own'? isMut='mut'? token='self'									#selfParameter
+	: isVar='var'? modifiers+=parameterModifier* identifier? ':' valueType	#namedParameter
+	| isOwn='own'? isMut='mut'? token='self'								#selfParameter
 	;
 
 parameterModifier
@@ -242,8 +248,8 @@ statement
 	;
 
 localVariableDeclaration
-	: kind=('var'|'let') identifier('?')? ':' referenceType ('=' expression)? // no type inference in pre-adamant so types are required
-	| kind=('var'|'let') '[' identifier (',' identifier)* ']' ':' referenceType ('=' expression)? // destructure tuple types
+	: kind=('var'|'let') identifier('?')? ':' valueType ('=' expression)? // no type inference in pre-adamant so types are required
+	| kind=('var'|'let') '[' identifier (',' identifier)* ']' ':' valueType ('=' expression)? // destructure tuple types
 	;
 
 expression
@@ -266,7 +272,7 @@ expression
 	| expression 'in' expression							#InExpression
 	| 'new' name '(' argumentList ')'						#NewExpression
 	| 'new' baseTypes? '(' argumentList ')' '{' member* '}'	#NewObjectExpression
-	| expression kind=('as'|'as!'|'as?') valueType			#CastExpression
+	| expression kind=('as'|'as!'|'as?') typeName			#CastExpression
 	| kind=('try'|'try!'|'try?') expression					#TryExpression
 	| <assoc=right> condition=expression '?' then=expression ':' else=expression #IfExpression
 	| <assoc=right> lvalue=expression op=('='|'*='|'/='|'+='|'-='|'and='|'xor='|'or=') rvalue=expression #AssignmentExpression

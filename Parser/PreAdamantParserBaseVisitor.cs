@@ -93,6 +93,16 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// <return>The visitor result.</return>
 	public virtual Result VisitClassDeclaration([NotNull] PreAdamantParser.ClassDeclarationContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.StructDeclaration"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.VariableDeclaration"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -353,7 +363,7 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// <return>The visitor result.</return>
 	public virtual Result VisitPointerType([NotNull] PreAdamantParser.PointerTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.ImmutableReferenceType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.LifetimeType"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -361,9 +371,9 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context) { return VisitChildren(context); }
+	public virtual Result VisitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.MutableReferenceType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.OwnedType"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -371,9 +381,9 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context) { return VisitChildren(context); }
+	public virtual Result VisitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.OwnedImmutableReferenceType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.RefType"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -381,9 +391,9 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context) { return VisitChildren(context); }
+	public virtual Result VisitRefType([NotNull] PreAdamantParser.RefTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.OwnedMutableReferenceType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -391,7 +401,7 @@ public partial class PreAdamantParserBaseVisitor<Result> : AbstractParseTreeVisi
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context) { return VisitChildren(context); }
+	public virtual Result VisitType([NotNull] PreAdamantParser.TypeContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
 	/// <para>

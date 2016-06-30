@@ -58,8 +58,14 @@ mode DEFAULT_MODE;
 Using : 'using';
 Namespace : 'namespace';
 Class : 'class';
+Struct : 'struct';
 Enum : 'enum';
 New : 'new';
+NewPanic : 'new!';
+NewResult : 'new?';
+NewPointer : 'new*';
+NewPointerPanic : 'new*!';
+NewNullablePointer : 'new*?';
 Delete : 'delete';
 Self : 'self';
 Uninitialized : 'uninitialized';
@@ -122,6 +128,9 @@ Unsafe : 'unsafe';
 Own : 'own';
 Mutable : 'mut';
 Immutable : 'immut';
+Copy : 'copy';
+Move : 'move';
+Ref : 'ref';
 
 // Async
 Async: 'async';

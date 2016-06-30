@@ -129,5 +129,21 @@ namespace PreAdamant.Compiler.Analyzer
 				context.ReferencedSymbol = symbol;
 			}
 		}
+
+		public override void ExitUnqualifiedName(UnqualifiedNameContext context)
+		{
+			context.ReferencedSymbol = context.simpleName().ReferencedSymbol;
+		}
+
+		public override void ExitQualifiedName(QualifiedNameContext context)
+		{
+			// TODO lookup the name
+			throw new NotImplementedException();
+		}
+
+		public override void ExitNamedType(NamedTypeContext context)
+		{
+			context.ReferencedSymbol = context.name().ReferencedSymbol;
+		}
 	}
 }

@@ -106,6 +106,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitClassDeclaration([NotNull] PreAdamantParser.ClassDeclarationContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.StructDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.StructDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.VariableDeclaration"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -418,53 +430,53 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitPointerType([NotNull] PreAdamantParser.PointerTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.ImmutableReferenceType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.LifetimeType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context) { }
+	public virtual void EnterLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.ImmutableReferenceType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.LifetimeType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context) { }
+	public virtual void ExitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.MutableReferenceType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.OwnedType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context) { }
+	public virtual void EnterOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.MutableReferenceType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.OwnedType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context) { }
+	public virtual void ExitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.OwnedImmutableReferenceType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.RefType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context) { }
+	public virtual void EnterRefType([NotNull] PreAdamantParser.RefTypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.OwnedImmutableReferenceType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.RefType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context) { }
+	public virtual void ExitRefType([NotNull] PreAdamantParser.RefTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.OwnedMutableReferenceType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context) { }
+	public virtual void EnterType([NotNull] PreAdamantParser.TypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.OwnedMutableReferenceType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context) { }
+	public virtual void ExitType([NotNull] PreAdamantParser.TypeContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
 	/// <para>The default implementation does nothing.</para>

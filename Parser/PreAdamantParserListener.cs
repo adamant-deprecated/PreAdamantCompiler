@@ -94,6 +94,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitClassDeclaration([NotNull] PreAdamantParser.ClassDeclarationContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>StructDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>StructDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>VariableDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
 	/// </summary>
@@ -323,112 +335,110 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	void ExitQualifiedName([NotNull] PreAdamantParser.QualifiedNameContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>NamedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterNamedType([NotNull] PreAdamantParser.NamedTypeContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>NamedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitNamedType([NotNull] PreAdamantParser.NamedTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>FunctionType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterFunctionType([NotNull] PreAdamantParser.FunctionTypeContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>FunctionType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitFunctionType([NotNull] PreAdamantParser.FunctionTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>TupleType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterTupleType([NotNull] PreAdamantParser.TupleTypeContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>TupleType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitTupleType([NotNull] PreAdamantParser.TupleTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>MaybeType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterMaybeType([NotNull] PreAdamantParser.MaybeTypeContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>MaybeType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitMaybeType([NotNull] PreAdamantParser.MaybeTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>PointerType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterPointerType([NotNull] PreAdamantParser.PointerTypeContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>PointerType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitPointerType([NotNull] PreAdamantParser.PointerTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>ImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Enter a parse tree produced by the <c>LifetimeType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context);
+	void EnterLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>ImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Exit a parse tree produced by the <c>LifetimeType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context);
+	void ExitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>MutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Enter a parse tree produced by the <c>OwnedType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context);
+	void EnterOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>MutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Exit a parse tree produced by the <c>OwnedType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context);
+	void ExitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>OwnedImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Enter a parse tree produced by the <c>RefType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context);
+	void EnterRefType([NotNull] PreAdamantParser.RefTypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>OwnedImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Exit a parse tree produced by the <c>RefType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context);
+	void ExitRefType([NotNull] PreAdamantParser.RefTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>OwnedMutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context);
+	void EnterType([NotNull] PreAdamantParser.TypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>OwnedMutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context);
+	void ExitType([NotNull] PreAdamantParser.TypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
 	/// </summary>

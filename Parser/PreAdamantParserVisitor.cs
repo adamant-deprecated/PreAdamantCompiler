@@ -69,6 +69,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitClassDeclaration([NotNull] PreAdamantParser.ClassDeclarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>StructDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStructDeclaration([NotNull] PreAdamantParser.StructDeclarationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>VariableDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser.declaration"/>.
 	/// </summary>
@@ -205,67 +212,66 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitQualifiedName([NotNull] PreAdamantParser.QualifiedNameContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>NamedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitNamedType([NotNull] PreAdamantParser.NamedTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>FunctionType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFunctionType([NotNull] PreAdamantParser.FunctionTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>TupleType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitTupleType([NotNull] PreAdamantParser.TupleTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>MaybeType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitMaybeType([NotNull] PreAdamantParser.MaybeTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>PointerType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
+	/// labeled alternative in <see cref="PreAdamantParser.typeName"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitPointerType([NotNull] PreAdamantParser.PointerTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>ImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Visit a parse tree produced by the <c>LifetimeType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitImmutableReferenceType([NotNull] PreAdamantParser.ImmutableReferenceTypeContext context);
+	Result VisitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>MutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Visit a parse tree produced by the <c>OwnedType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitMutableReferenceType([NotNull] PreAdamantParser.MutableReferenceTypeContext context);
+	Result VisitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>OwnedImmutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Visit a parse tree produced by the <c>RefType</c>
+	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitOwnedImmutableReferenceType([NotNull] PreAdamantParser.OwnedImmutableReferenceTypeContext context);
+	Result VisitRefType([NotNull] PreAdamantParser.RefTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>OwnedMutableReferenceType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.referenceType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.type"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitOwnedMutableReferenceType([NotNull] PreAdamantParser.OwnedMutableReferenceTypeContext context);
+	Result VisitType([NotNull] PreAdamantParser.TypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.returnType"/>.
 	/// </summary>

@@ -77,7 +77,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					.With<Symbol<MethodContext>>(methodSymbol =>
 					{
 						var method = methodSymbol.Declarations.Single();
-						source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method)};");
+						source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method, false)};");
 					})
 					.Exhaustive();
 		}
@@ -112,7 +112,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					{
 						var method = methodSymbol.Declarations.Single();
 
-						source.WriteIndentedLine(Signature(method));
+						source.WriteIndentedLine(Signature(method, true));
 						source.BeginBlock();
 						EmitDefinition(source, method.methodBody());
 						source.EndBlock();
@@ -153,7 +153,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				.With<IntLiteralExpressionContext>(literal =>
 				{
 					// TODO use the correctly calculated type for this
-					return $"new int32_t({literal.Value})";
+					return $"((int32_t){literal.Value})";
 				})
 				.With<CastExpressionContext>(cast =>
 				{
@@ -161,7 +161,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					switch(type)
 					{
 						case "as!":
-							return $"new {TypeName(cast.valueType())}(*({CodeFor(cast.expression())}))";
+							return $"(({TypeName(cast.typeName())}){CodeFor(cast.expression())})";
 						default:
 							throw new NotSupportedException($"Cast type '{type}' not supported");
 					}
@@ -183,7 +183,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var encodedValue = Encoding.UTF8.GetBytes(literal.Value);
 					var bytes = string.Join(", ", encodedValue.Select(b => "0x" + b.ToString("X")));
 					var unsafeArray = $"new uint8_t[{encodedValue.Length}]{{{bytes}}}";
-					return $"new ::__Adamant::Runtime::string(new size_t({encodedValue.Length}), {unsafeArray})";
+					return $"new ::__Adamant::Runtime::string((size_t){encodedValue.Length}, {unsafeArray})";
 				})
 				.With<CallExpressionContext>(call =>
 				{
@@ -208,7 +208,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		private static string CodeFor(LocalVariableDeclarationContext declaration)
 		{
 			var isMutable = declaration.IsMutable; // i.e. var vs let
-			var type = TypeName(declaration.referenceType(), isMutable);
+			var type = TypeName(declaration.valueType(), isMutable);
 			// TODO deal with destructuring assignment
 			var expression = declaration.expression();
 			var result = $"{type} {declaration.Name}";
@@ -241,22 +241,25 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		private static string Signature(FunctionDeclarationContext func)
 		{
 			var @params = func.Parameters.Cast<NamedParameterContext>().Select(Signature);
-			return $"{TypeName(func.returnType(), true)} {func.Name}({string.Join(", ", @params)})";
+			// Use C++11 return types syntax becuase of problems with fully qualified method names
+			return $"auto {func.Name}({string.Join(", ", @params)}) -> {TypeName(func.returnType(), true)}";
 		}
 
-		private static string Signature(MethodContext method)
+		private static string Signature(MethodContext method, bool qualified)
 		{
 			var @params = method.Parameters.OfType<NamedParameterContext>().Select(Signature);
 			var selfParam = method.Parameters.OfType<SelfParameterContext>().SingleOrDefault(); // TODO deal with static methods
 			var constMethod = selfParam.IsMutable ? "" : " const";
 			var @class = method.Symbol.Parent;
-			return $"{TypeName(method.returnType(), true)} {QualifiedName(@class)}::{method.Name}({string.Join(", ", @params)}){constMethod}";
+			var name = qualified ? $"{QualifiedName(@class)}::{method.Name}" : method.Name;
+			// Use C++11 return types syntax becuase of problems with fully qualified method names
+			return $"auto {name}({string.Join(", ", @params)}){constMethod} -> {TypeName(method.returnType(), true)}";
 		}
 
 		private static string Signature(NamedParameterContext param)
 		{
 			var isVar = param.isVar != null;
-			return $"{TypeName(param.referenceType(), isVar)} {param.identifier().GetText()}";
+			return $"{TypeName(param.valueType(), isVar)} {param.identifier().GetText()}";
 		}
 
 		private static string Signature(ClassDeclarationContext @class)
@@ -282,28 +285,53 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region TypeNames
-
 		private static string TypeName(ReturnTypeContext type, bool isMutable)
 		{
-			if(type.referenceType() != null)
-				return TypeName(type.referenceType(), isMutable);
+			if(type.type() != null)
+				return TypeName(type.type(), isMutable);
 
 			// This is the case of a non-terminating function i.e. `-> !`
-			return "void";
+			if(type.GetText() == "!")
+				return "void";
+
+			throw new NotImplementedException($"Return type	`{type.GetText()}` not implemented");
 		}
 
-		private static string TypeName(ReferenceTypeContext type, bool isMutable)
+		private static string TypeName(TypeContext type, bool isMutable)
 		{
-			var typeName = TypeName(type.ValueType);
-			if(typeName == "void") return typeName;
-			// the value is mutable i.e. `mut`
-			typeName += (type.IsMutable ? "*" : " const *");
-			// the reference is mutable i.e. `let` vs `var`
-			if(!isMutable) typeName += " const";
+			if(type.valueType() != null)
+				return TypeName(type.valueType(), isMutable);
+
+			if(type.GetText() == "void")
+				return "void";
+
+			throw new NotImplementedException($"Could not emit TypeName for `{type.GetText()}`");
+		}
+
+		private static string TypeName(ValueTypeContext type, bool isMutable)
+		{
+			var typeName = TypeName(type.TypeName);
+			var referencedSymbol = type.TypeName.ReferencedSymbol;
+			if(referencedSymbol == null)
+				throw new Exception($"TypeName not resolved to a symbol `{type.TypeName.GetText()}`");
+			var isReferenceType = referencedSymbol is Symbol<ClassDeclarationContext>;
+			if(!isReferenceType && !(referencedSymbol is Symbol<StructDeclarationContext>))
+				throw new Exception($"TypeName `{type.TypeName.GetText()}` references symbol that is neither class nor struct");
+
+			if(isReferenceType)
+				// pointer, const depends on if it is mutable i.e. `mut`
+				typeName += type.IsMutable ? "*" : " const *";
+			else if(type.IsMutable)
+				throw new Exception("`mut` is not valid on struct types");
+
+			// the binding is mutable i.e. `let` vs `var`
+			if(!isMutable)
+				typeName += " const";
+
 			return typeName;
 		}
 
-		private static string TypeName(ValueTypeContext type)
+		private static string TypeName(TypeNameContext type)
 		{
 			return type.Match().Returning<string>()
 				.With<NamedTypeContext>(namedType => TypeName(namedType.name()))
@@ -363,7 +391,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			var index = 0;
 			foreach(var parameter in entryPoint.Declarations.Single().Parameters.Cast<NamedParameterContext>())
 			{
-				source.WriteIndentedLine($"auto arg_{index++} = new {TypeName(parameter.referenceType().ValueType)}();");
+				source.WriteIndentedLine($"auto arg_{index++} = new {TypeName(parameter.valueType().TypeName)}();");
 			}
 			var arguments = string.Join(", ", Enumerable.Range(0, index).Select(i => $"arg_{i}"));
 
@@ -376,12 +404,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					source.WriteIndentedLine($"{entryPointName}({arguments});");
 					source.WriteIndentedLine("return 0;");
 					break;
-				case "int32_t*":
-				case "int32_t const *":
-					source.WriteIndentedLine($"auto exitCodePtr = {entryPointName}({arguments});");
-					source.WriteIndentedLine("auto exitCode = *exitCodePtr;");
-					source.WriteIndentedLine("delete exitCodePtr;");
-					source.WriteIndentedLine("return exitCode;");
+				case "int32_t":
+					source.WriteIndentedLine($"return {entryPointName}({arguments});");
 					break;
 				default:
 					throw new NotSupportedException($"Entry point return type of `{returnType}` not supported");
