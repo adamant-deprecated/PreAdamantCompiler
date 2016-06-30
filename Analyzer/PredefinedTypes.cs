@@ -12,6 +12,8 @@ namespace PreAdamant.Compiler.Analyzer
 			DefineInt(keywordTypes, "int", 32, true);
 			DefineInt(keywordTypes, "uint", 32, false);
 
+			DefineInt(keywordTypes, "size", 64, false);
+
 			// void
 			var structSymbol = Symbol.For(null, "void", default(StructDeclarationContext), true);
 			keywordTypes.Add("void", structSymbol);

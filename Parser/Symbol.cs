@@ -105,7 +105,7 @@ namespace PreAdamant.Compiler.Parser
 			var importedNamespace = child as Symbol<NamespaceDeclarationContext>;
 			if(importedNamespace != null)
 			{
-				var existingSymbol = Lookup(Name) as Symbol<NamespaceDeclarationContext>;
+				var existingSymbol = Lookup(importedNamespace.Name) as Symbol<NamespaceDeclarationContext>;
 				if(existingSymbol == null)
 				{
 					existingSymbol = new Symbol<NamespaceDeclarationContext>(this, importedNamespace.Name, importedNamespace.Declarations, false);
