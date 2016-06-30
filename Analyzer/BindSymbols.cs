@@ -19,7 +19,7 @@ namespace PreAdamant.Compiler.Analyzer
 		#region Name Scopes
 		public override void EnterPackage(PackageContext context)
 		{
-			globalNamespaceBinder = new SymbolBinder(null, context.Symbol.Children, $"package: {context.Name}");
+			globalNamespaceBinder = new SymbolBinder(null, context.Symbol.AllChildren, $"package: {context.Name}");
 			binders.Push(globalNamespaceBinder);
 		}
 
@@ -31,7 +31,7 @@ namespace PreAdamant.Compiler.Analyzer
 		public override void EnterCompilationUnit(CompilationUnitContext context)
 		{
 			var container = CurrentBinder;
-			var binder = new SymbolBinder(container, context.usingDirective().SelectMany(@using => ResolveDirective(@using).Children), $"file: {context.SourceText.Name}");
+			var binder = new SymbolBinder(container, context.usingDirective().SelectMany(@using => ResolveDirective(@using).AllChildren), $"file: {context.SourceText.Name}");
 			binders.Push(binder);
 		}
 
@@ -44,8 +44,8 @@ namespace PreAdamant.Compiler.Analyzer
 		{
 			// First search the current namespace, then the imported namespaces, then the containing namespaces, then the context
 			var parentBinders = NamespaceBinder(context.Names.Count() - 1, context.Symbol.Parent, CurrentBinder);
-			var usingsBinder = new SymbolBinder(parentBinders, context.usingDirective().SelectMany(@using => ResolveDirective(@using).Children), $"using statements for namespace: {context.Symbol.FullyQualifiedName}");
-			var namespaceBinder = new SymbolBinder(usingsBinder, context.Symbol.Children, $"namespace: {context.Symbol.FullyQualifiedName}");
+			var usingsBinder = new SymbolBinder(parentBinders, context.usingDirective().SelectMany(@using => ResolveDirective(@using).AllChildren), $"using statements for namespace: {context.Symbol.FullyQualifiedName}");
+			var namespaceBinder = new SymbolBinder(usingsBinder, context.Symbol.AllChildren, $"namespace: {context.Symbol.FullyQualifiedName}");
 			binders.Push(namespaceBinder);
 		}
 
@@ -54,7 +54,7 @@ namespace PreAdamant.Compiler.Analyzer
 			if(depth == 0) return container;
 			if(depth > 1) container = NamespaceBinder(depth - 1, ns.Parent, container);
 
-			return new SymbolBinder(container, ns.Children, $"namespace: {ns.FullyQualifiedName}");
+			return new SymbolBinder(container, ns.AllChildren, $"namespace: {ns.FullyQualifiedName}");
 		}
 
 		public override void ExitNamespaceDeclaration(NamespaceDeclarationContext context)
@@ -104,7 +104,7 @@ namespace PreAdamant.Compiler.Analyzer
 				symbol = symbol == null ? globalNamespaceBinder.LookupName(name) : symbol.Lookup(name);
 				if(symbol == null)
 					throw new Exception($"Could not resolve using statement `using {@using.namespaceName().GetText()}`");
-            }
+			}
 
 			return symbol;
 		}
@@ -117,8 +117,17 @@ namespace PreAdamant.Compiler.Analyzer
 
 		public override void EnterIdentifierName(IdentifierNameContext context)
 		{
-			var name = context.identifierOrPredefinedType().GetText();
-			context.ReferencedSymbol = CurrentBinder.LookupName(name);
+			var identifier = context.identifierOrPredefinedType().identifier();
+			if(identifier != null) context.ReferencedSymbol = CurrentBinder.LookupName(identifier.GetText());
+			else
+			{
+				var name = context.identifierOrPredefinedType().token.Text;
+				Symbol symbol;
+				if(!PredefinedTypes.Keyword.TryGetValue(name, out symbol))
+					throw new NotImplementedException($"Predefined type `{name}` not implemented");
+
+				context.ReferencedSymbol = symbol;
+			}
 		}
 	}
 }

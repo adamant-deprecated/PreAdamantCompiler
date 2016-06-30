@@ -323,8 +323,15 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return simpleName.Match().Returning<string>()
 				.With<IdentifierNameContext>(identifierName =>
 				{
-					var code = identifierName.GetText();
-					switch(code)
+					var symbol = identifierName.ReferencedSymbol;
+					if(identifierName.ReferencedSymbol == null)
+						throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
+
+					if(!symbol.IsPredefined)
+						return QualifiedName(symbol);
+
+					var code = symbol.Name;
+					switch(symbol.Name)
 					{
 						case "void":
 							break;
@@ -336,10 +343,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 							code = "::__Adamant::Runtime::string";
 							break;
 						default:
-							if(identifierName.ReferencedSymbol == null)
-								throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
-							code = QualifiedName(identifierName.ReferencedSymbol);
-							break;
+							throw new NotImplementedException($"Predefined type '{symbol.Name}' not not implemented");
 					}
 					return code;
 				})
