@@ -88,7 +88,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					{
 						var field = fieldSymbol.Declarations.Single();
 						source.WriteIndentedLine($"{Signature(field.accessModifier())}: {TypeName(field.valueType(), field.IsMutable)} {field.identifier().Name};");
-                    })
+					})
 					.Exhaustive();
 		}
 		#endregion
@@ -278,6 +278,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			var @params = method.Parameters.OfType<NamedParameterContext>().Select(Signature);
 			var selfParam = method.Parameters.OfType<SelfParameterContext>().SingleOrDefault(); // TODO deal with static methods
+			if(selfParam == null)
+				throw new NotImplementedException("Associated functions (aka static methods) not implemented");
 			var constMethod = selfParam.IsMutable ? "" : " const";
 			var @class = method.Symbol.Parent;
 			var name = qualified ? $"{QualifiedName(@class)}::{method.Name}" : method.Name;
@@ -406,6 +408,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 							break;
 						case "string":
 							code = "::__Adamant::Runtime::string";
+							break;
+						case "size":
+							code += "_t";
+							break;
+						case "offset":
+							code = "ptrdiff_t";
 							break;
 						default:
 							throw new NotImplementedException($"Predefined type '{symbol.Name}' not not implemented");

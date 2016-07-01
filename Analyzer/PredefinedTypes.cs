@@ -12,7 +12,9 @@ namespace PreAdamant.Compiler.Analyzer
 			DefineInt(keywordTypes, "int", 32, true);
 			DefineInt(keywordTypes, "uint", 32, false);
 
+			// Really the size of these varies by platform
 			DefineInt(keywordTypes, "size", 64, false);
+			DefineInt(keywordTypes, "offset", 64, true);
 
 			// void
 			var structSymbol = Symbol.For(null, "void", default(StructDeclarationContext), true);
