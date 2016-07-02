@@ -303,7 +303,13 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 		private static string Signature(ClassDeclarationContext @class)
 		{
-			return $"class {@class.Name}";
+			string template = "";
+			if(@class.typeParameters() != null)
+			{
+				var typeParams = @class.typeParameters().typeParameter().Select(tp => "typename " + tp.identifier().Name);
+				template = $"template<{string.Join(", ", typeParams)}> ";
+			}
+			return template + $"class {@class.Name}";
 		}
 
 		private static string Signature(AccessModifierContext accessModifier)

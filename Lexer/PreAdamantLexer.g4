@@ -87,7 +87,7 @@ Abstract : 'abstract';
 Params : 'params';
 
 // Control Flow
-Do : 'do';
+Loop : 'loop';
 While : 'while';
 If : 'if';
 Else : 'else';
