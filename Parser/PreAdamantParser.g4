@@ -28,10 +28,10 @@ namespaceName
 
 declaration
 	: 'namespace' namespaceName '{' usingDirective* declaration* '}'  #NamespaceDeclaration
-	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'class' identifier typeParameters? baseTypes?
+	| attribute* accessModifier safetyModifier? classInheritanceModifier? 'mut'? 'class' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #ClassDeclaration
-	| attribute* accessModifier safetyModifier? kind=('copy'|'move') 'struct' identifier typeParameters? baseTypes?
+	| attribute* accessModifier safetyModifier? 'mut'? 'struct' identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		'{' member* '}' #StructDeclaration
 	| attribute* accessModifier kind=('var'|'let') identifier (':' valueType)? ('=' expression)? ';' #VariableDeclaration
@@ -45,7 +45,7 @@ contract
 	;
 
 attribute
-	: EscapedIdentifier ('(' ')')? // TODO needs fixed now that escaped identifiers use ` but attributes should still be @
+	: '@' identifier ('(' argumentList ')')? // TODO needs fixed now that escaped identifiers use ` but attributes should still be @
 	;
 
 baseTypes
@@ -76,7 +76,7 @@ methodInheritanceModifier
 	| token='sealed' token='override'
 	;
 
-conversionModifier
+explicitModifier
 	: token='implicit'
 	| token='explicit'
 	;
@@ -176,10 +176,11 @@ typeParameterConstraint
 	;
 
 member
-	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType)? constructorInitializer? contract* methodBody																	#Constructor
+	: attribute* accessModifier safetyModifier? 'new' identifier? parameterList ('->' returnType)? whereClause* constructorInitializer? contract* methodBody																	#Constructor
+	| attribute* accessModifier safetyModifier? explicitModifier 'new' 'copy' parameterList ('->' returnType)? whereClause* constructorInitializer? contract* methodBody #CopyConstructor
 	| attribute* accessModifier safetyModifier? 'delete' parameterList methodBody																																				#Destructor
-	| attribute* accessModifier safetyModifier? conversionModifier 'conversion' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
-	| attribute* accessModifier kind=('var'|'let') identifier (':' valueType)? ('=' expression)? ';'																														#Field
+	| attribute* accessModifier safetyModifier? explicitModifier 'conversion' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody												#ConversionMethod
+	| attribute* accessModifier kind=('var'|'let') 'unsafe'? identifier (':' valueType)? ('=' expression)? ';'																														#Field
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Accessor
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind=('get'|'set') '[' ']' typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody		#Indexer
 	| attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody				#Method
@@ -196,11 +197,22 @@ parameterList
 
 parameter
 	: isVar='var'? modifiers+=parameterModifier* identifier? ':' valueType	#namedParameter
-	| isOwn='own'? isMut='mut'? token='self'								#selfParameter
+	| isRef='ref'? isMut='mut'? token='self'					#selfParameter
 	;
 
 parameterModifier
 	: 'params'
+	;
+
+whereClause
+	: 'where' typeName ':' constraints+=genericConstraint (',' constraints+=genericConstraint)*
+	;
+
+genericConstraint
+	: typeName
+	| 'class'
+	| 'struct'
+	| 'copy' '(' ')'
 	;
 
 constructorInitializer
@@ -257,6 +269,7 @@ expression
 	| '|' expression '|'									#MagnitudeExpression
 	| expression '.' identifier								#MemberExpression
 	| expression '..' expression							#DotDotExpression
+	| expression 'to' expression							#ToExpression
 	| expression '(' argumentList ')'						#CallExpression
 	| expression '[' argumentList ']'						#ArrayAccessExpression
 	| 'await' expression									#AwaitExpression
@@ -271,7 +284,7 @@ expression
 	| expression 'or' expression							#OrExpression
 	| expression '??' expression							#CoalesceExpression
 	| expression 'in' expression							#InExpression
-	| 'new' name '(' argumentList ')'						#NewExpression
+	| 'new' (name|'copy') '(' argumentList ')'				#NewExpression
 	| 'new' baseTypes? '(' argumentList ')' '{' member* '}'	#NewObjectExpression
 	| expression kind=('as'|'as!'|'as?') typeName			#CastExpression
 	| kind=('try'|'try!'|'try?') expression					#TryExpression
@@ -287,4 +300,5 @@ expression
 	| 'uninitialized'										#UninitializedExpression
 	| StringLiteral											#StringLiteralExpression
 	| CharLiteral											#CharLiteralExpression
+	| 'unsafe' '(' expression ')'							#UnsafeExpression
 	;

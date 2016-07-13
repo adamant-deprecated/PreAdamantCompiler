@@ -226,15 +226,15 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.explicitModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	void EnterExplicitModifier([NotNull] PreAdamantParser.ExplicitModifierContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.explicitModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	void ExitExplicitModifier([NotNull] PreAdamantParser.ExplicitModifierContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
 	/// </summary>
@@ -536,6 +536,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitConstructor([NotNull] PreAdamantParser.ConstructorContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>CopyConstructor</c>
+	/// labeled alternative in <see cref="PreAdamantParser.member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCopyConstructor([NotNull] PreAdamantParser.CopyConstructorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>CopyConstructor</c>
+	/// labeled alternative in <see cref="PreAdamantParser.member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCopyConstructor([NotNull] PreAdamantParser.CopyConstructorContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>Destructor</c>
 	/// labeled alternative in <see cref="PreAdamantParser.member"/>.
 	/// </summary>
@@ -675,6 +687,26 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitParameterModifier([NotNull] PreAdamantParser.ParameterModifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.whereClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterWhereClause([NotNull] PreAdamantParser.WhereClauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.whereClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitWhereClause([NotNull] PreAdamantParser.WhereClauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.genericConstraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGenericConstraint([NotNull] PreAdamantParser.GenericConstraintContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.genericConstraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGenericConstraint([NotNull] PreAdamantParser.GenericConstraintContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.constructorInitializer"/>.
 	/// </summary>
@@ -1016,6 +1048,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>ToExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterToExpression([NotNull] PreAdamantParser.ToExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ToExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitToExpression([NotNull] PreAdamantParser.ToExpressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>AndExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
 	/// </summary>
@@ -1219,6 +1263,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitComparativeExpression([NotNull] PreAdamantParser.ComparativeExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>UnsafeExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>UnsafeExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>CastExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

@@ -200,6 +200,7 @@ Semicolon : ';';
 Colon : ':';
 Dot : '.';
 DotDot : '..';
+To : 'to';
 ColonColon: '::';
 Tilde : '~';
 Comma : ',';

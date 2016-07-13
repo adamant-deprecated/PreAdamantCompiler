@@ -147,11 +147,11 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitMethodInheritanceModifier([NotNull] PreAdamantParser.MethodInheritanceModifierContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser.conversionModifier"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.explicitModifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitConversionModifier([NotNull] PreAdamantParser.ConversionModifierContext context);
+	Result VisitExplicitModifier([NotNull] PreAdamantParser.ExplicitModifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.asyncModifier"/>.
 	/// </summary>
@@ -330,6 +330,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitConstructor([NotNull] PreAdamantParser.ConstructorContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>CopyConstructor</c>
+	/// labeled alternative in <see cref="PreAdamantParser.member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCopyConstructor([NotNull] PreAdamantParser.CopyConstructorContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>Destructor</c>
 	/// labeled alternative in <see cref="PreAdamantParser.member"/>.
 	/// </summary>
@@ -411,6 +418,18 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitParameterModifier([NotNull] PreAdamantParser.ParameterModifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.whereClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWhereClause([NotNull] PreAdamantParser.WhereClauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser.genericConstraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGenericConstraint([NotNull] PreAdamantParser.GenericConstraintContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser.constructorInitializer"/>.
 	/// </summary>
@@ -611,6 +630,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>ToExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitToExpression([NotNull] PreAdamantParser.ToExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>AndExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
 	/// </summary>
@@ -729,6 +755,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitComparativeExpression([NotNull] PreAdamantParser.ComparativeExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>UnsafeExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>CastExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
