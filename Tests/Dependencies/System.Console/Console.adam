@@ -2,7 +2,7 @@
 {
 	public class Console
 	{
-		public WriteLine(mut self, line: string) -> void
+		public async WriteLine(mut self, line: string) -> void
 		{
 			IntrinsicMethods.ConsoleWriteLine(line);
 		}

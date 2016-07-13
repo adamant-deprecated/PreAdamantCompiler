@@ -78,14 +78,6 @@ namespace PreAdamant.Compiler.Parser
 			public override bool IsMutable => isMut != null;
 		}
 
-		public partial class OwnedTypeContext
-		{
-			public override TypeNameContext TypeName => typeName();
-			public override LifetimeContext Lifetime => null;
-			public override bool IsOwned => true;
-			public override bool IsMutable => isMut != null;
-		}
-
 		public partial class RefTypeContext
 		{
 			public override TypeNameContext TypeName => typeName();

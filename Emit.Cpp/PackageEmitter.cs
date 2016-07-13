@@ -228,6 +228,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 					var right = CodeFor(assignmentExpression.rvalue);
 					return $"{left} {assignmentExpression.op.Text} {right}";
 				})
+				// Currently, awaits are handled as synchronous calls
+				.With<AwaitExpressionContext>(awaitExpression => CodeFor(awaitExpression.expression()))
 				.Any(() =>
 				{
 					throw new Exception($"Match not exhaustive for expression '{expression.GetText()}' of type '{expression.GetType().Name}'");

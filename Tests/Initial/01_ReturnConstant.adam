@@ -3,7 +3,7 @@
 	"result": 42
 }
 */
-public Main() -> own int
+public Main() -> int
 {
 	return 42;
 }

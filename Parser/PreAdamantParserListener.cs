@@ -406,18 +406,6 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>OwnedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>OwnedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>RefType</c>
 	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
@@ -1015,6 +1003,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitNewObjectExpression([NotNull] PreAdamantParser.NewObjectExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>AwaitExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>AwaitExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>AndExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

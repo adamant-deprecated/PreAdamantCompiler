@@ -5,7 +5,7 @@
 */
 namespace Adamant.Compiler.Tests.Initial
 {
-	public Main() -> own int
+	public Main() -> int
 	{
 		return 42;
 	}

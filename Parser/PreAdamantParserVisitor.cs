@@ -253,13 +253,6 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>OwnedType</c>
-	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context);
-	/// <summary>
 	/// Visit a parse tree produced by the <c>RefType</c>
 	/// labeled alternative in <see cref="PreAdamantParser.valueType"/>.
 	/// </summary>
@@ -610,6 +603,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitNewObjectExpression([NotNull] PreAdamantParser.NewObjectExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>AwaitExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>AndExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

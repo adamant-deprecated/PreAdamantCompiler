@@ -5,12 +5,12 @@
 */
 namespace Adamant.Compiler.Tests.Initial
 {
-	public Main() -> own int
+	public Main() -> int
 	{
 		return Function();
 	}
 
-	public Function() -> own int
+	public Function() -> int
 	{
 		return 42;
 	}

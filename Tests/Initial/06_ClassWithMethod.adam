@@ -7,13 +7,13 @@ namespace Adamant.Compiler.Tests.Initial
 {
 	public class Foo
 	{
-		public Method(self, value: own int) -> own int
+		public Method(self, value: int) -> int
 		{
 			return value;
 		}
 	}
 
-	public Main() -> own int
+	public Main() -> int
 	{
 		let foo: Foo = new Foo();
 		return foo.Method(42);

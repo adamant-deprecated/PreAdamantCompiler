@@ -5,12 +5,12 @@
 */
 namespace Adamant.Compiler.Tests.Initial
 {
-	public Main() -> own int
+	public Main() -> int
 	{
 		return Function("Hello World!");
 	}
 
-	public Function(value: own string) -> own int
+	public Function(value: string) -> int
 	{
 		return value.ByteLength as! int;
 	}

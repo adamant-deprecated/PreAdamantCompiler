@@ -35,7 +35,7 @@ declaration
 		typeParameterConstraintClause*
 		'{' member* '}' #StructDeclaration
 	| attribute* accessModifier kind=('var'|'let') identifier (':' valueType)? ('=' expression)? ';' #VariableDeclaration
-	| attribute* accessModifier safetyModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
+	| attribute* accessModifier safetyModifier? asyncModifier? identifier typeArguments? parameterList '->' returnType typeParameterConstraintClause* contract* methodBody #FunctionDeclaration
 	| 'external' '{' declaration* '}' #ExternalDeclaration
 	;
 
@@ -130,7 +130,6 @@ typeName
 
 valueType // these are types for which there are actual values of that type
 	: lifetime? isMut='mut'? typeName		#LifetimeType
-	| 'own' isMut='mut'? typeName			#OwnedType
 	| 'ref' 'var'? isMut='mut'? typeName	#RefType
 	;
 
@@ -147,6 +146,7 @@ returnType
 lifetime
 	: '~' identifier
 	| '~' 'self'
+	| '~' 'own'
 	;
 
 funcTypeParameterList
@@ -259,6 +259,7 @@ expression
 	| expression '..' expression							#DotDotExpression
 	| expression '(' argumentList ')'						#CallExpression
 	| expression '[' argumentList ']'						#ArrayAccessExpression
+	| 'await' expression									#AwaitExpression
 	| expression '?'										#NullCheckExpression
 	| op=('+'|'-'|'not'|'&'|'*') expression					#UnaryExpression
 	| expression op=('*'|'/') expression					#MultiplicativeExpression

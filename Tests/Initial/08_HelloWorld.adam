@@ -9,8 +9,8 @@ using System.Console;
 
 namespace Adamant.Compiler.Tests.Initial
 {
-	public Main(console: mut Console) -> void
+	public async Main(console: mut Console) -> void
 	{
-		console.WriteLine("Hello World!");
+		await console.WriteLine("Hello World!");
 	}
 }

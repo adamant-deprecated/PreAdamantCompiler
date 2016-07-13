@@ -442,18 +442,6 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLifetimeType([NotNull] PreAdamantParser.LifetimeTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser.OwnedType"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser.OwnedType"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOwnedType([NotNull] PreAdamantParser.OwnedTypeContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.RefType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1077,6 +1065,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNewObjectExpression([NotNull] PreAdamantParser.NewObjectExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.AwaitExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.AwaitExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAwaitExpression([NotNull] PreAdamantParser.AwaitExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.AndExpression"/>.
 	/// <para>The default implementation does nothing.</para>

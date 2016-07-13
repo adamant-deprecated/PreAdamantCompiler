@@ -15,7 +15,7 @@ namespace Adamant.Compiler.Tests.Classes
 		}
 	}
 
-	public Main() -> own int
+	public Main() -> int
 	{
 		let foo: Foo = new Foo(42);
 		return foo.Value;
