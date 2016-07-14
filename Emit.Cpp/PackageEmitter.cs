@@ -74,6 +74,14 @@ namespace PreAdamant.Compiler.Emit.Cpp
 						EmitDeclaration(source, classSymbol.Children);
 						source.EndBlockWithSemicolon();
 					})
+					.With<Symbol<StructDeclarationContext>>(structSymbol =>
+					{
+						var @struct = structSymbol.Declarations.Single();
+						source.WriteIndentedLine(Signature(@struct));
+						source.BeginBlock();
+						EmitDeclaration(source, structSymbol.Children);
+						source.EndBlockWithSemicolon();
+					})
 					.With<Symbol<MethodContext>>(methodSymbol =>
 					{
 						var method = methodSymbol.Declarations.Single();
@@ -219,7 +227,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 				.With<NewExpressionContext>(@newExpression =>
 				{
 					var typeName = TypeName(@newExpression.name());
-					var args = @newExpression.argumentList()._expressions.Select(CodeFor);
+					var args = @newExpression.constructorArguments._expressions.Select(CodeFor);
 					return $"new {typeName}({string.Join(", ", args)})";
 				})
 				.With<AssignmentExpressionContext>(assignmentExpression =>
@@ -314,6 +322,17 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return template + $"class {@class.Name}";
 		}
 
+		private static string Signature(StructDeclarationContext @struct)
+		{
+			string template = "";
+			if(@struct.typeParameters() != null)
+			{
+				var typeParams = @struct.typeParameters().typeParameter().Select(tp => "typename " + tp.identifier().Name);
+				template = $"template<{string.Join(", ", typeParams)}> ";
+			}
+			return template + $"struct {@struct.Name}";
+		}
+
 		private static string Signature(AccessModifierContext accessModifier)
 		{
 			switch(accessModifier.token.Type)
@@ -382,6 +401,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		{
 			return type.Match().Returning<string>()
 				.With<NamedTypeContext>(namedType => TypeName(namedType.name()))
+				.With<PointerTypeContext>(pointerType => "*" + (pointerType.IsMutable ? "" : "const ") + TypeName(pointerType.typeName()))
 				.Exhaustive();
 		}
 

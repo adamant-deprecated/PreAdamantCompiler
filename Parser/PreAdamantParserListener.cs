@@ -952,6 +952,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitStringLiteralExpression([NotNull] PreAdamantParser.StringLiteralExpressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>NewMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNewMemoryExpression([NotNull] PreAdamantParser.NewMemoryExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>NewMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNewMemoryExpression([NotNull] PreAdamantParser.NewMemoryExpressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>XorExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
 	/// </summary>
@@ -987,6 +999,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitInExpression([NotNull] PreAdamantParser.InExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>DeleteMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDeleteMemoryExpression([NotNull] PreAdamantParser.DeleteMemoryExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>DeleteMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDeleteMemoryExpression([NotNull] PreAdamantParser.DeleteMemoryExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>UnaryExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
@@ -1275,6 +1299,18 @@ public interface IPreAdamantParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>PlacementDeleteExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPlacementDeleteExpression([NotNull] PreAdamantParser.PlacementDeleteExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>PlacementDeleteExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPlacementDeleteExpression([NotNull] PreAdamantParser.PlacementDeleteExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>CastExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

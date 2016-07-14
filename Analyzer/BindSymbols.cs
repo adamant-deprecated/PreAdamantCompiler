@@ -94,6 +94,17 @@ namespace PreAdamant.Compiler.Analyzer
 			binders.Pop();
 		}
 
+		public override void EnterStructDeclaration(StructDeclarationContext context)
+		{
+			var binder = new SymbolBinder(CurrentBinder, context.Symbol.Children, $"struct: {context.Symbol.FullyQualifiedName}");
+			binders.Push(binder);
+		}
+
+		public override void ExitStructDeclaration(StructDeclarationContext context)
+		{
+			binders.Pop();
+		}
+
 		public override void EnterMethod(MethodContext context)
 		{
 			EnterFunction(context, "method");
@@ -110,6 +121,26 @@ namespace PreAdamant.Compiler.Analyzer
 		}
 
 		public override void ExitConstructor(ConstructorContext context)
+		{
+			binders.Pop();
+		}
+
+		public override void EnterCopyConstructor(CopyConstructorContext context)
+		{
+			EnterFunction(context, "copy-constructor");
+		}
+
+		public override void ExitCopyConstructor(CopyConstructorContext context)
+		{
+			binders.Pop();
+		}
+
+		public override void EnterOperatorOverload(OperatorOverloadContext context)
+		{
+			EnterFunction(context, "operator-overload");
+		}
+
+		public override void ExitOperatorOverload(OperatorOverloadContext context)
 		{
 			binders.Pop();
 		}

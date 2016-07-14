@@ -268,6 +268,7 @@ expression
 	: '(' expression ')'									#ParenthesizedExpression
 	| '|' expression '|'									#MagnitudeExpression
 	| expression '.' identifier								#MemberExpression
+	| expression '.' 'delete'								#PlacementDeleteExpression
 	| expression '..' expression							#DotDotExpression
 	| expression 'to' expression							#ToExpression
 	| expression '(' argumentList ')'						#CallExpression
@@ -284,8 +285,10 @@ expression
 	| expression 'or' expression							#OrExpression
 	| expression '??' expression							#CoalesceExpression
 	| expression 'in' expression							#InExpression
-	| 'new' (name|'copy') '(' argumentList ')'				#NewExpression
+	| 'new' ('(' placementArguments=argumentList ')'	)? (name|'copy') '(' constructorArguments=argumentList ')'				#NewExpression
+	| 'new' typeArguments? '(' argumentList ')'				#NewMemoryExpression
 	| 'new' baseTypes? '(' argumentList ')' '{' member* '}'	#NewObjectExpression
+	| 'delete' '(' argumentList ')'							#DeleteMemoryExpression
 	| expression kind=('as'|'as!'|'as?') typeName			#CastExpression
 	| kind=('try'|'try!'|'try?') expression					#TryExpression
 	| <assoc=right> condition=expression '?' then=expression ':' else=expression #IfExpression

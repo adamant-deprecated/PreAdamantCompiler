@@ -1018,6 +1018,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStringLiteralExpression([NotNull] PreAdamantParser.StringLiteralExpressionContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.NewMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNewMemoryExpression([NotNull] PreAdamantParser.NewMemoryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.NewMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNewMemoryExpression([NotNull] PreAdamantParser.NewMemoryExpressionContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.XorExpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1053,6 +1065,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitInExpression([NotNull] PreAdamantParser.InExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.DeleteMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeleteMemoryExpression([NotNull] PreAdamantParser.DeleteMemoryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.DeleteMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeleteMemoryExpression([NotNull] PreAdamantParser.DeleteMemoryExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.UnaryExpression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -1341,6 +1365,18 @@ public partial class PreAdamantParserBaseListener : IPreAdamantParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser.PlacementDeleteExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPlacementDeleteExpression([NotNull] PreAdamantParser.PlacementDeleteExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser.PlacementDeleteExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPlacementDeleteExpression([NotNull] PreAdamantParser.PlacementDeleteExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser.CastExpression"/>.
 	/// <para>The default implementation does nothing.</para>

@@ -574,6 +574,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitStringLiteralExpression([NotNull] PreAdamantParser.StringLiteralExpressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>NewMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNewMemoryExpression([NotNull] PreAdamantParser.NewMemoryExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>XorExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
 	/// </summary>
@@ -594,6 +601,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitInExpression([NotNull] PreAdamantParser.InExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>DeleteMemoryExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeleteMemoryExpression([NotNull] PreAdamantParser.DeleteMemoryExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>UnaryExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
@@ -762,6 +776,13 @@ public interface IPreAdamantParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitUnsafeExpression([NotNull] PreAdamantParser.UnsafeExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>PlacementDeleteExpression</c>
+	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPlacementDeleteExpression([NotNull] PreAdamantParser.PlacementDeleteExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>CastExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser.expression"/>.

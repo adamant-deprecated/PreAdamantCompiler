@@ -42,6 +42,17 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
+		public override void EnterStructDeclaration(StructDeclarationContext context)
+		{
+			context.Symbol = Symbol.For(CurrentSymbol, context.Name, context);
+			symbols.Push(context.Symbol);
+		}
+
+		public override void ExitStructDeclaration(StructDeclarationContext context)
+		{
+			symbols.Pop();
+		}
+
 		#region Function Like
 		private void EnterFunctionContext<T>(T context)
 			where T : ParserRuleContext, IFunctionContext<T>
@@ -70,12 +81,32 @@ namespace PreAdamant.Compiler.Analyzer
 			symbols.Pop();
 		}
 
+		public override void EnterCopyConstructor(CopyConstructorContext context)
+		{
+			EnterFunctionContext(context);
+		}
+
+		public override void ExitCopyConstructor(CopyConstructorContext context)
+		{
+			symbols.Pop();
+		}
+
 		public override void EnterFunctionDeclaration(FunctionDeclarationContext context)
 		{
 			EnterFunctionContext(context);
 		}
 
 		public override void ExitFunctionDeclaration(FunctionDeclarationContext context)
+		{
+			symbols.Pop();
+		}
+
+		public override void EnterOperatorOverload(OperatorOverloadContext context)
+		{
+			EnterFunctionContext(context);
+		}
+
+		public override void ExitOperatorOverload(OperatorOverloadContext context)
 		{
 			symbols.Pop();
 		}

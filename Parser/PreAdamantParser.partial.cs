@@ -31,6 +31,12 @@ namespace PreAdamant.Compiler.Parser
 			public string Name => identifier().Name;
 		}
 
+		public partial class StructDeclarationContext
+		{
+			public Symbol<StructDeclarationContext> Symbol { get; set; }
+			public string Name => identifier().Name;
+		}
+
 		public partial class FunctionDeclarationContext : IFunctionContext<FunctionDeclarationContext>
 		{
 			public Symbol<FunctionDeclarationContext> Symbol { get; set; }
@@ -170,6 +176,20 @@ namespace PreAdamant.Compiler.Parser
 			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
 		}
 
+		public partial class CopyConstructorContext : IFunctionContext<CopyConstructorContext>
+		{
+			public Symbol<CopyConstructorContext> Symbol { get; set; }
+			public string Name => "__copy";
+			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
+		}
+
+		public partial class OperatorOverloadContext : IFunctionContext<OperatorOverloadContext>
+		{
+			public Symbol<OperatorOverloadContext> Symbol { get; set; }
+			public string Name => $"__op_{overloadableOperator().GetText()}";
+			public IEnumerable<ParameterContext> Parameters => parameterList().parameter();
+		}
+
 		public partial class LocalVariableDeclarationContext
 		{
 			public Symbol<LocalVariableDeclarationContext> Symbol { get; set; }
@@ -191,6 +211,11 @@ namespace PreAdamant.Compiler.Parser
 		{
 			public Symbol<FieldContext> Symbol { get; set; }
 			public bool IsMutable => kind.Type == Var;
+		}
+
+		public partial class PointerTypeContext
+		{
+			public bool IsMutable => isMut != null;
 		}
 	}
 }
