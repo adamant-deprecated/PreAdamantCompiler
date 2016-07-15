@@ -40,11 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spec.cs" />
+    <Compile Include="SpecLexer.cs">
+      <DependentUpon>SpecLexer.g4</DependentUpon>
+    </Compile>
     <Compile Include="SpecReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpecLexer.g4" />
+    <None Include="SpecLexer.tokens">
+      <DependentUpon>SpecLexer.g4</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@ Whitespace
 fragment WhitespaceChar
 	: Unicode_Zs // Any Character With Unicode Class Zs
 	| '\u0009' // Horizontal Tab Character (U+0009)
-	| '\u000B' // Vertical Tab Character (U+000B)'
+	| '\u000B' // Vertical Tab Character (U+000B)
 	| '\u000C' // Form Feed Character (U+000C)
 	;
 
