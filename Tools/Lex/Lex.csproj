@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime">
+      <HintPath>..\..\lib\Antlr4.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,20 +43,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AntlrGenerator.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandType.cs" />
+    <Compile Include="Fragment.cs" />
+    <Compile Include="ModeBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rule.cs" />
     <Compile Include="Spec.cs" />
     <Compile Include="SpecLexer.cs">
       <DependentUpon>SpecLexer.g4</DependentUpon>
     </Compile>
-    <Compile Include="SpecReader.cs" />
+    <Compile Include="SpecParser.cs">
+      <DependentUpon>SpecParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="SpecParserBaseListener.cs">
+      <DependentUpon>SpecParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="SpecParserBaseVisitor.cs">
+      <DependentUpon>SpecParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="SpecParserListener.cs">
+      <DependentUpon>SpecParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="SpecParserSafeBaseVisitor.cs" />
+    <Compile Include="SpecParserVisitor.cs">
+      <DependentUpon>SpecParser.g4</DependentUpon>
+    </Compile>
+    <Compile Include="SpecReader.cs">
+    </Compile>
+    <Compile Include="SpecValidations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SpecLexer.g4" />
     <None Include="SpecLexer.tokens">
       <DependentUpon>SpecLexer.g4</DependentUpon>
+    </None>
+    <None Include="SpecParser.g4" />
+    <None Include="SpecParser.tokens">
+      <DependentUpon>SpecParser.g4</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

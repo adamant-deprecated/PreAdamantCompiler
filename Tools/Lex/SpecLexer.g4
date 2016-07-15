@@ -34,18 +34,18 @@ StartMode: '@startMode';
 Include: '@include';
 
 // Commands
-Mode: '@mode';
-PushMode: '@pushMode';
-PopMode: '@popMode';
-Skip: '@skip';
-More: '@more';
-Type: '@type';
-Channel: '@channel';
-Error: '@error';
-Capture: '@capture';
-Decode: '@decode';
-Text: '@text';
-Action: '<%' .*? '%>';
+ModeCmd: '@mode';
+PushModeCmd: '@pushMode';
+PopModeCmd: '@popMode';
+SkipCmd: '@skip';
+MoreCmd: '@more';
+TypeCmd: '@type';
+ChannelCmd: '@channel';
+ErrorCmd: '@error';
+CaptureCmd: '@capture';
+DecodeCmd: '@decode';
+TextCmd: '@text';
+ActionCmd: '<%' .*? '%>';
 
 // Operators
 OfType: ':';
@@ -57,6 +57,7 @@ AnyChar: '.';
 Optional: '?';
 Complement: '!';
 Repetition: '*';
+OneOrMore: '+';
 Intersection: '&';
 Subtraction: '-';
 Upto: '~';
@@ -75,10 +76,7 @@ Number: '0' | [1-9][0-9]*;
 Identifier: [a-zA-Z][a-zA-Z0-9_]*;
 Literal: '"' LiteralChar+ '"' | EscapeChar;
 
-fragment LiteralChar
-	: EscapeChar
-	| [^\\"]
-	;
+fragment LiteralChar : EscapeChar | ~[\\"];
 
 fragment EscapeChar // These string escapes match Adamant
 	: '\\t'

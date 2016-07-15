@@ -77,8 +77,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Common.lex" />
     <None Include="PreAdamantCommon.g4" />
+    <None Include="PreAdamantLexer.ANTLR.g4">
+		<DependentUpon>PreAdamantLexer.lex</DependentUpon>
+	</None>
     <None Include="PreAdamantLexer.g4" />
+    <None Include="PreAdamantLexer.lex" />
     <None Include="PreAdamantLexer.tokens">
       <DependentUpon>PreAdamantLexer.g4</DependentUpon>
     </None>

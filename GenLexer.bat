@@ -1,8 +1,13 @@
-cd Lexer\
-CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer.g4 -package PreAdamant.Compiler.Lexer
+Tools\Cmd\bin\Debug\gen.exe lex Lexer\PreAdamantLexer.lex
 
-cd Preprocessor\
-CALL ..\..\Tools\ANTLR\antlr4.bat PreprocessorLineLexer.g4 -lib ..\ -package PreAdamant.Compiler.Lexer.Preprocessor
-CALL ..\..\Tools\ANTLR\antlr4.bat PreprocessorLineParser.g4 -visitor -package PreAdamant.Compiler.Lexer.Preprocessor
+cd Lexer\
+CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer.ANTLR.g4 -package PreAdamant.Compiler.Lexer.Antlr
+
+
+REM CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer.g4 -package PreAdamant.Compiler.Lexer
+
+REM cd Preprocessor\
+REM CALL ..\..\Tools\ANTLR\antlr4.bat PreprocessorLineLexer.g4 -lib ..\ -package PreAdamant.Compiler.Lexer.Preprocessor
+REM CALL ..\..\Tools\ANTLR\antlr4.bat PreprocessorLineParser.g4 -visitor -package PreAdamant.Compiler.Lexer.Preprocessor
 
 PAUSE
