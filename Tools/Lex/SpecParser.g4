@@ -24,7 +24,8 @@ directive
 parseRule: name=Identifier (':' base=Identifier)? ('=' pattern ('->' commands+=command (',' commands+=command)*)?)? ';' ;
 
 pattern
-	: '(' pattern ')'						#GroupingPattern
+	: '[' negate=Caret? charSet* ']'		#CharClassPattern
+	| '(' pattern ')'						#GroupingPattern
 	| lexerName=Identifier '::' ruleName=Identifier	#ImportedRulePattern
 	| pattern '?'							#OptionalPattern
 	| pattern '*'							#ZeroOrMorePattern
@@ -40,6 +41,14 @@ pattern
 	| '.'									#AnyPattern
 	| Literal								#LiteralPattern
 	;
+
+charSet
+	: char Dash char				#CharRange
+	| char							#SingleChar
+	| Dash							#DashChar
+	;
+
+char: Char | EscapedChar | EscapedDash | Caret;
 
 command
 	: '@mode' '(' modeName=Identifier ')'		#ModeCommand

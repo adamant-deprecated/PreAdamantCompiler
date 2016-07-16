@@ -302,6 +302,18 @@ public interface ISpecParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitImportedRulePattern([NotNull] SpecParser.ImportedRulePatternContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>CharClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCharClassPattern([NotNull] SpecParser.CharClassPatternContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>CharClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCharClassPattern([NotNull] SpecParser.CharClassPatternContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>ConcatPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>
@@ -313,6 +325,52 @@ public interface ISpecParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitConcatPattern([NotNull] SpecParser.ConcatPatternContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>CharRange</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCharRange([NotNull] SpecParser.CharRangeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>CharRange</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCharRange([NotNull] SpecParser.CharRangeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>SingleChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSingleChar([NotNull] SpecParser.SingleCharContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>SingleChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSingleChar([NotNull] SpecParser.SingleCharContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>DashChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDashChar([NotNull] SpecParser.DashCharContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>DashChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDashChar([NotNull] SpecParser.DashCharContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.char"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterChar([NotNull] SpecParser.CharContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.char"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitChar([NotNull] SpecParser.CharContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ModeCommand</c>
 	/// labeled alternative in <see cref="SpecParser.command"/>.

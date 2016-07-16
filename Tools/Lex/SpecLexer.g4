@@ -74,11 +74,20 @@ Comma: ',';
 // Terminals
 Number: '0' | [1-9][0-9]*;
 Identifier: [a-zA-Z][a-zA-Z0-9_]*;
-Literal: '"' LiteralChar+ '"' | EscapeChar;
+Literal: '"' LiteralChar+ '"' | EscapedChar;
 
-fragment LiteralChar : EscapeChar | ~[\\"];
+fragment LiteralChar : EscapedChar | ~[\\"];
+fragment HexDigit: [a-fA-F0-9];
 
-fragment EscapeChar // These string escapes match Adamant
+// Errors
+InvalidKeyword: '@' Identifier;
+UnexpectedChar: [^];
+
+// Character Classes
+mode CharacterClass;
+Char: ~[\\\-\]^];
+Caret: '^';
+EscapedChar // These string escapes match Adamant
 	: '\\t'
 	| '\\n'
 	| '\\r'
@@ -96,20 +105,7 @@ fragment EscapeChar // These string escapes match Adamant
 	| '\\U' HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit
 	| '\\u{' HexDigit HexDigit? HexDigit? HexDigit? HexDigit? HexDigit? '}'
 	;
-
-fragment HexDigit: [a-fA-F0-9];
-
-// Errors
-InvalidKeyword: '@' Identifier;
-UnexpectedChar: [^];
-
-// Character Classes
-mode StartCharacterClass;
-NegateCharClass: '^' -> mode(CharacterClass);
-
-mode CharacterClass;
-Char: (EscapeChar | [^\\\-\]]) -> mode(CharacterClass);
-EscapeDash: '\\-' -> type(Char), mode(CharacterClass);
-EscapeRightBracket: '\\]' -> type(Char), mode(CharacterClass);
-CharRange: '-' -> mode(CharacterClass);
+EscapedDash: '\\-';
+EscapedRightBracket: '\\]';
+Dash: '-';
 EndCharClass: ']' -> popMode;

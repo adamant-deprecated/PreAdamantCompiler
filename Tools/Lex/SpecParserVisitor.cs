@@ -190,12 +190,46 @@ public interface ISpecParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitImportedRulePattern([NotNull] SpecParser.ImportedRulePatternContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>CharClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCharClassPattern([NotNull] SpecParser.CharClassPatternContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>ConcatPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitConcatPattern([NotNull] SpecParser.ConcatPatternContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>CharRange</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCharRange([NotNull] SpecParser.CharRangeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>SingleChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSingleChar([NotNull] SpecParser.SingleCharContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>DashChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDashChar([NotNull] SpecParser.DashCharContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SpecParser.char"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitChar([NotNull] SpecParser.CharContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>ModeCommand</c>
 	/// labeled alternative in <see cref="SpecParser.command"/>.

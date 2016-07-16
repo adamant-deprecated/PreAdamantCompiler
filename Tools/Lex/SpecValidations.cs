@@ -6,13 +6,14 @@ namespace PreAdamant.Compiler.Tools.Lex
 {
 	public class SpecValidations : SpecParserBaseListener
 	{
+		private readonly IReadOnlyDictionary<string, Spec> imports;
 		private bool inModesBlock;
 		private readonly ISet<string> ruleNames = new HashSet<string>();
 		private ISet<string> channels;
 
 		public SpecValidations(Dictionary<string, Spec> imports)
 		{
-			throw new NotImplementedException();
+			this.imports = imports;
 		}
 
 		public override void EnterModesDirective(SpecParser.ModesDirectiveContext context)
@@ -86,7 +87,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 					throw new Exception($"Fragment '{name}' has a base token, fragements are not allowed to have base tokens");
 				if(context.pattern() == null)
 					throw new Exception($"Fragment '{name}' does not have a pattern");
-				if(context._commands != null)
+				if(context._commands != null && context._commands.Any())
 					throw new Exception($"Fragment '{name}' has commands");
 			}
 		}

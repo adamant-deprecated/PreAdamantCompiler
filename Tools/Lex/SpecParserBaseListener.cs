@@ -310,6 +310,18 @@ public partial class SpecParserBaseListener : ISpecParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitImportedRulePattern([NotNull] SpecParser.ImportedRulePatternContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.CharClassPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCharClassPattern([NotNull] SpecParser.CharClassPatternContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.CharClassPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCharClassPattern([NotNull] SpecParser.CharClassPatternContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="SpecParser.ConcatPattern"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -321,6 +333,54 @@ public partial class SpecParserBaseListener : ISpecParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitConcatPattern([NotNull] SpecParser.ConcatPatternContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.CharRange"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCharRange([NotNull] SpecParser.CharRangeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.CharRange"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCharRange([NotNull] SpecParser.CharRangeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.SingleChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSingleChar([NotNull] SpecParser.SingleCharContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.SingleChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSingleChar([NotNull] SpecParser.SingleCharContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.DashChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDashChar([NotNull] SpecParser.DashCharContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.DashChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDashChar([NotNull] SpecParser.DashCharContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.@char"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterChar([NotNull] SpecParser.CharContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.@char"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitChar([NotNull] SpecParser.CharContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="SpecParser.ModeCommand"/>.
 	/// <para>The default implementation does nothing.</para>
