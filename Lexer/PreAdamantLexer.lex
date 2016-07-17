@@ -1,17 +1,25 @@
 ﻿@lexer PreAdamantLexer;
 @namespace PreAdamant.Compiler.Lexer;
-@import Common;
+@import C = Common;
 @channels Trivia;
 
 @startMode Code;
 
 @modes Code
 {
+	Whitespace = \s+ -> @channel(Trivia);
+	Newline = \R -> @channel(Trivia);
+
+	//*************
+	// Preprocessor
+	//*************
+	PreprocessorLine =  \s* "#" .* -> <% Preprocess(); %>, @channel(Trivia);
+
 	//*************
 	// Comments
 	//*************
-	DocComment = "///" InputChar*;
-	LineComment = "//" InputChar* -> @channel(Trivia);
+	DocComment = "///" .*;
+	LineComment = "//" .* -> @channel(Trivia);
 	BlockComment = "/*" ~"*/" -> @channel(Trivia);
 
 	//*************
@@ -130,10 +138,33 @@
 		| "partial"
 		| "fixed" IntLiteral "." IntLiteral // Fixed type
 		| "decimal" IntLiteral? // Decimal Type
-		; 
+		;
+
+	//*************
+	// Literals
+	//*************
+	BooleanLiteral = "true" | "false" ;
+
+	IntLiteral = "0" | [1-9] ("_"|\d)*;
+
+	NullLiteral = "null";
+
+	StringLiteral = \" ([^\R\\]|\\\"|\\)* \";
+
+	CharLiteral =  \' [^\']* \';
 }
 
+// Here we use a mode to handle preprocessor sections that are skipped, this mode will be entered by the preprocessor code
 @modes PreprocessorSkip
 {
-	
+	// the type here prevents it from creating another token type
+	PreprocessorLineInSkipped = \s* "#" .* -> <% Preprocess(); %>, @type(PreprocessorLine), @channel(Trivia);
+
+	// anything except newline or #
+	// newline is excluded because otherwise a multi-line match could swallow the leading whitespace we need to check
+	// that preprocessor directives are the first thing on the line
+	PreprocessorSkippedSection = [^\R#]+ -> @channel(Trivia);
+
+	// the type here prevents it from creating another token type
+	PreprocessorSkippedNewline = \R -> @type(Newline), @channel(Trivia);
 }

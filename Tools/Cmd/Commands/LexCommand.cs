@@ -22,7 +22,7 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			var antlrSpec = generator.Generate(spec);
 
 			var fileName = Path.GetFileNameWithoutExtension(lexerSpecPath);
-			var antlrSpecPath = Path.Combine(dir, fileName + ".ANTLR.g4");
+			var antlrSpecPath = Path.Combine(dir, fileName + "_Antlr.g4");
 			File.WriteAllText(antlrSpecPath, antlrSpec);
 			return 0;
 		}

@@ -40,15 +40,17 @@ pattern
 	| ruleName=Identifier					#RulePattern
 	| '.'									#AnyPattern
 	| Literal								#LiteralPattern
+	| PredefinedClass						#PredefinedClassPattern
 	;
 
 charSet
 	: char Dash char				#CharRange
 	| char							#SingleChar
+	| PredefinedClass				#PredefinedClassChar
 	| Dash							#DashChar
 	;
 
-char: Char | EscapedChar | EscapedDash | Caret;
+char: Char | EscapedChar | EscapedDash | Caret | InvalidEscapedChar;
 
 command
 	: '@mode' '(' modeName=Identifier ')'		#ModeCommand
@@ -56,11 +58,11 @@ command
 	| '@popMode'								#PopModeCommand
 	| '@skip'									#SkipCommand
 	| '@more'									#ModeCommand
-	| '@type' '(' Identifier ')'				#TypeCommand
+	| '@type' '(' type=Identifier ')'			#TypeCommand
 	| '@channel' '(' channel=Identifier ')'		#ChannelCommand
 	| '@error'									#ErrorCommand
 	| '@capture'								#CaptureCommand
 	| '@decode' '(' base=Number ')'				#DecodeCommand
-	| '@text' '(' Literal ')'					#TextCommand
+	| '@text' '(' text=Literal ')'				#TextCommand
 	| ActionCmd									#ActionCommand
 	;

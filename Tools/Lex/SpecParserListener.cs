@@ -206,6 +206,18 @@ public interface ISpecParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitIntersectionPattern([NotNull] SpecParser.IntersectionPatternContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>PredefinedClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPredefinedClassPattern([NotNull] SpecParser.PredefinedClassPatternContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>PredefinedClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPredefinedClassPattern([NotNull] SpecParser.PredefinedClassPatternContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>AnyPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>
@@ -349,6 +361,18 @@ public interface ISpecParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSingleChar([NotNull] SpecParser.SingleCharContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>PredefinedClassChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPredefinedClassChar([NotNull] SpecParser.PredefinedClassCharContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>PredefinedClassChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPredefinedClassChar([NotNull] SpecParser.PredefinedClassCharContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>DashChar</c>
 	/// labeled alternative in <see cref="SpecParser.charSet"/>.

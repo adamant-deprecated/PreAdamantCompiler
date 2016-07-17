@@ -134,6 +134,13 @@ public interface ISpecParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitIntersectionPattern([NotNull] SpecParser.IntersectionPatternContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>PredefinedClassPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPredefinedClassPattern([NotNull] SpecParser.PredefinedClassPatternContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>AnyPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>
@@ -217,6 +224,13 @@ public interface ISpecParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitSingleChar([NotNull] SpecParser.SingleCharContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>PredefinedClassChar</c>
+	/// labeled alternative in <see cref="SpecParser.charSet"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPredefinedClassChar([NotNull] SpecParser.PredefinedClassCharContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>DashChar</c>
 	/// labeled alternative in <see cref="SpecParser.charSet"/>.

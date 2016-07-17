@@ -47,6 +47,9 @@
     <Compile Include="PreAdamantLexer.cs">
       <DependentUpon>PreAdamantLexer.g4</DependentUpon>
     </Compile>
+    <Compile Include="PreAdamantLexer_Antlr.cs">
+      <DependentUpon>PreAdamantLexer.lex</DependentUpon>
+    </Compile>
     <Compile Include="Preprocessor\Conditional.cs" />
     <Compile Include="Preprocessor\PreprocessorLineLexer.cs">
       <DependentUpon>PreprocessorLineLexer.g4</DependentUpon>
@@ -79,13 +82,16 @@
   <ItemGroup>
     <None Include="Common.lex" />
     <None Include="PreAdamantCommon.g4" />
-    <None Include="PreAdamantLexer.ANTLR.g4">
-		<DependentUpon>PreAdamantLexer.lex</DependentUpon>
-	</None>
     <None Include="PreAdamantLexer.g4" />
     <None Include="PreAdamantLexer.lex" />
     <None Include="PreAdamantLexer.tokens">
       <DependentUpon>PreAdamantLexer.g4</DependentUpon>
+    </None>
+    <None Include="PreAdamantLexer_Antlr.g4">
+      <DependentUpon>PreAdamantLexer.lex</DependentUpon>
+    </None>
+    <None Include="PreAdamantLexer_Antlr.tokens">
+      <DependentUpon>PreAdamantLexer.lex</DependentUpon>
     </None>
     <None Include="Preprocessor\PreprocessorLineLexer.g4" />
     <None Include="Preprocessor\PreprocessorLineLexer.tokens">

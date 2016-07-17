@@ -71,22 +71,33 @@ BeginCommands: '->';
 Terminator: ';';
 Comma: ',';
 
+// Predefined Character Classes (needs to be before Literal which includes invalid escape chars)
+PredefinedClass
+	: '\\d' | '\\D'
+	| '\\s' | '\\S'
+	| '\\w' | '\\W'
+	| '\\p{' Identifier '}' |'\\P{' Identifier '}'
+	| '\\R'
+	;
+
 // Terminals
 Number: '0' | [1-9][0-9]*;
 Identifier: [a-zA-Z][a-zA-Z0-9_]*;
-Literal: '"' LiteralChar+ '"' | EscapedChar;
+Literal: '"' LiteralChar+ '"' | EscapedChar | InvalidEscapedChar;
 
-fragment LiteralChar : EscapedChar | ~[\\"];
+fragment LiteralChar : EscapedChar | InvalidEscapedChar | ~[\\"];
 fragment HexDigit: [a-fA-F0-9];
 
 // Errors
 InvalidKeyword: '@' Identifier;
 UnexpectedChar: [^];
 
+
 // Character Classes
 mode CharacterClass;
 Char: ~[\\\-\]^];
 Caret: '^';
+PredefinedClass_CharClass: PredefinedClass -> type(PredefinedClass);
 EscapedChar // These string escapes match Adamant
 	: '\\t'
 	| '\\n'
@@ -103,8 +114,9 @@ EscapedChar // These string escapes match Adamant
 	| '\\x' HexDigit HexDigit
 	| '\\u' HexDigit HexDigit HexDigit HexDigit
 	| '\\U' HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit
-	| '\\u{' HexDigit HexDigit? HexDigit? HexDigit? HexDigit? HexDigit? '}'
+	| '\\u{' HexDigit HexDigit? HexDigit? HexDigit? HexDigit? HexDigit? '}' // for consistency with other regular expressions we use {} instead of () like Adamant
 	;
+InvalidEscapedChar: '\\' InputChar;
 EscapedDash: '\\-';
 EscapedRightBracket: '\\]';
 Dash: '-';

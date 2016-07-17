@@ -214,6 +214,18 @@ public partial class SpecParserBaseListener : ISpecParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIntersectionPattern([NotNull] SpecParser.IntersectionPatternContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.PredefinedClassPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPredefinedClassPattern([NotNull] SpecParser.PredefinedClassPatternContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.PredefinedClassPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPredefinedClassPattern([NotNull] SpecParser.PredefinedClassPatternContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="SpecParser.AnyPattern"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -357,6 +369,18 @@ public partial class SpecParserBaseListener : ISpecParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSingleChar([NotNull] SpecParser.SingleCharContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.PredefinedClassChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPredefinedClassChar([NotNull] SpecParser.PredefinedClassCharContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.PredefinedClassChar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPredefinedClassChar([NotNull] SpecParser.PredefinedClassCharContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="SpecParser.DashChar"/>.
 	/// <para>The default implementation does nothing.</para>
