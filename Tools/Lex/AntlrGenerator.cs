@@ -63,10 +63,28 @@ namespace PreAdamant.Compiler.Tools.Lex
 					case "Whitespace":
 						chars = UnicodeCharsWithProperty(char.IsWhiteSpace);
 						break;
+					case "Letter":
+						chars = UnicodeCharsWithProperty(char.IsLetter);
+						break;
+					case "Digit":
+						chars = UnicodeCharsWithProperty(char.IsDigit);
+						break;
+					case "Connector_Punctuation":
+						chars = UnicodeCharsWithProperty(c => char.GetUnicodeCategory(c) == UnicodeCategory.ConnectorPunctuation);
+						break;
+					case "Non_Spacing_Mark":
+						chars = UnicodeCharsWithProperty(c => char.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark);
+						break;
+					case "Spacing_Combining_Mark":
+						chars = UnicodeCharsWithProperty(c => char.GetUnicodeCategory(c) == UnicodeCategory.SpacingCombiningMark);
+						break;
+					case "Format":
+						chars = UnicodeCharsWithProperty(c => char.GetUnicodeCategory(c) == UnicodeCategory.Format);
+						break;
 					default:
 						throw new NotImplementedException($"Unicode property '{unicodeProperty}' not implemented");
 				}
-				builder.Append($"fragment {unicodeFragment}: {chars};");
+				builder.AppendLine($"fragment {unicodeFragment}: {chars};");
 			}
 
 			return builder.ToString();
@@ -85,7 +103,8 @@ namespace PreAdamant.Compiler.Tools.Lex
 			if(action != null)
 				builder.Append(" " + action);
 
-			var commands = rule.Commands.Except(actionCommands).Select(command2 => CommadBuilder.Visit(command2)).ToList();
+			var commands = rule.Commands.Except(actionCommands).Select(command2 => CommadBuilder.Visit(command2))
+				.Where(c => c != null).ToList();
 			if(commands.Any())
 				builder.Append($" -> {string.Join(", ", commands)}");
 
@@ -99,14 +118,14 @@ namespace PreAdamant.Compiler.Tools.Lex
 				if(test((char)i))
 				{
 					var lowEnd = i;
-					builder.Append($"\\u{lowEnd.ToString("x4")}");
+					builder.Append($"\\u{lowEnd.ToString("X4")}");
 					while(i <= char.MaxValue && test((char)++i))
 					{
 						/* do nothing */
 					}
 					var highEnd = i - 1;
 					if(lowEnd < highEnd)
-						builder.Append($"-\\u{highEnd.ToString("x4")}");
+						builder.Append($"-\\u{highEnd.ToString("X4")}");
 				}
 			builder.Append("]");
 			return builder.ToString();
@@ -116,12 +135,12 @@ namespace PreAdamant.Compiler.Tools.Lex
 		private const string UnicodeNot = "Lex__UnicodeNot__";
 		private const string UnicodeWhitespace = Unicode + "Whitespace";
 		private const string UnicodeNotWhitespace = UnicodeNot + "Whitespace";
-		private const string UnicodeAlpha = Unicode + "Alpha";
+		private const string UnicodeLetter = Unicode + "Letter";
 		private const string UnicodeDigit = Unicode + "Digit";
-		private const string UnicodeMark = Unicode + "Mark";
 		private const string UnicodeConnectorPunctuation = Unicode + "Connector_Punctuation";
-		private const string UnicodeJoinControl = Unicode + "Join_Control";
-
+		private const string UnicodeNonSpacingMark = Unicode + "Non_Spacing_Mark";
+		private const string UnicodeSpacingCombiningMark = Unicode + "Spacing_Combining_Mark";
+		private const string UnicodeFormat = Unicode + "Format";
 
 		/// <summary>
 		/// Produces a pattern for ANTLR from our regular expression pattern.  Note that each
@@ -239,7 +258,9 @@ namespace PreAdamant.Compiler.Tools.Lex
 
 			public override string VisitImportedRulePattern(ImportedRulePatternContext context)
 			{
-				var lexerSpec = spec.Imports[context.lexerName.Text];
+				Spec lexerSpec;
+				if(!spec.Imports.TryGetValue(context.lexerName.Text, out lexerSpec))
+					throw new Exception($"Incorrect reference to imported lexer '{context.lexerName.Text}'");
 				var ruleName = context.ruleName.Text;
 				return BuildRule(new PatternBuilder(lexerSpec, false), ruleName);
 			}
@@ -300,6 +321,24 @@ namespace PreAdamant.Compiler.Tools.Lex
 						throw new NotImplementedException();
 					case @"\R":
 						return $"('\\r\\n'|[{NewLineChars}])";
+					case @"\p{Letter}":
+						PredefinedFragmentsUsed.Add(UnicodeLetter);
+						return UnicodeLetter;
+					case @"\p{Digit}":
+						PredefinedFragmentsUsed.Add(UnicodeDigit);
+						return UnicodeDigit;
+					case @"\p{Connector_Punctuation}":
+						PredefinedFragmentsUsed.Add(UnicodeConnectorPunctuation);
+						return UnicodeConnectorPunctuation;
+					case @"\p{Non_Spacing_Mark}":
+						PredefinedFragmentsUsed.Add(UnicodeNonSpacingMark);
+						return UnicodeNonSpacingMark;
+					case @"\p{Spacing_Combining_Mark}":
+						PredefinedFragmentsUsed.Add(UnicodeSpacingCombiningMark);
+						return UnicodeSpacingCombiningMark;
+					case @"\p{Format}":
+						PredefinedFragmentsUsed.Add(UnicodeFormat);
+						return UnicodeFormat;
 					default:
 						throw new NotImplementedException();
 				}
@@ -383,6 +422,11 @@ namespace PreAdamant.Compiler.Tools.Lex
 			public override string VisitTypeCommand(TypeCommandContext context)
 			{
 				return $"type({context.type.Text})";
+			}
+
+			public override string VisitErrorCommand(ErrorCommandContext context)
+			{
+				return null;
 			}
 
 			public override string VisitActionCommand(ActionCommandContext context)

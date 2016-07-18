@@ -1,4 +1,14 @@
 ﻿
-unicodeEscape =  "\\u" ( HexDigit{4} | "(" HexDigit{1, 6} ")" );
+unicodeEscape =  "\\u" ( hexDigit{4} | "(" hexDigit{1, 6} ")" );
 hexDigit = [0-9a-fA-F];
-decimalDigit = [0-9];
+
+identifierStartChar = \p{Letter} | "_" | unicodeEscape;
+identifierPartChar =
+	  \p{Letter}
+	| \p{Digit}
+	| \p{Connector_Punctuation}
+	| \p{Non_Spacing_Mark}
+	| \p{Spacing_Combining_Mark}
+	| \p{Format}
+	| unicodeEscape
+	;

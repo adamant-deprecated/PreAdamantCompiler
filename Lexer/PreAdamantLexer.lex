@@ -152,6 +152,68 @@
 	StringLiteral = \" ([^\R\\]|\\\"|\\)* \";
 
 	CharLiteral =  \' [^\']* \';
+
+	//*************
+	// Operators
+	//*************
+	Semicolon = ";";
+	Colon = ":";
+	Dot = ".";
+	DotDot = "..";
+	To = "to";
+	ColonColon= "::";
+	Tilde = "~";
+	Comma = ",";
+	Lambda = "->";
+	LeftBrace = "{";
+	RightBrace = "}";
+	LeftAngle = "<";
+	RightAngle = ">";
+	LeftBracket = "[";
+	RightBracket = "]";
+	LeftParen = "(";
+	RightParen = ")";
+	Asterisk = "*";
+	AtSign = "@";
+	AddressOf = "&";
+	Coalesce = "??";
+	IsNull = "?";
+	Equal = "==";
+	NotEqual = "<>";
+	LessThanOrEqual = "<=";
+	GreaterThanOrEqual = ">=";
+	TypeList = "...";
+	Plus = "+";
+	Minus = "-";
+	Divide = "/";
+	Pipe = "|";
+	And = "and";
+	Xor = "xor";
+	Or = "or";
+	Not = "not";
+
+	Assign = "=";
+	AddAssign = "+=";
+	SubtractAssign = "-=";
+	MultiplyAssign = "*=";
+	DivideAssign = "/=";
+	AndAssign = "and=";
+	XorAssign = "xor=";
+	OrAssign = "or=";
+
+	PlaceHolder = "_";
+
+	// must be defined after all keywords so it will not match a keyword
+	// TODO should really be using a disambiguation system rather than order of file priority
+	Identifier = C::identifierStartChar C::identifierPartChar*;
+
+	EscapedIdentifier = "`" Identifier;
+
+	//*************
+	// Error Rules
+	//*************
+	BadNotEqual = "!=" -> @type(NotEqual), @error; /* { NotifyErrorListeners("Invalid operator, use '<>' for not equal instead of '!='"); } */
+	Unknown = .; // An error catch rule for everything else
 }
 
 // Here we use a mode to handle preprocessor sections that are skipped, this mode will be entered by the preprocessor code
