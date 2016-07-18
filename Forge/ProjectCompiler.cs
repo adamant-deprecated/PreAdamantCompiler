@@ -73,7 +73,7 @@ namespace PreAdamant.Compiler.Forge
 			var package = new PackageContext(projectConfig.Name, isApp, projectConfig.Dependencies.Select(d => new PackageReferenceContext(d.Key, null, true)));
 			var projectPathLength = Path.GetFullPath(sourcePath).Length;
 			foreach(var fileInfo in sourceFiles)
-				compiler.Parse(package, new SourceFile(package.Name, fileInfo.FullName.Substring(projectPathLength).TrimStart('\\'), fileInfo));
+				compiler.Parse(package, new SourceText(package.Name, fileInfo.FullName.Substring(projectPathLength).TrimStart('\\'), fileInfo));
 
 			if(package.Diagnostics.Count > 0)
 			{

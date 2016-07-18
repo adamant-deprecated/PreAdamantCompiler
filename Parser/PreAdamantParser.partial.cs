@@ -15,8 +15,8 @@ namespace PreAdamant.Compiler.Parser
 		{
 		}
 
-		public PreAdamantParser(string fileName)
-			: this(new PreAdamantLexer(fileName))
+		public PreAdamantParser(SourceText source)
+			: this(new PreAdamantLexer(source))
 		{
 		}
 

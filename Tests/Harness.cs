@@ -52,7 +52,7 @@ namespace PreAdamant.Compiler.Tests
 			var packages = CompileDependencies(packageReferences);
 
 			var testPackage = new PackageContext($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences);
-			Compile(testPackage, new SourceReader("Test", config.FileName, reader), packages);
+			Compile(testPackage, new SourceText("Test", config.FileName, reader), packages);
 
 			packages.Add(testPackage);
 			foreach(var package in packages)
@@ -114,7 +114,7 @@ namespace PreAdamant.Compiler.Tests
 				// Compile all the source files in the package
 				foreach(var sourceFilePath in sourceFilePaths)
 				{
-					var sourceFile = new SourceFile(package.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath));
+					var sourceFile = new SourceText(package.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath));
 					Compile(package, sourceFile, dependencies);
 				}
 

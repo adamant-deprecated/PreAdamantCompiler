@@ -18,12 +18,20 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			var dir = Path.GetDirectoryName(lexerSpecPath);
 			var lexerSpecContents = File.ReadAllText(lexerSpecPath);
 			var spec = new SpecReader().Read(lexerSpecContents, lexerName => File.ReadAllText(Path.Combine(dir, lexerName + ".lex")));
-			var generator = new AntlrGenerator();
-			var antlrSpec = generator.Generate(spec);
+			var specFileName = Path.GetFileNameWithoutExtension(lexerSpecPath);
 
-			var fileName = Path.GetFileNameWithoutExtension(lexerSpecPath);
-			var antlrSpecPath = Path.Combine(dir, fileName + "_Antlr.g4");
+			// Generate ANTLR file
+			var antlrGenerator = new AntlrGenerator();
+			var antlrSpec = antlrGenerator.Generate(spec);
+			var antlrSpecPath = Path.Combine(dir, specFileName + "_Antlr.g4");
 			File.WriteAllText(antlrSpecPath, antlrSpec);
+
+			// Generate Parser.cs file
+			var parserGenerator = new ParserGenerator();
+			var parserCode = parserGenerator.Generate(spec);
+			var parserCodePath = Path.Combine(dir, specFileName + ".cs");
+			File.WriteAllText(parserCodePath, parserCode);
+
 			return 0;
 		}
 	}

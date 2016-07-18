@@ -28,13 +28,14 @@ namespace PreAdamant.Compiler.Tools.Lex
 			treeWalker.Walk(new SpecValidations(imports), specTree);
 
 			var name = specTree.children.OfType<NameDirectiveContext>().SingleOrDefault()?.Identifier().GetText();
-			var ns = string.Join(".", specTree.children.OfType<NamespaceDirectiveContext>().SingleOrDefault()?.children.Select(n => n.GetText()) ?? Enumerable.Empty<string>());
+			var ns = string.Join(".", specTree.children.OfType<NamespaceDirectiveContext>().SingleOrDefault()?.GetTokens(Identifier).Select(n => n.GetText()) ?? Enumerable.Empty<string>());
+			var startMode = specTree.children.OfType<StartModeDirectiveContext>().SingleOrDefault()?.Identifier().GetText();
 			var modes = specTree.children.OfType<ModesDirectiveContext>().SelectMany(m => m._modes).Select(m => m.Text).Distinct();
 			var channels = (specTree.children.OfType<ChannelsDirectiveContext>().SingleOrDefault()?._channels.Select(c => c.Text) ?? Enumerable.Empty<string>()).ToList();
 			var fragements = specTree.children.OfType<ParseRuleContext>().Select(BuildFragment);
 			var blocks = specTree.children.OfType<ModesDirectiveContext>().Select(Build);
 
-			return new Spec(name, ns, imports, modes, channels, fragements, blocks);
+			return new Spec(name, ns, startMode, imports, modes, channels, fragements, blocks);
 		}
 
 		private static Fragment BuildFragment(ParseRuleContext rule)

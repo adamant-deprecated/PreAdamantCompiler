@@ -6,5 +6,6 @@ namespace PreAdamant.Compiler.Core
 	{
 		string Package { get; }
 		string Name { get; }
+		string Text { get; }
 	}
 }

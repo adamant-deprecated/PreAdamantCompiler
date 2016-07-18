@@ -18,5 +18,10 @@ namespace PreAdamant.Compiler.Tools.Lex
 			Pattern = pattern;
 			Commands = commands.ToList();
 		}
+
+		/// <summary>
+		/// Whether this rule will correspond to an actual token type output by the lexer
+		/// </summary>
+		public bool IsTokenType => !Commands.OfType<TypeCommandContext>().Any();
 	}
 }
