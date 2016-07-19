@@ -97,7 +97,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.Append($"{ruleName}: {pattern}");
 
 			var actionCommands = rule.Commands.OfType<ActionCommandContext>().ToList();
-			var action = actionCommands.Select(command1 => CommadBuilder.Visit(command1)).SingleOrDefault();
+			var action = actionCommands.Select(a => CommadBuilder.Visit(a)).SingleOrDefault();
 			if(action != null)
 				builder.Append(" " + action);
 
@@ -159,8 +159,9 @@ namespace PreAdamant.Compiler.Tools.Lex
 
 			public override string VisitActionCommand(ActionCommandContext context)
 			{
-				var action = context.GetText();
-				return $"{{{action.Substring(2, action.Length - 4)}}}";
+				var parseRule = (ParseRuleContext)context.Parent;
+				var actionName = context.action?.Text ?? parseRule.name.Text;
+				return $"{{{actionName}Action(_localctx);}}";
 			}
 		}
 	}

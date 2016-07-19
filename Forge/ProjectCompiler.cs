@@ -64,26 +64,26 @@ namespace PreAdamant.Compiler.Forge
 
 		private void CompileProject(string projectDirPath, ProjectConfig projectConfig, Projects projects)
 		{
-			Console.WriteLine($"Compiling {projectConfig.Name} ...");
+			//Console.WriteLine($"Compiling {projectConfig.Name} ...");
 
-			var sourcePath = Path.Combine(projectDirPath, "src");
-			var sourceFiles = new DirectoryInfo(sourcePath).GetFiles("*.adam", SearchOption.AllDirectories);
-			var isApp = projectConfig.Template == "app";
-			// TODO read trusted from config
-			var package = new PackageContext(projectConfig.Name, isApp, projectConfig.Dependencies.Select(d => new PackageReferenceContext(d.Key, null, true)));
-			var projectPathLength = Path.GetFullPath(sourcePath).Length;
-			foreach(var fileInfo in sourceFiles)
-				compiler.Parse(package, new SourceText(package.Name, fileInfo.FullName.Substring(projectPathLength).TrimStart('\\'), fileInfo));
+			//var sourcePath = Path.Combine(projectDirPath, "src");
+			//var sourceFiles = new DirectoryInfo(sourcePath).GetFiles("*.adam", SearchOption.AllDirectories);
+			//var isApp = projectConfig.Template == "app";
+			//// TODO read trusted from config
+			//var package = new PackageContext(projectConfig.Name, isApp, projectConfig.Dependencies.Select(d => new PackageReferenceContext(d.Key, null, true)));
+			//var projectPathLength = Path.GetFullPath(sourcePath).Length;
+			//foreach(var fileInfo in sourceFiles)
+			//	compiler.Parse(package, new SourceText(package.Name, fileInfo.FullName.Substring(projectPathLength).TrimStart('\\'), fileInfo));
 
-			if(package.Diagnostics.Count > 0)
-			{
-				PrintDiagnostics(package);
-				return;
-			}
-			compiler.Compile(package, projects.Select(p => p.Package));
-			var project = new Project(projectDirPath, package);
-			projects.Add(project);
-			OnProjectCompiled(project, projects);
+			//if(package.Diagnostics.Count > 0)
+			//{
+			//	PrintDiagnostics(package);
+			//	return;
+			//}
+			//compiler.Compile(package, projects.Select(p => p.Package));
+			//var project = new Project(projectDirPath, package);
+			//projects.Add(project);
+			//OnProjectCompiled(project, projects);
 		}
 
 		protected void OnProjectCompiled(Project project, Projects projects)
@@ -103,22 +103,22 @@ namespace PreAdamant.Compiler.Forge
 			}
 		}
 
-		private static void PrintDiagnostics(PackageContext package)
-		{
-			ISourceText file = null;
-			foreach(var diagnostic in package.Diagnostics)
-			{
-				if(file != diagnostic.File)
-				{
-					file = diagnostic.File;
-					Console.WriteLine($"In {file.Name}");
-				}
-				var level = diagnostic.Level.ToString();
-				var line = diagnostic.Position.Line + 1;
-				var column = diagnostic.Position.Column + 1;
-				Console.WriteLine($"{level} on line {line} at character {column}: ");
-				Console.WriteLine($"    {diagnostic.Message}");
-			}
-		}
+		//private static void PrintDiagnostics(PackageContext package)
+		//{
+		//	ISourceText file = null;
+		//	foreach(var diagnostic in package.Diagnostics)
+		//	{
+		//		if(file != diagnostic.File)
+		//		{
+		//			file = diagnostic.File;
+		//			Console.WriteLine($"In {file.Name}");
+		//		}
+		//		var level = diagnostic.Level.ToString();
+		//		var line = diagnostic.Position.Line + 1;
+		//		var column = diagnostic.Position.Column + 1;
+		//		Console.WriteLine($"{level} on line {line} at character {column}: ");
+		//		Console.WriteLine($"    {diagnostic.Message}");
+		//	}
+		//}
 	}
 }

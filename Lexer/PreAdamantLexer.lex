@@ -13,7 +13,7 @@
 	//*************
 	// Preprocessor
 	//*************
-	PreprocessorLine =  \s* "#" .* -> <% Preprocess(); %>, @channel(Trivia);
+	PreprocessorLine =  \s* "#" .* -> @channel(Trivia), @action(Preprocess);
 
 	//*************
 	// Comments
@@ -220,7 +220,7 @@
 @modes PreprocessorSkip
 {
 	// the type here prevents it from creating another token type
-	PreprocessorLineInSkipped = \s* "#" .* -> <% Preprocess(); %>, @type(PreprocessorLine), @channel(Trivia);
+	PreprocessorLineInSkipped = \s* "#" .* -> @type(PreprocessorLine), @channel(Trivia), @action(Preprocess);
 
 	// anything except newline or #
 	// newline is excluded because otherwise a multi-line match could swallow the leading whitespace we need to check

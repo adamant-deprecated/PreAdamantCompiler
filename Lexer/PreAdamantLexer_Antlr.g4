@@ -12,7 +12,7 @@ mode Code;
 
 Whitespace: (Lex__Unicode__Whitespace+) -> channel(Trivia);
 Newline: ('\r\n'|[\r\n\u000B\f\u0085\u2028\u2029]) -> channel(Trivia);
-PreprocessorLine: (Lex__Unicode__Whitespace*) '#' ((~[\r\n\u000B\f\u0085\u2028\u2029])*) { Preprocess(); } -> channel(Trivia);
+PreprocessorLine: (Lex__Unicode__Whitespace*) '#' ((~[\r\n\u000B\f\u0085\u2028\u2029])*) {PreprocessAction(_localctx);} -> channel(Trivia);
 DocComment: '///' ((~[\r\n\u000B\f\u0085\u2028\u2029])*);
 LineComment: '//' ((~[\r\n\u000B\f\u0085\u2028\u2029])*) -> channel(Trivia);
 BlockComment: '/*' (.*? '*/') -> channel(Trivia);
@@ -147,7 +147,7 @@ Unknown: (~[\r\n\u000B\f\u0085\u2028\u2029]);
 
 mode PreprocessorSkip;
 
-PreprocessorLineInSkipped: (Lex__Unicode__Whitespace*) '#' ((~[\r\n\u000B\f\u0085\u2028\u2029])*) { Preprocess(); } -> type(PreprocessorLine), channel(Trivia);
+PreprocessorLineInSkipped: (Lex__Unicode__Whitespace*) '#' ((~[\r\n\u000B\f\u0085\u2028\u2029])*) {PreprocessAction(_localctx);} -> type(PreprocessorLine), channel(Trivia);
 PreprocessorSkippedSection: ((~[\r\n\u000B\f\u0085\u2028\u2029#])+) -> channel(Trivia);
 PreprocessorSkippedNewline: ('\r\n'|[\r\n\u000B\f\u0085\u2028\u2029]) -> type(Newline), channel(Trivia);
 

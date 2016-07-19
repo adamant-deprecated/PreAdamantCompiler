@@ -7,7 +7,7 @@ using PreAdamant.Compiler.Lexer.Antlr;
 
 namespace PreAdamant.Compiler.Lexer
 {
-	public partial class PreAdamantLexer : IEnumerable<Token>
+	public partial class PreAdamantLexer : IEnumerable<SyntaxToken>
 	{
 		public readonly SourceText Source;
 
@@ -16,7 +16,7 @@ namespace PreAdamant.Compiler.Lexer
 			Source = source;
 		}
 
-		public IEnumerator<Token> GetEnumerator()
+		public IEnumerator<SyntaxToken> GetEnumerator()
 		{
 			using(var reader = new StringReader(Source.Text))
 			{
@@ -84,7 +84,7 @@ namespace PreAdamant.Compiler.Lexer
 		//}
 	}
 
-	public class KeywordToken : Token
+	public class KeywordToken : SyntaxToken
 	{
 		protected KeywordToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)

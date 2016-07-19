@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace PreAdamant.Compiler.Forge
 {
@@ -6,7 +7,8 @@ namespace PreAdamant.Compiler.Forge
 	{
 		protected override string GetKeyForItem(Project item)
 		{
-			return item.Name;
+			throw new NotImplementedException();
+			//return item.Name;
 		}
 	}
 }

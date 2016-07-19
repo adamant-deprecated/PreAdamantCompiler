@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Lexer;
@@ -8,9 +9,11 @@ namespace PreAdamant.Compiler.Parser
 {
 	public partial class PreAdamantParser
 	{
-		public PreAdamantParser(IEnumerable<Token> tokens)
+		private readonly IEnumerable<SyntaxToken> tokens;
+
+		public PreAdamantParser(IEnumerable<SyntaxToken> tokens)
 		{
-			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(new TokenSourceAdapter(tokens)));
+			this.tokens = tokens;
 		}
 
 		public PreAdamantParser(SourceText source)
@@ -18,21 +21,24 @@ namespace PreAdamant.Compiler.Parser
 		{
 		}
 
+		public void Parse()
+		{
+			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(new TokenSourceAdapter(tokens)));
+			var unit = parser.compilationUnit();
+		}
+
 		private class TokenSourceAdapter : ITokenSource
 		{
-			private IEnumerator<Token> tokens;
+			private readonly IEnumerator<SyntaxToken> tokens;
 
-			public TokenSourceAdapter(IEnumerable<Token> tokens)
+			public TokenSourceAdapter(IEnumerable<SyntaxToken> tokens)
 			{
 				this.tokens = tokens.GetEnumerator();
 			}
 
 			public IToken NextToken()
 			{
-				if(tokens.MoveNext())
-					return new TokenAdapter(tokens.Current); 
-				else
-					return null;
+				return tokens.MoveNext() ? new TokenAdapter(tokens.Current) : null;
 			}
 
 			public int Line
@@ -64,59 +70,46 @@ namespace PreAdamant.Compiler.Parser
 
 		internal class TokenAdapter : IToken
 		{
-			public TokenAdapter(Token token)
+			private readonly SyntaxToken token;
+
+			public TokenAdapter(SyntaxToken token)
 			{
-				throw new System.NotImplementedException();
+				this.token = token;
 			}
 
-			public string Text
-			{
-				get { return text; }
-			}
+			public string Text => token.Text;
 
-			public int Type
-			{
-				get { return type; }
-			}
+			public int Type => token.TokenNumber;
 
 			public int Line
 			{
-				get { return line; }
+				get { throw new NotSupportedException(); }
 			}
 
 			public int Column
 			{
-				get { return column; }
+				get { throw new NotSupportedException(); }
 			}
 
-			public int Channel
-			{
-				get { return channel; }
-			}
+			public int Channel => (int)token.Channel;
 
 			public int TokenIndex
 			{
-				get { return tokenIndex; }
+				get { throw new NotSupportedException(); }
 			}
 
-			public int StartIndex
-			{
-				get { return startIndex; }
-			}
+			public int StartIndex => (int)token.Offset;
 
-			public int StopIndex
-			{
-				get { return stopIndex; }
-			}
+			public int StopIndex => (int)(token.Offset + token.Length);
 
 			public ITokenSource TokenSource
 			{
-				get { return tokenSource; }
+				get { throw new NotSupportedException(); }
 			}
 
 			public ICharStream InputStream
 			{
-				get { return inputStream; }
+				get { throw new NotSupportedException(); }
 			}
 		}
 

@@ -13,7 +13,7 @@ namespace PreAdamant.Compiler.Lexer
 			Trivia,
 		}
 
-		private Token CreateToken(SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text)
+		private SyntaxToken CreateToken(SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text)
 		{
 			switch(type)
 			{
@@ -291,7 +291,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class WhitespaceToken : Token
+	public partial class WhitespaceToken : SyntaxToken
 	{
 		public WhitespaceToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -299,7 +299,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class NewlineToken : Token
+	public partial class NewlineToken : SyntaxToken
 	{
 		public NewlineToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -307,7 +307,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PreprocessorLineToken : Token
+	public partial class PreprocessorLineToken : SyntaxToken
 	{
 		public PreprocessorLineToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -315,7 +315,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class DocCommentToken : Token
+	public partial class DocCommentToken : SyntaxToken
 	{
 		public DocCommentToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -323,7 +323,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LineCommentToken : Token
+	public partial class LineCommentToken : SyntaxToken
 	{
 		public LineCommentToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -331,7 +331,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class BlockCommentToken : Token
+	public partial class BlockCommentToken : SyntaxToken
 	{
 		public BlockCommentToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -923,7 +923,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PanicToken : Token
+	public partial class PanicToken : SyntaxToken
 	{
 		public PanicToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -931,7 +931,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class ReservedWordToken : Token
+	public partial class ReservedWordToken : SyntaxToken
 	{
 		public ReservedWordToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -939,7 +939,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class BooleanLiteralToken : Token
+	public partial class BooleanLiteralToken : SyntaxToken
 	{
 		public BooleanLiteralToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -947,7 +947,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class IntLiteralToken : Token
+	public partial class IntLiteralToken : SyntaxToken
 	{
 		public IntLiteralToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -955,7 +955,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class NullLiteralToken : Token
+	public partial class NullLiteralToken : SyntaxToken
 	{
 		public NullLiteralToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -963,7 +963,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class StringLiteralToken : Token
+	public partial class StringLiteralToken : SyntaxToken
 	{
 		public StringLiteralToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -971,7 +971,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class CharLiteralToken : Token
+	public partial class CharLiteralToken : SyntaxToken
 	{
 		public CharLiteralToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -979,7 +979,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class SemicolonToken : Token
+	public partial class SemicolonToken : SyntaxToken
 	{
 		public SemicolonToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -987,7 +987,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class ColonToken : Token
+	public partial class ColonToken : SyntaxToken
 	{
 		public ColonToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -995,7 +995,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class DotToken : Token
+	public partial class DotToken : SyntaxToken
 	{
 		public DotToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1003,7 +1003,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class DotDotToken : Token
+	public partial class DotDotToken : SyntaxToken
 	{
 		public DotDotToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1011,7 +1011,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class ToToken : Token
+	public partial class ToToken : SyntaxToken
 	{
 		public ToToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1019,7 +1019,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class ColonColonToken : Token
+	public partial class ColonColonToken : SyntaxToken
 	{
 		public ColonColonToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1027,7 +1027,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class TildeToken : Token
+	public partial class TildeToken : SyntaxToken
 	{
 		public TildeToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1035,7 +1035,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class CommaToken : Token
+	public partial class CommaToken : SyntaxToken
 	{
 		public CommaToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1043,7 +1043,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LambdaToken : Token
+	public partial class LambdaToken : SyntaxToken
 	{
 		public LambdaToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1051,7 +1051,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LeftBraceToken : Token
+	public partial class LeftBraceToken : SyntaxToken
 	{
 		public LeftBraceToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1059,7 +1059,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class RightBraceToken : Token
+	public partial class RightBraceToken : SyntaxToken
 	{
 		public RightBraceToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1067,7 +1067,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LeftAngleToken : Token
+	public partial class LeftAngleToken : SyntaxToken
 	{
 		public LeftAngleToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1075,7 +1075,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class RightAngleToken : Token
+	public partial class RightAngleToken : SyntaxToken
 	{
 		public RightAngleToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1083,7 +1083,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LeftBracketToken : Token
+	public partial class LeftBracketToken : SyntaxToken
 	{
 		public LeftBracketToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1091,7 +1091,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class RightBracketToken : Token
+	public partial class RightBracketToken : SyntaxToken
 	{
 		public RightBracketToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1099,7 +1099,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LeftParenToken : Token
+	public partial class LeftParenToken : SyntaxToken
 	{
 		public LeftParenToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1107,7 +1107,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class RightParenToken : Token
+	public partial class RightParenToken : SyntaxToken
 	{
 		public RightParenToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1115,7 +1115,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AsteriskToken : Token
+	public partial class AsteriskToken : SyntaxToken
 	{
 		public AsteriskToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1123,7 +1123,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AtSignToken : Token
+	public partial class AtSignToken : SyntaxToken
 	{
 		public AtSignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1131,7 +1131,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AddressOfToken : Token
+	public partial class AddressOfToken : SyntaxToken
 	{
 		public AddressOfToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1139,7 +1139,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class CoalesceToken : Token
+	public partial class CoalesceToken : SyntaxToken
 	{
 		public CoalesceToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1147,7 +1147,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class IsNullToken : Token
+	public partial class IsNullToken : SyntaxToken
 	{
 		public IsNullToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1155,7 +1155,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class EqualToken : Token
+	public partial class EqualToken : SyntaxToken
 	{
 		public EqualToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1163,7 +1163,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class NotEqualToken : Token
+	public partial class NotEqualToken : SyntaxToken
 	{
 		public NotEqualToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1171,7 +1171,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class LessThanOrEqualToken : Token
+	public partial class LessThanOrEqualToken : SyntaxToken
 	{
 		public LessThanOrEqualToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1179,7 +1179,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class GreaterThanOrEqualToken : Token
+	public partial class GreaterThanOrEqualToken : SyntaxToken
 	{
 		public GreaterThanOrEqualToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1187,7 +1187,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class TypeListToken : Token
+	public partial class TypeListToken : SyntaxToken
 	{
 		public TypeListToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1195,7 +1195,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PlusToken : Token
+	public partial class PlusToken : SyntaxToken
 	{
 		public PlusToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1203,7 +1203,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class MinusToken : Token
+	public partial class MinusToken : SyntaxToken
 	{
 		public MinusToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1211,7 +1211,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class DivideToken : Token
+	public partial class DivideToken : SyntaxToken
 	{
 		public DivideToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1219,7 +1219,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PipeToken : Token
+	public partial class PipeToken : SyntaxToken
 	{
 		public PipeToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1227,7 +1227,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AndToken : Token
+	public partial class AndToken : SyntaxToken
 	{
 		public AndToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1235,7 +1235,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class XorToken : Token
+	public partial class XorToken : SyntaxToken
 	{
 		public XorToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1243,7 +1243,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class OrToken : Token
+	public partial class OrToken : SyntaxToken
 	{
 		public OrToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1251,7 +1251,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class NotToken : Token
+	public partial class NotToken : SyntaxToken
 	{
 		public NotToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1259,7 +1259,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AssignToken : Token
+	public partial class AssignToken : SyntaxToken
 	{
 		public AssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1267,7 +1267,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AddAssignToken : Token
+	public partial class AddAssignToken : SyntaxToken
 	{
 		public AddAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1275,7 +1275,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class SubtractAssignToken : Token
+	public partial class SubtractAssignToken : SyntaxToken
 	{
 		public SubtractAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1283,7 +1283,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class MultiplyAssignToken : Token
+	public partial class MultiplyAssignToken : SyntaxToken
 	{
 		public MultiplyAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1291,7 +1291,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class DivideAssignToken : Token
+	public partial class DivideAssignToken : SyntaxToken
 	{
 		public DivideAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1299,7 +1299,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class AndAssignToken : Token
+	public partial class AndAssignToken : SyntaxToken
 	{
 		public AndAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1307,7 +1307,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class XorAssignToken : Token
+	public partial class XorAssignToken : SyntaxToken
 	{
 		public XorAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1315,7 +1315,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class OrAssignToken : Token
+	public partial class OrAssignToken : SyntaxToken
 	{
 		public OrAssignToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1323,7 +1323,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PlaceHolderToken : Token
+	public partial class PlaceHolderToken : SyntaxToken
 	{
 		public PlaceHolderToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1331,7 +1331,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class IdentifierToken : Token
+	public partial class IdentifierToken : SyntaxToken
 	{
 		public IdentifierToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1339,7 +1339,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class EscapedIdentifierToken : Token
+	public partial class EscapedIdentifierToken : SyntaxToken
 	{
 		public EscapedIdentifierToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1347,7 +1347,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class UnknownToken : Token
+	public partial class UnknownToken : SyntaxToken
 	{
 		public UnknownToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)
@@ -1355,7 +1355,7 @@ namespace PreAdamant.Compiler.Lexer
 		}
 	}
 
-	public partial class PreprocessorSkippedSectionToken : Token
+	public partial class PreprocessorSkippedSectionToken : SyntaxToken
 	{
 		public PreprocessorSkippedSectionToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
 			: base(source, startIndex, stopIndex, type, channel, text)

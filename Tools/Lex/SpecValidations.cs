@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static PreAdamant.Compiler.Tools.Lex.SpecParser;
 
 namespace PreAdamant.Compiler.Tools.Lex
 {
@@ -16,47 +17,47 @@ namespace PreAdamant.Compiler.Tools.Lex
 			this.imports = imports;
 		}
 
-		public override void EnterModesDirective(SpecParser.ModesDirectiveContext context)
+		public override void EnterModesDirective(ModesDirectiveContext context)
 		{
 			inModesBlock = true;
 		}
 
-		public override void ExitModesDirective(SpecParser.ModesDirectiveContext context)
+		public override void ExitModesDirective(ModesDirectiveContext context)
 		{
 			inModesBlock = false;
 		}
 
-		public override void EnterNameDirective(SpecParser.NameDirectiveContext context)
+		public override void EnterNameDirective(NameDirectiveContext context)
 		{
 			if(inModesBlock)
 				throw new Exception("@lexer directive can't occur inside @modes block");
 		}
 
-		public override void EnterNamespaceDirective(SpecParser.NamespaceDirectiveContext context)
+		public override void EnterNamespaceDirective(NamespaceDirectiveContext context)
 		{
 			if(inModesBlock)
 				throw new Exception("@namespace directive can't occur inside @modes block");
 		}
 
-		public override void EnterImportDirective(SpecParser.ImportDirectiveContext context)
+		public override void EnterImportDirective(ImportDirectiveContext context)
 		{
 			if(inModesBlock)
 				throw new Exception("@import directive can't occur inside @modes block");
 		}
 
-		public override void EnterStartModeDirective(SpecParser.StartModeDirectiveContext context)
+		public override void EnterStartModeDirective(StartModeDirectiveContext context)
 		{
 			if(inModesBlock)
 				throw new Exception("@startMode directive can't occur inside @modes block");
 		}
 
-		public override void EnterIncludeDirective(SpecParser.IncludeDirectiveContext context)
+		public override void EnterIncludeDirective(IncludeDirectiveContext context)
 		{
 			if(!inModesBlock)
 				throw new Exception("@include directive can only occur inside @modes block");
 		}
 
-		public override void EnterChannelsDirective(SpecParser.ChannelsDirectiveContext context)
+		public override void EnterChannelsDirective(ChannelsDirectiveContext context)
 		{
 			if(inModesBlock)
 				throw new Exception("@channels directive can't occur inside @modes block");
@@ -67,7 +68,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			channels = new HashSet<string>(context._channels.Select(t => t.Text));
 		}
 
-		public override void EnterParseRule(SpecParser.ParseRuleContext context)
+		public override void EnterParseRule(ParseRuleContext context)
 		{
 			var name = context.name.Text;
 			var isFragement = char.IsLower(name[0]);
@@ -92,7 +93,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			}
 		}
 
-		public override void EnterChannelCommand(SpecParser.ChannelCommandContext context)
+		public override void EnterChannelCommand(ChannelCommandContext context)
 		{
 			var channel = context.channel.Text;
 			if(channels == null)
@@ -100,6 +101,13 @@ namespace PreAdamant.Compiler.Tools.Lex
 
 			if(!channels.Contains(channel))
 				throw new Exception($"Channel '{channel}' used, but not declared with @channels");
+		}
+
+		public override void EnterActionCommand(ActionCommandContext context)
+		{
+			var parseRule = (ParseRuleContext)context.Parent;
+			if(parseRule._commands.IndexOf(context) != parseRule._commands.Count - 1)
+				throw new Exception("@action command must be the last command in a command list");
 		}
 	}
 }

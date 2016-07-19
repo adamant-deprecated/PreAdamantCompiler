@@ -162,12 +162,12 @@ public partial class PreAdamantLexer_Antlr : Lexer {
 	}
 	private void PreprocessorLine_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
-		case 0:  Preprocess();  break;
+		case 0: PreprocessAction(_localctx); break;
 		}
 	}
 	private void PreprocessorLineInSkipped_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
-		case 1:  Preprocess();  break;
+		case 1: PreprocessAction(_localctx); break;
 		}
 	}
 

@@ -45,7 +45,7 @@ ErrorCmd: '@error';
 CaptureCmd: '@capture';
 DecodeCmd: '@decode';
 TextCmd: '@text';
-ActionCmd: '<%' .*? '%>';
+ActionCmd: '@action';
 
 // Operators
 OfType: ':';

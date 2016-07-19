@@ -63,5 +63,5 @@ command
 	| '@capture'								#CaptureCommand
 	| '@decode' '(' base=Number ')'				#DecodeCommand
 	| '@text' '(' text=Literal ')'				#TextCommand
-	| ActionCmd									#ActionCommand
+	| '@action'	('(' action=Identifier ')')?	#ActionCommand
 	;
