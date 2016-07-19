@@ -4,11 +4,11 @@ using PreAdamant.Compiler.Tools.Lex;
 
 namespace PreAdamant.Compiler.Tools.Cmd.Commands
 {
-	public class LexCommand : ConsoleCommand
+	public class LexerCommand : ConsoleCommand
 	{
-		public LexCommand()
+		public LexerCommand()
 		{
-			IsCommand("lex", "generate lexer from *.lex file");
+			IsCommand("lexer", "generate lexer from *.lex file");
 			HasAdditionalArguments(1, " <spec>");
 		}
 
@@ -27,7 +27,7 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			File.WriteAllText(antlrSpecPath, antlrSpec);
 
 			// Generate Parser.cs file
-			var parserGenerator = new ParserGenerator();
+			var parserGenerator = new LexerGenerator();
 			var parserCode = parserGenerator.Generate(spec);
 			var parserCodePath = Path.Combine(dir, specFileName + ".cs");
 			File.WriteAllText(parserCodePath, parserCode);

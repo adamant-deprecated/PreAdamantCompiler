@@ -4,12 +4,12 @@ using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Parser
 {
-	public interface IFunctionContext<T>
-		where T : ParserRuleContext, IFunctionContext<T>
-	{
-		Symbol<T> Symbol { get; set; }
-		string Name { get; }
-		IEnumerable<ParameterContext> Parameters { get; }
-		MethodBodyContext methodBody();
-	}
+	//public interface IFunctionContext<T>
+	//	where T : ParserRuleContext, IFunctionContext<T>
+	//{
+	//	Symbol<T> Symbol { get; set; }
+	//	string Name { get; }
+	//	IEnumerable<ParameterContext> Parameters { get; }
+	//	MethodBodyContext methodBody();
+	//}
 }

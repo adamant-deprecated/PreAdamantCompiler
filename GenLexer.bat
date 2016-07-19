@@ -1,4 +1,4 @@
-Tools\Cmd\bin\Debug\gen.exe lex Lexer\PreAdamantLexer.lex
+Tools\Cmd\bin\Debug\gen.exe lexer Lexer\PreAdamantLexer.lex
 
 cd Lexer\
 CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer_Antlr.g4 -package PreAdamant.Compiler.Lexer.Antlr

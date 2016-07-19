@@ -50,32 +50,21 @@
     <Compile Include="IContextListener.cs" />
     <Compile Include="IContextVisitor.cs" />
     <Compile Include="IFunctionContext.cs" />
+    <Compile Include="PreAdamantParser.cs"><DependentUpon>PreAdamantParser.parse</DependentUpon></Compile>
     <Compile Include="PreAdamantParser.partial.cs" />
     <Compile Include="PackageReferenceContext.cs" />
     <Compile Include="PackageContext.cs" />
-    <Compile Include="PreAdamantParser.cs">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </Compile>
-    <Compile Include="PreAdamantParserBaseListener.cs">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </Compile>
-    <Compile Include="PreAdamantParserBaseVisitor.cs">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </Compile>
-    <Compile Include="PreAdamantParserListener.cs">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </Compile>
-    <Compile Include="PreAdamantParserVisitor.cs">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </Compile>
+    <Compile Include="PreAdamantParser_Antlr.cs"><DependentUpon>PreAdamantParser.parse</DependentUpon></Compile>
+    <Compile Include="PreAdamantParser_AntlrBaseListener.cs"><DependentUpon>PreAdamantParser.parse</DependentUpon></Compile>
+    <Compile Include="PreAdamantParser_AntlrListener.cs"><DependentUpon>PreAdamantParser.parse</DependentUpon></Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PreAdamantParser.g4" />
-    <None Include="PreAdamantParser.tokens">
-      <DependentUpon>PreAdamantParser.g4</DependentUpon>
-    </None>
+    <None Include="PreAdamantParser.parse" />
+    <None Include="PreAdamantParser_Antlr.g4"><DependentUpon>PreAdamantParser.parse</DependentUpon></None>
+    <None Include="PreAdamantParser_Antlr.tokens"><DependentUpon>PreAdamantParser.parse</DependentUpon></None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

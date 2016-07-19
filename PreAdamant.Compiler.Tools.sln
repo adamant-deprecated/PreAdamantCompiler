@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cmd", "Tools\Cmd\Cmd.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lex", "Tools\Lex\Lex.csproj", "{32334122-C001-41F7-B88E-3431CA56172F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Tools\Parse\Parse.csproj", "{D862F553-80A9-4C97-AC49-9961CFED398F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{32334122-C001-41F7-B88E-3431CA56172F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32334122-C001-41F7-B88E-3431CA56172F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32334122-C001-41F7-B88E-3431CA56172F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D862F553-80A9-4C97-AC49-9961CFED398F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D862F553-80A9-4C97-AC49-9961CFED398F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D862F553-80A9-4C97-AC49-9961CFED398F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D862F553-80A9-4C97-AC49-9961CFED398F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Lexer.Antlr;
-using PreAdamant.Compiler.Lexer.Preprocessor;
 
 namespace PreAdamant.Compiler.Lexer
 {
@@ -40,21 +38,21 @@ namespace PreAdamant.Compiler.Lexer
 			return GetEnumerator();
 		}
 
-		public static IReadOnlyDictionary<int, string> ChannelNames { get; } = new Dictionary<int, string>()
-		{
-			{ 0, "Default" }, { 2, "DocComments" }
-		};
-		public static readonly Encoding Encoding = new UTF8Encoding(false, true);
-
-		private readonly PreprocessorState preprocessorState = new PreprocessorState();
-		private PreprocessorVisitor preprocessorVisitor;
-
-		//public PreAdamantLexer(string fileName)
-		//	: this(new AntlrFileStream(fileName, Encoding))
+		//public static IReadOnlyDictionary<int, string> ChannelNames { get; } = new Dictionary<int, string>()
 		//{
-		//}
+		//	{ 0, "Default" }, { 2, "DocComments" }
+		//};
+		//public static readonly Encoding Encoding = new UTF8Encoding(false, true);
 
-		public PreprocessorState PreprocessorState => preprocessorState;
+		//private readonly PreprocessorState preprocessorState = new PreprocessorState();
+		//private PreprocessorVisitor preprocessorVisitor;
+
+		////public PreAdamantLexer(string fileName)
+		////	: this(new AntlrFileStream(fileName, Encoding))
+		////{
+		////}
+
+		//public PreprocessorState PreprocessorState => preprocessorState;
 
 		//private void Preprocess()
 		//{

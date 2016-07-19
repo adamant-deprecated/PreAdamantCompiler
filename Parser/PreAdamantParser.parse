@@ -1,0 +1,17 @@
+﻿@parser PreAdamantParser;
+@namespace PreAdamant.Compiler.Parser;
+
+compilationUnit
+	= usingDirective*
+	  // globalAttribute*
+	  declaration*
+	  EOF
+	;
+
+usingDirective = "using" namespaceName ";"; // TODO using names are allowed to be more complicated than this
+
+identifier = Identifier | EscapedIdentifier;
+
+namespaceName = identifier{"." 1,};
+
+declaration = identifier;

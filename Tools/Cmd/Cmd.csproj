@@ -55,8 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\LexCommand.cs" />
-    <Compile Include="Commands\ParseCommand.cs" />
+    <Compile Include="Commands\LexerCommand.cs" />
+    <Compile Include="Commands\ParserCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +68,10 @@
     <ProjectReference Include="..\Lex\Lex.csproj">
       <Project>{32334122-C001-41F7-B88E-3431CA56172F}</Project>
       <Name>Lex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parse\Parse.csproj">
+      <Project>{d862f553-80a9-4c97-ac49-9961cfed398f}</Project>
+      <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

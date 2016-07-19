@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PreAdamant.Compiler.Tools.Lex
 {
-	public class ParserGenerator
+	public class LexerGenerator
 	{
 		public string Generate(Spec spec)
 		{
@@ -19,7 +19,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine($"namespace {spec.Namespace}");
 			builder.AppendLine("{");
 
-			// Parser Class
+			// Lexer Class
 			builder.AppendLine($"	public partial class {spec.Name}");
 			builder.AppendLine("	{");
 			builder.AppendLine($"		private const int StartMode = {antlrLexer}.{spec.StartMode};");

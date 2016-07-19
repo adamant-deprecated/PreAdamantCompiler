@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PreAdamant.Compiler.Tools.Lex
 {
-	public class SpecValidations : SpecParserBaseListener
+	internal class SpecValidations : SpecParserBaseListener
 	{
 		private readonly IReadOnlyDictionary<string, Spec> imports;
 		private bool inModesBlock;

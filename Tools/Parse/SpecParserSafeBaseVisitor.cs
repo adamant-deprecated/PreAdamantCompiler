@@ -1,9 +1,9 @@
 ﻿using System;
 using Antlr4.Runtime.Tree;
 
-namespace PreAdamant.Compiler.Tools.Lex
+namespace PreAdamant.Compiler.Tools.Parse
 {
-	internal abstract class SpecParserSafeBaseVisitor<T>: SpecParserBaseVisitor<T>
+	internal class SpecParserSafeBaseVisitor<T> : SpecParserBaseVisitor<T>
 	{
 		public override T VisitChildren(IRuleNode node)
 		{

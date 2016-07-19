@@ -6,7 +6,6 @@ options
 	tokenVocab=SpecLexer;
 }
 
-
 // Directives
 spec: (directive | parseRule)*;
 
