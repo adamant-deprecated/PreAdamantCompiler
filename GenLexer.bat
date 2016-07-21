@@ -1,7 +1,7 @@
-Tools\Cmd\bin\Debug\gen.exe lexer Lexer\PreAdamantLexer.lex
+Tools\Cmd\bin\Debug\gen.exe lexer Syntax\PreAdamantLexer.lex
 
-cd Lexer\
-CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer_Antlr.g4 -package PreAdamant.Compiler.Lexer.Antlr
+cd Syntax\
+CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer_Antlr.g4 -package PreAdamant.Compiler.Syntax.Antlr
 
 
 REM CALL ..\Tools\ANTLR\antlr4.bat PreAdamantLexer.g4 -package PreAdamant.Compiler.Lexer

@@ -1,0 +1,3 @@
+﻿Due to the way the ANTLR wrapping stuff works, the lexer and parser have to be treated as a whole unit. Hence they
+have been combinded in this Syntax project.  However, it really would make more sense if Lexer and Parser were separate
+projects.

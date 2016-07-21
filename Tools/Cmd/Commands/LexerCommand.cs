@@ -32,6 +32,18 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			var parserCodePath = Path.Combine(dir, specFileName + ".cs");
 			File.WriteAllText(parserCodePath, parserCode);
 
+			// Generate TokenTransformer.cs file
+			var transformerGenerator = new TransformerGenerator();
+			var transformerCode = transformerGenerator.Generate(spec);
+			var transformerCodePath = Path.Combine(dir, specFileName.Replace("Lexer", "") + "TokenTransformer.cs");
+			File.WriteAllText(transformerCodePath, transformerCode);
+
+			// Generate Tokens.cs file
+			var tokensGenerator = new TokensGenerator();
+			var tokensCode = tokensGenerator.Generate(spec);
+			var tokensCodePath = Path.Combine(dir, specFileName + ".Tokens.cs");
+			File.WriteAllText(tokensCodePath, tokensCode);
+
 			return 0;
 		}
 	}

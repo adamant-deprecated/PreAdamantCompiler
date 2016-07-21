@@ -1,6 +1,6 @@
 using Antlr4.Runtime;
 
-namespace PreAdamant.Compiler.Lexer.Antlr
+namespace PreAdamant.Compiler.Syntax.Antlr
 {
 	// ReSharper disable once InconsistentNaming
     public partial class PreAdamantLexer_Antlr

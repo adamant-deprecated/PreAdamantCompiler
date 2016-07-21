@@ -17,7 +17,7 @@
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace PreAdamant.Compiler.Lexer.Antlr {
+namespace PreAdamant.Compiler.Syntax.Antlr {
 using System;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
@@ -769,4 +769,4 @@ public partial class PreAdamantLexer_Antlr : Lexer {
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }
-} // namespace PreAdamant.Compiler.Lexer.Antlr
+} // namespace PreAdamant.Compiler.Syntax.Antlr

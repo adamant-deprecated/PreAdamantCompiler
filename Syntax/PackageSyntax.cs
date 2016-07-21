@@ -3,7 +3,7 @@ using System.Linq;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Core.Diagnostics;
 
-namespace PreAdamant.Compiler.Parser
+namespace PreAdamant.Compiler.Syntax
 {
 	public class PackageSyntax : SyntaxNode
 	{
@@ -18,6 +18,7 @@ namespace PreAdamant.Compiler.Parser
 		// TODO Language version
 
 		public PackageSyntax(string name, bool isApp, IEnumerable<PackageReferenceSyntax> dependencies)
+			: base(dependencies)
 		{
 			Requires.NotNullOrEmpty(name, nameof(name));
 			// TODO enforce this rule with the analyzer
@@ -27,9 +28,6 @@ namespace PreAdamant.Compiler.Parser
 			Name = name;
 			IsApp = isApp;
 			Diagnostics = new List<Diagnostic>();
-
-			foreach(var dependency in dependencies)
-				AddChild(dependency);
 		}
 	}
 }

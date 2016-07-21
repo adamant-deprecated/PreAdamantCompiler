@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Antlr4.Runtime;
-using static PreAdamant.Compiler.Parser.PreAdamantParser;
+//using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Parser
 {

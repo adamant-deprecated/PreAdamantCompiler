@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PreAdamant.Compiler.Core
+namespace PreAdamant.Compiler.Syntax
 {
 	/// <summary>
 	/// Some piece of syntax in a syntax tree, either a node or token.

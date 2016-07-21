@@ -278,7 +278,7 @@ expression
 	| op=('+'|'-'|'not'|'&'|'*') expression					#UnaryExpression
 	| expression op=('*'|'/') expression					#MultiplicativeExpression
 	| expression op=('+'|'-') expression					#AdditiveExpression
-	| expression op=('<'|'<='|'>'|'>=') expression			#ComparativeExpression
+	| expression op=('<'|'<='|'>'|'>=')<assoc=right> expression			#ComparativeExpression
 	| lhs=expression op=('=='|'<>') rhs=expression			#EqualityExpression
 	| expression 'and' expression							#AndExpression
 	| expression 'xor' expression							#XorExpression

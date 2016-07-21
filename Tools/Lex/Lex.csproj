@@ -75,6 +75,8 @@
     <Compile Include="SpecReader.cs">
     </Compile>
     <Compile Include="SpecValidations.cs" />
+    <Compile Include="TokensGenerator.cs" />
+    <Compile Include="TransformerGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SpecLexer.g4" />

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
-using PreAdamant.Compiler.Lexer;
-using PreAdamant.Compiler.Parser.Antlr;
+using PreAdamant.Compiler.Syntax.Antlr;
 
-namespace PreAdamant.Compiler.Parser
+namespace PreAdamant.Compiler.Syntax
 {
 	public partial class PreAdamantParser
 	{
-		private readonly IEnumerable<SyntaxToken> tokens;
+		private readonly PreAdamantLexer lexer;
 
-		public PreAdamantParser(IEnumerable<SyntaxToken> tokens)
+		public PreAdamantParser(PreAdamantLexer lexer)
 		{
-			this.tokens = tokens;
+			this.lexer = lexer;
 		}
 
 		public PreAdamantParser(SourceText source)
@@ -23,94 +20,12 @@ namespace PreAdamant.Compiler.Parser
 
 		public void Parse()
 		{
-			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(new TokenSourceAdapter(tokens)));
-			var unit = parser.compilationUnit();
-		}
+			var source = lexer.Source;
+			var tokenSource = lexer.BeginLexing();
+			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(tokenSource));
+			var compilationUnit = parser.compilationUnit();
 
-		private class TokenSourceAdapter : ITokenSource
-		{
-			private readonly IEnumerator<SyntaxToken> tokens;
-
-			public TokenSourceAdapter(IEnumerable<SyntaxToken> tokens)
-			{
-				this.tokens = tokens.GetEnumerator();
-			}
-
-			public IToken NextToken()
-			{
-				return tokens.MoveNext() ? new TokenAdapter(tokens.Current) : null;
-			}
-
-			public int Line
-			{
-				get { throw new System.NotSupportedException(); }
-			}
-
-			public int Column
-			{
-				get { throw new System.NotSupportedException(); }
-			}
-
-			public ICharStream InputStream
-			{
-				get { throw new System.NotSupportedException(); }
-			}
-
-			public string SourceName
-			{
-				get { throw new System.NotSupportedException(); }
-			}
-
-			public ITokenFactory TokenFactory
-			{
-				get { throw new System.NotSupportedException(); }
-				set { throw new System.NotSupportedException(); }
-			}
-		}
-
-		internal class TokenAdapter : IToken
-		{
-			private readonly SyntaxToken token;
-
-			public TokenAdapter(SyntaxToken token)
-			{
-				this.token = token;
-			}
-
-			public string Text => token.Text;
-
-			public int Type => token.TokenNumber;
-
-			public int Line
-			{
-				get { throw new NotSupportedException(); }
-			}
-
-			public int Column
-			{
-				get { throw new NotSupportedException(); }
-			}
-
-			public int Channel => (int)token.Channel;
-
-			public int TokenIndex
-			{
-				get { throw new NotSupportedException(); }
-			}
-
-			public int StartIndex => (int)token.Offset;
-
-			public int StopIndex => (int)(token.Offset + token.Length);
-
-			public ITokenSource TokenSource
-			{
-				get { throw new NotSupportedException(); }
-			}
-
-			public ICharStream InputStream
-			{
-				get { throw new NotSupportedException(); }
-			}
+			var tokenTransformer = new PreAdamantTokenTransformer(source);
 		}
 
 		//public partial class CompilationUnitContext

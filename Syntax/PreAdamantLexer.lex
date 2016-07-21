@@ -1,5 +1,5 @@
 ﻿@lexer PreAdamantLexer;
-@namespace PreAdamant.Compiler.Lexer;
+@namespace PreAdamant.Compiler.Syntax;
 @import C = Common;
 @channels Trivia;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Parser;
-using static PreAdamant.Compiler.Parser.PreAdamantParser;
+using static PreAdamant.Compiler.Syntax.PreAdamantParser;
 using Requires = PreAdamant.Compiler.Common.Requires;
 
 namespace PreAdamant.Compiler.Emit.Cpp

@@ -3,7 +3,7 @@ using System.Linq;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using PreAdamant.Compiler.Core.Diagnostics;
-using static PreAdamant.Compiler.Parser.PreAdamantParser;
+//using static PreAdamant.Compiler.Parser.PreAdamantParser;
 using Requires = PreAdamant.Compiler.Common.Requires;
 
 namespace PreAdamant.Compiler.Parser

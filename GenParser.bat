@@ -1,5 +1,5 @@
-Tools\Cmd\bin\Debug\gen.exe parser Parser\PreAdamantParser.parse
+Tools\Cmd\bin\Debug\gen.exe parser Syntax\PreAdamantParser.parse
 
-cd Parser\
-CALL ..\Tools\ANTLR\antlr4.bat PreAdamantParser_Antlr.g4 -lib ..\Lexer\ -package PreAdamant.Compiler.Parser.Antlr
+cd Syntax\
+CALL ..\Tools\ANTLR\antlr4.bat PreAdamantParser_Antlr.g4 -lib ..\Lexer\ -package PreAdamant.Compiler.Syntax.Antlr
 PAUSE

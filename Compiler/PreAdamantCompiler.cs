@@ -7,58 +7,64 @@ using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Parser;
+using PreAdamant.Compiler.Syntax;
+using PreAdamantParser = PreAdamant.Compiler.Syntax.PreAdamantParser;
 
 namespace PreAdamant.Compiler
 {
 	public class PreAdamantCompiler
 	{
-		//public PreAdamantParser.CompilationUnitContext Parse(PackageContext package, SourceText sourceText)
-		//{
-		//	// TODO make use of the package.  We don't currently use the package, but we
-		//	// are taking it as an argument becuase we should be for things like:
-		//	//   * Language Version
-		//	//   * Dependency Names
-		//	//   * Defined Preprocessor Symbols
-		//	var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
+		public /*PreAdamantParser.CompilationUnitContext*/ void Parse(PackageSyntax package, SourceText sourceText)
+		{
+			// TODO make use of the package.  We don't currently use the package, but we
+			// are taking it as an argument becuase we should be for things like:
+			//   * Language Version
+			//   * Dependency Names
+			//   * Defined Preprocessor Symbols
+			var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
 
 
-		//	throw new NotImplementedException();
+			var parser = new PreAdamantParser(sourceText);
+			parser.Parse();
 
-		//	//var parser = sourceText.NewParser();
-		//	//// Stupid ANTLR makes it difficult to do this in the constructor
-		//	//parser.RemoveErrorListeners();
-		//	//var errorsListener = new GatherErrorsListener(diagnostics);
-		//	//parser.AddErrorListener(errorsListener);
-		//	//parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
+			throw new NotImplementedException();
 
-		//	//var compilationUnit = parser.compilationUnit();
-		//	//compilationUnit.SourceText = sourceText;
-		//	//// TODO in the exploratory compiler, these lines checked method modifier restrictions
-		//	////var syntaxCheck = new SyntaxCheckVisitor(builder);
-		//	////tree.Accept(syntaxCheck);
+			//var parser = sourceText.NewParser();
+			//// Stupid ANTLR makes it difficult to do this in the constructor
+			//parser.RemoveErrorListeners();
+			//var errorsListener = new GatherErrorsListener(diagnostics);
+			//parser.AddErrorListener(errorsListener);
+			//parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
 
-		//	//// TODO should really be about ones that prevent further processing?
-		//	//if(!diagnostics.Any)
-		//	//	package.AddChild(compilationUnit);
+			//var compilationUnit = parser.compilationUnit();
+			//compilationUnit.SourceText = sourceText;
+			//// TODO in the exploratory compiler, these lines checked method modifier restrictions
+			////var syntaxCheck = new SyntaxCheckVisitor(builder);
+			////tree.Accept(syntaxCheck);
 
-		//	//return compilationUnit;
-		//}
+			//// TODO should really be about ones that prevent further processing?
+			//if(!diagnostics.Any)
+			//	package.AddChild(compilationUnit);
 
-		//public void Compile(PackageContext package, IEnumerable<PackageContext> compiledPackages)
-		//{
-		//	package.BindDependencies(compiledPackages);
+			//return compilationUnit;
+		}
 
-		//	var treeWalker = new ParseTreeWalker();
-		//	treeWalker.Walk(new SymbolsBuilder(), package);
-		//	treeWalker.Walk(new BindSymbols(), package);
+		public void Compile(PackageSyntax package, IEnumerable<PackageSyntax> compiledPackages)
+		{
+			//package.BindDependencies(compiledPackages);
 
-		//	// TODO rest of analysis
-		//}
+			//var treeWalker = new ParseTreeWalker();
+			//treeWalker.Walk(new SymbolsBuilder(), package);
+			//treeWalker.Walk(new BindSymbols(), package);
 
-		//public string EmitCpp(PackageContext package)
-		//{
-		//	var emitter = new PackageEmitter(package);
-		//	return emitter.Emit();
-		//}
+			// TODO rest of analysis
+		}
+
+		public string EmitCpp(PackageSyntax package)
+		{
+			throw new NotImplementedException();
+			//var emitter = new PackageEmitter(package);
+			//return emitter.Emit();
+		}
 	}
 }

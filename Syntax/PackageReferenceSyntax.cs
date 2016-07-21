@@ -1,8 +1,8 @@
 ﻿using PreAdamant.Compiler.Common;
 
-namespace PreAdamant.Compiler.Parser
+namespace PreAdamant.Compiler.Syntax
 {
-	public class PackageReferenceSyntax
+	public class PackageReferenceSyntax : SyntaxNode
 	{
 		public readonly string Name;
 		public readonly string Alias;

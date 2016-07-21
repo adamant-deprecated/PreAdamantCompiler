@@ -67,6 +67,10 @@
       <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
       <Name>Parser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Syntax\Syntax.csproj">
+      <Project>{0F50D108-4A28-4CC9-A647-26D2F823A47D}</Project>
+      <Name>Syntax</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

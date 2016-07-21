@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime;
-using static PreAdamant.Compiler.Parser.PreAdamantParser;
+//using static PreAdamant.Compiler.Parser.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Parser
 {

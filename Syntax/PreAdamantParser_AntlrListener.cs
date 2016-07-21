@@ -17,7 +17,7 @@
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace PreAdamant.Compiler.Parser.Antlr {
+namespace PreAdamant.Compiler.Syntax.Antlr {
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 using IToken = Antlr4.Runtime.IToken;
@@ -80,4 +80,4 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitDeclaration([NotNull] PreAdamantParser_Antlr.DeclarationContext context);
 }
-} // namespace PreAdamant.Compiler.Parser.Antlr
+} // namespace PreAdamant.Compiler.Syntax.Antlr

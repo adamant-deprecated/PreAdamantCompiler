@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
-using PreAdamant.Compiler.Lexer.Antlr;
+using PreAdamant.Compiler.Syntax.Antlr;
 
-namespace PreAdamant.Compiler.Lexer
+namespace PreAdamant.Compiler.Syntax
 {
-	public partial class PreAdamantLexer : IEnumerable<SyntaxToken>
+	public partial class PreAdamantLexer
 	{
 		public readonly SourceText Source;
 
@@ -16,26 +14,18 @@ namespace PreAdamant.Compiler.Lexer
 			Source = source;
 		}
 
-		public IEnumerator<SyntaxToken> GetEnumerator()
+		/// <summary>
+		/// Method used by the paired parser to start lexing.  This is internal becuase it leaks implementation details (i.e. returns an ANTLR type
+		/// </summary>
+		/// <returns></returns>
+		internal ITokenSource BeginLexing()
 		{
-			using(var reader = new StringReader(Source.Text))
+			var reader = new StringReader(Source.Text);
+			var antlrLexer = new PreAdamantLexer_Antlr(new AntlrInputStream(reader))
 			{
-				var antlrLexer = new PreAdamantLexer_Antlr(new AntlrInputStream(reader))
-				{
-					CurrentMode = StartMode
-				};
-				for(;;)
-				{
-					antlrLexer.NextToken();
-					if(antlrLexer.HitEOF) yield break;
-					yield return CreateToken(Source, antlrLexer.Token.StopIndex, antlrLexer.Token.StopIndex, antlrLexer.Type, (Channel)(antlrLexer.Channel - 1), antlrLexer.Text);
-				}
-			}
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
+				CurrentMode = StartMode
+			};
+			return antlrLexer;
 		}
 
 		//public static IReadOnlyDictionary<int, string> ChannelNames { get; } = new Dictionary<int, string>()
@@ -82,13 +72,5 @@ namespace PreAdamant.Compiler.Lexer
 		//	var antlrErrorListener = ErrorListenerDispatch;
 		//	antlrErrorListener.SyntaxError(this, Type, line, charPositionInLine, msg, e);
 		//}
-	}
-
-	public class KeywordToken : SyntaxToken
-	{
-		protected KeywordToken(SourceText source, int startIndex, int stopIndex, int type, PreAdamantLexer.Channel channel, string text)
-			: base(source, startIndex, stopIndex, type, channel, text)
-		{
-		}
 	}
 }

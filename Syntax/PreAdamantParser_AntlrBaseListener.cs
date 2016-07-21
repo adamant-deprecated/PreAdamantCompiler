@@ -17,7 +17,7 @@
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace PreAdamant.Compiler.Parser.Antlr {
+namespace PreAdamant.Compiler.Syntax.Antlr {
 
 using Antlr4.Runtime.Misc;
 using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
@@ -107,4 +107,4 @@ public partial class PreAdamantParser_AntlrBaseListener : IPreAdamantParser_Antl
 	/// <remarks>The default implementation does nothing.</remarks>
 	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
 }
-} // namespace PreAdamant.Compiler.Parser.Antlr
+} // namespace PreAdamant.Compiler.Syntax.Antlr
