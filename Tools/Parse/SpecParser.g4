@@ -16,7 +16,7 @@ directive
 	| '@startRule' Identifier ';'									#StartRuleDirective
 	;
 
-parseRule: name=Identifier (':' base=Identifier)? ('=' pattern)? ';' ;
+parseRule: name=Identifier (':' base=Identifier)? ('=' pattern ('{' attributes+=Identifier (',' attributes+=Identifier)*'}')?)? ';' ;
 
 pattern
 	: '(' pattern ')'						#GroupingPattern
@@ -26,8 +26,11 @@ pattern
 	| pattern '+'							#OneOrMorePattern
 	| pattern '{' separator=Literal (min=Number (range=',' max=Number?)?)? '}'	#RepeatWithSeparatorPattern
 	| pattern '{' min=Number (range=',' max=Number?)? '}'	#RepeatPattern
+	| label=Identifier ':' pattern			#LabelPattern
 	| pattern pattern						#ConcatPattern
 	| pattern '|' pattern					#AlternationPattern
 	| ruleName=Identifier					#RulePattern
 	| Literal								#LiteralPattern
 	;
+
+// TODO support templates with rule<a,b,c...> = x<a> | b ...;

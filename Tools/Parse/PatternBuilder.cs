@@ -44,7 +44,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 		public override string VisitRepeatWithSeparatorPattern(SpecParser.RepeatWithSeparatorPatternContext context)
 		{
 			var pattern = Visit(context.pattern()); // The pattern is already indivisble i.e. has parens etc
-			var minString = context.min.Text;
+			var minString = context.min?.Text;
 			var min = minString != null ? int.Parse(minString) : 0;
 			var maxString = context.max?.Text;
 			var max = maxString != null ? int.Parse(maxString) : default(int?);
@@ -60,7 +60,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 				builder.Append("(");
 
 			builder.Append(pattern); // Always have at least one copy
-			var limit = (max ?? min); // make one extra copy becuse we are using *
+			var limit = Math.Max(max ?? min, 1); // make one extra copy becuse we are using *, always make at least one copy
 			for(var i = 1; i <= limit; i++) // the rest of the required copies
 			{
 				var needsGrouped = max == null && i == limit;
@@ -134,6 +134,11 @@ namespace PreAdamant.Compiler.Tools.Parse
 		{
 			var value = context.GetText();
 			return $"'{value.Substring(1, value.Length - 2)}'";
+		}
+
+		public override string VisitLabelPattern(SpecParser.LabelPatternContext context)
+		{
+			return $"({context.label.Text}={Visit(context.pattern())})";
 		}
 	}
 }

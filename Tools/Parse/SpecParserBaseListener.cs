@@ -226,6 +226,18 @@ public partial class SpecParserBaseListener : ISpecParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitRulePattern([NotNull] SpecParser.RulePatternContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="SpecParser.LabelPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLabelPattern([NotNull] SpecParser.LabelPatternContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SpecParser.LabelPattern"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLabelPattern([NotNull] SpecParser.LabelPatternContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="SpecParser.AlternationPattern"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

@@ -141,6 +141,13 @@ public interface ISpecParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitRulePattern([NotNull] SpecParser.RulePatternContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>LabelPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLabelPattern([NotNull] SpecParser.LabelPatternContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>AlternationPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>

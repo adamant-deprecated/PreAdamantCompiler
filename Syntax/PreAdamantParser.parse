@@ -14,4 +14,180 @@ identifier = Identifier | EscapedIdentifier;
 
 namespaceName = identifier{"." 1,};
 
-declaration = identifier;
+// declaration
+namespaceDeclaration: declaration = "namespace" namespaceName "{" usingDirective* declaration* "}";
+classDeclaration: declaration = attribute* accessModifier safetyModifier? classInheritanceModifier? "mut"? "class" identifier typeParameters? baseTypes?
+		typeParameterConstraintClause*
+		"{" member* "}";
+structDeclaration: declaration = attribute* accessModifier safetyModifier? "mut"? "struct" identifier typeParameters? baseTypes?
+		typeParameterConstraintClause*
+		"{" member* "}";
+variableDeclaration: declaration = attribute* accessModifier kind:("var"|"let") identifier (":" valueType)? ("=" expression)? ";";
+functionDeclaration: declaration = attribute* accessModifier safetyModifier? asyncModifier? identifier typeArguments? parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+externalBlockDeclaration: declaration = "external" "{" declaration* "}";
+
+// contract
+precondition: contract = "requires" expression;
+postcondition: contract = "ensures" expression;
+
+attribute = "@" identifier ("(" argumentList ")")?;
+
+baseTypes = ":" baseType:name? (":" interfaces:name{"," 1,})?;
+
+accessModifier = "public" | "private" | "protected" | "internal";
+
+safetyModifier = "safe" | "unsafe";
+
+classInheritanceModifier = "abstract"| "sealed";
+
+methodInheritanceModifier = "abstract" | "override" | "sealed" | "sealed" "override";
+
+explicitModifier = "implicit" | "explicit";
+
+asyncModifier = "async";
+
+typeParameters = "<" typeParameter{"," 1,} ">";
+
+typeParameter = identifier isList:"..."? (":" baseType:typeName)? | lifetime;
+
+typeArguments = "<" type{"," 1,} ">";
+
+identifierOrPredefinedType = identifier | "string" | "byte" | IntType | UIntType | FloatType | SizeType | OffsetType | UnsafeArrayType;
+
+// simpleName
+identifierName: simpleName = identifierOrPredefinedType;
+genericName: simpleName	= identifierOrPredefinedType typeArguments;
+
+// name
+unqualifiedName: name = simpleName;
+qualifiedName: name = leftName:name "." rightName:simpleName;
+
+// typeName
+namedType: typeName = name;
+maybeType: typeName = typeName "?";
+pointerType: typeName = "*" isMut:"mut"? typeName;
+tupleType: typeName = ("[" types:typeName{"," 1,} "]" | "[" "]");
+functionType: typeName = funcTypeParameterList "->" returnType;
+
+// valueType // these are types for which there are actual values of that type
+LifetimeType: valueType = lifetime? isMut:"mut"? typeName;
+RefType: valueType = "ref" "var"? isMut:"mut"? typeName;
+
+type = valueType | "void";
+
+returnType =  type | "!";
+
+lifetime = "~" identifier | "~" "self" | "~" "own";
+
+funcTypeParameterList = "(" funcTypeParameter{","} ")";
+
+funcTypeParameter = parameterModifier* valueType;
+
+constExpression = IntLiteral | StringLiteral | identifier;
+
+typeParameterConstraintClause = "where" typeParameter ":" typeParameterConstraint{"," 1,}
+	| "where" typeParameter (">="|"<="|"<"|">") IntLiteral
+	;
+
+// typeParameterConstraint
+constructorConstraint: typeParameterConstraint = "new" "(" ")";
+typeConstraint: typeParameterConstraint = typeName;
+typeListParameterConstraint: typeParameterConstraint = typeParameter; // will only be hit for type lists (i.e. "foo...")
+
+// member
+constructor: member = attribute* accessModifier safetyModifier? "new" identifier? parameterList ("->" returnType)? whereClause* constructorInitializer? contract* methodBody;
+copyConstructor: member = attribute* accessModifier safetyModifier? explicitModifier "new" "copy" parameterList ("->" returnType)? whereClause* constructorInitializer? contract* methodBody;
+destructor: member = attribute* accessModifier safetyModifier? "delete" parameterList methodBody;
+conversionMethod: member = attribute* accessModifier safetyModifier? explicitModifier "conversion" typeArguments? parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+field: member = attribute* accessModifier kind:("var"|"let") "unsafe"? identifier (":" valueType)? ("=" expression)? ";";
+accessor: member = attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind:("get"|"set") identifier typeArguments? parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+indexer: member = attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? kind:("get"|"set") "[" "]" typeArguments? parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+method: member = attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? identifier typeArguments? parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+operatorOverload: member = attribute* accessModifier methodInheritanceModifier? safetyModifier? asyncModifier? "operator" overloadableOperator parameterList "->" returnType typeParameterConstraintClause* contract* methodBody;
+nestedClassDeclaration: member = attribute* accessModifier safetyModifier? classInheritanceModifier? "class" identifier typeParameters? baseTypes?
+		typeParameterConstraintClause*
+		"{" member* "}";
+
+
+parameterList = "(" parameter{","} ")";
+
+// parameter
+namedParameter: parameter = isVar:"var"? modifiers:parameterModifier* identifier? ":" valueType;
+selfParameter: parameter = isRef:"ref"? isMut:"mut"? "self";
+
+parameterModifier = "params";
+
+whereClause = "where" typeName ":" constraints:genericConstraint{"," 1,};
+
+genericConstraint = typeName | "class" | "struct" | "copy" "(" ")";
+
+constructorInitializer = ":" ("base"|"self") "(" argumentList ")";
+
+argumentList =  expressions:expression{","};
+
+// methodBody
+blockMethodBody: methodBody = "{" statement* "}";
+noMethodBody: methodBody = ";";
+
+overloadableOperator = "*" | "&" | "or" | "and" | "xor" | "?" | "??" | "." | "[" "]" | "|" "|";
+
+// statement
+variableDeclarationStatement: statement = localVariableDeclaration ";";
+unsafeBlockStatement: statement = "unsafe" "{" statement* "}";
+blockStatement: statement = "{" statement* "}";
+emptyStatement: statement = ";";
+expressionStatement: statement = expression ";";
+returnStatement: statement = "return" expression? ";";
+throwStatement: statement = "throw" expression ";";
+ifStatement: statement = "if" "(" condition:expression ")" then:statement ("else" else:statement)?;
+letIfStatement: statement = "if" "(" localVariableDeclaration ")" then:statement ("else" else:statement)?;
+forStatement: statement = "for" "(" (localVariableDeclaration|"_") "in" expression ")" statement;
+whileStatement: statement = "while" "(" expression ")" statement;
+deleteStatement: statement = "delete" expression ";";
+continueStatement: statement = "continue" ";";
+
+localVariableDeclaration = 
+	  kind:("var"|"let") identifier("?")? ":" valueType ("=" expression)? // no type inference in pre-adamant so types are required
+	| kind:("var"|"let") "[" identifier{"," 1,} "]" ":" valueType ("=" expression)? // destructure tuple types
+	;
+
+// expression
+parenthesizedExpression: expression = "(" expression ")";
+magnitudeExpression: expression = "|" expression "|";
+memberExpression: expression = expression "." identifier;
+placementDeleteExpression: expression = expression "." "delete";
+dotDotExpression: expression = expression ".." expression;
+toExpression: expression = expression "to" expression;
+callExpression: expression = expression "(" argumentList ")";
+arrayAccessExpression: expression = expression "[" argumentList "]";
+awaitExpression: expression = "await" expression;
+nullCheckExpression: expression = expression "?";
+unaryExpression: expression = op:("+"|"-"|"not"|"&"|"*") expression;
+multiplicativeExpression: expression = expression op:("*"|"/") expression;
+additiveExpression: expression = expression op:("+"|"-") expression;
+comparativeExpression: expression = expression op:("<"|"<="|">"|">=") expression;
+equalityExpression: expression = lhs:expression op:("=="|"<>") rhs:expression;
+andExpression: expression = expression "and" expression;
+xorExpression: expression = expression "xor" expression;
+orExpression: expression = expression "or" expression;
+coalesceExpression: expression = expression "??" expression;
+inExpression: expression = expression "in" expression;
+// Since new Class.Constructor() is indistiguishable from new Namespace.Class() we can"t parse for named constructor calls here
+newExpression: expression = "new" ("(" placementArguments:argumentList ")"	)? (name|"copy") "(" constructorArguments:argumentList ")";
+newMemoryExpression: expression = "new" typeArguments? "(" argumentList ")";
+newObjectExpression: expression = "new" baseTypes? "(" argumentList ")" "{" member* "}";
+deleteMemoryExpression: expression = "delete" "(" argumentList ")";
+castExpression: expression = expression kind:("as"|"as!"|"as?") typeName;
+tryExpression: expression = kind:("try"|"try!"|"try?") expression;
+ifExpression: expression = condition:expression "?" then:expression ":" else:expression {right};
+assignmentExpression: expression = lvalue:expression op:("="|"*="|"/="|"+="|"-="|"and="|"xor="|"or=") rvalue:expression {right};
+lambdaExpression: expression = (identifier|parameterList) "->" (expression|"{" statement* "}");
+nameExpression: expression = simpleName;
+nullLiteralExpression: expression = "null";
+selfExpression: expression = "self";
+booleanLiteralExpression: expression = BooleanLiteral;
+intLiteralExpression: expression = IntLiteral;
+uninitializedExpression: expression = "uninitialized";
+stringLiteralExpression: expression = StringLiteral;
+charLiteralExpression: expression = CharLiteral;
+unsafeExpression: expression =  "unsafe" "(" expression ")";

@@ -30,7 +30,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 
 		private static Rule Build(ParseRuleContext rule)
 		{
-			return new Rule(rule.name.Text, rule.@base?.Text, rule.pattern());
+			return new Rule(rule.name.Text, rule.@base?.Text, rule.pattern(), rule._attributes.Select(a => a.Text));
 		}
 	}
 }

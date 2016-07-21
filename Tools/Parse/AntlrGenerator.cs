@@ -24,8 +24,9 @@ namespace PreAdamant.Compiler.Tools.Parse
 			builder.AppendLine("// Unlabeled Alternatives Rules");
 			foreach(var rule in ruleLookup[true])
 			{
+				var associativity = BuildAssociativity(rule);
 				var pattern = patternBuilder.Visit(rule.Pattern);
-				builder.AppendLine($"{rule.Name}: {pattern};");
+				builder.AppendLine($"{rule.Name}: {associativity}{pattern};");
 			}
 
 			builder.AppendLine();
@@ -42,14 +43,24 @@ namespace PreAdamant.Compiler.Tools.Parse
 						separator = ":";
 						isFirst = false;
 					}
+					var associativity = BuildAssociativity(rule);
 					var pattern = patternBuilder.Visit(rule.Pattern);
-					builder.AppendLine($"	{separator} {pattern} #{rule.Name}");
+					builder.AppendLine($"	{separator} {associativity}{pattern} #{rule.Name}");
 				}
 				builder.AppendLine("	;");
 				builder.AppendLine();
 			}
 
 			return builder.ToString();
+		}
+
+		private string BuildAssociativity(Rule rule)
+		{
+			if(rule.Attributes.Contains("right"))
+				return "<assoc=right>";
+			if(rule.Attributes.Contains("left"))
+				return "<assoc=left>";
+			return "";
 		}
 	}
 }

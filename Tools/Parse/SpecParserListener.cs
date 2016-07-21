@@ -218,6 +218,18 @@ public interface ISpecParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitRulePattern([NotNull] SpecParser.RulePatternContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>LabelPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLabelPattern([NotNull] SpecParser.LabelPatternContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>LabelPattern</c>
+	/// labeled alternative in <see cref="SpecParser.pattern"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLabelPattern([NotNull] SpecParser.LabelPatternContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>AlternationPattern</c>
 	/// labeled alternative in <see cref="SpecParser.pattern"/>.
 	/// </summary>
