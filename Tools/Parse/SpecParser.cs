@@ -720,7 +720,7 @@ public partial class SpecParser : Parser {
 
 				State = 64; ((LabelPatternContext)_localctx).label = Match(Identifier);
 				State = 65; Match(OfType);
-				State = 66; pattern(5);
+				State = 66; pattern(10);
 				}
 				break;
 			case 2:
@@ -796,7 +796,7 @@ public partial class SpecParser : Parser {
 						_localctx = new OptionalPatternContext(new PatternContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_pattern);
 						State = 83;
-						if (!(Precpred(Context, 10))) throw new FailedPredicateException(this, "Precpred(Context, 10)");
+						if (!(Precpred(Context, 9))) throw new FailedPredicateException(this, "Precpred(Context, 9)");
 						State = 84; Match(Optional);
 						}
 						break;
@@ -805,7 +805,7 @@ public partial class SpecParser : Parser {
 						_localctx = new ZeroOrMorePatternContext(new PatternContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_pattern);
 						State = 85;
-						if (!(Precpred(Context, 9))) throw new FailedPredicateException(this, "Precpred(Context, 9)");
+						if (!(Precpred(Context, 8))) throw new FailedPredicateException(this, "Precpred(Context, 8)");
 						State = 86; Match(Repetition);
 						}
 						break;
@@ -814,7 +814,7 @@ public partial class SpecParser : Parser {
 						_localctx = new OneOrMorePatternContext(new PatternContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_pattern);
 						State = 87;
-						if (!(Precpred(Context, 8))) throw new FailedPredicateException(this, "Precpred(Context, 8)");
+						if (!(Precpred(Context, 7))) throw new FailedPredicateException(this, "Precpred(Context, 7)");
 						State = 88; Match(OneOrMore);
 						}
 						break;
@@ -823,7 +823,7 @@ public partial class SpecParser : Parser {
 						_localctx = new RepeatWithSeparatorPatternContext(new PatternContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_pattern);
 						State = 89;
-						if (!(Precpred(Context, 7))) throw new FailedPredicateException(this, "Precpred(Context, 7)");
+						if (!(Precpred(Context, 6))) throw new FailedPredicateException(this, "Precpred(Context, 6)");
 						State = 90; Match(LeftBrace);
 						State = 91; ((RepeatWithSeparatorPatternContext)_localctx).separator = Match(Literal);
 						State = 99;
@@ -858,7 +858,7 @@ public partial class SpecParser : Parser {
 						_localctx = new RepeatPatternContext(new PatternContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_pattern);
 						State = 102;
-						if (!(Precpred(Context, 6))) throw new FailedPredicateException(this, "Precpred(Context, 6)");
+						if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");
 						State = 103; Match(LeftBrace);
 						State = 104; ((RepeatPatternContext)_localctx).min = Match(Number);
 						State = 109;
@@ -910,11 +910,11 @@ public partial class SpecParser : Parser {
 		switch (predIndex) {
 		case 0: return Precpred(Context, 4);
 		case 1: return Precpred(Context, 3);
-		case 2: return Precpred(Context, 10);
-		case 3: return Precpred(Context, 9);
-		case 4: return Precpred(Context, 8);
-		case 5: return Precpred(Context, 7);
-		case 6: return Precpred(Context, 6);
+		case 2: return Precpred(Context, 9);
+		case 3: return Precpred(Context, 8);
+		case 4: return Precpred(Context, 7);
+		case 5: return Precpred(Context, 6);
+		case 6: return Precpred(Context, 5);
 		}
 		return true;
 	}
@@ -949,16 +949,16 @@ public partial class SpecParser : Parser {
 		":\x3\x2\x2\x2\x39\x37\x3\x2\x2\x2:<\a\x14\x2\x2;\x31\x3\x2\x2\x2;<\x3"+
 		"\x2\x2\x2<>\x3\x2\x2\x2=/\x3\x2\x2\x2=>\x3\x2\x2\x2>?\x3\x2\x2\x2?@\a"+
 		"\x15\x2\x2@\a\x3\x2\x2\x2\x41\x42\b\x5\x1\x2\x42\x43\a\x18\x2\x2\x43\x44"+
-		"\a\t\x2\x2\x44O\x5\b\x5\a\x45\x46\a\x11\x2\x2\x46G\x5\b\x5\x2GH\a\x12"+
+		"\a\t\x2\x2\x44O\x5\b\x5\f\x45\x46\a\x11\x2\x2\x46G\x5\b\x5\x2GH\a\x12"+
 		"\x2\x2HO\x3\x2\x2\x2IJ\a\x18\x2\x2JK\a\n\x2\x2KO\a\x18\x2\x2LO\a\x18\x2"+
 		"\x2MO\a\x19\x2\x2N\x41\x3\x2\x2\x2N\x45\x3\x2\x2\x2NI\x3\x2\x2\x2NL\x3"+
 		"\x2\x2\x2NM\x3\x2\x2\x2Ot\x3\x2\x2\x2PQ\f\x6\x2\x2Qs\x5\b\x5\aRS\f\x5"+
-		"\x2\x2ST\a\r\x2\x2Ts\x5\b\x5\x6UV\f\f\x2\x2Vs\a\xE\x2\x2WX\f\v\x2\x2X"+
-		"s\a\xF\x2\x2YZ\f\n\x2\x2Zs\a\x10\x2\x2[\\\f\t\x2\x2\\]\a\x13\x2\x2]\x65"+
+		"\x2\x2ST\a\r\x2\x2Ts\x5\b\x5\x6UV\f\v\x2\x2Vs\a\xE\x2\x2WX\f\n\x2\x2X"+
+		"s\a\xF\x2\x2YZ\f\t\x2\x2Zs\a\x10\x2\x2[\\\f\b\x2\x2\\]\a\x13\x2\x2]\x65"+
 		"\a\x19\x2\x2^\x63\a\x17\x2\x2_\x61\a\x16\x2\x2`\x62\a\x17\x2\x2\x61`\x3"+
 		"\x2\x2\x2\x61\x62\x3\x2\x2\x2\x62\x64\x3\x2\x2\x2\x63_\x3\x2\x2\x2\x63"+
 		"\x64\x3\x2\x2\x2\x64\x66\x3\x2\x2\x2\x65^\x3\x2\x2\x2\x65\x66\x3\x2\x2"+
-		"\x2\x66g\x3\x2\x2\x2gs\a\x14\x2\x2hi\f\b\x2\x2ij\a\x13\x2\x2jo\a\x17\x2"+
+		"\x2\x66g\x3\x2\x2\x2gs\a\x14\x2\x2hi\f\a\x2\x2ij\a\x13\x2\x2jo\a\x17\x2"+
 		"\x2km\a\x16\x2\x2ln\a\x17\x2\x2ml\x3\x2\x2\x2mn\x3\x2\x2\x2np\x3\x2\x2"+
 		"\x2ok\x3\x2\x2\x2op\x3\x2\x2\x2pq\x3\x2\x2\x2qs\a\x14\x2\x2rP\x3\x2\x2"+
 		"\x2rR\x3\x2\x2\x2rU\x3\x2\x2\x2rW\x3\x2\x2\x2rY\x3\x2\x2\x2r[\x3\x2\x2"+

@@ -1,4 +1,5 @@
-﻿using Antlr4.Runtime;
+﻿using System;
+using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Syntax.Antlr;
 
@@ -18,7 +19,7 @@ namespace PreAdamant.Compiler.Syntax
 		{
 		}
 
-		public void Parse()
+		public SyntaxTree<CompilationUnitSyntax> Parse()
 		{
 			var source = lexer.Source;
 			var tokenSource = lexer.BeginLexing();
@@ -26,6 +27,8 @@ namespace PreAdamant.Compiler.Syntax
 			var compilationUnit = parser.compilationUnit();
 
 			var tokenTransformer = new PreAdamantTokenTransformer(source);
+
+			throw new NotImplementedException();
 		}
 
 		//public partial class CompilationUnitContext

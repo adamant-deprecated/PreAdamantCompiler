@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
+using static PreAdamant.Compiler.Tools.Parse.SpecParser;
 
 namespace PreAdamant.Compiler.Tools.Parse
 {
@@ -9,7 +10,6 @@ namespace PreAdamant.Compiler.Tools.Parse
 		{
 			var builder = new StringBuilder();
 
-			var patternBuilder = new PatternBuilder(spec);
 			builder.AppendLine($"parser grammar {spec.Name}_Antlr;");
 			builder.AppendLine("");
 			builder.AppendLine("options");
@@ -25,7 +25,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 			foreach(var rule in ruleLookup[true])
 			{
 				var associativity = BuildAssociativity(rule);
-				var pattern = patternBuilder.Visit(rule.Pattern);
+				var pattern = Build(rule.Pattern);
 				builder.AppendLine($"{rule.Name}: {associativity}{pattern};");
 			}
 
@@ -44,7 +44,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 						isFirst = false;
 					}
 					var associativity = BuildAssociativity(rule);
-					var pattern = patternBuilder.Visit(rule.Pattern);
+					var pattern = Build(rule.Pattern);
 					builder.AppendLine($"	{separator} {associativity}{pattern} #{rule.Name}");
 				}
 				builder.AppendLine("	;");
@@ -54,7 +54,14 @@ namespace PreAdamant.Compiler.Tools.Parse
 			return builder.ToString();
 		}
 
-		private string BuildAssociativity(Rule rule)
+		private static string Build(PatternContext pattern)
+		{
+			var labelIsRepeated = LabelGatherer.Instance.Visit(pattern);
+
+			return new AntlrPatternBuilder(labelIsRepeated).Visit(pattern);
+		}
+
+		private static string BuildAssociativity(Rule rule)
 		{
 			if(rule.Attributes.Contains("right"))
 				return "<assoc=right>";

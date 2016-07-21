@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -12,13 +13,13 @@ namespace PreAdamant.Compiler.Tools.Parse
 	/// There are two exceptions to this, alternation `|` and concatenation ` ` are assumed to
 	/// have the same precendence and be safe.
 	/// </summary>
-	internal class PatternBuilder : SpecParserSafeBaseVisitor<string>
+	internal class AntlrPatternBuilder : SpecParserSafeBaseVisitor<string>
 	{
-		private readonly Spec spec;
+		private readonly IReadOnlyDictionary<string, bool> labelIsRepeated;
 
-		public PatternBuilder(Spec spec)
+		public AntlrPatternBuilder(IReadOnlyDictionary<string, bool> labelIsRepeated)
 		{
-			this.spec = spec;
+			this.labelIsRepeated = labelIsRepeated;
 		}
 
 		public override string VisitGroupingPattern(SpecParser.GroupingPatternContext context)
@@ -138,7 +139,9 @@ namespace PreAdamant.Compiler.Tools.Parse
 
 		public override string VisitLabelPattern(SpecParser.LabelPatternContext context)
 		{
-			return $"({context.label.Text}={Visit(context.pattern())})";
+			var label = context.label.Text;
+			var op = labelIsRepeated[label] ? "+=" : "=";
+			return $"{label}{op}{Visit(context.pattern())}";
 		}
 	}
 }

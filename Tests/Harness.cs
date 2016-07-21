@@ -128,7 +128,7 @@ namespace PreAdamant.Compiler.Tests
 
 		private void Compile(PackageSyntax package, SourceText sourceText, IEnumerable<PackageSyntax> dependencies)
 		{
-			compiler.Parse(package, sourceText);
+			compiler.Parse(sourceText);
 			if(package.Diagnostics.Count > 0)
 				Assert.Fail(ToString(package.Diagnostics));
 			compiler.Compile(package, dependencies);

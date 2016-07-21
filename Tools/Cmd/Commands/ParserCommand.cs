@@ -33,6 +33,12 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			var parserCodePath = Path.Combine(dir, specFileName + ".cs");
 			File.WriteAllText(parserCodePath, parserCode);
 
+			// Generate Syntax.cs file
+			var syntaxGenerator = new SyntaxGenerator();
+			var syntaxCode = syntaxGenerator.Generate(spec);
+			var syntaxCodePath = Path.Combine(dir, specFileName + ".Syntax.cs");
+			File.WriteAllText(syntaxCodePath, syntaxCode);
+
 			return 0;
 		}
 	}

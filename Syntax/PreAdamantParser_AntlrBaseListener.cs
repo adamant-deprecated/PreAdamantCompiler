@@ -82,17 +82,1373 @@ public partial class PreAdamantParser_AntlrBaseListener : IPreAdamantParser_Antl
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNamespaceName([NotNull] PreAdamantParser_Antlr.NamespaceNameContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.declaration"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.attribute"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDeclaration([NotNull] PreAdamantParser_Antlr.DeclarationContext context) { }
+	public virtual void EnterAttribute([NotNull] PreAdamantParser_Antlr.AttributeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.declaration"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.attribute"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDeclaration([NotNull] PreAdamantParser_Antlr.DeclarationContext context) { }
+	public virtual void ExitAttribute([NotNull] PreAdamantParser_Antlr.AttributeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.baseTypes"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBaseTypes([NotNull] PreAdamantParser_Antlr.BaseTypesContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.baseTypes"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBaseTypes([NotNull] PreAdamantParser_Antlr.BaseTypesContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.accessModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAccessModifier([NotNull] PreAdamantParser_Antlr.AccessModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.accessModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAccessModifier([NotNull] PreAdamantParser_Antlr.AccessModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.safetyModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSafetyModifier([NotNull] PreAdamantParser_Antlr.SafetyModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.safetyModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSafetyModifier([NotNull] PreAdamantParser_Antlr.SafetyModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.classInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterClassInheritanceModifier([NotNull] PreAdamantParser_Antlr.ClassInheritanceModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.classInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitClassInheritanceModifier([NotNull] PreAdamantParser_Antlr.ClassInheritanceModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.methodInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMethodInheritanceModifier([NotNull] PreAdamantParser_Antlr.MethodInheritanceModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.methodInheritanceModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMethodInheritanceModifier([NotNull] PreAdamantParser_Antlr.MethodInheritanceModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.explicitModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExplicitModifier([NotNull] PreAdamantParser_Antlr.ExplicitModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.explicitModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExplicitModifier([NotNull] PreAdamantParser_Antlr.ExplicitModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.asyncModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsyncModifier([NotNull] PreAdamantParser_Antlr.AsyncModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.asyncModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsyncModifier([NotNull] PreAdamantParser_Antlr.AsyncModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameters"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeParameters([NotNull] PreAdamantParser_Antlr.TypeParametersContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameters"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeParameters([NotNull] PreAdamantParser_Antlr.TypeParametersContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeParameter([NotNull] PreAdamantParser_Antlr.TypeParameterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeParameter([NotNull] PreAdamantParser_Antlr.TypeParameterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeArguments"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeArguments([NotNull] PreAdamantParser_Antlr.TypeArgumentsContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeArguments"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeArguments([NotNull] PreAdamantParser_Antlr.TypeArgumentsContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.identifierOrPredefinedType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIdentifierOrPredefinedType([NotNull] PreAdamantParser_Antlr.IdentifierOrPredefinedTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.identifierOrPredefinedType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIdentifierOrPredefinedType([NotNull] PreAdamantParser_Antlr.IdentifierOrPredefinedTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.type"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterType([NotNull] PreAdamantParser_Antlr.TypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.type"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitType([NotNull] PreAdamantParser_Antlr.TypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.returnType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterReturnType([NotNull] PreAdamantParser_Antlr.ReturnTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.returnType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitReturnType([NotNull] PreAdamantParser_Antlr.ReturnTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.lifetime"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLifetime([NotNull] PreAdamantParser_Antlr.LifetimeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.lifetime"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLifetime([NotNull] PreAdamantParser_Antlr.LifetimeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.funcTypeParameterList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFuncTypeParameterList([NotNull] PreAdamantParser_Antlr.FuncTypeParameterListContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.funcTypeParameterList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFuncTypeParameterList([NotNull] PreAdamantParser_Antlr.FuncTypeParameterListContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.funcTypeParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFuncTypeParameter([NotNull] PreAdamantParser_Antlr.FuncTypeParameterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.funcTypeParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFuncTypeParameter([NotNull] PreAdamantParser_Antlr.FuncTypeParameterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.constExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConstExpression([NotNull] PreAdamantParser_Antlr.ConstExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.constExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConstExpression([NotNull] PreAdamantParser_Antlr.ConstExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParameterList([NotNull] PreAdamantParser_Antlr.ParameterListContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParameterList([NotNull] PreAdamantParser_Antlr.ParameterListContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParameterModifier([NotNull] PreAdamantParser_Antlr.ParameterModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParameterModifier([NotNull] PreAdamantParser_Antlr.ParameterModifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.whereClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWhereClause([NotNull] PreAdamantParser_Antlr.WhereClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.whereClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWhereClause([NotNull] PreAdamantParser_Antlr.WhereClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.genericConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGenericConstraint([NotNull] PreAdamantParser_Antlr.GenericConstraintContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.genericConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGenericConstraint([NotNull] PreAdamantParser_Antlr.GenericConstraintContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.constructorInitializer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConstructorInitializer([NotNull] PreAdamantParser_Antlr.ConstructorInitializerContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.constructorInitializer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConstructorInitializer([NotNull] PreAdamantParser_Antlr.ConstructorInitializerContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.argumentList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArgumentList([NotNull] PreAdamantParser_Antlr.ArgumentListContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.argumentList"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArgumentList([NotNull] PreAdamantParser_Antlr.ArgumentListContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.overloadableOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.overloadableOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.namespaceDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNamespaceDeclaration([NotNull] PreAdamantParser_Antlr.NamespaceDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.namespaceDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNamespaceDeclaration([NotNull] PreAdamantParser_Antlr.NamespaceDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.classDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterClassDeclaration([NotNull] PreAdamantParser_Antlr.ClassDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.classDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitClassDeclaration([NotNull] PreAdamantParser_Antlr.ClassDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.structDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStructDeclaration([NotNull] PreAdamantParser_Antlr.StructDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.structDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStructDeclaration([NotNull] PreAdamantParser_Antlr.StructDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.variableDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterVariableDeclaration([NotNull] PreAdamantParser_Antlr.VariableDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.variableDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitVariableDeclaration([NotNull] PreAdamantParser_Antlr.VariableDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.functionDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionDeclaration([NotNull] PreAdamantParser_Antlr.FunctionDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.functionDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionDeclaration([NotNull] PreAdamantParser_Antlr.FunctionDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.externalBlockDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExternalBlockDeclaration([NotNull] PreAdamantParser_Antlr.ExternalBlockDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.externalBlockDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExternalBlockDeclaration([NotNull] PreAdamantParser_Antlr.ExternalBlockDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.precondition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPrecondition([NotNull] PreAdamantParser_Antlr.PreconditionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.precondition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPrecondition([NotNull] PreAdamantParser_Antlr.PreconditionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.postcondition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPostcondition([NotNull] PreAdamantParser_Antlr.PostconditionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.postcondition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPostcondition([NotNull] PreAdamantParser_Antlr.PostconditionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.identifierName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIdentifierName([NotNull] PreAdamantParser_Antlr.IdentifierNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.identifierName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIdentifierName([NotNull] PreAdamantParser_Antlr.IdentifierNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.genericName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGenericName([NotNull] PreAdamantParser_Antlr.GenericNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.genericName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGenericName([NotNull] PreAdamantParser_Antlr.GenericNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.qualifiedName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQualifiedName([NotNull] PreAdamantParser_Antlr.QualifiedNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.qualifiedName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQualifiedName([NotNull] PreAdamantParser_Antlr.QualifiedNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.unqualifiedName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnqualifiedName([NotNull] PreAdamantParser_Antlr.UnqualifiedNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.unqualifiedName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnqualifiedName([NotNull] PreAdamantParser_Antlr.UnqualifiedNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.namedType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNamedType([NotNull] PreAdamantParser_Antlr.NamedTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.namedType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNamedType([NotNull] PreAdamantParser_Antlr.NamedTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.pointerType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPointerType([NotNull] PreAdamantParser_Antlr.PointerTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.pointerType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPointerType([NotNull] PreAdamantParser_Antlr.PointerTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.tupleType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTupleType([NotNull] PreAdamantParser_Antlr.TupleTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.tupleType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTupleType([NotNull] PreAdamantParser_Antlr.TupleTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.functionType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionType([NotNull] PreAdamantParser_Antlr.FunctionTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.functionType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionType([NotNull] PreAdamantParser_Antlr.FunctionTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.maybeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.maybeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.LifetimeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.LifetimeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.RefType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.RefType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.constructorConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConstructorConstraint([NotNull] PreAdamantParser_Antlr.ConstructorConstraintContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.constructorConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConstructorConstraint([NotNull] PreAdamantParser_Antlr.ConstructorConstraintContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeConstraint([NotNull] PreAdamantParser_Antlr.TypeConstraintContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeConstraint([NotNull] PreAdamantParser_Antlr.TypeConstraintContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeListParameterConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeListParameterConstraint([NotNull] PreAdamantParser_Antlr.TypeListParameterConstraintContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeListParameterConstraint"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeListParameterConstraint([NotNull] PreAdamantParser_Antlr.TypeListParameterConstraintContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.constructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConstructor([NotNull] PreAdamantParser_Antlr.ConstructorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.constructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConstructor([NotNull] PreAdamantParser_Antlr.ConstructorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.copyConstructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCopyConstructor([NotNull] PreAdamantParser_Antlr.CopyConstructorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.copyConstructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCopyConstructor([NotNull] PreAdamantParser_Antlr.CopyConstructorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.destructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDestructor([NotNull] PreAdamantParser_Antlr.DestructorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.destructor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDestructor([NotNull] PreAdamantParser_Antlr.DestructorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.conversionMethod"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConversionMethod([NotNull] PreAdamantParser_Antlr.ConversionMethodContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.conversionMethod"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConversionMethod([NotNull] PreAdamantParser_Antlr.ConversionMethodContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.field"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterField([NotNull] PreAdamantParser_Antlr.FieldContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.field"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitField([NotNull] PreAdamantParser_Antlr.FieldContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.accessor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAccessor([NotNull] PreAdamantParser_Antlr.AccessorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.accessor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAccessor([NotNull] PreAdamantParser_Antlr.AccessorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.indexer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIndexer([NotNull] PreAdamantParser_Antlr.IndexerContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.indexer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIndexer([NotNull] PreAdamantParser_Antlr.IndexerContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.method"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMethod([NotNull] PreAdamantParser_Antlr.MethodContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.method"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMethod([NotNull] PreAdamantParser_Antlr.MethodContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.operatorOverload"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOperatorOverload([NotNull] PreAdamantParser_Antlr.OperatorOverloadContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.operatorOverload"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOperatorOverload([NotNull] PreAdamantParser_Antlr.OperatorOverloadContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.nestedClassDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNestedClassDeclaration([NotNull] PreAdamantParser_Antlr.NestedClassDeclarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.nestedClassDeclaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNestedClassDeclaration([NotNull] PreAdamantParser_Antlr.NestedClassDeclarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.namedParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNamedParameter([NotNull] PreAdamantParser_Antlr.NamedParameterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.namedParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNamedParameter([NotNull] PreAdamantParser_Antlr.NamedParameterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.selfParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSelfParameter([NotNull] PreAdamantParser_Antlr.SelfParameterContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.selfParameter"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSelfParameter([NotNull] PreAdamantParser_Antlr.SelfParameterContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.blockMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBlockMethodBody([NotNull] PreAdamantParser_Antlr.BlockMethodBodyContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.blockMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBlockMethodBody([NotNull] PreAdamantParser_Antlr.BlockMethodBodyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.noMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNoMethodBody([NotNull] PreAdamantParser_Antlr.NoMethodBodyContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.noMethodBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNoMethodBody([NotNull] PreAdamantParser_Antlr.NoMethodBodyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.variableDeclarationStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterVariableDeclarationStatement([NotNull] PreAdamantParser_Antlr.VariableDeclarationStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.variableDeclarationStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitVariableDeclarationStatement([NotNull] PreAdamantParser_Antlr.VariableDeclarationStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.unsafeBlockStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnsafeBlockStatement([NotNull] PreAdamantParser_Antlr.UnsafeBlockStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.unsafeBlockStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnsafeBlockStatement([NotNull] PreAdamantParser_Antlr.UnsafeBlockStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.blockStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBlockStatement([NotNull] PreAdamantParser_Antlr.BlockStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.blockStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBlockStatement([NotNull] PreAdamantParser_Antlr.BlockStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.emptyStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterEmptyStatement([NotNull] PreAdamantParser_Antlr.EmptyStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.emptyStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitEmptyStatement([NotNull] PreAdamantParser_Antlr.EmptyStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.expressionStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExpressionStatement([NotNull] PreAdamantParser_Antlr.ExpressionStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.expressionStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExpressionStatement([NotNull] PreAdamantParser_Antlr.ExpressionStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.returnStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterReturnStatement([NotNull] PreAdamantParser_Antlr.ReturnStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.returnStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitReturnStatement([NotNull] PreAdamantParser_Antlr.ReturnStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.throwStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterThrowStatement([NotNull] PreAdamantParser_Antlr.ThrowStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.throwStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitThrowStatement([NotNull] PreAdamantParser_Antlr.ThrowStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.ifStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIfStatement([NotNull] PreAdamantParser_Antlr.IfStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.ifStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIfStatement([NotNull] PreAdamantParser_Antlr.IfStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.letIfStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLetIfStatement([NotNull] PreAdamantParser_Antlr.LetIfStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.letIfStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLetIfStatement([NotNull] PreAdamantParser_Antlr.LetIfStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.forStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterForStatement([NotNull] PreAdamantParser_Antlr.ForStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.forStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitForStatement([NotNull] PreAdamantParser_Antlr.ForStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.whileStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWhileStatement([NotNull] PreAdamantParser_Antlr.WhileStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.whileStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWhileStatement([NotNull] PreAdamantParser_Antlr.WhileStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.deleteStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeleteStatement([NotNull] PreAdamantParser_Antlr.DeleteStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.deleteStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeleteStatement([NotNull] PreAdamantParser_Antlr.DeleteStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.continueStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterContinueStatement([NotNull] PreAdamantParser_Antlr.ContinueStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.continueStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitContinueStatement([NotNull] PreAdamantParser_Antlr.ContinueStatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.additiveExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAdditiveExpression([NotNull] PreAdamantParser_Antlr.AdditiveExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.additiveExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAdditiveExpression([NotNull] PreAdamantParser_Antlr.AdditiveExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.xorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterXorExpression([NotNull] PreAdamantParser_Antlr.XorExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.xorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitXorExpression([NotNull] PreAdamantParser_Antlr.XorExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.toExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterToExpression([NotNull] PreAdamantParser_Antlr.ToExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.toExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitToExpression([NotNull] PreAdamantParser_Antlr.ToExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.booleanLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBooleanLiteralExpression([NotNull] PreAdamantParser_Antlr.BooleanLiteralExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.booleanLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBooleanLiteralExpression([NotNull] PreAdamantParser_Antlr.BooleanLiteralExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.castExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCastExpression([NotNull] PreAdamantParser_Antlr.CastExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.castExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCastExpression([NotNull] PreAdamantParser_Antlr.CastExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.newMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNewMemoryExpression([NotNull] PreAdamantParser_Antlr.NewMemoryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.newMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNewMemoryExpression([NotNull] PreAdamantParser_Antlr.NewMemoryExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.andExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAndExpression([NotNull] PreAdamantParser_Antlr.AndExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.andExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAndExpression([NotNull] PreAdamantParser_Antlr.AndExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.tryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTryExpression([NotNull] PreAdamantParser_Antlr.TryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.tryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTryExpression([NotNull] PreAdamantParser_Antlr.TryExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.parenthesizedExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterParenthesizedExpression([NotNull] PreAdamantParser_Antlr.ParenthesizedExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.parenthesizedExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitParenthesizedExpression([NotNull] PreAdamantParser_Antlr.ParenthesizedExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.newObjectExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNewObjectExpression([NotNull] PreAdamantParser_Antlr.NewObjectExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.newObjectExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNewObjectExpression([NotNull] PreAdamantParser_Antlr.NewObjectExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.unsafeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnsafeExpression([NotNull] PreAdamantParser_Antlr.UnsafeExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.unsafeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnsafeExpression([NotNull] PreAdamantParser_Antlr.UnsafeExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.uninitializedExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUninitializedExpression([NotNull] PreAdamantParser_Antlr.UninitializedExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.uninitializedExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUninitializedExpression([NotNull] PreAdamantParser_Antlr.UninitializedExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.unaryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUnaryExpression([NotNull] PreAdamantParser_Antlr.UnaryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.unaryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUnaryExpression([NotNull] PreAdamantParser_Antlr.UnaryExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.ifExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIfExpression([NotNull] PreAdamantParser_Antlr.IfExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.ifExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIfExpression([NotNull] PreAdamantParser_Antlr.IfExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.nullLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNullLiteralExpression([NotNull] PreAdamantParser_Antlr.NullLiteralExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.nullLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNullLiteralExpression([NotNull] PreAdamantParser_Antlr.NullLiteralExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.nullCheckExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNullCheckExpression([NotNull] PreAdamantParser_Antlr.NullCheckExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.nullCheckExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNullCheckExpression([NotNull] PreAdamantParser_Antlr.NullCheckExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.nameExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNameExpression([NotNull] PreAdamantParser_Antlr.NameExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.nameExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNameExpression([NotNull] PreAdamantParser_Antlr.NameExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.deleteMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeleteMemoryExpression([NotNull] PreAdamantParser_Antlr.DeleteMemoryExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.deleteMemoryExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeleteMemoryExpression([NotNull] PreAdamantParser_Antlr.DeleteMemoryExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.coalesceExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCoalesceExpression([NotNull] PreAdamantParser_Antlr.CoalesceExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.coalesceExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCoalesceExpression([NotNull] PreAdamantParser_Antlr.CoalesceExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.awaitExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAwaitExpression([NotNull] PreAdamantParser_Antlr.AwaitExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.awaitExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAwaitExpression([NotNull] PreAdamantParser_Antlr.AwaitExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.lambdaExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLambdaExpression([NotNull] PreAdamantParser_Antlr.LambdaExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.lambdaExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLambdaExpression([NotNull] PreAdamantParser_Antlr.LambdaExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.newExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNewExpression([NotNull] PreAdamantParser_Antlr.NewExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.newExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNewExpression([NotNull] PreAdamantParser_Antlr.NewExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.dotDotExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDotDotExpression([NotNull] PreAdamantParser_Antlr.DotDotExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.dotDotExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDotDotExpression([NotNull] PreAdamantParser_Antlr.DotDotExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.intLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIntLiteralExpression([NotNull] PreAdamantParser_Antlr.IntLiteralExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.intLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIntLiteralExpression([NotNull] PreAdamantParser_Antlr.IntLiteralExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.assignmentExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAssignmentExpression([NotNull] PreAdamantParser_Antlr.AssignmentExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.assignmentExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAssignmentExpression([NotNull] PreAdamantParser_Antlr.AssignmentExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.multiplicativeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMultiplicativeExpression([NotNull] PreAdamantParser_Antlr.MultiplicativeExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.multiplicativeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMultiplicativeExpression([NotNull] PreAdamantParser_Antlr.MultiplicativeExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.magnitudeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMagnitudeExpression([NotNull] PreAdamantParser_Antlr.MagnitudeExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.magnitudeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMagnitudeExpression([NotNull] PreAdamantParser_Antlr.MagnitudeExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.memberExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMemberExpression([NotNull] PreAdamantParser_Antlr.MemberExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.memberExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMemberExpression([NotNull] PreAdamantParser_Antlr.MemberExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.placementDeleteExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPlacementDeleteExpression([NotNull] PreAdamantParser_Antlr.PlacementDeleteExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.placementDeleteExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPlacementDeleteExpression([NotNull] PreAdamantParser_Antlr.PlacementDeleteExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.stringLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStringLiteralExpression([NotNull] PreAdamantParser_Antlr.StringLiteralExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.stringLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStringLiteralExpression([NotNull] PreAdamantParser_Antlr.StringLiteralExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.comparativeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterComparativeExpression([NotNull] PreAdamantParser_Antlr.ComparativeExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.comparativeExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitComparativeExpression([NotNull] PreAdamantParser_Antlr.ComparativeExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.orExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOrExpression([NotNull] PreAdamantParser_Antlr.OrExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.orExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOrExpression([NotNull] PreAdamantParser_Antlr.OrExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.inExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterInExpression([NotNull] PreAdamantParser_Antlr.InExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.inExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitInExpression([NotNull] PreAdamantParser_Antlr.InExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.arrayAccessExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArrayAccessExpression([NotNull] PreAdamantParser_Antlr.ArrayAccessExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.arrayAccessExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArrayAccessExpression([NotNull] PreAdamantParser_Antlr.ArrayAccessExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.callExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCallExpression([NotNull] PreAdamantParser_Antlr.CallExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.callExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCallExpression([NotNull] PreAdamantParser_Antlr.CallExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.selfExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSelfExpression([NotNull] PreAdamantParser_Antlr.SelfExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.selfExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSelfExpression([NotNull] PreAdamantParser_Antlr.SelfExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.equalityExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterEqualityExpression([NotNull] PreAdamantParser_Antlr.EqualityExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.equalityExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitEqualityExpression([NotNull] PreAdamantParser_Antlr.EqualityExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.charLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCharLiteralExpression([NotNull] PreAdamantParser_Antlr.CharLiteralExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.charLiteralExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCharLiteralExpression([NotNull] PreAdamantParser_Antlr.CharLiteralExpressionContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

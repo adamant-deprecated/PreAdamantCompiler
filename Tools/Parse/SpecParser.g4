@@ -21,12 +21,12 @@ parseRule: name=Identifier (':' base=Identifier)? ('=' pattern ('{' attributes+=
 pattern
 	: '(' pattern ')'						#GroupingPattern
 	| lexerName=Identifier '::' ruleName=Identifier	#ImportedRulePattern
+	| label=Identifier ':' pattern			#LabelPattern
 	| pattern '?'							#OptionalPattern
 	| pattern '*'							#ZeroOrMorePattern
 	| pattern '+'							#OneOrMorePattern
 	| pattern '{' separator=Literal (min=Number (range=',' max=Number?)?)? '}'	#RepeatWithSeparatorPattern
 	| pattern '{' min=Number (range=',' max=Number?)? '}'	#RepeatPattern
-	| label=Identifier ':' pattern			#LabelPattern
 	| pattern pattern						#ConcatPattern
 	| pattern '|' pattern					#AlternationPattern
 	| ruleName=Identifier					#RulePattern

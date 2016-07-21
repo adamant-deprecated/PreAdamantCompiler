@@ -14,14 +14,14 @@ namespace PreAdamant.Compiler
 {
 	public class PreAdamantCompiler
 	{
-		public /*PreAdamantParser.CompilationUnitContext*/ void Parse(PackageSyntax package, SourceText sourceText)
+		public SyntaxTree<CompilationUnitSyntax> Parse(SourceText sourceText)
 		{
 			// TODO make use of the package.  We don't currently use the package, but we
 			// are taking it as an argument becuase we should be for things like:
 			//   * Language Version
 			//   * Dependency Names
 			//   * Defined Preprocessor Symbols
-			var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
+			//var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
 
 
 			var parser = new PreAdamantParser(sourceText);

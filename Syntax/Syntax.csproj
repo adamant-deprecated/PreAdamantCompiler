@@ -55,6 +55,9 @@
     <Compile Include="PreAdamantLexer.Tokens.cs">
       <DependentUpon>PreAdamantLexer.lex</DependentUpon>
     </Compile>
+    <Compile Include="PreAdamantParser.Syntax.cs">
+      <DependentUpon>PreAdamantParser.parse</DependentUpon>
+    </Compile>
     <Compile Include="PreAdamantTokenTransformer.cs">
       <DependentUpon>PreAdamantLexer.lex</DependentUpon>
     </Compile>
@@ -78,6 +81,7 @@
     <Compile Include="Syntax.cs" />
     <Compile Include="SyntaxNode.cs" />
     <Compile Include="SyntaxToken.cs" />
+    <Compile Include="SyntaxTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DesignNotes.txt" />
