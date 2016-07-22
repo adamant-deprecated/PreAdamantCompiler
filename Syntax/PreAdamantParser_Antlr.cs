@@ -173,6 +173,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCompilationUnit(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompilationUnit(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -244,6 +249,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUsingDirective(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsingDirective(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -284,6 +294,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -335,6 +350,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNamespaceName(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNamespaceName(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -396,6 +416,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAttribute(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttribute(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -455,6 +480,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitBaseTypes(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBaseTypes(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -533,6 +563,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAccessModifier(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAccessModifier(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -577,6 +612,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitSafetyModifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSafetyModifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -623,6 +663,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitClassInheritanceModifier(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClassInheritanceModifier(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -667,6 +712,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMethodInheritanceModifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMethodInheritanceModifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -729,6 +779,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitExplicitModifier(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExplicitModifier(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -774,6 +829,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAsyncModifier(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAsyncModifier(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -816,6 +876,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeParameters(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeParameters(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -883,6 +948,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeParameter(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeParameter(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -963,6 +1033,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeArguments(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeArguments(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1027,6 +1102,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIdentifierOrPredefinedType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifierOrPredefinedType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1124,6 +1204,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1191,6 +1276,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitReturnType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReturnType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1261,6 +1351,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitLifetime(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLifetime(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1323,6 +1418,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitFuncTypeParameterList(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFuncTypeParameterList(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1396,6 +1496,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitFuncTypeParameter(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFuncTypeParameter(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1453,6 +1558,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitConstExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1520,6 +1630,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeParameterConstraintClause(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeParameterConstraintClause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1605,6 +1720,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitParameterList(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameterList(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1668,6 +1788,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitParameterModifier(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameterModifier(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1715,6 +1840,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitWhereClause(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWhereClause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1777,6 +1907,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitGenericConstraint(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGenericConstraint(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1857,6 +1992,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitConstructorInitializer(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstructorInitializer(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -1913,6 +2053,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitArgumentList(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgumentList(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -1976,6 +2121,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitOverloadableOperator(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOverloadableOperator(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2093,6 +2243,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitLocalVariableDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLocalVariableDeclaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2258,6 +2413,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitStructDeclaration(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStructDeclaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ExternalBlockDeclarationContext : DeclarationContext {
 		public DeclarationContext[] declaration() {
@@ -2274,6 +2434,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitExternalBlockDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternalBlockDeclaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class NamespaceDeclarationContext : DeclarationContext {
@@ -2300,6 +2465,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNamespaceDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNamespaceDeclaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class FunctionDeclarationContext : DeclarationContext {
@@ -2354,6 +2524,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitFunctionDeclaration(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctionDeclaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ClassDeclarationContext : DeclarationContext {
 		public AccessModifierContext accessModifier() {
@@ -2401,6 +2576,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitClassDeclaration(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClassDeclaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VariableDeclarationContext : DeclarationContext {
 		public IToken kind;
@@ -2430,6 +2610,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitVariableDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableDeclaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2887,6 +3072,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitPrecondition(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrecondition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class PostconditionContext : ContractContext {
 		public ExpressionContext expression() {
@@ -2900,6 +3090,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitPostcondition(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPostcondition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -2966,6 +3161,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIdentifierName(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifierName(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class GenericNameContext : SimpleNameContext {
 		public IdentifierOrPredefinedTypeContext identifierOrPredefinedType() {
@@ -2982,6 +3182,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitGenericName(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGenericName(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3050,6 +3255,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitQualifiedName(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQualifiedName(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class UnqualifiedNameContext : NameContext {
 		public SimpleNameContext simpleName() {
@@ -3063,6 +3273,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUnqualifiedName(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnqualifiedName(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3152,6 +3367,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNamedType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNamedType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class PointerTypeContext : TypeNameContext {
 		public IToken isMut;
@@ -3166,6 +3386,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitPointerType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPointerType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class TupleTypeContext : TypeNameContext {
@@ -3186,6 +3411,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTupleType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTupleType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class FunctionTypeContext : TypeNameContext {
 		public FuncTypeParameterListContext funcTypeParameterList() {
@@ -3203,6 +3433,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitFunctionType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctionType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class MaybeTypeContext : TypeNameContext {
 		public TypeNameContext typeName() {
@@ -3216,6 +3451,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMaybeType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMaybeType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3391,6 +3631,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitRefType(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRefType(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class LifetimeTypeContext : ValueTypeContext {
 		public IToken isMut;
@@ -3408,6 +3653,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitLifetimeType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLifetimeType(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3525,6 +3775,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitConstructorConstraint(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstructorConstraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class TypeListParameterConstraintContext : TypeParameterConstraintContext {
 		public TypeParameterContext typeParameter() {
@@ -3539,6 +3794,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeListParameterConstraint(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeListParameterConstraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class TypeConstraintContext : TypeParameterConstraintContext {
 		public TypeNameContext typeName() {
@@ -3552,6 +3812,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTypeConstraint(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTypeConstraint(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -3659,6 +3924,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitConversionMethod(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConversionMethod(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class FieldContext : MemberContext {
 		public IToken kind;
@@ -3688,6 +3958,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitField(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitField(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class MethodContext : MemberContext {
@@ -3745,6 +4020,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMethod(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMethod(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class OperatorOverloadContext : MemberContext {
 		public AccessModifierContext accessModifier() {
@@ -3798,6 +4078,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitOperatorOverload(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperatorOverload(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ConstructorContext : MemberContext {
 		public AccessModifierContext accessModifier() {
@@ -3848,6 +4133,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitConstructor(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstructor(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class DestructorContext : MemberContext {
 		public AccessModifierContext accessModifier() {
@@ -3876,6 +4166,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitDestructor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDestructor(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class AccessorContext : MemberContext {
@@ -3934,6 +4229,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAccessor(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAccessor(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class NestedClassDeclarationContext : MemberContext {
 		public AccessModifierContext accessModifier() {
@@ -3980,6 +4280,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNestedClassDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNestedClassDeclaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class IndexerContext : MemberContext {
@@ -4035,6 +4340,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIndexer(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndexer(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class CopyConstructorContext : MemberContext {
 		public AccessModifierContext accessModifier() {
@@ -4084,6 +4394,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCopyConstructor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCopyConstructor(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5001,6 +5316,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNamedParameter(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNamedParameter(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class SelfParameterContext : ParameterContext {
 		public IToken isRef;
@@ -5013,6 +5333,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitSelfParameter(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelfParameter(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5138,6 +5463,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNoMethodBody(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNoMethodBody(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class BlockMethodBodyContext : MethodBodyContext {
 		public StatementContext[] statement() {
@@ -5154,6 +5484,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitBlockMethodBody(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockMethodBody(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5232,6 +5567,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitEmptyStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEmptyStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class UnsafeBlockStatementContext : StatementContext {
 		public StatementContext[] statement() {
@@ -5248,6 +5588,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUnsafeBlockStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnsafeBlockStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class BlockStatementContext : StatementContext {
@@ -5266,6 +5611,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitBlockStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ThrowStatementContext : StatementContext {
 		public ExpressionContext expression() {
@@ -5279,6 +5629,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitThrowStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitThrowStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class ForStatementContext : StatementContext {
@@ -5300,6 +5655,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitForStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ReturnStatementContext : StatementContext {
 		public ExpressionContext expression() {
@@ -5313,6 +5673,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitReturnStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReturnStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class IfStatementContext : StatementContext {
@@ -5337,6 +5702,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIfStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class WhileStatementContext : StatementContext {
 		public ExpressionContext expression() {
@@ -5354,6 +5724,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitWhileStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWhileStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class DeleteStatementContext : StatementContext {
 		public ExpressionContext expression() {
@@ -5367,6 +5742,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitDeleteStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeleteStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class LetIfStatementContext : StatementContext {
@@ -5390,6 +5770,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitLetIfStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLetIfStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class VariableDeclarationStatementContext : StatementContext {
 		public LocalVariableDeclarationContext localVariableDeclaration() {
@@ -5403,6 +5788,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitVariableDeclarationStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableDeclarationStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class ExpressionStatementContext : StatementContext {
@@ -5418,6 +5808,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitExpressionStatement(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpressionStatement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ContinueStatementContext : StatementContext {
 		public ContinueStatementContext(StatementContext context) { CopyFrom(context); }
@@ -5428,6 +5823,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitContinueStatement(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContinueStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -5678,6 +6078,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAdditiveExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdditiveExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class XorExpressionContext : ExpressionContext {
 		public ExpressionContext[] expression() {
@@ -5694,6 +6099,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitXorExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXorExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class ToExpressionContext : ExpressionContext {
@@ -5712,6 +6122,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitToExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitToExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class BooleanLiteralExpressionContext : ExpressionContext {
 		public ITerminalNode BooleanLiteral() { return GetToken(PreAdamantParser_Antlr.BooleanLiteral, 0); }
@@ -5723,6 +6138,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitBooleanLiteralExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBooleanLiteralExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class CastExpressionContext : ExpressionContext {
@@ -5742,6 +6162,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCastExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCastExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class NewMemoryExpressionContext : ExpressionContext {
 		public ArgumentListContext argumentList() {
@@ -5758,6 +6183,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNewMemoryExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNewMemoryExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class AndExpressionContext : ExpressionContext {
@@ -5776,6 +6206,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAndExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAndExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class TryExpressionContext : ExpressionContext {
 		public IToken kind;
@@ -5791,6 +6226,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitTryExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTryExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ParenthesizedExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -5804,6 +6244,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitParenthesizedExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParenthesizedExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class NewObjectExpressionContext : ExpressionContext {
@@ -5828,6 +6273,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNewObjectExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNewObjectExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class UnsafeExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -5842,6 +6292,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUnsafeExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnsafeExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class UninitializedExpressionContext : ExpressionContext {
 		public UninitializedExpressionContext(ExpressionContext context) { CopyFrom(context); }
@@ -5852,6 +6307,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUninitializedExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUninitializedExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class UnaryExpressionContext : ExpressionContext {
@@ -5867,6 +6327,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitUnaryExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnaryExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class IfExpressionContext : ExpressionContext {
@@ -5888,6 +6353,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIfExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIfExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class NullLiteralExpressionContext : ExpressionContext {
 		public NullLiteralExpressionContext(ExpressionContext context) { CopyFrom(context); }
@@ -5898,6 +6368,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNullLiteralExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNullLiteralExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class NullCheckExpressionContext : ExpressionContext {
@@ -5913,6 +6388,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNullCheckExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNullCheckExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class NameExpressionContext : ExpressionContext {
 		public SimpleNameContext simpleName() {
@@ -5927,6 +6407,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNameExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNameExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class DeleteMemoryExpressionContext : ExpressionContext {
 		public ArgumentListContext argumentList() {
@@ -5940,6 +6425,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitDeleteMemoryExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeleteMemoryExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class CoalesceExpressionContext : ExpressionContext {
@@ -5958,6 +6448,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCoalesceExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCoalesceExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class AwaitExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -5971,6 +6466,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAwaitExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAwaitExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class LambdaExpressionContext : ExpressionContext {
@@ -5998,6 +6498,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitLambdaExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLambdaExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class NewExpressionContext : ExpressionContext {
 		public ArgumentListContext placementArguments;
@@ -6020,6 +6525,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitNewExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNewExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class DotDotExpressionContext : ExpressionContext {
 		public ExpressionContext[] expression() {
@@ -6037,6 +6547,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitDotDotExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDotDotExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class IntLiteralExpressionContext : ExpressionContext {
 		public ITerminalNode IntLiteral() { return GetToken(PreAdamantParser_Antlr.IntLiteral, 0); }
@@ -6048,6 +6563,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitIntLiteralExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIntLiteralExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class AssignmentExpressionContext : ExpressionContext {
@@ -6069,6 +6589,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitAssignmentExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAssignmentExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class MultiplicativeExpressionContext : ExpressionContext {
 		public IToken op;
@@ -6087,6 +6612,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMultiplicativeExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMultiplicativeExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class MagnitudeExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -6100,6 +6630,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMagnitudeExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMagnitudeExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class MemberExpressionContext : ExpressionContext {
@@ -6118,6 +6653,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitMemberExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMemberExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class PlacementDeleteExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -6132,6 +6672,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitPlacementDeleteExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPlacementDeleteExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class StringLiteralExpressionContext : ExpressionContext {
 		public ITerminalNode StringLiteral() { return GetToken(PreAdamantParser_Antlr.StringLiteral, 0); }
@@ -6143,6 +6688,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitStringLiteralExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStringLiteralExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class ComparativeExpressionContext : ExpressionContext {
@@ -6162,6 +6712,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitComparativeExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComparativeExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class OrExpressionContext : ExpressionContext {
 		public ExpressionContext[] expression() {
@@ -6178,6 +6733,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitOrExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOrExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class InExpressionContext : ExpressionContext {
@@ -6196,6 +6756,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitInExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class ArrayAccessExpressionContext : ExpressionContext {
 		public ExpressionContext expression() {
@@ -6212,6 +6777,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitArrayAccessExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArrayAccessExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class CallExpressionContext : ExpressionContext {
@@ -6230,6 +6800,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCallExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCallExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class SelfExpressionContext : ExpressionContext {
 		public SelfExpressionContext(ExpressionContext context) { CopyFrom(context); }
@@ -6240,6 +6815,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitSelfExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelfExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class EqualityExpressionContext : ExpressionContext {
@@ -6261,6 +6841,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitEqualityExpression(this);
 		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEqualityExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class CharLiteralExpressionContext : ExpressionContext {
 		public ITerminalNode CharLiteral() { return GetToken(PreAdamantParser_Antlr.CharLiteral, 0); }
@@ -6272,6 +6857,11 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
 			if (typedListener != null) typedListener.ExitCharLiteralExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCharLiteralExpression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 

@@ -39,6 +39,12 @@ namespace PreAdamant.Compiler.Tools.Cmd.Commands
 			var syntaxCodePath = Path.Combine(dir, specFileName + ".Syntax.cs");
 			File.WriteAllText(syntaxCodePath, syntaxCode);
 
+			// Generate SyntacTransformer.cs file
+			var transformerGenerator = new TransformerGenerator();
+			var transformerCode = transformerGenerator.Generate(spec);
+			var transformerCodePath = Path.Combine(dir, specFileName.Replace("Parser", "") + "SyntaxTransformer.cs");
+			File.WriteAllText(transformerCodePath, transformerCode);
+
 			return 0;
 		}
 	}

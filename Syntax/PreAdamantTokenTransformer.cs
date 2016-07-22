@@ -5,7 +5,7 @@ using PreAdamant.Compiler.Syntax.Antlr;
 
 namespace PreAdamant.Compiler.Syntax
 {
-	public partial class PreAdamantTokenTransformer
+	internal partial class PreAdamantTokenTransformer
 	{
 		private readonly ISourceText source;
 
@@ -14,7 +14,7 @@ namespace PreAdamant.Compiler.Syntax
 			this.source = source;
 		}
 
-		private SyntaxToken Transform(IToken token)
+		internal SyntaxToken Transform(IToken token)
 		{
 			var type = token.Type;
 			var startIndex = token.StartIndex;

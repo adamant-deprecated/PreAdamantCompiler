@@ -7,6 +7,9 @@ namespace PreAdamant.Compiler.Syntax
 	/// </summary>
 	public interface ISyntax
 	{
+		bool IsPoisoned { get; }
+		void Poison();
+		bool IsTrivia { get; }
 		IReadOnlyList<ISyntax> Children { get; }
 	}
 }

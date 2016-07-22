@@ -22,7 +22,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine("{");
 
 			// Lexer Class
-			builder.AppendLine($"	public partial class {transformerName}");
+			builder.AppendLine($"	internal partial class {transformerName}");
 			builder.AppendLine("	{");
 			builder.AppendLine("		private readonly ISourceText source;");
 			builder.AppendLine();
@@ -31,7 +31,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine("			this.source = source;");
 			builder.AppendLine("		}");
 			builder.AppendLine();
-			builder.AppendLine("		private SyntaxToken Transform(IToken token)");
+			builder.AppendLine("		internal SyntaxToken Transform(IToken token)");
 			builder.AppendLine("		{");
 			//SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text
 			builder.AppendLine("			var type = token.Type;");

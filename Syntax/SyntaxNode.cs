@@ -8,16 +8,29 @@ namespace PreAdamant.Compiler.Syntax
 	/// </summary>
 	public abstract class SyntaxNode : ISyntax
 	{
+		public bool IsPoisoned { get; private set; }
+		public bool IsTrivia { get; }
 		public IReadOnlyList<ISyntax> Children { get; }
 
-		protected SyntaxNode(IEnumerable<ISyntax> children)
+		protected SyntaxNode(IEnumerable<ISyntax> children, bool isTrivia)
 		{
+			IsTrivia = isTrivia;
 			Children = children.ToList();
 		}
 
-		protected SyntaxNode()
+		protected SyntaxNode(bool isTrivia)
 		{
-			Children = PreAdamant.Compiler.Syntax.Syntax.NoChildren;
+			IsTrivia = isTrivia;
+			Children = Syntax.NoChildren;
+		}
+
+		public void Poison()
+		{
+			if(IsPoisoned) return;
+			foreach(var child in Children)
+				child.Poison();
+
+			IsPoisoned = true;
 		}
 	}
 }

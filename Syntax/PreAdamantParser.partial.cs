@@ -27,6 +27,7 @@ namespace PreAdamant.Compiler.Syntax
 			var compilationUnit = parser.compilationUnit();
 
 			var tokenTransformer = new PreAdamantTokenTransformer(source);
+			var syntaxTransformer = new PreAdamantSyntaxTransformer(source);
 
 			throw new NotImplementedException();
 		}

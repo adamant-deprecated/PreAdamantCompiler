@@ -58,6 +58,15 @@
     <Compile Include="PreAdamantParser.Syntax.cs">
       <DependentUpon>PreAdamantParser.parse</DependentUpon>
     </Compile>
+    <Compile Include="PreAdamantParser_AntlrBaseVisitor.cs">
+      <DependentUpon>PreAdamantParser.parse</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantParser_AntlrVisitor.cs">
+      <DependentUpon>PreAdamantParser.parse</DependentUpon>
+    </Compile>
+    <Compile Include="PreAdamantSyntaxTransformer.cs">
+      <DependentUpon>PreAdamantParser.parse</DependentUpon>
+    </Compile>
     <Compile Include="PreAdamantTokenTransformer.cs">
       <DependentUpon>PreAdamantLexer.lex</DependentUpon>
     </Compile>

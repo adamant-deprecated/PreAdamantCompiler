@@ -2,7 +2,7 @@
 
 namespace PreAdamant.Compiler.Syntax
 {
-	public class PackageReferenceSyntax : SyntaxNode
+	public class PackageReferenceSyntax
 	{
 		public readonly string Name;
 		public readonly string Alias;
