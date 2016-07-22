@@ -67,6 +67,7 @@
     <Compile Include="PreAdamantSyntaxTransformer.cs">
       <DependentUpon>PreAdamantParser.parse</DependentUpon>
     </Compile>
+    <Compile Include="PreAdamantSyntaxTransformer.partial.cs" />
     <Compile Include="PreAdamantTokenTransformer.cs">
       <DependentUpon>PreAdamantLexer.lex</DependentUpon>
     </Compile>

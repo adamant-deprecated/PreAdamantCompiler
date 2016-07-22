@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PreAdamant.Compiler.Core;
 
 namespace PreAdamant.Compiler.Syntax
 {
@@ -10,6 +11,7 @@ namespace PreAdamant.Compiler.Syntax
 		bool IsPoisoned { get; }
 		void Poison();
 		bool IsTrivia { get; }
+		TextSpan SourceSpan { get; }
 		IReadOnlyList<ISyntax> Children { get; }
 	}
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AntlrGenerator.cs" />
+    <Compile Include="Inflector.cs" />
     <Compile Include="LabelGatherer.cs" />
     <Compile Include="ParserGenerator.cs" />
     <Compile Include="AntlrPatternBuilder.cs" />

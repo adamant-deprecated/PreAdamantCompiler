@@ -7,8 +7,7 @@ namespace PreAdamant.Compiler.Syntax
 	public class SyntaxToken : ISyntax
 	{
 		public ISourceText Source { get; }
-		public long Offset { get; }
-		public int Length { get; }
+		public TextSpan SourceSpan { get; }
 		public string Text { get; }
 		public bool IsPoisoned { get; private set; }
 		public bool IsTrivia { get; }
@@ -17,7 +16,7 @@ namespace PreAdamant.Compiler.Syntax
 		protected SyntaxToken(ISourceText source, int startIndex, int stopIndex, PreAdamantLexer.Channel channel, string text)
 		{
 			Source = source;
-			Offset = startIndex;
+			SourceSpan = new TextSpan(startIndex, stopIndex - startIndex);
 			switch(channel)
 			{
 				case PreAdamantLexer.Channel.Main:
@@ -30,7 +29,6 @@ namespace PreAdamant.Compiler.Syntax
 					throw new NotSupportedException($"Channel '{channel}' not supported");
 			}
 			Text = text;
-			Length = stopIndex - startIndex;
 		}
 
 		public void Poison()

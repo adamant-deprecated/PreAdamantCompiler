@@ -9,7 +9,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 		{
 			var builder = new StringBuilder();
 
-			builder.AppendLine($"using {spec.Namespace}.Antlr;");
+			builder.AppendLine("using System.Collections.Generic;");
 			builder.AppendLine();
 			builder.AppendLine($"namespace {spec.Namespace}");
 			builder.AppendLine("{");
@@ -18,35 +18,36 @@ namespace PreAdamant.Compiler.Tools.Parse
 
 			foreach(var rule in spec.Rules.Values)
 			{
-				var baseClass = rule.Base == null ? "SyntaxNode" : ToClassName(rule.Base) + "Syntax";
+				var baseClass = rule.Base == null ? "SyntaxNode" : Inflector.ToSyntaxClass(rule.Base);
 				baseClasses.Add(baseClass);
 
-				builder.AppendLine($"	public partial class {ToClassName(rule.Name)}Syntax : {baseClass}");
-				builder.AppendLine("	{");
-				builder.AppendLine("	}");
-				builder.AppendLine();
+				GenerateClass(builder, rule, Inflector.ToSyntaxClass(rule.Name), baseClass);
 			}
 			baseClasses.Remove("SyntaxNode");
 
 			foreach(var baseClass in baseClasses)
 			{
-				builder.AppendLine($"	public partial class {baseClass} : SyntaxNode");
-				builder.AppendLine("	{");
-				builder.AppendLine("	}");
-				builder.AppendLine();
+				GenerateClass(builder, null, baseClass, "SyntaxNode");
+				//builder.AppendLine($"	public partial class {baseClass} : SyntaxNode");
+				//builder.AppendLine("	{");
+				//builder.AppendLine("	}");
+				//builder.AppendLine();
 			}
 
 			builder.AppendLine("}");
 			return builder.ToString();
 		}
 
-		public static string ToClassName(string name)
+		private static void GenerateClass(StringBuilder builder, Rule rule, string className, string baseClass)
 		{
-			var firstChar = name[0];
-			if(char.IsLower(firstChar))
-				return char.ToUpper(firstChar) + name.Substring(1);
-
-			return name;
+			builder.AppendLine($"	public partial class {className} : {baseClass}");
+			builder.AppendLine("	{");
+			builder.AppendLine($"		public {className}(IEnumerable<ISyntax> allChildren)");
+			builder.AppendLine("			: base(allChildren)");
+			builder.AppendLine("		{");
+			builder.AppendLine("		}");
+			builder.AppendLine("	}");
+			builder.AppendLine();
 		}
 	}
 }

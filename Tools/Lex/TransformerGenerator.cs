@@ -36,7 +36,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 			//SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text
 			builder.AppendLine("			var type = token.Type;");
 			builder.AppendLine("			var startIndex = token.StartIndex;");
-			builder.AppendLine("			var stopIndex = token.StopIndex;");
+			builder.AppendLine("			var stopIndex = token.StopIndex + 1; // their stop index is in the value, ours is past the value");
 			builder.AppendLine($"			var channel = ({spec.Name}.Channel)token.Channel;");
 			builder.AppendLine("			var text = token.Text;");
 			builder.AppendLine("			switch(type)");

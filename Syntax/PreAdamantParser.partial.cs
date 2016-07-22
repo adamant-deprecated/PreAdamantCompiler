@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Syntax.Antlr;
@@ -23,13 +24,46 @@ namespace PreAdamant.Compiler.Syntax
 		{
 			var source = lexer.Source;
 			var tokenSource = lexer.BeginLexing();
-			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(tokenSource));
+			var capturingTokenSource = new CapturingTokenSource(tokenSource);
+			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(capturingTokenSource));
 			var compilationUnit = parser.compilationUnit();
 
 			var tokenTransformer = new PreAdamantTokenTransformer(source);
-			var syntaxTransformer = new PreAdamantSyntaxTransformer(source);
+			var syntaxTransformer = new PreAdamantSyntaxTransformer(capturingTokenSource.Tokens, tokenTransformer);
+			var compilationUnitSyntax = syntaxTransformer.Transform(compilationUnit);
 
 			throw new NotImplementedException();
+		}
+
+		private class CapturingTokenSource : ITokenSource
+		{
+			private readonly ITokenSource tokenSource;
+			private readonly List<IToken> buffer = new List<IToken>();
+
+			public CapturingTokenSource(ITokenSource tokenSource)
+			{
+				this.tokenSource = tokenSource;
+			}
+
+			public IReadOnlyList<IToken> Tokens => buffer;
+
+			IToken ITokenSource.NextToken()
+			{
+				var token = tokenSource.NextToken();
+				if(token != null)
+					buffer.Add(token);
+				return token;
+			}
+
+			int ITokenSource.Line => tokenSource.Line;
+			int ITokenSource.Column => tokenSource.Column;
+			ICharStream ITokenSource.InputStream => tokenSource.InputStream;
+			string ITokenSource.SourceName => tokenSource.SourceName;
+			ITokenFactory ITokenSource.TokenFactory
+			{
+				get { return tokenSource.TokenFactory; }
+				set { tokenSource.TokenFactory = value; }
+			}
 		}
 
 		//public partial class CompilationUnitContext

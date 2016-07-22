@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace PreAdamant.Compiler.Tools.Parse
 {
@@ -14,45 +10,32 @@ namespace PreAdamant.Compiler.Tools.Parse
 
 			var transformerName = spec.Name.Replace("Parser", "") + "SyntaxTransformer";
 			var antlrParser = $"{spec.Name}_Antlr";
-			//var tokenTypes = spec.ModeBlocks.SelectMany(b => b.Rules.Values).Where(r => r.IsTokenType).ToList();
 
-			builder.AppendLine("using System;");
-			builder.AppendLine("using Antlr4.Runtime;");
+			builder.AppendLine("using System.Linq;");
 			builder.AppendLine("using PreAdamant.Compiler.Core;");
 			builder.AppendLine($"using {spec.Namespace}.Antlr;");
 			builder.AppendLine();
 			builder.AppendLine($"namespace {spec.Namespace}");
 			builder.AppendLine("{");
 
-			// Lexer Class
+			// Transformer Class
 			builder.AppendLine($"	internal partial class {transformerName} : IPreAdamantParser_AntlrVisitor<ISyntax>");
 			builder.AppendLine("	{");
-			builder.AppendLine("		private readonly ISourceText source;");
-			builder.AppendLine();
-			builder.AppendLine($"		public {transformerName}(ISourceText source)");
-			builder.AppendLine("		{");
-			builder.AppendLine("			this.source = source;");
-			builder.AppendLine("		}");
-			builder.AppendLine();
-			builder.AppendLine($"		internal CompilationUnitSyntax Transform({antlrParser}.CompilationUnitContext compilationUnit)");
-			builder.AppendLine("		{");
-			////SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text
-			//builder.AppendLine("			var type = token.Type;");
-			//builder.AppendLine("			var startIndex = token.StartIndex;");
-			//builder.AppendLine("			var stopIndex = token.StopIndex;");
-			//builder.AppendLine($"			var channel = ({spec.Name}.Channel)token.Channel;");
-			//builder.AppendLine("			var text = token.Text;");
-			//builder.AppendLine("			switch(type)");
-			//builder.AppendLine("			{");
-			//foreach(var rule in tokenTypes)
-			//{
-			//	builder.AppendLine($"				case {antlrLexer}.{rule.Name}:");
-			//	builder.AppendLine($"					return new {rule.Name}Token(source, startIndex, stopIndex, channel, text);");
-			//}
-			//builder.AppendLine("				default:");
-			//builder.AppendLine("					throw new Exception($\"Unknown token type {type}\");");
-			//builder.AppendLine("			}");
-			builder.AppendLine("		}");
+
+			foreach(var rule in spec.Rules.Values)
+			{
+				var caseName = Inflector.ToIdentifier(rule.Name);
+				var syntaxClass = Inflector.ToSyntaxClass(rule.Name);
+				var contextClass = Inflector.ToContextClass(rule.Name);
+				builder.AppendLine($"		ISyntax I{antlrParser}Visitor<ISyntax>.Visit{caseName}({antlrParser}.{contextClass} context)");
+				builder.AppendLine("		{");
+				builder.AppendLine("			var children = context.children.Select(c => c.Accept(this)).ToList();");
+				builder.AppendLine("			var allChildren = InterleaveTriva(children);");
+				builder.AppendLine($"			return new {syntaxClass}(allChildren);");
+				builder.AppendLine("		}");
+				builder.AppendLine();
+			}
+
 			builder.AppendLine("	}");
 
 			builder.AppendLine("}");

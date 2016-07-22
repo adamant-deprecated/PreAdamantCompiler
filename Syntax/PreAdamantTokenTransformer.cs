@@ -18,7 +18,7 @@ namespace PreAdamant.Compiler.Syntax
 		{
 			var type = token.Type;
 			var startIndex = token.StartIndex;
-			var stopIndex = token.StopIndex;
+			var stopIndex = token.StopIndex + 1; // their stop index is in the value, ours is past the value
 			var channel = (PreAdamantLexer.Channel)token.Channel;
 			var text = token.Text;
 			switch(type)
