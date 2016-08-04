@@ -75,6 +75,10 @@
       <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
       <Name>Parser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Semantics\Semantics.csproj">
+      <Project>{9356799E-68CB-4AA1-AC5A-8CBC90FE6355}</Project>
+      <Name>Semantics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Syntax\Syntax.csproj">
       <Project>{0f50d108-4a28-4cc9-a647-26d2f823a47d}</Project>
       <Name>Syntax</Name>

@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using PreAdamant.Compiler.Core.Diagnostics;
+using PreAdamant.Compiler.Syntax;
 
-namespace Semantics
+namespace PreAdamant.Compiler.Semantics
 {
 	/// <summary>
 	/// A compiled package
 	/// </summary>
-    public class Package
-    {
-    }
+	public class Package
+	{
+		public string Name => Syntax.Name;
+		public PackageSyntax Syntax { get; }
+		//	public Symbol<PackageContext> Symbol { get; set; }
+		public IReadOnlyList<Diagnostic> Diagnostics => Syntax.Diagnostics; // TODO have semantic errors too
+
+		public Package(PackageSyntax syntax)
+		{
+			Syntax = syntax;
+		}
+	}
 }

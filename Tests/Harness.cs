@@ -11,6 +11,7 @@ using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Parser;
+using PreAdamant.Compiler.Semantics;
 using PreAdamant.Compiler.Syntax;
 
 namespace PreAdamant.Compiler.Tests
@@ -52,8 +53,9 @@ namespace PreAdamant.Compiler.Tests
 				.Select(d => new PackageReferenceSyntax(d, null, true)).ToList();
 			var packages = CompileDependencies(packageReferences);
 
-			var testPackage = new PackageSyntax($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences);
-			Compile(testPackage, new SourceText("Test", config.FileName, reader), packages);
+			var syntaxTree = Parse(new SourceText("Test", config.FileName, reader));
+			var testPackageSyntax = new PackageSyntax($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences, new[] { syntaxTree });
+			var testPackage = Compile(testPackageSyntax, packages);
 
 			packages.Add(testPackage);
 			foreach(var package in packages)
@@ -99,41 +101,46 @@ namespace PreAdamant.Compiler.Tests
 		/// <summary>
 		/// Compiles dependencies. This is simplified from what forge would do
 		/// </summary>
-		private IList<PackageSyntax> CompileDependencies(List<PackageReferenceSyntax> packageReferences)
+		private IList<Package> CompileDependencies(List<PackageReferenceSyntax> packageReferences)
 		{
 			// We compile references in order, assuming that each depends on all packages before it.
 			// So they must be listed in order correctly
-			var pastReferences = new List<PackageReferenceSyntax>();
-			var dependencies = new List<PackageSyntax>();
+			var references = new List<PackageReferenceSyntax>();
+			var packages = new List<Package>();
 			foreach(var reference in packageReferences)
 			{
-				var package = new PackageSyntax(reference.Name, false, pastReferences);
-
-				var packagePath = Path.GetFullPath(Path.Combine(dependenciesPath, package.Name));
+				var packagePath = Path.GetFullPath(Path.Combine(dependenciesPath, reference.Name));
 				var sourceFilePaths = Directory.GetFiles(packagePath, "*" + Extension, SearchOption.AllDirectories);
 
-				// Compile all the source files in the package
-				foreach(var sourceFilePath in sourceFilePaths)
-				{
-					var sourceFile = new SourceText(package.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath));
-					Compile(package, sourceFile, dependencies);
-				}
+				// Parse all the source files in the package
+				var syntaxTrees = sourceFilePaths
+					.Select(sourceFilePath => new SourceText(reference.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath)))
+					.Select(Parse);
 
-				dependencies.Add(package);
-				pastReferences.Add(reference);
+				var packageSyntax = new PackageSyntax(reference.Name, false, references, syntaxTrees);
+				var package = Compile(packageSyntax, packages);
+
+				packages.Add(package);
+				references.Add(reference);
 			}
 
-			return dependencies;
+			return packages;
 		}
 
-		private void Compile(PackageSyntax package, SourceText sourceText, IEnumerable<PackageSyntax> dependencies)
+		private SyntaxTree<CompilationUnitSyntax> Parse(SourceText sourceText)
 		{
-			compiler.Parse(sourceText);
+			var syntaxTree = compiler.Parse(sourceText);
+			if(syntaxTree.Diagnostics.Count > 0)
+				Assert.Fail(ToString(syntaxTree.Diagnostics));
+			return syntaxTree;
+		}
+
+		private Package Compile(PackageSyntax packageSyntax, IEnumerable<Package> dependencies)
+		{
+			var package = compiler.Compile(packageSyntax, dependencies);
 			if(package.Diagnostics.Count > 0)
 				Assert.Fail(ToString(package.Diagnostics));
-			compiler.Compile(package, dependencies);
-			if(package.Diagnostics.Count > 0)
-				Assert.Fail(ToString(package.Diagnostics));
+			return package;
 		}
 
 		private void CreateFile(string fileName, string content)

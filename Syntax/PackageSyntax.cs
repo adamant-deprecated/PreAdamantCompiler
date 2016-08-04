@@ -12,15 +12,12 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public readonly string Name;
 		public readonly bool IsApp;
-		//	// If no children are added, the children collection is null
-		//	public IEnumerable<CompilationUnitContext> CompilationUnits => children?.OfType<CompilationUnitContext>() ?? Enumerable.Empty<CompilationUnitContext>();
+		public IReadOnlyList<SyntaxTree<CompilationUnitSyntax>> CompilationUnits { get; }
 		public IReadOnlyList<PackageReferenceSyntax> Dependencies { get; }
-		//	public Symbol<PackageContext> Symbol { get; set; }
-
-		public readonly IList<Diagnostic> Diagnostics;
+		public IReadOnlyList<Diagnostic> Diagnostics { get; }
 		// TODO Language version
 
-		public PackageSyntax(string name, bool isApp, IEnumerable<PackageReferenceSyntax> dependencies)
+		public PackageSyntax(string name, bool isApp, IEnumerable<PackageReferenceSyntax> dependencies, IEnumerable<SyntaxTree<CompilationUnitSyntax>> compilationUnits)
 		{
 			Requires.NotNullOrEmpty(name, nameof(name));
 			// TODO enforce this rule with the analyzer
@@ -29,6 +26,7 @@ namespace PreAdamant.Compiler.Syntax
 
 			Name = name;
 			IsApp = isApp;
+			CompilationUnits = compilationUnits.ToList();
 			Diagnostics = new List<Diagnostic>();
 		}
 	}

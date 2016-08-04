@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
+using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Syntax.Antlr;
 
 namespace PreAdamant.Compiler.Syntax
@@ -33,7 +34,28 @@ namespace PreAdamant.Compiler.Syntax
 
 			// TODO capture diagnostics and put into syntax tree
 
-			return new SyntaxTree<CompilationUnitSyntax>(compilationUnitSyntax);
+			//var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
+			// TODO make sure all this work is done inside PreAdamantParser.Parse
+			//var parser = sourceText.NewParser();
+			//// Stupid ANTLR makes it difficult to do this in the constructor
+			//parser.RemoveErrorListeners();
+			//var errorsListener = new GatherErrorsListener(diagnostics);
+			//parser.AddErrorListener(errorsListener);
+			//parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
+
+			//var compilationUnit = parser.compilationUnit();
+			//compilationUnit.SourceText = sourceText;
+			//// TODO in the exploratory compiler, these lines checked method modifier restrictions
+			////var syntaxCheck = new SyntaxCheckVisitor(builder);
+			////tree.Accept(syntaxCheck);
+
+			//// TODO should really be about ones that prevent further processing?
+			//if(!diagnostics.Any)
+			//	package.AddChild(compilationUnit);
+
+			//return compilationUnit;
+
+			return new SyntaxTree<CompilationUnitSyntax>(compilationUnitSyntax, new Diagnostic[0]);
 		}
 
 		private class CapturingTokenSource : ITokenSource

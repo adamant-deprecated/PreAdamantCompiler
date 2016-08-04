@@ -7,8 +7,8 @@
     <ProjectGuid>{9356799E-68CB-4AA1-AC5A-8CBC90FE6355}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Semantics</RootNamespace>
-    <AssemblyName>Semantics</AssemblyName>
+    <RootNamespace>PreAdamant.Compiler.Semantics</RootNamespace>
+    <AssemblyName>PreAdamant.Compiler.Semantics</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,16 @@
   <ItemGroup>
     <Compile Include="Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Syntax\Syntax.csproj">
+      <Project>{0F50D108-4A28-4CC9-A647-26D2F823A47D}</Project>
+      <Name>Syntax</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
