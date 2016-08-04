@@ -12,7 +12,7 @@ namespace PreAdamant.Compiler.Core
 		{
 			Requires.That(start >= 0, nameof(start), "Must be >= 0");
 			// This handles overflow as well as negative length
-			Requires.That(start + length > start, nameof(length), "Length must be valid");
+			Requires.That(start + length >= start, nameof(length), "Length must be valid");
 			Start = start;
 			Length = length;
 		}

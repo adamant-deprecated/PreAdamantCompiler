@@ -23,6 +23,8 @@ namespace PreAdamant.Compiler.Syntax
 			var text = token.Text;
 			switch(type)
 			{
+				case PreAdamantLexer_Antlr.Eof:
+					return new EndOfFileToken(source, startIndex, stopIndex, channel, text);
 				case PreAdamantLexer_Antlr.Whitespace:
 					return new WhitespaceToken(source, startIndex, stopIndex, channel, text);
 				case PreAdamantLexer_Antlr.Newline:

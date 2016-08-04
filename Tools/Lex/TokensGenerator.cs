@@ -19,6 +19,10 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine($"namespace {spec.Namespace}");
 			builder.AppendLine("{");
 
+			// Generate a special EOF token
+			var eofRule = new Rule("EndOfFile", null, null, Enumerable.Empty<SpecParser.CommandContext>());
+			GenerateTokenClass(builder, spec.Name, eofRule);
+
 			foreach(var rule in tokenTypes)
 				GenerateTokenClass(builder, spec.Name, rule);
 

@@ -6,6 +6,14 @@ using PreAdamant.Compiler.Syntax.Antlr;
 namespace PreAdamant.Compiler.Syntax
 {
 
+	public partial class EndOfFileToken : SyntaxToken
+	{
+		public EndOfFileToken(ISourceText source, int startIndex, int stopIndex, PreAdamantLexer.Channel channel, string text)
+			: base(source, startIndex, stopIndex, channel, text)
+		{
+		}
+	}
+
 	public partial class WhitespaceToken : SyntaxToken
 	{
 		public WhitespaceToken(ISourceText source, int startIndex, int stopIndex, PreAdamantLexer.Channel channel, string text)

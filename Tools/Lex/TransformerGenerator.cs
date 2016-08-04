@@ -33,7 +33,6 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine();
 			builder.AppendLine("		internal SyntaxToken Transform(IToken token)");
 			builder.AppendLine("		{");
-			//SourceText source, int startIndex, int stopIndex, int type, Channel channel, string text
 			builder.AppendLine("			var type = token.Type;");
 			builder.AppendLine("			var startIndex = token.StartIndex;");
 			builder.AppendLine("			var stopIndex = token.StopIndex + 1; // their stop index is in the value, ours is past the value");
@@ -41,6 +40,10 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine("			var text = token.Text;");
 			builder.AppendLine("			switch(type)");
 			builder.AppendLine("			{");
+
+			builder.AppendLine($"				case {antlrLexer}.Eof:");
+			builder.AppendLine("					return new EndOfFileToken(source, startIndex, stopIndex, channel, text);");
+
 			foreach(var rule in tokenTypes)
 			{
 				builder.AppendLine($"				case {antlrLexer}.{rule.Name}:");
