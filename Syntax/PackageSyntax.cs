@@ -5,6 +5,9 @@ using PreAdamant.Compiler.Core.Diagnostics;
 
 namespace PreAdamant.Compiler.Syntax
 {
+	/// <summary>
+	/// A PackageSyntax is the combined set of data for a package, including the source and information in the package config
+	/// </summary>
 	public class PackageSyntax
 	{
 		public readonly string Name;

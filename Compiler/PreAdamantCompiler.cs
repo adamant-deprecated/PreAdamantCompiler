@@ -25,10 +25,11 @@ namespace PreAdamant.Compiler
 
 
 			var parser = new PreAdamantParser(sourceText);
-			parser.Parse();
+			var syntaxTree = parser.Parse();
+			return syntaxTree;
 
-			throw new NotImplementedException();
 
+			// TODO make sure all this work is done inside PreAdamantParser.Parse
 			//var parser = sourceText.NewParser();
 			//// Stupid ANTLR makes it difficult to do this in the constructor
 			//parser.RemoveErrorListeners();

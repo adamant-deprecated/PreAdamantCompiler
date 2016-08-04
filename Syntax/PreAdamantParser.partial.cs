@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Antlr4.Runtime;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Syntax.Antlr;
@@ -32,7 +31,9 @@ namespace PreAdamant.Compiler.Syntax
 			var syntaxTransformer = new PreAdamantSyntaxTransformer(capturingTokenSource.Tokens, tokenTransformer);
 			var compilationUnitSyntax = syntaxTransformer.Transform(compilationUnit);
 
-			throw new NotImplementedException();
+			// TODO capture diagnostics and put into syntax tree
+
+			return new SyntaxTree<CompilationUnitSyntax>(compilationUnitSyntax);
 		}
 
 		private class CapturingTokenSource : ITokenSource
