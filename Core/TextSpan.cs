@@ -16,5 +16,10 @@ namespace PreAdamant.Compiler.Core
 			Start = start;
 			Length = length;
 		}
+
+		public static TextSpan FromTo(int start, int end)
+		{
+			return new TextSpan(start, end - start);
+		}
 	}
 }

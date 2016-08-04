@@ -20,7 +20,7 @@ namespace PreAdamant.Compiler.Syntax
 			IsTrivia = false;
 			AllChildren = allChildren.ToList();
 			Children = AllChildren.Where(c => !c.IsTrivia).ToList();
-			SourceSpan = new TextSpan(Children.First().SourceSpan.Start, Children.Last().SourceSpan.End);
+			SourceSpan = TextSpan.FromTo(Children.First().SourceSpan.Start, Children.Last().SourceSpan.End);
 		}
 
 		protected SyntaxNode()

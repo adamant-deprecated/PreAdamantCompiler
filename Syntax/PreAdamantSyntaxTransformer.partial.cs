@@ -29,7 +29,7 @@ namespace PreAdamant.Compiler.Syntax
 			var allChildren = new List<ISyntax>(children);
 			for(var i = allChildren.Count - 1; i > 0; i--)
 			{
-				var triviaTokens = GetTokensInSpan(allChildren[i - 1].SourceSpan.End + 1, allChildren[i].SourceSpan.Start);
+				var triviaTokens = GetTokensInSpan(allChildren[i - 1].SourceSpan.End, allChildren[i].SourceSpan.Start);
 				allChildren.InsertRange(i, triviaTokens.Select(tokenTransformer.Transform));
 			}
 			return allChildren;
@@ -37,6 +37,7 @@ namespace PreAdamant.Compiler.Syntax
 
 		private IEnumerable<IToken> GetTokensInSpan(int start, int end)
 		{
+			if(start == end) yield break;
 			foreach(var token in tokens)
 			{
 				if(token.StopIndex + 1 > end) // their stop index is in the value, ours is after the value, hence + 1

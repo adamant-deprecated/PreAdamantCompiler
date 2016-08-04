@@ -16,7 +16,7 @@ namespace PreAdamant.Compiler.Syntax
 		protected SyntaxToken(ISourceText source, int startIndex, int stopIndex, PreAdamantLexer.Channel channel, string text)
 		{
 			Source = source;
-			SourceSpan = new TextSpan(startIndex, stopIndex - startIndex);
+			SourceSpan = TextSpan.FromTo(startIndex, stopIndex);
 			switch(channel)
 			{
 				case PreAdamantLexer.Channel.Main:

@@ -22,10 +22,10 @@ namespace PreAdamant.Compiler.Tools.Lex
 			builder.AppendLine("		public enum Channel");
 			builder.AppendLine("		{");
 			builder.AppendLine("			Main = 0,");
+			builder.AppendLine("			Hidden,"); // ANTLR lexers always have the hidden channel
 			foreach(var channel in spec.Channels)
-			{
 				builder.AppendLine($"			{channel},");
-			}
+
 			builder.AppendLine("		}");
 			builder.AppendLine("	}");
 

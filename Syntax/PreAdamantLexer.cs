@@ -8,6 +8,7 @@ namespace PreAdamant.Compiler.Syntax
 		public enum Channel
 		{
 			Main = 0,
+			Hidden,
 			Trivia,
 		}
 	}
