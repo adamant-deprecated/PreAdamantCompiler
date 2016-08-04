@@ -140,7 +140,7 @@ AndAssign: 'and=';
 XorAssign: 'xor=';
 OrAssign: 'or=';
 PlaceHolder: '_';
-Identifier: Lex__Unicode__Letter | '_' | '\\u' (([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]) | '(' ([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?) ')') (Lex__Unicode__Letter | Lex__Unicode__Digit | Lex__Unicode__Connector_Punctuation | Lex__Unicode__Non_Spacing_Mark | Lex__Unicode__Spacing_Combining_Mark | Lex__Unicode__Format | '\\u' (([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]) | '(' ([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?[0-9a-fA-F]?) ')')*);
+Identifier: (Lex__Unicode__Letter | '_' | ('\\u' ((([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])) | '(' (([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?) ')'))) ((Lex__Unicode__Letter | Lex__Unicode__Digit | Lex__Unicode__Connector_Punctuation | Lex__Unicode__Non_Spacing_Mark | Lex__Unicode__Spacing_Combining_Mark | Lex__Unicode__Format | ('\\u' ((([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])) | '(' (([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?([0-9a-fA-F])?) ')')))*);
 EscapedIdentifier: '`' Identifier;
 BadNotEqual: '!=' -> type(NotEqual);
 Unknown: (~[\r\n\u000B\f\u0085\u2028\u2029]);

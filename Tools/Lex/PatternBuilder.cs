@@ -100,7 +100,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 		public override string VisitAlternationPattern(SpecParser.AlternationPatternContext context)
 		{
 			// One of the exception to indivisible units so no parens
-			return String.Join(" | ", context.pattern().Select(Visit));
+			return string.Join(" | ", context.pattern().Select(Visit));
 		}
 
 		public override string VisitRulePattern(SpecParser.RulePatternContext context)
@@ -218,7 +218,7 @@ namespace PreAdamant.Compiler.Tools.Lex
 				pattern = builder.spec.ModeBlocks.Single(b => b.Rules.ContainsKey(ruleName)).Rules[ruleName].Pattern;
 			var result = builder.Visit(pattern);
 			PredefinedFragmentsUsed.UnionWith(builder.PredefinedFragmentsUsed); // Pull forward any predefined sets
-			return result;
+			return $"({result})"; // the pattern might have top level alternation or concatination and so needs to be wrapped in parens to make it indivisible
 		}
 
 		private void BuildCharClass(SpecParser.PredefinedClassCharContext context, StringBuilder alternatives, StringBuilder classBlock, bool isNegated)
