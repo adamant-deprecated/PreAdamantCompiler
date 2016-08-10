@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Forge.Config;
-using PreAdamant.Compiler.Parser;
 
 namespace PreAdamant.Compiler.Forge
 {

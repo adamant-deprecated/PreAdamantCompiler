@@ -7,29 +7,31 @@ namespace PreAdamant.Compiler.Core.Diagnostics
 	{
 		public readonly DiagnosticLevel Level;
 		public readonly CompilerPhase Phase;
-		public readonly ISourceText File;
+		public readonly ISourceText Source;
+		public readonly TextSpan SourceSpan;
 		public readonly TextPosition Position;
 		public readonly string Message;
 
-		internal Diagnostic(DiagnosticLevel level, CompilerPhase phase, ISourceText file, TextPosition position, string message)
+		internal Diagnostic(DiagnosticLevel level, CompilerPhase phase, ISourceText source, TextSpan sourceSpan, string message)
 		{
 			Requires.EnumDefined(level, nameof(level));
 			Requires.EnumDefined(phase, nameof(phase));
-			Requires.NotNull(file, nameof(file));
+			Requires.NotNull(source, nameof(source));
 			Requires.NotNullOrEmpty(message, nameof(message));
 
 			Level = level;
 			Phase = phase;
-			File = file;
-			Position = position;
+			Source = source;
+			SourceSpan = sourceSpan;
+			Position = Source.PositionOfStart(sourceSpan);
 			Message = message;
 		}
 
 		public int CompareTo(Diagnostic other)
 		{
-			var compare = File.CompareTo(other.File);
+			var compare = Source.CompareTo(other.Source);
 			if(compare != 0) return compare;
-			compare = Position.CompareTo(other.Position);
+			compare = SourceSpan.CompareTo(other.SourceSpan);
 			if(compare != 0) return compare;
 			compare = Level.CompareTo(other.Level);
 			if(compare != 0) return compare;

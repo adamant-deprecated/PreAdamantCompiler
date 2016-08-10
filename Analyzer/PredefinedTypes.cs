@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PreAdamant.Compiler.Parser;
 using static PreAdamant.Compiler.Syntax.PreAdamantParser;
 
 namespace PreAdamant.Compiler.Analyzer

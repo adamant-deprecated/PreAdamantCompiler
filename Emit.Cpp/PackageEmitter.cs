@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PreAdamant.Compiler.Common;
-using PreAdamant.Compiler.Parser;
 using PreAdamant.Compiler.Semantics;
 using static PreAdamant.Compiler.Syntax.PreAdamantParser;
 using Requires = PreAdamant.Compiler.Common.Requires;

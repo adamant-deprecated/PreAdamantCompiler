@@ -1,26 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PreAdamant.Compiler.Core.Diagnostics
 {
 	public class ParseDiagnosticsBuilder
 	{
-		public readonly ISourceText SourceFile;
-		private readonly IList<Diagnostic> diagnostics;
-		public bool Any { get; private set; }
+		public readonly ISourceText SourceText;
+		private IList<Diagnostic> diagnostics;
+		public bool Any => diagnostics.Any();
 
-		public ParseDiagnosticsBuilder(ISourceText sourceFile, IList<Diagnostic> diagnostics)
+		public ParseDiagnosticsBuilder(ISourceText sourceText)
 		{
-			SourceFile = sourceFile;
-			this.diagnostics = diagnostics;
+			SourceText = sourceText;
+			diagnostics = new List<Diagnostic>();
 		}
 
 		// TODO make methods for specific errors?
-		public Diagnostic AntlrParseError(TextPosition position, string message)
+		public Diagnostic AntlrParseError(TextSpan sourceSpan, string message)
 		{
-			Any = true;
-			var diagnostic = new Diagnostic(DiagnosticLevel.FatalCompilationError, CompilerPhase.Parsing, SourceFile, position, message);
+			var diagnostic = new Diagnostic(DiagnosticLevel.FatalCompilationError, CompilerPhase.Parsing, SourceText, sourceSpan, message);
 			diagnostics.Add(diagnostic);
 			return diagnostic;
+		}
+
+		public IList<Diagnostic> Build()
+		{
+			var result = diagnostics;
+			diagnostics = new List<Diagnostic>();
+			return result;
 		}
 	}
 }

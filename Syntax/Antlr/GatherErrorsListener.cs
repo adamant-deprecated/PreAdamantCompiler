@@ -2,9 +2,9 @@
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Core.Diagnostics;
 
-namespace PreAdamant.Compiler.Parser
+namespace PreAdamant.Compiler.Syntax.Antlr
 {
-	public class GatherErrorsListener : IAntlrErrorListener<IToken>
+	internal class GatherErrorsListener : IAntlrErrorListener<IToken>
 	{
 		private readonly ParseDiagnosticsBuilder diagnostics;
 
@@ -16,7 +16,8 @@ namespace PreAdamant.Compiler.Parser
 		public void SyntaxError(IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
 		{
 			// TODO we really should distinguish lexing and parsing errors
-			diagnostics.AntlrParseError(new TextPosition(offendingSymbol.StartIndex, line - 1, charPositionInLine), msg);
+			// ANTLR StopIndex is inside the symbol where ours is after the symbol
+			diagnostics.AntlrParseError(TextSpan.FromTo(offendingSymbol.StartIndex, offendingSymbol.StopIndex + 1), msg);
 		}
 	}
 }

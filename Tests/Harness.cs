@@ -10,7 +10,6 @@ using NUnit.Framework;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Emit.Cpp;
-using PreAdamant.Compiler.Parser;
 using PreAdamant.Compiler.Semantics;
 using PreAdamant.Compiler.Syntax;
 
@@ -157,9 +156,9 @@ namespace PreAdamant.Compiler.Tests
 			ISourceText file = null;
 			foreach(var diagnostic in diagnostics)
 			{
-				if(file != diagnostic.File)
+				if(file != diagnostic.Source)
 				{
-					file = diagnostic.File;
+					file = diagnostic.Source;
 					builder.AppendLine($"In {file.Name}");
 				}
 				var level = diagnostic.Level.ToString();

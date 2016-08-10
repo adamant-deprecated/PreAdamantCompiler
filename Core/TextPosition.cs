@@ -9,11 +9,11 @@ namespace PreAdamant.Compiler.Core
 	/// </summary>
 	public struct TextPosition : IComparable<TextPosition>
 	{
-		public readonly long Offset;
+		public readonly int Offset;
 		public readonly int Line;
 		public readonly int Column;
 
-		public TextPosition(long offset, int line, int column)
+		public TextPosition(int offset, int line, int column)
 		{
 			Requires.NonNegative(offset, nameof(offset));
 			Requires.NonNegative(line, nameof(line));

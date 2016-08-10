@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Core.Diagnostics;
 using PreAdamant.Compiler.Syntax.Antlr;
@@ -23,39 +24,30 @@ namespace PreAdamant.Compiler.Syntax
 		public SyntaxTree<CompilationUnitSyntax> Parse()
 		{
 			var source = lexer.Source;
+
+			var diagnostics = new ParseDiagnosticsBuilder(source);
+
+			// Setup Parser
 			var tokenSource = lexer.BeginLexing();
 			var capturingTokenSource = new CapturingTokenSource(tokenSource);
 			var parser = new PreAdamantParser_Antlr(new CommonTokenStream(capturingTokenSource));
+			// Stupid ANTLR makes it difficult to do this in the constructor
+			parser.RemoveErrorListeners();
+			var errorsListener = new GatherErrorsListener(diagnostics);
+			parser.AddErrorListener(errorsListener);
+			parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
+
+			// Perform Parse
 			var compilationUnit = parser.compilationUnit();
 
+			// Transform Syntax Tree
 			var tokenTransformer = new PreAdamantTokenTransformer(source);
 			var syntaxTransformer = new PreAdamantSyntaxTransformer(capturingTokenSource.Tokens, tokenTransformer);
 			var compilationUnitSyntax = syntaxTransformer.Transform(compilationUnit);
 
-			// TODO capture diagnostics and put into syntax tree
+			// TODO any other syntax checks on the tree that aren't built into the grammar?
 
-			//var diagnostics = new ParseDiagnosticsBuilder(sourceText, package.Diagnostics);
-			// TODO make sure all this work is done inside PreAdamantParser.Parse
-			//var parser = sourceText.NewParser();
-			//// Stupid ANTLR makes it difficult to do this in the constructor
-			//parser.RemoveErrorListeners();
-			//var errorsListener = new GatherErrorsListener(diagnostics);
-			//parser.AddErrorListener(errorsListener);
-			//parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
-
-			//var compilationUnit = parser.compilationUnit();
-			//compilationUnit.SourceText = sourceText;
-			//// TODO in the exploratory compiler, these lines checked method modifier restrictions
-			////var syntaxCheck = new SyntaxCheckVisitor(builder);
-			////tree.Accept(syntaxCheck);
-
-			//// TODO should really be about ones that prevent further processing?
-			//if(!diagnostics.Any)
-			//	package.AddChild(compilationUnit);
-
-			//return compilationUnit;
-
-			return new SyntaxTree<CompilationUnitSyntax>(compilationUnitSyntax, new Diagnostic[0]);
+			return new SyntaxTree<CompilationUnitSyntax>(compilationUnitSyntax, diagnostics.Build());
 		}
 
 		private class CapturingTokenSource : ITokenSource

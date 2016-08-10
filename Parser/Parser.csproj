@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="ContextListener.cs" />
     <Compile Include="ContextVisitor.cs" />
-    <Compile Include="GatherErrorsListener.cs" />
     <Compile Include="IContextListener.cs" />
     <Compile Include="IContextVisitor.cs" />
     <Compile Include="IFunctionContext.cs" />

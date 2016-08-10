@@ -1,6 +1,4 @@
-﻿using PreAdamant.Compiler.Parser;
-
-namespace PreAdamant.Compiler.Forge
+﻿namespace PreAdamant.Compiler.Forge
 {
 	public class Project
 	{

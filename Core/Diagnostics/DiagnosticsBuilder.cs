@@ -28,9 +28,9 @@ namespace PreAdamant.Compiler.Core.Diagnostics
 			return result;
 		}
 
-		public void AddAnalysisError(ISourceText file, TextPosition position, string message)
+		public void AddAnalysisError(ISourceText source, TextSpan sourceSpan, string message)
 		{
-			diagnostics.Add(new Diagnostic(DiagnosticLevel.CompilationError, CompilerPhase.Analysis, file, position, message));
+			diagnostics.Add(new Diagnostic(DiagnosticLevel.CompilationError, CompilerPhase.Analysis, source, sourceSpan, message));
 		}
 	}
 }
