@@ -17,6 +17,7 @@ namespace PreAdamant.Compiler.Tests
 		public string Description;
 		public int Result;
 		public string[] Dependencies;
+		public TestCaseError[] Errors;
 
 		// These settings are read from the output section after a line of "---"
 		public bool VerifyConsoleOutput;
@@ -48,6 +49,9 @@ namespace PreAdamant.Compiler.Tests
 
 			if(config.Dependencies == null)
 				config.Dependencies = new string[0];
+
+			if(config.Errors == null)
+				config.Errors = new TestCaseError[0];
 
 			return config;
 		}

@@ -41,6 +41,7 @@ namespace PreAdamant.Compiler.Core
 		{
 			var offset = textSpan.Start;
 			var lineNumber = Lines.LineNumber(offset);
+			// TODO count tabs as more than one column
 			return new TextPosition(offset, lineNumber, offset - Lines[lineNumber].Start);
 		}
 

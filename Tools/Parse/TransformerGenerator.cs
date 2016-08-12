@@ -11,8 +11,8 @@ namespace PreAdamant.Compiler.Tools.Parse
 			var transformerName = spec.Name.Replace("Parser", "") + "SyntaxTransformer";
 			var antlrParser = $"{spec.Name}_Antlr";
 
+			builder.AppendLine("using System.Collections.Generic;");
 			builder.AppendLine("using System.Linq;");
-			builder.AppendLine("using PreAdamant.Compiler.Core;");
 			builder.AppendLine($"using {spec.Namespace}.Antlr;");
 			builder.AppendLine();
 			builder.AppendLine($"namespace {spec.Namespace}");
@@ -29,9 +29,9 @@ namespace PreAdamant.Compiler.Tools.Parse
 				var contextClass = Inflector.ToContextClass(rule.Name);
 				builder.AppendLine($"		ISyntax I{antlrParser}Visitor<ISyntax>.Visit{caseName}({antlrParser}.{contextClass} context)");
 				builder.AppendLine("		{");
-				builder.AppendLine("			var children = context.children.Select(c => c.Accept(this)).ToList();");
+				builder.AppendLine("			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;");
 				builder.AppendLine("			var allChildren = InterleaveTriva(children);");
-				builder.AppendLine($"			return new {syntaxClass}(allChildren);");
+				builder.AppendLine($"			return allChildren.Any() ? new {syntaxClass}(allChildren) : new {syntaxClass}(context.Start.StartIndex);");
 				builder.AppendLine("		}");
 				builder.AppendLine();
 			}

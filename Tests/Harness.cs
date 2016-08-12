@@ -20,7 +20,7 @@ namespace PreAdamant.Compiler.Tests
 	{
 		private const string Extension = ".adam";
 		private readonly PreAdamantCompiler compiler = new PreAdamantCompiler();
-
+		private readonly TestCaseError[] noErrors = new TestCaseError[0];
 		private string workPath;
 		private string dependenciesPath;
 
@@ -52,7 +52,8 @@ namespace PreAdamant.Compiler.Tests
 				.Select(d => new PackageReferenceSyntax(d, null, true)).ToList();
 			var packages = CompileDependencies(packageReferences);
 
-			var syntaxTree = Parse(new SourceText("Test", config.FileName, reader));
+			var syntaxTree = Parse(new SourceText("Test", config.FileName, reader), config.Errors);
+			if(syntaxTree.Diagnostics.Any()) return; // expected parse errors happened
 			var testPackageSyntax = new PackageSyntax($"Adamant.Exploratory.Compiler.Tests.{config.TestName}", true, packageReferences, new[] { syntaxTree });
 			var testPackage = Compile(testPackageSyntax, packages);
 
@@ -114,7 +115,7 @@ namespace PreAdamant.Compiler.Tests
 				// Parse all the source files in the package
 				var syntaxTrees = sourceFilePaths
 					.Select(sourceFilePath => new SourceText(reference.Name, sourceFilePath.Substring(packagePath.Length + 1), new FileInfo(sourceFilePath)))
-					.Select(Parse);
+					.Select(source => Parse(source, noErrors));
 
 				var packageSyntax = new PackageSyntax(reference.Name, false, references, syntaxTrees);
 				var package = Compile(packageSyntax, packages);
@@ -126,12 +127,26 @@ namespace PreAdamant.Compiler.Tests
 			return packages;
 		}
 
-		private SyntaxTree<CompilationUnitSyntax> Parse(SourceText sourceText)
+		private SyntaxTree<CompilationUnitSyntax> Parse(SourceText sourceText, TestCaseError[] expectedErrors)
 		{
 			var syntaxTree = compiler.Parse(sourceText);
-			if(syntaxTree.Diagnostics.Count > 0)
-				Assert.Fail(ToString(syntaxTree.Diagnostics));
+			foreach(var diagnostic in syntaxTree.Diagnostics)
+				if(!IsExpected(diagnostic, expectedErrors))
+					Assert.Fail(ToString(syntaxTree.Diagnostics));
+
 			return syntaxTree;
+		}
+
+		private static bool IsExpected(Diagnostic diagnostics, TestCaseError[] expectedErrors)
+		{
+			foreach(var expectedError in expectedErrors)
+				if(diagnostics.Position.Line + 1 == expectedError.Line
+				   && diagnostics.Position.Column + 1 == expectedError.Column)
+				{
+					if(expectedError.Message == null || expectedError.Message == diagnostics.Message)
+						return true;
+				}
+			return false;
 		}
 
 		private Package Compile(PackageSyntax packageSyntax, IEnumerable<Package> dependencies)

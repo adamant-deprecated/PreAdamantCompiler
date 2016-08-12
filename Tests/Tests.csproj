@@ -55,9 +55,10 @@
     <Compile Include="Harness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCaseConfig.cs" />
+    <Compile Include="TestCaseError.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Initial\00_Empty.adam" />
+    <EmbeddedResource Include="Errors\Syntax\MissingReturnType.adam" />
     <EmbeddedResource Include="Initial\01_ReturnConstant.adam" />
     <EmbeddedResource Include="Initial\02_ReturnConstantWithNamespace.adam" />
     <EmbeddedResource Include="Initial\03_ReturnStringLength.adam" />
@@ -71,6 +72,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="Initial\07_FunctionCallWithStringArgument.adam" />
+    <EmbeddedResource Include="Initial\00_Empty.adam" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

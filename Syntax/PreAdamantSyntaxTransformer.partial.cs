@@ -9,6 +9,8 @@ namespace PreAdamant.Compiler.Syntax
 {
 	internal partial class PreAdamantSyntaxTransformer
 	{
+		private static readonly IReadOnlyList<ISyntax> NoChildren = new List<ISyntax>();
+
 		private readonly IReadOnlyList<IToken> tokens;
 		private readonly PreAdamantTokenTransformer tokenTransformer;
 
@@ -22,7 +24,6 @@ namespace PreAdamant.Compiler.Syntax
 		{
 			return (CompilationUnitSyntax)compilationUnit.Accept(this);
 		}
-
 
 		private List<ISyntax> InterleaveTriva(IReadOnlyList<ISyntax> children)
 		{

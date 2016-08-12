@@ -46,6 +46,11 @@ namespace PreAdamant.Compiler.Tools.Parse
 			builder.AppendLine("			: base(allChildren)");
 			builder.AppendLine("		{");
 			builder.AppendLine("		}");
+			builder.AppendLine();
+			builder.AppendLine($"		public {className}(int offset)");
+			builder.AppendLine("			: base(offset)");
+			builder.AppendLine("		{");
+			builder.AppendLine("		}");
 			builder.AppendLine("	}");
 			builder.AppendLine();
 		}

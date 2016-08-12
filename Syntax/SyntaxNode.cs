@@ -23,10 +23,12 @@ namespace PreAdamant.Compiler.Syntax
 			SourceSpan = TextSpan.FromTo(Children.First().SourceSpan.Start, Children.Last().SourceSpan.End);
 		}
 
-		protected SyntaxNode()
+		protected SyntaxNode(int offset)
 		{
 			IsTrivia = false;
+			AllChildren = Syntax.NoChildren;
 			Children = Syntax.NoChildren;
+			SourceSpan = new TextSpan(offset, 0);
 		}
 
 		public void Poison()

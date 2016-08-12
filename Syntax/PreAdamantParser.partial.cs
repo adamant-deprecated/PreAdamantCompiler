@@ -35,6 +35,7 @@ namespace PreAdamant.Compiler.Syntax
 			parser.RemoveErrorListeners();
 			var errorsListener = new GatherErrorsListener(diagnostics);
 			parser.AddErrorListener(errorsListener);
+			parser.AddErrorListener(new DiagnosticErrorListener()); // output ambiguous as error?
 			parser.Interpreter.PredictionMode = PredictionMode.LlExactAmbigDetection;
 
 			// Perform Parse
