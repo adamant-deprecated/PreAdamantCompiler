@@ -6,13 +6,13 @@ usingDirective(n: namespaceName)
 	imports Entity from Namespace ns
 		where n refers to Namespace ns;
 
-classDeclaration(c: name, p: typeParameters)
+classDeclaration(c: className, p: typeParameters)
 	defines /* unique */ Entity c of type t*
 		where p* has type t* // treat type parameters as special types almost like method overloads (i.e. type, type... or integer)
 	// defines type parameters?
 	scopes Entity, Member, Constructor;
 
-structDeclaration(s: name)
+structDeclaration(s: structName)
 	defines /* unique */ Entity s
 	scopes Entity, Member, Constructor;
 

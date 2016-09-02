@@ -253,16 +253,6 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitConstExpression([NotNull] PreAdamantParser_Antlr.ConstExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context) { return VisitChildren(context); }
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterList"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -332,16 +322,6 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.namespaceDeclaration"/>.
 	/// <para>
@@ -532,6 +512,26 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterBoundConstraintClause"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitTypeParameterBoundConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterRangeConstraintClause"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitTypeParameterRangeConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.constructorConstraint"/>.
 	/// <para>
@@ -832,6 +832,26 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitContinueStatement([NotNull] PreAdamantParser_Antlr.ContinueStatementContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.simpleLocalVariableDeclaration"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitSimpleLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.destructureLocalVariableDeclaration"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitDestructureLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.additiveExpression"/>.
 	/// <para>

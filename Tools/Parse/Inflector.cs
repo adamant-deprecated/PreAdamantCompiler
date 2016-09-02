@@ -7,6 +7,17 @@
 			return ToIdentifier(name) + "Syntax";
 		}
 
+		public static string ToTokenClass(string name)
+		{
+			return ToIdentifier(name) + "Token";
+		}
+
+		public static string ToClass(string name)
+		{
+			var firstChar = name[0];
+			return char.IsLower(firstChar) ? ToSyntaxClass(name) : ToTokenClass(name);
+		}
+
 		public static string ToContextClass(string name)
 		{
 			return ToIdentifier(name) + "Context";

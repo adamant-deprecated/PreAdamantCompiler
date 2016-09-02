@@ -4,6 +4,9 @@ namespace PreAdamant.Compiler.Syntax
 {
 	public partial class CompilationUnitSyntax : SyntaxNode
 	{
+		public IReadOnlyList<UsingDirectiveSyntax> UsingDirectives { get; }
+		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
+
 		public CompilationUnitSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -17,6 +20,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class UsingDirectiveSyntax : SyntaxNode
 	{
+		public NamespaceNameSyntax NamespaceName { get; }
+
 		public UsingDirectiveSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -30,6 +35,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IdentifierSyntax : SyntaxNode
 	{
+		public IdentifierToken Identifier { get; }
+		public EscapedIdentifierToken EscapedIdentifier { get; }
+
 		public IdentifierSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -43,6 +51,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NamespaceNameSyntax : SyntaxNode
 	{
+		public IdentifierSyntax Identifier { get; }
+
 		public NamespaceNameSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -56,6 +66,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NamespaceDeclarationSyntax : DeclarationSyntax
 	{
+		public NamespaceNameSyntax NamespaceName { get; }
+		public IReadOnlyList<UsingDirectiveSyntax> UsingDirectives { get; }
+		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
+
 		public NamespaceDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -69,6 +83,16 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ClassDeclarationSyntax : DeclarationSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public ClassInheritanceModifierSyntax ClassInheritanceModifier { get; }
+		public IdentifierSyntax ClassName { get; }
+		public TypeParametersSyntax TypeParameters { get; }
+		public BaseTypesSyntax BaseTypes { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<MemberSyntax> Members { get; }
+
 		public ClassDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -82,6 +106,15 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class StructDeclarationSyntax : DeclarationSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public IdentifierSyntax StructName { get; }
+		public TypeParametersSyntax TypeParameters { get; }
+		public BaseTypesSyntax BaseTypes { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<MemberSyntax> Members { get; }
+
 		public StructDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -95,6 +128,12 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class VariableDeclarationSyntax : DeclarationSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public ValueTypeSyntax ValueType { get; }
+		public ExpressionSyntax Expression { get; }
+
 		public VariableDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -108,6 +147,18 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class FunctionDeclarationSyntax : DeclarationSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public AsyncModifierSyntax AsyncModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public FunctionDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -121,6 +172,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ExternalBlockDeclarationSyntax : DeclarationSyntax
 	{
+		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
+
 		public ExternalBlockDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -134,6 +187,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class PreconditionSyntax : ContractSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public PreconditionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -147,6 +202,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class PostconditionSyntax : ContractSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public PostconditionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -160,6 +217,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AttributeSyntax : SyntaxNode
 	{
+		public IdentifierSyntax Identifier { get; }
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public AttributeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -173,6 +233,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class BaseTypesSyntax : SyntaxNode
 	{
+		public NameSyntax BaseType { get; }
+		public IReadOnlyList<NameSyntax> Interfaces { get; }
+
 		public BaseTypesSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -264,6 +327,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeParametersSyntax : SyntaxNode
 	{
+		public IReadOnlyList<TypeParameterSyntax> TypeParameters { get; }
+
 		public TypeParametersSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -277,6 +342,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeParameterSyntax : SyntaxNode
 	{
+		public IdentifierSyntax Identifier { get; }
+		public TypeNameSyntax BaseType { get; }
+		public LifetimeSyntax Lifetime { get; }
+
 		public TypeParameterSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -290,6 +359,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeArgumentsSyntax : SyntaxNode
 	{
+		public IReadOnlyList<TypeSyntax> Types { get; }
+
 		public TypeArgumentsSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -303,6 +374,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IdentifierOrPredefinedTypeSyntax : SyntaxNode
 	{
+		public UnsafeArrayTypeToken UnsafeArrayType { get; }
+
 		public IdentifierOrPredefinedTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -329,6 +402,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class GenericNameSyntax : SimpleNameSyntax
 	{
+		public IdentifierOrPredefinedTypeSyntax IdentifierOrPredefinedType { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+
 		public GenericNameSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -355,6 +431,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class QualifiedNameSyntax : NameSyntax
 	{
+		public NameSyntax LeftName { get; }
+		public SimpleNameSyntax RightName { get; }
+
 		public QualifiedNameSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -381,6 +460,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MaybeTypeSyntax : TypeNameSyntax
 	{
+		public TypeNameSyntax TypeName { get; }
+
 		public MaybeTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -394,6 +475,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class PointerTypeSyntax : TypeNameSyntax
 	{
+		public TypeNameSyntax TypeName { get; }
+
 		public PointerTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -420,6 +503,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class FunctionTypeSyntax : TypeNameSyntax
 	{
+		public FuncTypeParameterListSyntax FuncTypeParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+
 		public FunctionTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -433,6 +519,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class LifetimeTypeSyntax : ValueTypeSyntax
 	{
+		public LifetimeSyntax Lifetime { get; }
+		public TypeNameSyntax TypeName { get; }
+
 		public LifetimeTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -446,6 +535,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class RefTypeSyntax : ValueTypeSyntax
 	{
+		public TypeNameSyntax TypeName { get; }
+
 		public RefTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -459,6 +550,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeSyntax : SyntaxNode
 	{
+		public ValueTypeSyntax ValueType { get; }
+
 		public TypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -472,6 +565,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ReturnTypeSyntax : SyntaxNode
 	{
+		public TypeSyntax Type { get; }
+
 		public ReturnTypeSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -498,6 +593,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class FuncTypeParameterListSyntax : SyntaxNode
 	{
+		public IReadOnlyList<FuncTypeParameterSyntax> FuncTypeParameters { get; }
+
 		public FuncTypeParameterListSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -511,6 +608,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class FuncTypeParameterSyntax : SyntaxNode
 	{
+		public IReadOnlyList<ParameterModifierSyntax> ParameterModifiers { get; }
+		public ValueTypeSyntax ValueType { get; }
+
 		public FuncTypeParameterSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -524,6 +624,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConstExpressionSyntax : SyntaxNode
 	{
+		public IdentifierSyntax Identifier { get; }
+
 		public ConstExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -535,14 +637,33 @@ namespace PreAdamant.Compiler.Syntax
 		}
 	}
 
-	public partial class TypeParameterConstraintClauseSyntax : SyntaxNode
+	public partial class TypeParameterBoundConstraintClauseSyntax : TypeParameterConstraintClauseSyntax
 	{
-		public TypeParameterConstraintClauseSyntax(IEnumerable<ISyntax> allChildren)
+		public TypeParameterSyntax TypeParameter { get; }
+		public IReadOnlyList<TypeParameterConstraintSyntax> TypeParameterConstraints { get; }
+
+		public TypeParameterBoundConstraintClauseSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
 		}
 
-		public TypeParameterConstraintClauseSyntax(int offset)
+		public TypeParameterBoundConstraintClauseSyntax(int offset)
+			: base(offset)
+		{
+		}
+	}
+
+	public partial class TypeParameterRangeConstraintClauseSyntax : TypeParameterConstraintClauseSyntax
+	{
+		public TypeParameterSyntax TypeParameter { get; }
+		public IntLiteralToken IntLiteral { get; }
+
+		public TypeParameterRangeConstraintClauseSyntax(IEnumerable<ISyntax> allChildren)
+			: base(allChildren)
+		{
+		}
+
+		public TypeParameterRangeConstraintClauseSyntax(int offset)
 			: base(offset)
 		{
 		}
@@ -589,6 +710,17 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConstructorSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<WhereClauseSyntax> WhereClauses { get; }
+		public ConstructorInitializerSyntax ConstructorInitializer { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public ConstructorSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -602,6 +734,17 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class CopyConstructorSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public ExplicitModifierSyntax ExplicitModifier { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<WhereClauseSyntax> WhereClauses { get; }
+		public ConstructorInitializerSyntax ConstructorInitializer { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public CopyConstructorSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -615,6 +758,12 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class DestructorSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public DestructorSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -628,6 +777,17 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConversionMethodSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public ExplicitModifierSyntax ExplicitModifier { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public ConversionMethodSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -641,6 +801,12 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class FieldSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public ValueTypeSyntax ValueType { get; }
+		public ExpressionSyntax Expression { get; }
+
 		public FieldSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -654,6 +820,19 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AccessorSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public MethodInheritanceModifierSyntax MethodInheritanceModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public AsyncModifierSyntax AsyncModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public AccessorSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -667,6 +846,18 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IndexerSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public MethodInheritanceModifierSyntax MethodInheritanceModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public AsyncModifierSyntax AsyncModifier { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public IndexerSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -680,6 +871,19 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MethodSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public MethodInheritanceModifierSyntax MethodInheritanceModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public AsyncModifierSyntax AsyncModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public MethodSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -693,6 +897,18 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class OperatorOverloadSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public MethodInheritanceModifierSyntax MethodInheritanceModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public AsyncModifierSyntax AsyncModifier { get; }
+		public OverloadableOperatorSyntax OverloadableOperator { get; }
+		public ParameterListSyntax ParameterList { get; }
+		public ReturnTypeSyntax ReturnType { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<ContractSyntax> Contracts { get; }
+		public MethodBodySyntax MethodBody { get; }
+
 		public OperatorOverloadSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -706,6 +922,16 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NestedClassDeclarationSyntax : MemberSyntax
 	{
+		public IReadOnlyList<AttributeSyntax> Attributes { get; }
+		public AccessModifierSyntax AccessModifier { get; }
+		public SafetyModifierSyntax SafetyModifier { get; }
+		public ClassInheritanceModifierSyntax ClassInheritanceModifier { get; }
+		public IdentifierSyntax Identifier { get; }
+		public TypeParametersSyntax TypeParameters { get; }
+		public BaseTypesSyntax BaseTypes { get; }
+		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
+		public IReadOnlyList<MemberSyntax> Members { get; }
+
 		public NestedClassDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -719,6 +945,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ParameterListSyntax : SyntaxNode
 	{
+		public IReadOnlyList<ParameterSyntax> Parameters { get; }
+
 		public ParameterListSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -732,6 +960,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NamedParameterSyntax : ParameterSyntax
 	{
+		public IReadOnlyList<ParameterModifierSyntax> Modifiers { get; }
+		public IdentifierSyntax Identifier { get; }
+		public ValueTypeSyntax ValueType { get; }
+
 		public NamedParameterSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -771,6 +1003,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class WhereClauseSyntax : SyntaxNode
 	{
+		public TypeNameSyntax TypeName { get; }
+		public IReadOnlyList<GenericConstraintSyntax> Constraints { get; }
+
 		public WhereClauseSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -797,6 +1032,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConstructorInitializerSyntax : SyntaxNode
 	{
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public ConstructorInitializerSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -810,6 +1047,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ArgumentListSyntax : SyntaxNode
 	{
+		public ExpressionSyntax Expressions { get; }
+
 		public ArgumentListSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -823,6 +1062,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class BlockMethodBodySyntax : MethodBodySyntax
 	{
+		public IReadOnlyList<StatementSyntax> Statements { get; }
+
 		public BlockMethodBodySyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -862,6 +1103,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class VariableDeclarationStatementSyntax : StatementSyntax
 	{
+		public LocalVariableDeclarationSyntax LocalVariableDeclaration { get; }
+
 		public VariableDeclarationStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -875,6 +1118,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class UnsafeBlockStatementSyntax : StatementSyntax
 	{
+		public IReadOnlyList<StatementSyntax> Statements { get; }
+
 		public UnsafeBlockStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -888,6 +1133,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class BlockStatementSyntax : StatementSyntax
 	{
+		public IReadOnlyList<StatementSyntax> Statements { get; }
+
 		public BlockStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -914,6 +1161,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ExpressionStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public ExpressionStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -927,6 +1176,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ReturnStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public ReturnStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -940,6 +1191,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ThrowStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public ThrowStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -953,6 +1206,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IfStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Condition { get; }
+		public StatementSyntax Then { get; }
+		public StatementSyntax Else { get; }
+
 		public IfStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -966,6 +1223,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class LetIfStatementSyntax : StatementSyntax
 	{
+		public LocalVariableDeclarationSyntax LocalVariableDeclaration { get; }
+		public StatementSyntax Then { get; }
+		public StatementSyntax Else { get; }
+
 		public LetIfStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -979,6 +1240,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ForStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public StatementSyntax Statement { get; }
+
 		public ForStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -992,6 +1256,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class WhileStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public StatementSyntax Statement { get; }
+
 		public WhileStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1005,6 +1272,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class DeleteStatementSyntax : StatementSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public DeleteStatementSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1029,14 +1298,35 @@ namespace PreAdamant.Compiler.Syntax
 		}
 	}
 
-	public partial class LocalVariableDeclarationSyntax : SyntaxNode
+	public partial class SimpleLocalVariableDeclarationSyntax : LocalVariableDeclarationSyntax
 	{
-		public LocalVariableDeclarationSyntax(IEnumerable<ISyntax> allChildren)
+		public IdentifierSyntax Identifier { get; }
+		public ValueTypeSyntax ValueType { get; }
+		public ExpressionSyntax Expression { get; }
+
+		public SimpleLocalVariableDeclarationSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
 		}
 
-		public LocalVariableDeclarationSyntax(int offset)
+		public SimpleLocalVariableDeclarationSyntax(int offset)
+			: base(offset)
+		{
+		}
+	}
+
+	public partial class DestructureLocalVariableDeclarationSyntax : LocalVariableDeclarationSyntax
+	{
+		public IReadOnlyList<IdentifierSyntax> Identifiers { get; }
+		public ValueTypeSyntax ValueType { get; }
+		public ExpressionSyntax Expression { get; }
+
+		public DestructureLocalVariableDeclarationSyntax(IEnumerable<ISyntax> allChildren)
+			: base(allChildren)
+		{
+		}
+
+		public DestructureLocalVariableDeclarationSyntax(int offset)
 			: base(offset)
 		{
 		}
@@ -1044,6 +1334,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ParenthesizedExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public ParenthesizedExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1057,6 +1349,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MagnitudeExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public MagnitudeExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1070,6 +1364,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MemberExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public IdentifierSyntax Identifier { get; }
+
 		public MemberExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1083,6 +1380,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class PlacementDeleteExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public PlacementDeleteExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1096,6 +1395,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class DotDotExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public DotDotExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1109,6 +1411,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ToExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax From { get; }
+		public ExpressionSyntax To { get; }
+
 		public ToExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1122,6 +1427,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class CallExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public CallExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1135,6 +1443,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ArrayAccessExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public ArrayAccessExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1148,6 +1459,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AwaitExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public AwaitExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1161,6 +1474,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NullCheckExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public NullCheckExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1174,6 +1489,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class UnaryExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public UnaryExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1187,6 +1504,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MultiplicativeExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public MultiplicativeExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1200,6 +1520,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AdditiveExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public AdditiveExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1213,6 +1536,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ComparativeExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public ComparativeExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1226,6 +1552,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class EqualityExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public EqualityExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1239,6 +1568,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AndExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public AndExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1252,6 +1584,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class XorExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public XorExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1265,6 +1600,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class OrExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public OrExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1278,6 +1616,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class CoalesceExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public CoalesceExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1291,6 +1632,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class InExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lhs { get; }
+		public ExpressionSyntax Rhs { get; }
+
 		public InExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1304,6 +1648,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NewExpressionSyntax : ExpressionSyntax
 	{
+		public ArgumentListSyntax PlacementArguments { get; }
+		public ArgumentListSyntax ConstructorArguments { get; }
+
 		public NewExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1317,6 +1664,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NewMemoryExpressionSyntax : ExpressionSyntax
 	{
+		public TypeArgumentsSyntax TypeArguments { get; }
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public NewMemoryExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1330,6 +1680,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NewObjectExpressionSyntax : ExpressionSyntax
 	{
+		public BaseTypesSyntax BaseTypes { get; }
+		public ArgumentListSyntax ArgumentList { get; }
+		public IReadOnlyList<MemberSyntax> Members { get; }
+
 		public NewObjectExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1343,6 +1697,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class DeleteMemoryExpressionSyntax : ExpressionSyntax
 	{
+		public ArgumentListSyntax ArgumentList { get; }
+
 		public DeleteMemoryExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1356,6 +1712,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class CastExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+		public TypeNameSyntax TypeName { get; }
+
 		public CastExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1369,6 +1728,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TryExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public TryExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1382,6 +1743,10 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IfExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Condition { get; }
+		public ExpressionSyntax Then { get; }
+		public ExpressionSyntax Else { get; }
+
 		public IfExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1395,6 +1760,9 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AssignmentExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Lvalue { get; }
+		public ExpressionSyntax Rvalue { get; }
+
 		public AssignmentExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1525,6 +1893,8 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class UnsafeExpressionSyntax : ExpressionSyntax
 	{
+		public ExpressionSyntax Expression { get; }
+
 		public UnsafeExpressionSyntax(IEnumerable<ISyntax> allChildren)
 			: base(allChildren)
 		{
@@ -1614,6 +1984,19 @@ namespace PreAdamant.Compiler.Syntax
 		}
 	}
 
+	public partial class TypeParameterConstraintClauseSyntax : SyntaxNode
+	{
+		public TypeParameterConstraintClauseSyntax(IEnumerable<ISyntax> allChildren)
+			: base(allChildren)
+		{
+		}
+
+		public TypeParameterConstraintClauseSyntax(int offset)
+			: base(offset)
+		{
+		}
+	}
+
 	public partial class TypeParameterConstraintSyntax : SyntaxNode
 	{
 		public TypeParameterConstraintSyntax(IEnumerable<ISyntax> allChildren)
@@ -1674,6 +2057,19 @@ namespace PreAdamant.Compiler.Syntax
 		}
 
 		public StatementSyntax(int offset)
+			: base(offset)
+		{
+		}
+	}
+
+	public partial class LocalVariableDeclarationSyntax : SyntaxNode
+	{
+		public LocalVariableDeclarationSyntax(IEnumerable<ISyntax> allChildren)
+			: base(allChildren)
+		{
+		}
+
+		public LocalVariableDeclarationSyntax(int offset)
 			: base(offset)
 		{
 		}

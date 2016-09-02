@@ -163,12 +163,6 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <return>The visitor result.</return>
 	Result VisitConstExpression([NotNull] PreAdamantParser_Antlr.ConstExpressionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -210,12 +204,6 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>namespaceDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.declaration"/>.
@@ -349,6 +337,20 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>typeParameterBoundConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypeParameterBoundConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>typeParameterRangeConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypeParameterRangeConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>constructorConstraint</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraint"/>.
@@ -559,6 +561,20 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitContinueStatement([NotNull] PreAdamantParser_Antlr.ContinueStatementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>simpleLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSimpleLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>destructureLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDestructureLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>additiveExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.expression"/>.

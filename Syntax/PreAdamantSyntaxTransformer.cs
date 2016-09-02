@@ -293,11 +293,18 @@ namespace PreAdamant.Compiler.Syntax
 			return allChildren.Any() ? new ConstExpressionSyntax(allChildren) : new ConstExpressionSyntax(context.Start.StartIndex);
 		}
 
-		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitTypeParameterConstraintClause(PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context)
+		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitTypeParameterBoundConstraintClause(PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context)
 		{
 			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;
 			var allChildren = InterleaveTriva(children);
-			return allChildren.Any() ? new TypeParameterConstraintClauseSyntax(allChildren) : new TypeParameterConstraintClauseSyntax(context.Start.StartIndex);
+			return allChildren.Any() ? new TypeParameterBoundConstraintClauseSyntax(allChildren) : new TypeParameterBoundConstraintClauseSyntax(context.Start.StartIndex);
+		}
+
+		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitTypeParameterRangeConstraintClause(PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context)
+		{
+			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;
+			var allChildren = InterleaveTriva(children);
+			return allChildren.Any() ? new TypeParameterRangeConstraintClauseSyntax(allChildren) : new TypeParameterRangeConstraintClauseSyntax(context.Start.StartIndex);
 		}
 
 		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitConstructorConstraint(PreAdamantParser_Antlr.ConstructorConstraintContext context)
@@ -559,11 +566,18 @@ namespace PreAdamant.Compiler.Syntax
 			return allChildren.Any() ? new ContinueStatementSyntax(allChildren) : new ContinueStatementSyntax(context.Start.StartIndex);
 		}
 
-		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitLocalVariableDeclaration(PreAdamantParser_Antlr.LocalVariableDeclarationContext context)
+		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitSimpleLocalVariableDeclaration(PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context)
 		{
 			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;
 			var allChildren = InterleaveTriva(children);
-			return allChildren.Any() ? new LocalVariableDeclarationSyntax(allChildren) : new LocalVariableDeclarationSyntax(context.Start.StartIndex);
+			return allChildren.Any() ? new SimpleLocalVariableDeclarationSyntax(allChildren) : new SimpleLocalVariableDeclarationSyntax(context.Start.StartIndex);
+		}
+
+		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitDestructureLocalVariableDeclaration(PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context)
+		{
+			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;
+			var allChildren = InterleaveTriva(children);
+			return allChildren.Any() ? new DestructureLocalVariableDeclarationSyntax(allChildren) : new DestructureLocalVariableDeclarationSyntax(context.Start.StartIndex);
 		}
 
 		ISyntax IPreAdamantParser_AntlrVisitor<ISyntax>.VisitParenthesizedExpression(PreAdamantParser_Antlr.ParenthesizedExpressionContext context)

@@ -16,10 +16,10 @@ namespaceName = identifier{"." 1,};
 
 // declaration
 namespaceDeclaration: declaration = "namespace" namespaceName "{" usingDirective* declaration* "}";
-classDeclaration: declaration = attribute* accessModifier safetyModifier? classInheritanceModifier? "mut"? "class" name:identifier typeParameters? baseTypes?
+classDeclaration: declaration = attribute* accessModifier safetyModifier? classInheritanceModifier? "mut"? "class" className:identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		"{" member* "}";
-structDeclaration: declaration = attribute* accessModifier safetyModifier? "mut"? "struct" name:identifier typeParameters? baseTypes?
+structDeclaration: declaration = attribute* accessModifier safetyModifier? "mut"? "struct" structName:identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		"{" member* "}";
 variableDeclaration: declaration = attribute* accessModifier kind:("var"|"let") identifier (":" valueType)? ("=" expression)? ";";
@@ -85,9 +85,8 @@ funcTypeParameter = parameterModifier* valueType;
 
 constExpression = IntLiteral | StringLiteral | identifier;
 
-typeParameterConstraintClause = "where" typeParameter ":" typeParameterConstraint{"," 1,}
-	| "where" typeParameter (">="|"<="|"<"|">") IntLiteral
-	;
+typeParameterBoundConstraintClause: typeParameterConstraintClause = "where" typeParameter ":" typeParameterConstraint{"," 1,};
+typeParameterRangeConstraintClause: typeParameterConstraintClause = "where" typeParameter (">="|"<="|"<"|">") IntLiteral;
 
 // typeParameterConstraint
 constructorConstraint: typeParameterConstraint = "new" "(" ")";
@@ -146,32 +145,30 @@ whileStatement: statement = "while" "(" expression ")" statement;
 deleteStatement: statement = "delete" expression ";";
 continueStatement: statement = "continue" ";";
 
-localVariableDeclaration = 
-	  kind:("var"|"let") identifier("?")? ":" valueType ("=" expression)? // no type inference in pre-adamant so types are required
-	| kind:("var"|"let") "[" identifier{"," 1,} "]" ":" valueType ("=" expression)? // destructure tuple types
-	;
+simpleLocalVariableDeclaration: localVariableDeclaration = kind:("var"|"let") identifier ("?")? ":" valueType ("=" expression)?; // no type inference in pre-adamant so types are required
+destructureLocalVariableDeclaration: localVariableDeclaration = kind:("var"|"let") "[" identifier{"," 1,} "]" ":" valueType ("=" expression)?; // destructure tuple types
 
 // expression
 parenthesizedExpression: expression = "(" expression ")";
 magnitudeExpression: expression = "|" expression "|";
 memberExpression: expression = expression "." identifier;
 placementDeleteExpression: expression = expression "." "delete";
-dotDotExpression: expression = expression ".." expression;
-toExpression: expression = expression "to" expression;
+dotDotExpression: expression = lhs:expression ".." rhs:expression;
+toExpression: expression = from:expression "to" to:expression;
 callExpression: expression = expression "(" argumentList ")";
 arrayAccessExpression: expression = expression "[" argumentList "]";
 awaitExpression: expression = "await" expression;
 nullCheckExpression: expression = expression "?";
 unaryExpression: expression = op:("+"|"-"|"not"|"&"|"*") expression;
-multiplicativeExpression: expression = expression op:("*"|"/") expression;
-additiveExpression: expression = expression op:("+"|"-") expression;
-comparativeExpression: expression = expression op:("<"|"<="|">"|">=") expression;
+multiplicativeExpression: expression = lhs:expression op:("*"|"/") rhs:expression;
+additiveExpression: expression = lhs:expression op:("+"|"-") rhs:expression;
+comparativeExpression: expression = lhs:expression op:("<"|"<="|">"|">=") rhs:expression;
 equalityExpression: expression = lhs:expression op:("=="|"<>") rhs:expression;
-andExpression: expression = expression "and" expression;
-xorExpression: expression = expression "xor" expression;
-orExpression: expression = expression "or" expression;
-coalesceExpression: expression = expression "??" expression;
-inExpression: expression = expression "in" expression;
+andExpression: expression = lhs:expression "and" rhs:expression;
+xorExpression: expression = lhs:expression "xor" rhs:expression;
+orExpression: expression = lhs:expression "or" rhs:expression;
+coalesceExpression: expression = lhs:expression "??" rhs:expression;
+inExpression: expression = lhs:expression "in" rhs:expression;
 // Since new Class.Constructor() is indistiguishable from new Namespace.Class() we can"t parse for named constructor calls here
 newExpression: expression = "new" ("(" placementArguments:argumentList ")"	)? (name|"copy") "(" constructorArguments:argumentList ")";
 newMemoryExpression: expression = "new" typeArguments? "(" argumentList ")";

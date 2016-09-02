@@ -29,7 +29,6 @@ lifetime: '~' identifier | '~' 'self' | '~' 'own';
 funcTypeParameterList: '(' ((funcTypeParameter(','funcTypeParameter)*)?) ')';
 funcTypeParameter: (parameterModifier*) valueType;
 constExpression: IntLiteral | StringLiteral | identifier;
-typeParameterConstraintClause: 'where' typeParameter ':' (typeParameterConstraint(','typeParameterConstraint)*) | 'where' typeParameter ('>=' | '<=' | '<' | '>') IntLiteral;
 parameterList: '(' ((parameter(','parameter)*)?) ')';
 parameterModifier: 'params';
 whereClause: 'where' typeName ':' (constraints+=genericConstraint(','constraints+=genericConstraint)*);
@@ -37,13 +36,12 @@ genericConstraint: typeName | 'class' | 'struct' | 'copy' '(' ')';
 constructorInitializer: ':' ('base' | 'self') '(' argumentList ')';
 argumentList: ((expressions+=expression(','expressions+=expression)*)?);
 overloadableOperator: '*' | '&' | 'or' | 'and' | 'xor' | '?' | '??' | '.' | '[' ']' | '|' '|';
-localVariableDeclaration: kind+=('var' | 'let') identifier (('?')?) ':' valueType (('=' expression)?) | kind+=('var' | 'let') '[' (identifier(','identifier)*) ']' ':' valueType (('=' expression)?);
 
 // Labeled Alternatives Rules
 declaration
 	: 'namespace' namespaceName '{' (usingDirective*) (declaration*) '}' #namespaceDeclaration
-	| (attribute*) accessModifier (safetyModifier?) (classInheritanceModifier?) ('mut'?) 'class' name=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #classDeclaration
-	| (attribute*) accessModifier (safetyModifier?) ('mut'?) 'struct' name=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #structDeclaration
+	| (attribute*) accessModifier (safetyModifier?) (classInheritanceModifier?) ('mut'?) 'class' className=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #classDeclaration
+	| (attribute*) accessModifier (safetyModifier?) ('mut'?) 'struct' structName=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #structDeclaration
 	| (attribute*) accessModifier kind=('var' | 'let') identifier ((':' valueType)?) (('=' expression)?) ';' #variableDeclaration
 	| (attribute*) accessModifier (safetyModifier?) (asyncModifier?) identifier (typeArguments?) parameterList '->' returnType (typeParameterConstraintClause*) (contract*) methodBody #functionDeclaration
 	| 'external' '{' (declaration*) '}' #externalBlockDeclaration
@@ -75,6 +73,11 @@ typeName
 valueType
 	: (lifetime?) (isMut='mut'?) typeName #LifetimeType
 	| 'ref' ('var'?) (isMut='mut'?) typeName #RefType
+	;
+
+typeParameterConstraintClause
+	: 'where' typeParameter ':' (typeParameterConstraint(','typeParameterConstraint)*) #typeParameterBoundConstraintClause
+	| 'where' typeParameter ('>=' | '<=' | '<' | '>') IntLiteral #typeParameterRangeConstraintClause
 	;
 
 typeParameterConstraint
@@ -122,27 +125,32 @@ statement
 	| 'continue' ';' #continueStatement
 	;
 
+localVariableDeclaration
+	: kind=('var' | 'let') identifier (('?')?) ':' valueType (('=' expression)?) #simpleLocalVariableDeclaration
+	| kind=('var' | 'let') '[' (identifier(','identifier)*) ']' ':' valueType (('=' expression)?) #destructureLocalVariableDeclaration
+	;
+
 expression
 	: '(' expression ')' #parenthesizedExpression
 	| '|' expression '|' #magnitudeExpression
 	| expression '.' identifier #memberExpression
 	| expression '.' 'delete' #placementDeleteExpression
-	| expression '..' expression #dotDotExpression
-	| expression 'to' expression #toExpression
+	| lhs=expression '..' rhs=expression #dotDotExpression
+	| from=expression 'to' to=expression #toExpression
 	| expression '(' argumentList ')' #callExpression
 	| expression '[' argumentList ']' #arrayAccessExpression
 	| 'await' expression #awaitExpression
 	| expression '?' #nullCheckExpression
 	| op=('+' | '-' | 'not' | '&' | '*') expression #unaryExpression
-	| expression op=('*' | '/') expression #multiplicativeExpression
-	| expression op=('+' | '-') expression #additiveExpression
-	| expression op=('<' | '<=' | '>' | '>=') expression #comparativeExpression
+	| lhs=expression op=('*' | '/') rhs=expression #multiplicativeExpression
+	| lhs=expression op=('+' | '-') rhs=expression #additiveExpression
+	| lhs=expression op=('<' | '<=' | '>' | '>=') rhs=expression #comparativeExpression
 	| lhs=expression op=('==' | '<>') rhs=expression #equalityExpression
-	| expression 'and' expression #andExpression
-	| expression 'xor' expression #xorExpression
-	| expression 'or' expression #orExpression
-	| expression '??' expression #coalesceExpression
-	| expression 'in' expression #inExpression
+	| lhs=expression 'and' rhs=expression #andExpression
+	| lhs=expression 'xor' rhs=expression #xorExpression
+	| lhs=expression 'or' rhs=expression #orExpression
+	| lhs=expression '??' rhs=expression #coalesceExpression
+	| lhs=expression 'in' rhs=expression #inExpression
 	| 'new' (('(' placementArguments=argumentList ')')?) (name | 'copy') '(' constructorArguments=argumentList ')' #newExpression
 	| 'new' (typeArguments?) '(' argumentList ')' #newMemoryExpression
 	| 'new' (baseTypes?) '(' argumentList ')' '{' (member*) '}' #newObjectExpression

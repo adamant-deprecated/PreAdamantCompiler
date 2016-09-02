@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PreAdamant.Compiler.Tools.Parse
@@ -28,10 +29,6 @@ namespace PreAdamant.Compiler.Tools.Parse
 			foreach(var baseClass in baseClasses)
 			{
 				GenerateClass(builder, null, baseClass, "SyntaxNode");
-				//builder.AppendLine($"	public partial class {baseClass} : SyntaxNode");
-				//builder.AppendLine("	{");
-				//builder.AppendLine("	}");
-				//builder.AppendLine();
 			}
 
 			builder.AppendLine("}");
@@ -42,6 +39,20 @@ namespace PreAdamant.Compiler.Tools.Parse
 		{
 			builder.AppendLine($"	public partial class {className} : {baseClass}");
 			builder.AppendLine("	{");
+
+			if(rule != null)
+			{
+				foreach(var childRule in rule.Children)
+				{
+					var propertyType = Inflector.ToClass(childRule.Rule);
+					if(childRule.Repeated)
+						propertyType = $"IReadOnlyList<{propertyType}>";
+					builder.AppendLine($"		public {propertyType} {childRule.Label} {{ get; }}");
+				}
+				if(rule.Children.Any())
+					builder.AppendLine();
+			}
+
 			builder.AppendLine($"		public {className}(IEnumerable<ISyntax> allChildren)");
 			builder.AppendLine("			: base(allChildren)");
 			builder.AppendLine("		{");
@@ -51,6 +62,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 			builder.AppendLine("			: base(offset)");
 			builder.AppendLine("		{");
 			builder.AppendLine("		}");
+
 			builder.AppendLine("	}");
 			builder.AppendLine();
 		}

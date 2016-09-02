@@ -16,7 +16,7 @@ namespace PreAdamant.Compiler.Semantics
 			For<UsingDirectiveSyntax>()
 				.Import(syntax =>
 				{
-					//var ns = syntax.Name;
+					//var ns = syntax.NamespaceName;
 					//var n = ResolveReference(syntax, @namespace, ns);
 					//return ResolveReference(n, entity);
 					throw new NotImplementedException();
@@ -25,7 +25,7 @@ namespace PreAdamant.Compiler.Semantics
 			For<ClassDeclarationSyntax>()
 				.Define(syntax =>
 				{
-					//var c = syntax.Name;
+					//var c = syntax.ClassName;
 					//var p = syntax.TypeParameters;
 					//var t = TypeOf(p);
 					//return entity.Of(c, t);

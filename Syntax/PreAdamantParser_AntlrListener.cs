@@ -250,16 +250,6 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitConstExpression([NotNull] PreAdamantParser_Antlr.ConstExpressionContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitTypeParameterConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterConstraintClauseContext context);
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.parameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -329,16 +319,6 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.LocalVariableDeclarationContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>namespaceDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.declaration"/>.
@@ -567,6 +547,30 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>typeParameterBoundConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTypeParameterBoundConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>typeParameterBoundConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTypeParameterBoundConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>typeParameterRangeConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTypeParameterRangeConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>typeParameterRangeConstraintClause</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraintClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTypeParameterRangeConstraintClause([NotNull] PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>constructorConstraint</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.typeParameterConstraint"/>.
@@ -927,6 +931,30 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitContinueStatement([NotNull] PreAdamantParser_Antlr.ContinueStatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>simpleLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSimpleLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>simpleLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSimpleLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>destructureLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDestructureLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>destructureLocalVariableDeclaration</c>
+	/// labeled alternative in <see cref="PreAdamantParser_Antlr.localVariableDeclaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDestructureLocalVariableDeclaration([NotNull] PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>additiveExpression</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.expression"/>.
