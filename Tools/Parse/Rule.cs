@@ -20,7 +20,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 			Base = @base;
 			Pattern = pattern;
 			Attributes = new HashSet<string>(attributes);
-			Children = pattern.children.SelectMany(context => BuildChildren(context, null, false)).ToList();
+			Children = BuildChildren(pattern, null, false).ToList();
 		}
 
 		private static IEnumerable<ChildRule> BuildChildren(IParseTree context, string label, bool repeated)
