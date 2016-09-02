@@ -20,7 +20,7 @@ namespace PreAdamant.Compiler
 			return syntaxTree;
 		}
 
-		public Package Compile(PackageSyntax packageSyntax, IEnumerable<Package> packages)
+		public PackageSemantics Compile(PackageSyntax packageSyntax, IEnumerable<PackageSemantics> packages)
 		{
 			//package.BindDependencies(packages);
 
@@ -30,10 +30,10 @@ namespace PreAdamant.Compiler
 
 			// TODO rest of analysis
 
-			return new Package(packageSyntax);
+			return new PackageSemantics(packageSyntax);
 		}
 
-		public string EmitCpp(Package package)
+		public string EmitCpp(PackageSemantics package)
 		{
 			var emitter = new PackageEmitter(package);
 			return emitter.Emit();

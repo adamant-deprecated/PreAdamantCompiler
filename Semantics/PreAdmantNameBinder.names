@@ -1,0 +1,31 @@
+﻿
+
+@namespaces Namespace Entity Member Constructor Variable
+
+usingDirective(n: namespaceName)
+	imports Entity from Namespace ns
+		where n refers to Namespace ns;
+
+classDeclaration(c: name, p: typeParameters)
+	defines /* unique */ Entity c of type t*
+		where p* has type t* // treat type parameters as special types almost like method overloads (i.e. type, type... or integer)
+	// defines type parameters?
+	scopes Entity, Member, Constructor;
+
+structDeclaration(s: name)
+	defines /* unique */ Entity s
+	scopes Entity, Member, Constructor;
+
+unqualifiedName(n: identifierOrPredefinedType)
+	refers to Entity n
+	otherwise Variable n; // Not sure this is proper
+
+qualifiedName(l: leftName, r: rightName)
+	refers to Entity r in Entity l;
+
+variableDeclarationStatement((v:identifier, t: valueType):localVariableDeclaration)
+	defines Variable v of type t in subsequent scope;
+
+memberExpression(exp: expression, m: identifier)
+	refers to Entity m in Entity e
+		where exp has type EntityType(e); // plays into the type system

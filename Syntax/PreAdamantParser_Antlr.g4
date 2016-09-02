@@ -42,8 +42,8 @@ localVariableDeclaration: kind+=('var' | 'let') identifier (('?')?) ':' valueTyp
 // Labeled Alternatives Rules
 declaration
 	: 'namespace' namespaceName '{' (usingDirective*) (declaration*) '}' #namespaceDeclaration
-	| (attribute*) accessModifier (safetyModifier?) (classInheritanceModifier?) ('mut'?) 'class' identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #classDeclaration
-	| (attribute*) accessModifier (safetyModifier?) ('mut'?) 'struct' identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #structDeclaration
+	| (attribute*) accessModifier (safetyModifier?) (classInheritanceModifier?) ('mut'?) 'class' name=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #classDeclaration
+	| (attribute*) accessModifier (safetyModifier?) ('mut'?) 'struct' name=identifier (typeParameters?) (baseTypes?) (typeParameterConstraintClause*) '{' (member*) '}' #structDeclaration
 	| (attribute*) accessModifier kind=('var' | 'let') identifier ((':' valueType)?) (('=' expression)?) ';' #variableDeclaration
 	| (attribute*) accessModifier (safetyModifier?) (asyncModifier?) identifier (typeArguments?) parameterList '->' returnType (typeParameterConstraintClause*) (contract*) methodBody #functionDeclaration
 	| 'external' '{' (declaration*) '}' #externalBlockDeclaration

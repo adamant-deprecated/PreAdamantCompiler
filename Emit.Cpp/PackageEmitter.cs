@@ -11,9 +11,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 {
 	public class PackageEmitter
 	{
-		private readonly Package package;
+		private readonly PackageSemantics package;
 
-		public PackageEmitter(Package package)
+		public PackageEmitter(PackageSemantics package)
 		{
 			this.package = package;
 		}

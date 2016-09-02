@@ -7,14 +7,14 @@ namespace PreAdamant.Compiler.Semantics
 	/// <summary>
 	/// A compiled package
 	/// </summary>
-	public class Package
+	public class PackageSemantics
 	{
 		public string Name => Syntax.Name;
 		public PackageSyntax Syntax { get; }
 		//	public Symbol<PackageContext> Symbol { get; set; }
 		public IReadOnlyList<Diagnostic> Diagnostics => Syntax.Diagnostics; // TODO have semantic errors too
 
-		public Package(PackageSyntax syntax)
+		public PackageSemantics(PackageSyntax syntax)
 		{
 			Syntax = syntax;
 		}

@@ -101,12 +101,12 @@ namespace PreAdamant.Compiler.Tests
 		/// <summary>
 		/// Compiles dependencies. This is simplified from what forge would do
 		/// </summary>
-		private IList<Package> CompileDependencies(List<PackageReferenceSyntax> packageReferences)
+		private IList<PackageSemantics> CompileDependencies(List<PackageReferenceSyntax> packageReferences)
 		{
 			// We compile references in order, assuming that each depends on all packages before it.
 			// So they must be listed in order correctly
 			var references = new List<PackageReferenceSyntax>();
-			var packages = new List<Package>();
+			var packages = new List<PackageSemantics>();
 			foreach(var reference in packageReferences)
 			{
 				var packagePath = Path.GetFullPath(Path.Combine(dependenciesPath, reference.Name));
@@ -149,7 +149,7 @@ namespace PreAdamant.Compiler.Tests
 			return false;
 		}
 
-		private Package Compile(PackageSyntax packageSyntax, IEnumerable<Package> dependencies)
+		private PackageSemantics Compile(PackageSyntax packageSyntax, IEnumerable<PackageSemantics> dependencies)
 		{
 			var package = compiler.Compile(packageSyntax, dependencies);
 			if(package.Diagnostics.Count > 0)

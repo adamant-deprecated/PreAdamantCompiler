@@ -16,10 +16,10 @@ namespaceName = identifier{"." 1,};
 
 // declaration
 namespaceDeclaration: declaration = "namespace" namespaceName "{" usingDirective* declaration* "}";
-classDeclaration: declaration = attribute* accessModifier safetyModifier? classInheritanceModifier? "mut"? "class" identifier typeParameters? baseTypes?
+classDeclaration: declaration = attribute* accessModifier safetyModifier? classInheritanceModifier? "mut"? "class" name:identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		"{" member* "}";
-structDeclaration: declaration = attribute* accessModifier safetyModifier? "mut"? "struct" identifier typeParameters? baseTypes?
+structDeclaration: declaration = attribute* accessModifier safetyModifier? "mut"? "struct" name:identifier typeParameters? baseTypes?
 		typeParameterConstraintClause*
 		"{" member* "}";
 variableDeclaration: declaration = attribute* accessModifier kind:("var"|"let") identifier (":" valueType)? ("=" expression)? ";";

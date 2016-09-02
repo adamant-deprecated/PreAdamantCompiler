@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using static PreAdamant.Compiler.Syntax.PreAdamantParser;
-
-namespace PreAdamant.Compiler.Analyzer
+﻿namespace PreAdamant.Compiler.Semantics
 {
 	public static class PredefinedTypes
 	{
