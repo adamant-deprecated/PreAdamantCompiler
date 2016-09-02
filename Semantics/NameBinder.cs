@@ -38,10 +38,10 @@ namespace PreAdamant.Compiler.Semantics
 
 		protected class Namespace
 		{
-			public Symbol Of(string name, IEnumerable<ParameterType> parameterTypes)
-			{
-				throw new NotImplementedException();
-			}
+			//public Symbol Of(string name, IEnumerable<ParameterType> parameterTypes)
+			//{
+			//	throw new NotImplementedException();
+			//}
 		}
 
 		protected object TypeOf(IEnumerable<Symbol> symbols)
