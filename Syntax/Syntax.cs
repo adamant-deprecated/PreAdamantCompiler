@@ -4,6 +4,7 @@ namespace PreAdamant.Compiler.Syntax
 {
 	public static class Syntax
 	{
-		public static readonly IReadOnlyList<ISyntax> NoChildren = new List<ISyntax>();
+
+		public static readonly IReadOnlyList<ISyntaxNode> NoChildren = new List<ISyntaxNode>();
 	}
 }

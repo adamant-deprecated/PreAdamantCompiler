@@ -8,11 +8,13 @@ namespace PreAdamant.Compiler.Syntax
 	/// <summary>
 	/// A PackageSyntax is the combined set of data for a package, including the source and information in the package config
 	/// </summary>
-	public class PackageSyntax
+	public class PackageSyntax : ISyntax
 	{
 		public readonly string Name;
 		public readonly bool IsApp;
 		public IReadOnlyList<SyntaxTree<CompilationUnitSyntax>> CompilationUnits { get; }
+		private readonly IReadOnlyList<ISyntax> children;
+		IReadOnlyList<ISyntax> ISyntax.Children => children;
 		public IReadOnlyList<PackageReferenceSyntax> Dependencies { get; }
 		public IReadOnlyList<Diagnostic> Diagnostics { get; }
 		// TODO Language version
@@ -27,6 +29,7 @@ namespace PreAdamant.Compiler.Syntax
 			Name = name;
 			IsApp = isApp;
 			CompilationUnits = compilationUnits.ToList();
+			children = CompilationUnits.Select(cu => cu.Root).ToList();
 			Diagnostics = new List<Diagnostic>();
 		}
 	}

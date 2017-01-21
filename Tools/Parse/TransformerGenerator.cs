@@ -19,7 +19,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 			builder.AppendLine("{");
 
 			// Transformer Class
-			builder.AppendLine($"	internal partial class {transformerName} : IPreAdamantParser_AntlrVisitor<ISyntax>");
+			builder.AppendLine($"	internal partial class {transformerName} : IPreAdamantParser_AntlrVisitor<ISyntaxNode>");
 			builder.AppendLine("	{");
 
 			foreach(var rule in spec.Rules.Values)
@@ -27,7 +27,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 				var caseName = Inflector.ToIdentifier(rule.Name);
 				var syntaxClass = Inflector.ToSyntaxClass(rule.Name);
 				var contextClass = Inflector.ToContextClass(rule.Name);
-				builder.AppendLine($"		ISyntax I{antlrParser}Visitor<ISyntax>.Visit{caseName}({antlrParser}.{contextClass} context)");
+				builder.AppendLine($"		ISyntaxNode I{antlrParser}Visitor<ISyntaxNode>.Visit{caseName}({antlrParser}.{contextClass} context)");
 				builder.AppendLine("		{");
 				builder.AppendLine("			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;");
 				builder.AppendLine("			var allChildren = InterleaveTriva(children);");

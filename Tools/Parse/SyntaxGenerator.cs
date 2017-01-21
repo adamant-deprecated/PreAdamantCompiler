@@ -53,7 +53,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 					builder.AppendLine();
 			}
 
-			builder.AppendLine($"		public {className}(IEnumerable<ISyntax> allChildren)");
+			builder.AppendLine($"		public {className}(IEnumerable<ISyntaxNode> allChildren)");
 			builder.AppendLine("			: base(allChildren)");
 			builder.AppendLine("		{");
 			builder.AppendLine("		}");

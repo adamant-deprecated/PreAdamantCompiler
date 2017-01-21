@@ -22,6 +22,9 @@ namespace PreAdamant.Compiler
 
 		public PackageSemantics Compile(PackageSyntax packageSyntax, IEnumerable<PackageSemantics> packages)
 		{
+			var nameBinder = new PreAdamantNameBinder();
+			//var packageSymbol = nameBinder.BuildSymbols(packageSyntax);
+
 			//package.BindDependencies(packages);
 
 			//var treeWalker = new ParseTreeWalker();
@@ -30,7 +33,7 @@ namespace PreAdamant.Compiler
 
 			// TODO rest of analysis
 
-			return new PackageSemantics(packageSyntax);
+			return new PackageSemantics(packageSyntax, null);
 		}
 
 		public string EmitCpp(PackageSemantics package)

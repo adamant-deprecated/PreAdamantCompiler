@@ -7,15 +7,16 @@ namespace PreAdamant.Compiler.Syntax
 	/// <summary>
 	/// A non-terminal node in the syntax tree
 	/// </summary>
-	public abstract class SyntaxNode : ISyntax
+	public abstract class SyntaxNode : ISyntaxNode
 	{
 		public bool IsPoisoned { get; private set; }
 		public bool IsTrivia { get; }
 		public TextSpan SourceSpan { get; }
-		public IReadOnlyList<ISyntax> AllChildren { get; }
-		public IReadOnlyList<ISyntax> Children { get; }
+		public IReadOnlyList<ISyntaxNode> AllChildren { get; }
+		public IReadOnlyList<ISyntaxNode> Children { get; }
+		IReadOnlyList<ISyntax> ISyntax.Children => Children;
 
-		protected SyntaxNode(IEnumerable<ISyntax> allChildren)
+		protected SyntaxNode(IEnumerable<ISyntaxNode> allChildren)
 		{
 			IsTrivia = false;
 			AllChildren = allChildren.ToList();

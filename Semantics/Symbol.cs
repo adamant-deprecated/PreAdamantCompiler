@@ -1,25 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PreAdamant.Compiler.Syntax;
 
 namespace PreAdamant.Compiler.Semantics
 {
-	public abstract class Symbol
+	public class Symbol
 	{
 		public readonly Symbol Parent;
 		public readonly string Name;
 		public readonly bool IsPredefined;
-		//	private readonly List<Symbol> children = new List<Symbol>();
-		//	public IReadOnlyList<Symbol> Children => children;
+		public readonly IReadOnlyList<ISyntax> Declarations;
+		public readonly IReadOnlyList<Symbol> Children;
 		//	private readonly List<Symbol> importedChildren = new List<Symbol>();
 		//	public IReadOnlyList<Symbol> ImportedChildren => importedChildren;
 		//	public IEnumerable<Symbol> AllChildren => children.Concat(importedChildren);
 
-		//	protected Symbol(Symbol parent, string name, bool isPredefined)
-		//	{
-		//		Parent = parent;
-		//		Name = name;
-		//		IsPredefined = isPredefined;
-		//	}
+		internal Symbol(Symbol parent, string name, bool isPredefined, IEnumerable<ISyntax> declarations, List<Symbol> children)
+		{
+			Parent = parent;
+			Name = name;
+			IsPredefined = isPredefined;
+			Declarations = declarations.ToList();
+			Children = children;
+		}
 
 		//	public static Symbol<T> For<T>(Symbol parent, string name, T declaration, bool isPredefined = false)
 		//		where T : ParserRuleContext
@@ -59,7 +62,8 @@ namespace PreAdamant.Compiler.Semantics
 			get
 			{
 				if(Parent == null) return Name;
-				if(Parent is Symbol<PackageSyntax>) return Parent.FullyQualifiedName + "::" + Name;
+				// TODO how to handle scoping to package name
+				//if(Parent is Symbol<PackageSyntax>) return Parent.FullyQualifiedName + "::" + Name;
 
 				return Parent.FullyQualifiedName + "." + Name;
 			}
@@ -71,51 +75,51 @@ namespace PreAdamant.Compiler.Semantics
 		//	}
 	}
 
-	public class Symbol<T> : Symbol
-	{
-		private readonly List<T> declarations;
-		public IReadOnlyList<T> Declarations => declarations;
+	//public class Symbol<T> : Symbol
+	//{
+	//	private readonly List<T> declarations;
+	//	public IReadOnlyList<T> Declarations => declarations;
 
-		//	public Symbol(Symbol parent, string name, T declaration, bool isPredefined)
-		//		: base(parent, name, isPredefined)
-		//	{
-		//		declarations = new List<T>() { declaration };
-		//	}
+	//	//	public Symbol(Symbol parent, string name, T declaration, bool isPredefined)
+	//	//		: base(parent, name, isPredefined)
+	//	//	{
+	//	//		declarations = new List<T>() { declaration };
+	//	//	}
 
-		//	public Symbol(Symbol parent, string name, IEnumerable<T> declarations, bool isPredefined)
-		//		: base(parent, name, isPredefined)
-		//	{
-		//		this.declarations = declarations.ToList();
-		//	}
-		//	public void AddDeclaration(T declaration)
-		//	{
-		//		declarations.Add(declaration);
-		//	}
+	//	//	public Symbol(Symbol parent, string name, IEnumerable<T> declarations, bool isPredefined)
+	//	//		: base(parent, name, isPredefined)
+	//	//	{
+	//	//		this.declarations = declarations.ToList();
+	//	//	}
+	//	//	public void AddDeclaration(T declaration)
+	//	//	{
+	//	//		declarations.Add(declaration);
+	//	//	}
 
-		//	public override void Import(Symbol child)
-		//	{
-		//		if(typeof(T) != typeof(NamespaceDeclarationContext)
-		//			&& typeof(T) != typeof(PackageContext))
-		//			throw new NotSupportedException("Only package and namespace symbols can be imported into");
+	//	//	public override void Import(Symbol child)
+	//	//	{
+	//	//		if(typeof(T) != typeof(NamespaceDeclarationContext)
+	//	//			&& typeof(T) != typeof(PackageContext))
+	//	//			throw new NotSupportedException("Only package and namespace symbols can be imported into");
 
-		//		var importedNamespace = child as Symbol<NamespaceDeclarationContext>;
-		//		if(importedNamespace != null)
-		//		{
-		//			var existingSymbol = Lookup(importedNamespace.Name) as Symbol<NamespaceDeclarationContext>;
-		//			if(existingSymbol == null)
-		//			{
-		//				existingSymbol = new Symbol<NamespaceDeclarationContext>(this, importedNamespace.Name, importedNamespace.Declarations, false);
-		//				AddImportedChild(existingSymbol);
-		//			}
-		//			else
-		//				foreach(var declaration in importedNamespace.Declarations)
-		//					existingSymbol.AddDeclaration(declaration);
+	//	//		var importedNamespace = child as Symbol<NamespaceDeclarationContext>;
+	//	//		if(importedNamespace != null)
+	//	//		{
+	//	//			var existingSymbol = Lookup(importedNamespace.Name) as Symbol<NamespaceDeclarationContext>;
+	//	//			if(existingSymbol == null)
+	//	//			{
+	//	//				existingSymbol = new Symbol<NamespaceDeclarationContext>(this, importedNamespace.Name, importedNamespace.Declarations, false);
+	//	//				AddImportedChild(existingSymbol);
+	//	//			}
+	//	//			else
+	//	//				foreach(var declaration in importedNamespace.Declarations)
+	//	//					existingSymbol.AddDeclaration(declaration);
 
-		//			foreach(var nsChild in importedNamespace.Children)
-		//				existingSymbol.Import(nsChild);
-		//		}
-		//		else
-		//			AddImportedChild(child);
-		//	}
-	}
+	//	//			foreach(var nsChild in importedNamespace.Children)
+	//	//				existingSymbol.Import(nsChild);
+	//	//		}
+	//	//		else
+	//	//			AddImportedChild(child);
+	//	//	}
+	//}
 }

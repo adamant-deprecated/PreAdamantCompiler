@@ -21,7 +21,6 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public new T Root { get; }
 
-
 		public SyntaxTree(T root, IEnumerable<Diagnostic> diagnostics)
 			: base(root, diagnostics)
 		{

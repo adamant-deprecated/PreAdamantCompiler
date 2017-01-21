@@ -6,23 +6,56 @@ namespace PreAdamant.Compiler.Semantics
 {
 	public abstract class NameBinder
 	{
-		protected RuleBuilder<T> For<T>()
-			where T : SyntaxNode
+		private readonly IList<Namespace> namespaces = new List<Namespace>();
+		private readonly Dictionary<Type, Func<ISyntax, SymbolBuilder>> definitionActions = new Dictionary<Type, Func<ISyntax, SymbolBuilder>>();
+
+		public Symbol BuildSymbols(PackageSyntax syntax)
 		{
-			throw new System.NotImplementedException();
+			return BuildSymbols(syntax, null);
+		}
+
+		private Symbol BuildSymbols(ISyntax syntax, SymbolBuilder parentSymbol)
+		{
+			var syntaxType = syntax.GetType();
+			Func<ISyntax, SymbolBuilder> buildDefinition;
+			SymbolBuilder symbol = null;
+			if(definitionActions.TryGetValue(syntaxType, out buildDefinition))
+				symbol = buildDefinition(syntax);
+
+			foreach(var child in syntax.Children)
+			{
+			}
+
+			return symbol.Build();
+		}
+
+		protected RuleBuilder<T> For<T>()
+			where T : ISyntax
+		{
+			return new RuleBuilder<T>(this);
 		}
 
 		protected Namespace CreateNamespace(string name)
 		{
-			throw new System.NotImplementedException();
+			var ns = new Namespace(name);
+			namespaces.Add(ns);
+			return ns;
 		}
 
 		protected class RuleBuilder<T>
-			where T : SyntaxNode
+			where T : ISyntax
 		{
-			public RuleBuilder<T> Define(Func<T, Symbol<T>> action, bool unique)
+			private readonly NameBinder nameBinder;
+
+			public RuleBuilder(NameBinder nameBinder)
 			{
-				throw new NotImplementedException();
+				this.nameBinder = nameBinder;
+			}
+
+			public RuleBuilder<T> Define(Func<T, SymbolBuilder> action, bool unique)
+			{
+				nameBinder.definitionActions.Add(typeof(T), s=> action((T)s));
+				return this;
 			}
 
 			public RuleBuilder<T> Scope(params Namespace[] namespaces)
@@ -38,7 +71,19 @@ namespace PreAdamant.Compiler.Semantics
 
 		protected class Namespace
 		{
-			public Symbol Of(string name, IEnumerable<object> parameterTypes)
+			private readonly string name;
+
+			public Namespace(string name)
+			{
+				this.name = name;
+			}
+
+			public SymbolBuilder Of(string name, IEnumerable<object> parameterTypes)
+			{
+				throw new NotImplementedException();
+			}
+
+			public SymbolBuilder Of(string name)
 			{
 				throw new NotImplementedException();
 			}

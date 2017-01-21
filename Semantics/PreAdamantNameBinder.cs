@@ -7,31 +7,40 @@ namespace PreAdamant.Compiler.Semantics
 	{
 		public PreAdamantNameBinder()
 		{
+			var package = CreateNamespace("Package");
 			var @namespace = CreateNamespace("Namespace");
 			var entity = CreateNamespace("Entity");
 			var member = CreateNamespace("Member");
 			var constructor = CreateNamespace("Constructor");
 			var variable = CreateNamespace("Variable");
 
-			For<UsingDirectiveSyntax>()
-				.Import(syntax =>
-				{
-					//var ns = syntax.NamespaceName;
-					//var n = ResolveReference(syntax, @namespace, ns);
-					//return ResolveReference(n, entity);
-					throw new NotImplementedException();
-				});
-
-			For<ClassDeclarationSyntax>()
+			For<PackageSyntax>()
 				.Define(syntax =>
 				{
-					//var c = syntax.ClassName;
-					//var p = syntax.TypeParameters;
-					//var t = TypeOf(p);
-					//return entity.Of(c, t);
-					throw new NotImplementedException();
-				}, true)
-				.Scope(entity, member, constructor);
+					var name = syntax.Name;
+					return package.Of(name);
+				}, true);
+
+			//For<UsingDirectiveSyntax>()
+			//	.Import(syntax =>
+			//	{
+			//		//var ns = syntax.NamespaceName;
+			//		//var n = ResolveReference(syntax, @namespace, ns);
+			//		//return ResolveReference(n, entity);
+			//		throw new NotImplementedException();
+			//	});
+
+			//For<ClassDeclarationSyntax>()
+			//	.Define(syntax =>
+			//	{
+			//		var c = syntax.ClassName;
+			//		//var p = syntax.TypeParameters;
+			//		//var t = TypeOf(p);
+			//		return entity.Of(c);
+			//		//return entity.Of(c, t);
+			//		throw new NotImplementedException();
+			//	}, true)
+			//	.Scope(entity, member, constructor);
 		}
 	}
 }

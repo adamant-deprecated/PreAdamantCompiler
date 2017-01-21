@@ -46,6 +46,7 @@
     <Compile Include="Antlr\PreAdamantLexer_Antlr.partial.cs" />
     <Compile Include="Antlr\GatherErrorsListener.cs" />
     <Compile Include="ISyntax.cs" />
+    <Compile Include="ISyntaxNode.cs" />
     <Compile Include="KeywordToken.cs" />
     <Compile Include="PackageReferenceSyntax.cs" />
     <Compile Include="PackageSyntax.cs" />

@@ -32,7 +32,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 			source.WriteLine();
 			source.WriteIndentedLine("// Package Declaration");
-			//source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
+			source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
 			source.BeginBlock();
 			//EmitDeclaration(source, package.Symbol.Children);
 			source.EndBlock();
@@ -49,7 +49,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			return source.ToString();
 		}
 
-		//	#region EmitDeclaration
+		#region EmitDeclaration
 		//	private static void EmitDeclaration(SourceFileBuilder source, IEnumerable<Symbol> symbols)
 		//	{
 		//		foreach(var symbol in symbols)
@@ -99,9 +99,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//				})
 		//				.Exhaustive();
 		//	}
-		//	#endregion
+		#endregion
 
-		//	#region EmitDefinition
+		#region EmitDefinition
 		//	private static void EmitDefinition(SourceFileBuilder source, IEnumerable<Symbol> symbols)
 		//	{
 		//		foreach(var symbol in symbols)
@@ -172,9 +172,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//			})
 		//			.Exhaustive();
 		//	}
-		//	#endregion
+		#endregion
 
-		//	#region CodeFor
+		#region CodeFor
 		//	private static string CodeFor(ExpressionContext expression)
 		//	{
 		//		return expression.Match().Returning<string>()
@@ -255,9 +255,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//			result += " = " + CodeFor(expression);
 		//		return result;
 		//	}
-		//	#endregion
+		#endregion
 
-		//	#region Names
+		#region Names
 		//	private static string QualifiedName(Symbol symbol)
 		//	{
 		//		Requires.NotNull(symbol, nameof(symbol));
@@ -270,13 +270,13 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//			.Any(() => QualifiedName(symbol.Parent) + "::" + symbol.Name);
 		//	}
 
-		//	private static string PackageName(Symbol symbol)
-		//	{
-		//		return symbol.Name.Replace(".", "__");
-		//	}
-		//	#endregion
+		private static string PackageName(Symbol symbol)
+		{
+			return symbol.Name.Replace(".", "__");
+		}
+		#endregion
 
-		//	#region Signatures
+		#region Signatures
 		//	private static string Signature(FunctionDeclarationContext func)
 		//	{
 		//		var @params = func.Parameters.Cast<NamedParameterContext>().Select(Signature);
@@ -348,9 +348,9 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//				throw new NotSupportedException($"Access modifier {accessModifier.token.Text} ({accessModifier.token.Type}) not supported");
 		//		}
 		//	}
-		//	#endregion
+		#endregion
 
-		//	#region TypeNames
+		#region TypeNames
 		//	private static string TypeName(ReturnTypeContext type, bool isMutable)
 		//	{
 		//		if(type.type() != null)
@@ -450,7 +450,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//			})
 		//			.Exhaustive();
 		//	}
-		//	#endregion
+		#endregion
 
 		private void EmitEntryPoint(SourceFileBuilder source)
 		{

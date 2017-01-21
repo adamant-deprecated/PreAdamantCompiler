@@ -9,7 +9,7 @@ namespace PreAdamant.Compiler.Syntax
 {
 	internal partial class PreAdamantSyntaxTransformer
 	{
-		private static readonly IReadOnlyList<ISyntax> NoChildren = new List<ISyntax>();
+		private static readonly IReadOnlyList<ISyntaxNode> NoChildren = new List<ISyntaxNode>();
 
 		private readonly IReadOnlyList<IToken> tokens;
 		private readonly PreAdamantTokenTransformer tokenTransformer;
@@ -25,9 +25,9 @@ namespace PreAdamant.Compiler.Syntax
 			return (CompilationUnitSyntax)compilationUnit.Accept(this);
 		}
 
-		private List<ISyntax> InterleaveTriva(IReadOnlyList<ISyntax> children)
+		private List<ISyntaxNode> InterleaveTriva(IReadOnlyList<ISyntaxNode> children)
 		{
-			var allChildren = new List<ISyntax>(children);
+			var allChildren = new List<ISyntaxNode>(children);
 			for(var i = allChildren.Count - 1; i > 0; i--)
 			{
 				var triviaTokens = GetTokensInSpan(allChildren[i - 1].SourceSpan.End, allChildren[i].SourceSpan.Start);
@@ -49,22 +49,22 @@ namespace PreAdamant.Compiler.Syntax
 			}
 		}
 
-		ISyntax IParseTreeVisitor<ISyntax>.Visit(IParseTree tree)
+		ISyntaxNode IParseTreeVisitor<ISyntaxNode>.Visit(IParseTree tree)
 		{
 			throw new NotSupportedException();
 		}
 
-		ISyntax IParseTreeVisitor<ISyntax>.VisitChildren(IRuleNode node)
+		ISyntaxNode IParseTreeVisitor<ISyntaxNode>.VisitChildren(IRuleNode node)
 		{
 			throw new NotSupportedException();
 		}
 
-		ISyntax IParseTreeVisitor<ISyntax>.VisitTerminal(ITerminalNode node)
+		ISyntaxNode IParseTreeVisitor<ISyntaxNode>.VisitTerminal(ITerminalNode node)
 		{
 			return tokenTransformer.Transform(node.Symbol);
 		}
 
-		ISyntax IParseTreeVisitor<ISyntax>.VisitErrorNode(IErrorNode node)
+		ISyntaxNode IParseTreeVisitor<ISyntaxNode>.VisitErrorNode(IErrorNode node)
 		{
 			throw new NotSupportedException();
 		}

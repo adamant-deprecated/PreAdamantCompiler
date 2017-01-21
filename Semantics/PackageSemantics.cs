@@ -11,12 +11,13 @@ namespace PreAdamant.Compiler.Semantics
 	{
 		public string Name => Syntax.Name;
 		public PackageSyntax Syntax { get; }
-		//	public Symbol<PackageContext> Symbol { get; set; }
+		public Symbol Symbol { get;  }
 		public IReadOnlyList<Diagnostic> Diagnostics => Syntax.Diagnostics; // TODO have semantic errors too
 
-		public PackageSemantics(PackageSyntax syntax)
+		public PackageSemantics(PackageSyntax syntax, Symbol package)
 		{
 			Syntax = syntax;
+			Symbol = package;
 		}
 	}
 }

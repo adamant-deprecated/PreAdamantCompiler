@@ -4,14 +4,15 @@ using PreAdamant.Compiler.Core;
 
 namespace PreAdamant.Compiler.Syntax
 {
-	public class SyntaxToken : ISyntax
+	public class SyntaxToken : ISyntaxNode
 	{
 		public ISourceText Source { get; }
 		public TextSpan SourceSpan { get; }
 		public string Text { get; }
 		public bool IsPoisoned { get; private set; }
 		public bool IsTrivia { get; }
-		public IReadOnlyList<ISyntax> Children => Syntax.NoChildren;
+		IReadOnlyList<ISyntaxNode> ISyntaxNode.Children => Syntax.NoChildren;
+		IReadOnlyList<ISyntax> ISyntax.Children => Syntax.NoChildren;
 
 		protected SyntaxToken(ISourceText source, int startIndex, int stopIndex, PreAdamantLexer.Channel channel, string text)
 		{
