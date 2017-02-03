@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Semantics;

@@ -475,6 +475,13 @@ namespace PreAdamant.Compiler.Syntax
 			return allChildren.Any() ? new OverloadableOperatorSyntax(allChildren) : new OverloadableOperatorSyntax(context.Start.StartIndex);
 		}
 
+		ISyntaxNode IPreAdamantParser_AntlrVisitor<ISyntaxNode>.VisitBlock(PreAdamantParser_Antlr.BlockContext context)
+		{
+			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;
+			var allChildren = InterleaveTriva(children);
+			return allChildren.Any() ? new BlockSyntax(allChildren) : new BlockSyntax(context.Start.StartIndex);
+		}
+
 		ISyntaxNode IPreAdamantParser_AntlrVisitor<ISyntaxNode>.VisitVariableDeclarationStatement(PreAdamantParser_Antlr.VariableDeclarationStatementContext context)
 		{
 			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;

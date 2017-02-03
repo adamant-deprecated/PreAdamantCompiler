@@ -1096,6 +1096,21 @@ namespace PreAdamant.Compiler.Syntax
 		}
 	}
 
+	public partial class BlockSyntax : SyntaxNode
+	{
+		public IReadOnlyList<StatementSyntax> Statements { get; }
+
+		public BlockSyntax(IEnumerable<ISyntaxNode> allChildren)
+			: base(allChildren)
+		{
+		}
+
+		public BlockSyntax(int offset)
+			: base(offset)
+		{
+		}
+	}
+
 	public partial class VariableDeclarationStatementSyntax : StatementSyntax
 	{
 		public LocalVariableDeclarationSyntax LocalVariableDeclaration { get; }
@@ -1128,7 +1143,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class BlockStatementSyntax : StatementSyntax
 	{
-		public IReadOnlyList<StatementSyntax> Statements { get; }
+		public BlockSyntax Block { get; }
 
 		public BlockStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
@@ -1202,8 +1217,8 @@ namespace PreAdamant.Compiler.Syntax
 	public partial class IfStatementSyntax : StatementSyntax
 	{
 		public ExpressionSyntax Condition { get; }
-		public StatementSyntax Then { get; }
-		public StatementSyntax Else { get; }
+		public BlockSyntax Then { get; }
+		public BlockSyntax Else { get; }
 
 		public IfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
@@ -1219,8 +1234,8 @@ namespace PreAdamant.Compiler.Syntax
 	public partial class LetIfStatementSyntax : StatementSyntax
 	{
 		public LocalVariableDeclarationSyntax LocalVariableDeclaration { get; }
-		public StatementSyntax Then { get; }
-		public StatementSyntax Else { get; }
+		public BlockSyntax Then { get; }
+		public BlockSyntax Else { get; }
 
 		public LetIfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
@@ -1236,7 +1251,7 @@ namespace PreAdamant.Compiler.Syntax
 	public partial class ForStatementSyntax : StatementSyntax
 	{
 		public ExpressionSyntax Expression { get; }
-		public StatementSyntax Statement { get; }
+		public BlockSyntax Block { get; }
 
 		public ForStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
@@ -1252,7 +1267,7 @@ namespace PreAdamant.Compiler.Syntax
 	public partial class WhileStatementSyntax : StatementSyntax
 	{
 		public ExpressionSyntax Expression { get; }
-		public StatementSyntax Statement { get; }
+		public BlockSyntax Block { get; }
 
 		public WhileStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)

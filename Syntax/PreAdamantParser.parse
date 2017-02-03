@@ -131,17 +131,19 @@ noMethodBody: methodBody = ";";
 overloadableOperator = "*" | "&" | "or" | "and" | "xor" | "?" | "??" | "." | "[" "]" | "|" "|";
 
 // statement
+block = "{" statement* "}";
+
 variableDeclarationStatement: statement = localVariableDeclaration ";";
 unsafeBlockStatement: statement = "unsafe" "{" statement* "}";
-blockStatement: statement = "{" statement* "}";
+blockStatement: statement = block;
 emptyStatement: statement = ";";
 expressionStatement: statement = expression ";";
 returnStatement: statement = "return" expression? ";";
 throwStatement: statement = "throw" expression ";";
-ifStatement: statement = "if" "(" condition:expression ")" then:statement ("else" else:statement)?;
-letIfStatement: statement = "if" "(" localVariableDeclaration ")" then:statement ("else" else:statement)?;
-forStatement: statement = "for" "(" (localVariableDeclaration|"_") "in" expression ")" statement;
-whileStatement: statement = "while" "(" expression ")" statement;
+ifStatement: statement = "if" condition:expression then:block ("else" else:block)?;
+letIfStatement: statement = "if" localVariableDeclaration then:block ("else" else:block)?;
+forStatement: statement = "for" (localVariableDeclaration|"_") "in" expression block;
+whileStatement: statement = "while" expression block;
 deleteStatement: statement = "delete" expression ";";
 continueStatement: statement = "continue" ";";
 

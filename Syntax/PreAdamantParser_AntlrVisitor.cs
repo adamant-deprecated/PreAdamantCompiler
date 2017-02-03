@@ -205,6 +205,12 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <return>The visitor result.</return>
 	Result VisitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBlock([NotNull] PreAdamantParser_Antlr.BlockContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>namespaceDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.declaration"/>.
 	/// </summary>

@@ -323,6 +323,16 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitBlock([NotNull] PreAdamantParser_Antlr.BlockContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.namespaceDeclaration"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>

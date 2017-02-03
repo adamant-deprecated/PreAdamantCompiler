@@ -36,6 +36,7 @@ genericConstraint: typeName | 'class' | 'struct' | 'copy' '(' ')';
 constructorInitializer: ':' ('base' | 'self') '(' argumentList ')';
 argumentList: ((expressions+=expression(','expressions+=expression)*)?);
 overloadableOperator: '*' | '&' | 'or' | 'and' | 'xor' | '?' | '??' | '.' | '[' ']' | '|' '|';
+block: '{' (statement*) '}';
 
 // Labeled Alternatives Rules
 declaration
@@ -112,15 +113,15 @@ methodBody
 statement
 	: localVariableDeclaration ';' #variableDeclarationStatement
 	| 'unsafe' '{' (statement*) '}' #unsafeBlockStatement
-	| '{' (statement*) '}' #blockStatement
+	| block #blockStatement
 	| ';' #emptyStatement
 	| expression ';' #expressionStatement
 	| 'return' (expression?) ';' #returnStatement
 	| 'throw' expression ';' #throwStatement
-	| 'if' '(' condition=expression ')' then=statement (('else' else=statement)?) #ifStatement
-	| 'if' '(' localVariableDeclaration ')' then=statement (('else' else=statement)?) #letIfStatement
-	| 'for' '(' (localVariableDeclaration | '_') 'in' expression ')' statement #forStatement
-	| 'while' '(' expression ')' statement #whileStatement
+	| 'if' condition=expression then=block (('else' else=block)?) #ifStatement
+	| 'if' localVariableDeclaration then=block (('else' else=block)?) #letIfStatement
+	| 'for' (localVariableDeclaration | '_') 'in' expression block #forStatement
+	| 'while' expression block #whileStatement
 	| 'delete' expression ';' #deleteStatement
 	| 'continue' ';' #continueStatement
 	;

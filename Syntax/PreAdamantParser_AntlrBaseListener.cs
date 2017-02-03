@@ -382,6 +382,18 @@ public partial class PreAdamantParser_AntlrBaseListener : IPreAdamantParser_Antl
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBlock([NotNull] PreAdamantParser_Antlr.BlockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBlock([NotNull] PreAdamantParser_Antlr.BlockContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.namespaceDeclaration"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

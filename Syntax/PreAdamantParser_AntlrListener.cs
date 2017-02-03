@@ -320,6 +320,16 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitOverloadableOperator([NotNull] PreAdamantParser_Antlr.OverloadableOperatorContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBlock([NotNull] PreAdamantParser_Antlr.BlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBlock([NotNull] PreAdamantParser_Antlr.BlockContext context);
+	/// <summary>
 	/// Enter a parse tree produced by the <c>namespaceDeclaration</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.declaration"/>.
 	/// </summary>
