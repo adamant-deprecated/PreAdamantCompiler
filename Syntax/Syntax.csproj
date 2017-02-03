@@ -90,6 +90,7 @@
       <DependentUpon>PreAdamantParser.parse</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PreAdamantParser.Syntax.partial.cs" />
     <Compile Include="Syntax.cs" />
     <Compile Include="SyntaxNode.cs" />
     <Compile Include="SyntaxToken.cs" />

@@ -34,12 +34,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			source.WriteIndentedLine("// Package Declaration");
 			source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
 			source.BeginBlock();
-			//EmitDeclaration(source, package.Symbol.Children);
+			EmitDeclaration(source, package.Symbol.Children);
 			source.EndBlock();
 
 			source.WriteLine();
 			source.WriteIndentedLine("// Package Definition");
-			//source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
+			source.WriteIndentedLine($"namespace {PackageName(package.Symbol)}");
 			source.BeginBlock();
 			//EmitDefinition(source, package.Symbol.Children);
 			source.EndBlock();
@@ -50,55 +50,55 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		}
 
 		#region EmitDeclaration
-		//	private static void EmitDeclaration(SourceFileBuilder source, IEnumerable<Symbol> symbols)
-		//	{
-		//		foreach(var symbol in symbols)
-		//			symbol.Match()
-		//				.With<Symbol<NamespaceDeclarationContext>>(nsSymbol =>
-		//				{
-		//					source.WriteIndentedLine($"namespace {nsSymbol.Name}");
-		//					source.BeginBlock();
-		//					EmitDeclaration(source, nsSymbol.Children);
-		//					source.EndBlock();
-		//				})
-		//				.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
-		//				{
-		//					var func = funcSymbol.Declarations.Single();
-		//					source.WriteIndentedLine(Signature(func) + ";");
-		//				})
-		//				.With<Symbol<ClassDeclarationContext>>(classSymbol =>
-		//				{
-		//					var @class = classSymbol.Declarations.Single();
-		//					source.WriteIndentedLine(Signature(@class));
-		//					source.BeginBlock();
-		//					EmitDeclaration(source, classSymbol.Children);
-		//					source.EndBlockWithSemicolon();
-		//				})
-		//				.With<Symbol<StructDeclarationContext>>(structSymbol =>
-		//				{
-		//					var @struct = structSymbol.Declarations.Single();
-		//					source.WriteIndentedLine(Signature(@struct));
-		//					source.BeginBlock();
-		//					EmitDeclaration(source, structSymbol.Children);
-		//					source.EndBlockWithSemicolon();
-		//				})
-		//				.With<Symbol<MethodContext>>(methodSymbol =>
-		//				{
-		//					var method = methodSymbol.Declarations.Single();
-		//					source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method, false)};");
-		//				})
-		//				.With<Symbol<ConstructorContext>>(constructorSymbol =>
-		//				{
-		//					var constructor = constructorSymbol.Declarations.Single();
-		//					source.WriteIndentedLine($"{Signature(constructor.accessModifier())}: {Signature(constructor, false)};");
-		//				})
-		//				.With<Symbol<FieldContext>>(fieldSymbol =>
-		//				{
-		//					var field = fieldSymbol.Declarations.Single();
-		//					source.WriteIndentedLine($"{Signature(field.accessModifier())}: {TypeName(field.valueType(), field.IsMutable)} {field.identifier().Name};");
-		//				})
-		//				.Exhaustive();
-		//	}
+		private static void EmitDeclaration(SourceFileBuilder source, IEnumerable<Symbol> symbols)
+		{
+			//foreach(var symbol in symbols)
+			//	symbol.Match()
+			//		.With<Symbol<NamespaceDeclarationContext>>(nsSymbol =>
+			//		{
+			//			source.WriteIndentedLine($"namespace {nsSymbol.Name}");
+			//			source.BeginBlock();
+			//			EmitDeclaration(source, nsSymbol.Children);
+			//			source.EndBlock();
+			//		})
+			//		.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
+			//		{
+			//			var func = funcSymbol.Declarations.Single();
+			//			source.WriteIndentedLine(Signature(func) + ";");
+			//		})
+			//		.With<Symbol<ClassDeclarationContext>>(classSymbol =>
+			//		{
+			//			var @class = classSymbol.Declarations.Single();
+			//			source.WriteIndentedLine(Signature(@class));
+			//			source.BeginBlock();
+			//			EmitDeclaration(source, classSymbol.Children);
+			//			source.EndBlockWithSemicolon();
+			//		})
+			//		.With<Symbol<StructDeclarationContext>>(structSymbol =>
+			//		{
+			//			var @struct = structSymbol.Declarations.Single();
+			//			source.WriteIndentedLine(Signature(@struct));
+			//			source.BeginBlock();
+			//			EmitDeclaration(source, structSymbol.Children);
+			//			source.EndBlockWithSemicolon();
+			//		})
+			//		.With<Symbol<MethodContext>>(methodSymbol =>
+			//		{
+			//			var method = methodSymbol.Declarations.Single();
+			//			source.WriteIndentedLine($"{Signature(method.accessModifier())}: {Signature(method, false)};");
+			//		})
+			//		.With<Symbol<ConstructorContext>>(constructorSymbol =>
+			//		{
+			//			var constructor = constructorSymbol.Declarations.Single();
+			//			source.WriteIndentedLine($"{Signature(constructor.accessModifier())}: {Signature(constructor, false)};");
+			//		})
+			//		.With<Symbol<FieldContext>>(fieldSymbol =>
+			//		{
+			//			var field = fieldSymbol.Declarations.Single();
+			//			source.WriteIndentedLine($"{Signature(field.accessModifier())}: {TypeName(field.valueType(), field.IsMutable)} {field.identifier().Name};");
+			//		})
+			//		.Exhaustive();
+		}
 		#endregion
 
 		#region EmitDefinition

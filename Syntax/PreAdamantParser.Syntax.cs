@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PreAdamant.Compiler.Syntax
 {
@@ -10,6 +11,8 @@ namespace PreAdamant.Compiler.Syntax
 		public CompilationUnitSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			UsingDirectives = Children.OfType<UsingDirectiveSyntax>().ToList();
+			Declarations = Children.OfType<DeclarationSyntax>().ToList();
 		}
 
 		public CompilationUnitSyntax(int offset)
@@ -25,6 +28,7 @@ namespace PreAdamant.Compiler.Syntax
 		public UsingDirectiveSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			NamespaceName = Children.OfType<NamespaceNameSyntax>().SingleOrDefault();
 		}
 
 		public UsingDirectiveSyntax(int offset)
@@ -53,6 +57,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NamespaceNameSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Identifiers = Children.OfType<IdentifierSyntax>().ToList();
 		}
 
 		public NamespaceNameSyntax(int offset)
@@ -70,6 +75,9 @@ namespace PreAdamant.Compiler.Syntax
 		public NamespaceDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			NamespaceName = Children.OfType<NamespaceNameSyntax>().SingleOrDefault();
+			UsingDirectives = Children.OfType<UsingDirectiveSyntax>().ToList();
+			Declarations = Children.OfType<DeclarationSyntax>().ToList();
 		}
 
 		public NamespaceDeclarationSyntax(int offset)
@@ -93,6 +101,15 @@ namespace PreAdamant.Compiler.Syntax
 		public ClassDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			ClassInheritanceModifier = Children.OfType<ClassInheritanceModifierSyntax>().SingleOrDefault();
+			ClassName = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeParameters = Children.OfType<TypeParametersSyntax>().SingleOrDefault();
+			BaseTypes = Children.OfType<BaseTypesSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Members = Children.OfType<MemberSyntax>().ToList();
 		}
 
 		public ClassDeclarationSyntax(int offset)
@@ -115,6 +132,14 @@ namespace PreAdamant.Compiler.Syntax
 		public StructDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			StructName = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeParameters = Children.OfType<TypeParametersSyntax>().SingleOrDefault();
+			BaseTypes = Children.OfType<BaseTypesSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Members = Children.OfType<MemberSyntax>().ToList();
 		}
 
 		public StructDeclarationSyntax(int offset)
@@ -134,6 +159,11 @@ namespace PreAdamant.Compiler.Syntax
 		public VariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public VariableDeclarationSyntax(int offset)
@@ -159,6 +189,17 @@ namespace PreAdamant.Compiler.Syntax
 		public FunctionDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			AsyncModifier = Children.OfType<AsyncModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public FunctionDeclarationSyntax(int offset)
@@ -174,6 +215,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExternalBlockDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Declarations = Children.OfType<DeclarationSyntax>().ToList();
 		}
 
 		public ExternalBlockDeclarationSyntax(int offset)
@@ -189,6 +231,7 @@ namespace PreAdamant.Compiler.Syntax
 		public PreconditionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public PreconditionSyntax(int offset)
@@ -204,6 +247,7 @@ namespace PreAdamant.Compiler.Syntax
 		public PostconditionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public PostconditionSyntax(int offset)
@@ -220,6 +264,8 @@ namespace PreAdamant.Compiler.Syntax
 		public AttributeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public AttributeSyntax(int offset)
@@ -236,6 +282,8 @@ namespace PreAdamant.Compiler.Syntax
 		public BaseTypesSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			BaseType = Children.OfType<NameSyntax>().SingleOrDefault();
+			Interfaces = Children.OfType<NameSyntax>().ToList();
 		}
 
 		public BaseTypesSyntax(int offset)
@@ -329,6 +377,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeParametersSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeParameters = Children.OfType<TypeParameterSyntax>().ToList();
 		}
 
 		public TypeParametersSyntax(int offset)
@@ -357,6 +406,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeArgumentsSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Types = Children.OfType<TypeSyntax>().ToList();
 		}
 
 		public TypeArgumentsSyntax(int offset)
@@ -385,6 +435,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IdentifierNameSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IdentifierOrPredefinedType = Children.OfType<IdentifierOrPredefinedTypeSyntax>().SingleOrDefault();
 		}
 
 		public IdentifierNameSyntax(int offset)
@@ -401,6 +452,8 @@ namespace PreAdamant.Compiler.Syntax
 		public GenericNameSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IdentifierOrPredefinedType = Children.OfType<IdentifierOrPredefinedTypeSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
 		}
 
 		public GenericNameSyntax(int offset)
@@ -416,6 +469,7 @@ namespace PreAdamant.Compiler.Syntax
 		public UnqualifiedNameSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			SimpleName = Children.OfType<SimpleNameSyntax>().SingleOrDefault();
 		}
 
 		public UnqualifiedNameSyntax(int offset)
@@ -432,6 +486,8 @@ namespace PreAdamant.Compiler.Syntax
 		public QualifiedNameSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			LeftName = Children.OfType<NameSyntax>().SingleOrDefault();
+			RightName = Children.OfType<SimpleNameSyntax>().SingleOrDefault();
 		}
 
 		public QualifiedNameSyntax(int offset)
@@ -447,6 +503,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NamedTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Name = Children.OfType<NameSyntax>().SingleOrDefault();
 		}
 
 		public NamedTypeSyntax(int offset)
@@ -462,6 +519,7 @@ namespace PreAdamant.Compiler.Syntax
 		public MaybeTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public MaybeTypeSyntax(int offset)
@@ -477,6 +535,7 @@ namespace PreAdamant.Compiler.Syntax
 		public PointerTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public PointerTypeSyntax(int offset)
@@ -506,6 +565,8 @@ namespace PreAdamant.Compiler.Syntax
 		public FunctionTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			FuncTypeParameterList = Children.OfType<FuncTypeParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
 		}
 
 		public FunctionTypeSyntax(int offset)
@@ -522,6 +583,8 @@ namespace PreAdamant.Compiler.Syntax
 		public LifetimeTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lifetime = Children.OfType<LifetimeSyntax>().SingleOrDefault();
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public LifetimeTypeSyntax(int offset)
@@ -537,6 +600,7 @@ namespace PreAdamant.Compiler.Syntax
 		public RefTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public RefTypeSyntax(int offset)
@@ -591,6 +655,7 @@ namespace PreAdamant.Compiler.Syntax
 		public FuncTypeParameterListSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			FuncTypeParameters = Children.OfType<FuncTypeParameterSyntax>().ToList();
 		}
 
 		public FuncTypeParameterListSyntax(int offset)
@@ -607,6 +672,8 @@ namespace PreAdamant.Compiler.Syntax
 		public FuncTypeParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			ParameterModifiers = Children.OfType<ParameterModifierSyntax>().ToList();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
 		}
 
 		public FuncTypeParameterSyntax(int offset)
@@ -636,6 +703,8 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeParameterBoundConstraintClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
+			TypeParameterConstraints = Children.OfType<TypeParameterConstraintSyntax>().ToList();
 		}
 
 		public TypeParameterBoundConstraintClauseSyntax(int offset)
@@ -652,6 +721,8 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeParameterRangeConstraintClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
+			IntLiteral = Children.OfType<IntLiteralToken>().SingleOrDefault();
 		}
 
 		public TypeParameterRangeConstraintClauseSyntax(int offset)
@@ -680,6 +751,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public TypeConstraintSyntax(int offset)
@@ -695,6 +767,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeListParameterConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
 		}
 
 		public TypeListParameterConstraintSyntax(int offset)
@@ -719,6 +792,16 @@ namespace PreAdamant.Compiler.Syntax
 		public ConstructorSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			WhereClauses = Children.OfType<WhereClauseSyntax>().ToList();
+			ConstructorInitializer = Children.OfType<ConstructorInitializerSyntax>().SingleOrDefault();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public ConstructorSyntax(int offset)
@@ -743,6 +826,16 @@ namespace PreAdamant.Compiler.Syntax
 		public CopyConstructorSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			ExplicitModifier = Children.OfType<ExplicitModifierSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			WhereClauses = Children.OfType<WhereClauseSyntax>().ToList();
+			ConstructorInitializer = Children.OfType<ConstructorInitializerSyntax>().SingleOrDefault();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public CopyConstructorSyntax(int offset)
@@ -762,6 +855,11 @@ namespace PreAdamant.Compiler.Syntax
 		public DestructorSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public DestructorSyntax(int offset)
@@ -786,6 +884,16 @@ namespace PreAdamant.Compiler.Syntax
 		public ConversionMethodSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			ExplicitModifier = Children.OfType<ExplicitModifierSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public ConversionMethodSyntax(int offset)
@@ -805,6 +913,11 @@ namespace PreAdamant.Compiler.Syntax
 		public FieldSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public FieldSyntax(int offset)
@@ -831,6 +944,18 @@ namespace PreAdamant.Compiler.Syntax
 		public AccessorSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			MethodInheritanceModifier = Children.OfType<MethodInheritanceModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			AsyncModifier = Children.OfType<AsyncModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public AccessorSyntax(int offset)
@@ -856,6 +981,17 @@ namespace PreAdamant.Compiler.Syntax
 		public IndexerSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			MethodInheritanceModifier = Children.OfType<MethodInheritanceModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			AsyncModifier = Children.OfType<AsyncModifierSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public IndexerSyntax(int offset)
@@ -882,6 +1018,18 @@ namespace PreAdamant.Compiler.Syntax
 		public MethodSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			MethodInheritanceModifier = Children.OfType<MethodInheritanceModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			AsyncModifier = Children.OfType<AsyncModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public MethodSyntax(int offset)
@@ -907,6 +1055,17 @@ namespace PreAdamant.Compiler.Syntax
 		public OperatorOverloadSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			MethodInheritanceModifier = Children.OfType<MethodInheritanceModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			AsyncModifier = Children.OfType<AsyncModifierSyntax>().SingleOrDefault();
+			OverloadableOperator = Children.OfType<OverloadableOperatorSyntax>().SingleOrDefault();
+			ParameterList = Children.OfType<ParameterListSyntax>().SingleOrDefault();
+			ReturnType = Children.OfType<ReturnTypeSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Contracts = Children.OfType<ContractSyntax>().ToList();
+			MethodBody = Children.OfType<MethodBodySyntax>().SingleOrDefault();
 		}
 
 		public OperatorOverloadSyntax(int offset)
@@ -930,6 +1089,15 @@ namespace PreAdamant.Compiler.Syntax
 		public NestedClassDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Attributes = Children.OfType<AttributeSyntax>().ToList();
+			AccessModifier = Children.OfType<AccessModifierSyntax>().SingleOrDefault();
+			SafetyModifier = Children.OfType<SafetyModifierSyntax>().SingleOrDefault();
+			ClassInheritanceModifier = Children.OfType<ClassInheritanceModifierSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			TypeParameters = Children.OfType<TypeParametersSyntax>().SingleOrDefault();
+			BaseTypes = Children.OfType<BaseTypesSyntax>().SingleOrDefault();
+			TypeParameterConstraintClauses = Children.OfType<TypeParameterConstraintClauseSyntax>().ToList();
+			Members = Children.OfType<MemberSyntax>().ToList();
 		}
 
 		public NestedClassDeclarationSyntax(int offset)
@@ -945,6 +1113,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ParameterListSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Parameters = Children.OfType<ParameterSyntax>().ToList();
 		}
 
 		public ParameterListSyntax(int offset)
@@ -962,6 +1131,9 @@ namespace PreAdamant.Compiler.Syntax
 		public NamedParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Modifiers = Children.OfType<ParameterModifierSyntax>().ToList();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
 		}
 
 		public NamedParameterSyntax(int offset)
@@ -1004,6 +1176,8 @@ namespace PreAdamant.Compiler.Syntax
 		public WhereClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
+			Constraints = Children.OfType<GenericConstraintSyntax>().ToList();
 		}
 
 		public WhereClauseSyntax(int offset)
@@ -1032,6 +1206,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ConstructorInitializerSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public ConstructorInitializerSyntax(int offset)
@@ -1047,6 +1222,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ArgumentListSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expressions = Children.OfType<ExpressionSyntax>().ToList();
 		}
 
 		public ArgumentListSyntax(int offset)
@@ -1062,6 +1238,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BlockMethodBodySyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Statements = Children.OfType<StatementSyntax>().ToList();
 		}
 
 		public BlockMethodBodySyntax(int offset)
@@ -1103,6 +1280,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BlockSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Statements = Children.OfType<StatementSyntax>().ToList();
 		}
 
 		public BlockSyntax(int offset)
@@ -1118,6 +1296,7 @@ namespace PreAdamant.Compiler.Syntax
 		public VariableDeclarationStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			LocalVariableDeclaration = Children.OfType<LocalVariableDeclarationSyntax>().SingleOrDefault();
 		}
 
 		public VariableDeclarationStatementSyntax(int offset)
@@ -1133,6 +1312,7 @@ namespace PreAdamant.Compiler.Syntax
 		public UnsafeBlockStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Statements = Children.OfType<StatementSyntax>().ToList();
 		}
 
 		public UnsafeBlockStatementSyntax(int offset)
@@ -1148,6 +1328,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BlockStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Block = Children.OfType<BlockSyntax>().SingleOrDefault();
 		}
 
 		public BlockStatementSyntax(int offset)
@@ -1176,6 +1357,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ExpressionStatementSyntax(int offset)
@@ -1191,6 +1373,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ReturnStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ReturnStatementSyntax(int offset)
@@ -1206,6 +1389,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ThrowStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ThrowStatementSyntax(int offset)
@@ -1223,6 +1407,9 @@ namespace PreAdamant.Compiler.Syntax
 		public IfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Condition = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Then = Children.OfType<BlockSyntax>().SingleOrDefault();
+			Else = Children.OfType<BlockSyntax>().SingleOrDefault();
 		}
 
 		public IfStatementSyntax(int offset)
@@ -1240,6 +1427,9 @@ namespace PreAdamant.Compiler.Syntax
 		public LetIfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			LocalVariableDeclaration = Children.OfType<LocalVariableDeclarationSyntax>().SingleOrDefault();
+			Then = Children.OfType<BlockSyntax>().SingleOrDefault();
+			Else = Children.OfType<BlockSyntax>().SingleOrDefault();
 		}
 
 		public LetIfStatementSyntax(int offset)
@@ -1256,6 +1446,8 @@ namespace PreAdamant.Compiler.Syntax
 		public ForStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Block = Children.OfType<BlockSyntax>().SingleOrDefault();
 		}
 
 		public ForStatementSyntax(int offset)
@@ -1272,6 +1464,8 @@ namespace PreAdamant.Compiler.Syntax
 		public WhileStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Block = Children.OfType<BlockSyntax>().SingleOrDefault();
 		}
 
 		public WhileStatementSyntax(int offset)
@@ -1287,6 +1481,7 @@ namespace PreAdamant.Compiler.Syntax
 		public DeleteStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public DeleteStatementSyntax(int offset)
@@ -1317,6 +1512,9 @@ namespace PreAdamant.Compiler.Syntax
 		public SimpleLocalVariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public SimpleLocalVariableDeclarationSyntax(int offset)
@@ -1334,6 +1532,9 @@ namespace PreAdamant.Compiler.Syntax
 		public DestructureLocalVariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Identifiers = Children.OfType<IdentifierSyntax>().ToList();
+			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public DestructureLocalVariableDeclarationSyntax(int offset)
@@ -1349,6 +1550,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ParenthesizedExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ParenthesizedExpressionSyntax(int offset)
@@ -1364,6 +1566,7 @@ namespace PreAdamant.Compiler.Syntax
 		public MagnitudeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public MagnitudeExpressionSyntax(int offset)
@@ -1380,6 +1583,8 @@ namespace PreAdamant.Compiler.Syntax
 		public MemberExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
 		}
 
 		public MemberExpressionSyntax(int offset)
@@ -1395,6 +1600,7 @@ namespace PreAdamant.Compiler.Syntax
 		public PlacementDeleteExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public PlacementDeleteExpressionSyntax(int offset)
@@ -1411,6 +1617,8 @@ namespace PreAdamant.Compiler.Syntax
 		public DotDotExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public DotDotExpressionSyntax(int offset)
@@ -1427,6 +1635,8 @@ namespace PreAdamant.Compiler.Syntax
 		public ToExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			From = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			To = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ToExpressionSyntax(int offset)
@@ -1443,6 +1653,8 @@ namespace PreAdamant.Compiler.Syntax
 		public CallExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public CallExpressionSyntax(int offset)
@@ -1459,6 +1671,8 @@ namespace PreAdamant.Compiler.Syntax
 		public ArrayAccessExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public ArrayAccessExpressionSyntax(int offset)
@@ -1474,6 +1688,7 @@ namespace PreAdamant.Compiler.Syntax
 		public AwaitExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public AwaitExpressionSyntax(int offset)
@@ -1489,6 +1704,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NullCheckExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public NullCheckExpressionSyntax(int offset)
@@ -1504,6 +1720,7 @@ namespace PreAdamant.Compiler.Syntax
 		public UnaryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public UnaryExpressionSyntax(int offset)
@@ -1520,6 +1737,8 @@ namespace PreAdamant.Compiler.Syntax
 		public MultiplicativeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public MultiplicativeExpressionSyntax(int offset)
@@ -1536,6 +1755,8 @@ namespace PreAdamant.Compiler.Syntax
 		public AdditiveExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public AdditiveExpressionSyntax(int offset)
@@ -1552,6 +1773,8 @@ namespace PreAdamant.Compiler.Syntax
 		public ComparativeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public ComparativeExpressionSyntax(int offset)
@@ -1568,6 +1791,8 @@ namespace PreAdamant.Compiler.Syntax
 		public EqualityExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public EqualityExpressionSyntax(int offset)
@@ -1584,6 +1809,8 @@ namespace PreAdamant.Compiler.Syntax
 		public AndExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public AndExpressionSyntax(int offset)
@@ -1600,6 +1827,8 @@ namespace PreAdamant.Compiler.Syntax
 		public XorExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public XorExpressionSyntax(int offset)
@@ -1616,6 +1845,8 @@ namespace PreAdamant.Compiler.Syntax
 		public OrExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public OrExpressionSyntax(int offset)
@@ -1632,6 +1863,8 @@ namespace PreAdamant.Compiler.Syntax
 		public CoalesceExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public CoalesceExpressionSyntax(int offset)
@@ -1648,6 +1881,8 @@ namespace PreAdamant.Compiler.Syntax
 		public InExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public InExpressionSyntax(int offset)
@@ -1664,6 +1899,8 @@ namespace PreAdamant.Compiler.Syntax
 		public NewExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			PlacementArguments = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
+			ConstructorArguments = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public NewExpressionSyntax(int offset)
@@ -1680,6 +1917,8 @@ namespace PreAdamant.Compiler.Syntax
 		public NewMemoryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public NewMemoryExpressionSyntax(int offset)
@@ -1697,6 +1936,9 @@ namespace PreAdamant.Compiler.Syntax
 		public NewObjectExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			BaseTypes = Children.OfType<BaseTypesSyntax>().SingleOrDefault();
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
+			Members = Children.OfType<MemberSyntax>().ToList();
 		}
 
 		public NewObjectExpressionSyntax(int offset)
@@ -1712,6 +1954,7 @@ namespace PreAdamant.Compiler.Syntax
 		public DeleteMemoryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
 		}
 
 		public DeleteMemoryExpressionSyntax(int offset)
@@ -1728,6 +1971,8 @@ namespace PreAdamant.Compiler.Syntax
 		public CastExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
 		public CastExpressionSyntax(int offset)
@@ -1743,6 +1988,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public TryExpressionSyntax(int offset)
@@ -1760,6 +2006,9 @@ namespace PreAdamant.Compiler.Syntax
 		public IfExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Condition = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Then = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Else = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public IfExpressionSyntax(int offset)
@@ -1776,6 +2025,8 @@ namespace PreAdamant.Compiler.Syntax
 		public AssignmentExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Lvalue = Children.OfType<ExpressionSyntax>().SingleOrDefault();
+			Rvalue = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public AssignmentExpressionSyntax(int offset)
@@ -1804,6 +2055,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NameExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			SimpleName = Children.OfType<SimpleNameSyntax>().SingleOrDefault();
 		}
 
 		public NameExpressionSyntax(int offset)
@@ -1845,6 +2097,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BooleanLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			BooleanLiteral = Children.OfType<BooleanLiteralToken>().SingleOrDefault();
 		}
 
 		public BooleanLiteralExpressionSyntax(int offset)
@@ -1860,6 +2113,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IntLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IntLiteral = Children.OfType<IntLiteralToken>().SingleOrDefault();
 		}
 
 		public IntLiteralExpressionSyntax(int offset)
@@ -1888,6 +2142,7 @@ namespace PreAdamant.Compiler.Syntax
 		public StringLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			StringLiteral = Children.OfType<StringLiteralToken>().SingleOrDefault();
 		}
 
 		public StringLiteralExpressionSyntax(int offset)
@@ -1903,6 +2158,7 @@ namespace PreAdamant.Compiler.Syntax
 		public CharLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			CharLiteral = Children.OfType<CharLiteralToken>().SingleOrDefault();
 		}
 
 		public CharLiteralExpressionSyntax(int offset)
@@ -1918,6 +2174,7 @@ namespace PreAdamant.Compiler.Syntax
 		public UnsafeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
 		}
 
 		public UnsafeExpressionSyntax(int offset)

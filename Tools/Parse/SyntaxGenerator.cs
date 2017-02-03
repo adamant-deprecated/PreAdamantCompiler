@@ -11,6 +11,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 			var builder = new StringBuilder();
 
 			builder.AppendLine("using System.Collections.Generic;");
+			builder.AppendLine("using System.Linq;");
 			builder.AppendLine();
 			builder.AppendLine($"namespace {spec.Namespace}");
 			builder.AppendLine("{");
@@ -56,6 +57,15 @@ namespace PreAdamant.Compiler.Tools.Parse
 			builder.AppendLine($"		public {className}(IEnumerable<ISyntaxNode> allChildren)");
 			builder.AppendLine("			: base(allChildren)");
 			builder.AppendLine("		{");
+			if(rule != null)
+			{
+				foreach(var childRule in rule.Children)
+				{
+					var propertyType = Inflector.ToClass(childRule.Rule);
+					var action = childRule.Repeated ? "ToList" : "SingleOrDefault";
+					builder.AppendLine($"			{childRule.Label} = Children.OfType<{propertyType}>().{action}();");
+				}
+			}
 			builder.AppendLine("		}");
 			builder.AppendLine();
 			builder.AppendLine($"		public {className}(int offset)");

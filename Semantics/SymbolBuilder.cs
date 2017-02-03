@@ -33,6 +33,11 @@ namespace PreAdamant.Compiler.Semantics
 			children.Add(child);
 		}
 
+		public SymbolBuilder FindChild(string name)
+		{
+			return children.FirstOrDefault(c => c.Name == name);
+		}
+
 		public Symbol Build()
 		{
 			Requires.That(Parent == null, nameof(Parent), "Must be called on the root symbol");

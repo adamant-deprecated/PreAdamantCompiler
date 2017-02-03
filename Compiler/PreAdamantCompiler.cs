@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PreAdamant.Compiler.Core;
 using PreAdamant.Compiler.Emit.Cpp;
 using PreAdamant.Compiler.Semantics;
@@ -24,7 +23,7 @@ namespace PreAdamant.Compiler
 		public PackageSemantics Compile(PackageSyntax packageSyntax, IEnumerable<PackageSemantics> packages)
 		{
 			var nameBinder = new PreAdamantNameBinder();
-			//var packageSymbol = nameBinder.BuildSymbols(packageSyntax);
+			var packageSymbol = nameBinder.BuildSymbols(packageSyntax);
 
 			//package.BindDependencies(packages);
 
@@ -34,7 +33,7 @@ namespace PreAdamant.Compiler
 
 			// TODO rest of analysis
 
-			return new PackageSemantics(packageSyntax, null);
+			return new PackageSemantics(packageSyntax, packageSymbol);
 		}
 
 		public string EmitCpp(PackageSemantics package)
