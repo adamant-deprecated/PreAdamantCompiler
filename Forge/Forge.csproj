@@ -94,10 +94,6 @@
       <Project>{630F91E3-F9E3-494D-8985-313C4D372696}</Project>
       <Name>Emit.Cpp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parser\Parser.csproj">
-      <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
-      <Name>Parser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

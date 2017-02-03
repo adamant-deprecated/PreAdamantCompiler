@@ -53,10 +53,6 @@
       <Project>{2C63F001-5B59-4CB5-8607-13A54CDCC9B7}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parser\Parser.csproj">
-      <Project>{11EFF6AF-D8E2-412E-BFAA-C8ABBD242505}</Project>
-      <Name>Parser</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Syntax\Syntax.csproj">
       <Project>{0f50d108-4a28-4cc9-a647-26d2f823a47d}</Project>
       <Name>Syntax</Name>
