@@ -3450,26 +3450,6 @@ public partial class PreAdamantParser_Antlr : Parser {
 			base.CopyFrom(context);
 		}
 	}
-	public partial class RefTypeContext : ValueTypeContext {
-		public IToken isMutable;
-		public TypeNameContext typeName() {
-			return GetRuleContext<TypeNameContext>(0);
-		}
-		public RefTypeContext(ValueTypeContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
-			if (typedListener != null) typedListener.EnterRefType(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
-			if (typedListener != null) typedListener.ExitRefType(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitRefType(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 	public partial class LifetimeTypeContext : ValueTypeContext {
 		public IToken isMutable;
 		public TypeNameContext typeName() {
@@ -3490,6 +3470,26 @@ public partial class PreAdamantParser_Antlr : Parser {
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitLifetimeType(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class RefTypeContext : ValueTypeContext {
+		public IToken isMutable;
+		public TypeNameContext typeName() {
+			return GetRuleContext<TypeNameContext>(0);
+		}
+		public RefTypeContext(ValueTypeContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
+			if (typedListener != null) typedListener.EnterRefType(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
+			if (typedListener != null) typedListener.ExitRefType(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPreAdamantParser_AntlrVisitor<TResult> typedVisitor = visitor as IPreAdamantParser_AntlrVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRefType(this);
 			else return visitor.VisitChildren(this);
 		}
 	}

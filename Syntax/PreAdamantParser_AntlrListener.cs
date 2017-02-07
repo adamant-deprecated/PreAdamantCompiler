@@ -534,25 +534,25 @@ public interface IPreAdamantParser_AntlrListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>LifetimeType</c>
+	/// Enter a parse tree produced by the <c>lifetimeType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>LifetimeType</c>
+	/// Exit a parse tree produced by the <c>lifetimeType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>RefType</c>
+	/// Enter a parse tree produced by the <c>refType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>RefType</c>
+	/// Exit a parse tree produced by the <c>refType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

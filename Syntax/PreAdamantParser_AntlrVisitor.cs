@@ -330,14 +330,14 @@ public interface IPreAdamantParser_AntlrVisitor<Result> : IParseTreeVisitor<Resu
 	/// <return>The visitor result.</return>
 	Result VisitMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>LifetimeType</c>
+	/// Visit a parse tree produced by the <c>lifetimeType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>RefType</c>
+	/// Visit a parse tree produced by the <c>refType</c>
 	/// labeled alternative in <see cref="PreAdamantParser_Antlr.valueType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

@@ -70,8 +70,8 @@ tupleType: typeName = ("[" types:typeName{"," 1,} "]" | "[" "]");
 functionType: typeName = funcTypeParameterList "->" returnType;
 
 // valueType - these are types for which there are actual values of that type
-LifetimeType: valueType = lifetime? isMutable:"mut"? typeName;
-RefType: valueType = "ref" "var"? isMutable:"mut"? typeName;
+lifetimeType: valueType = lifetime? isMutable:"mut"? typeName;
+refType: valueType = "ref" "var"? isMutable:"mut"? typeName;
 
 type = valueType | isVoid:"void";
 

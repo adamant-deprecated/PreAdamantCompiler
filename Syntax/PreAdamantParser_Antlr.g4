@@ -72,8 +72,8 @@ typeName
 	;
 
 valueType
-	: (lifetime?) (isMutable='mut'?) typeName #LifetimeType
-	| 'ref' ('var'?) (isMutable='mut'?) typeName #RefType
+	: (lifetime?) (isMutable='mut'?) typeName #lifetimeType
+	| 'ref' ('var'?) (isMutable='mut'?) typeName #refType
 	;
 
 typeParameterConstraintClause

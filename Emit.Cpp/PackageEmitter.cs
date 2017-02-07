@@ -386,8 +386,8 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 		private static string TypeName(LifetimeTypeSyntax type, bool isMutable)
 		{
+			var typeName = TypeName(type.TypeName);
 			throw new NotImplementedException();
-			//var typeName = TypeName(type.TypeName);
 			//var referencedSymbol = type.TypeName.ReferencedSymbol;
 			//if(referencedSymbol == null)
 			//	throw new Exception($"TypeName not resolved to a symbol `{type.TypeName.GetText()}`");
@@ -431,41 +431,41 @@ namespace PreAdamant.Compiler.Emit.Cpp
 
 		private static string TypeName(SimpleNameSyntax simpleName)
 		{
-			throw new NotImplementedException();
-			//		return simpleName.Match().Returning<string>()
-			//			.With<IdentifierNameContext>(identifierName =>
-			//			{
-			//				var symbol = identifierName.ReferencedSymbol;
-			//				if(identifierName.ReferencedSymbol == null)
-			//					throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
+			//throw new NotImplementedException();
+			return simpleName.Match().Returning<string>()
+				.With<IdentifierNameSyntax>(identifierName =>
+				{
+					var symbol = identifierName.ReferencedSymbol;
+					if(identifierName.ReferencedSymbol == null)
+						throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
 
-			//				if(!symbol.IsPredefined)
-			//					return QualifiedName(symbol);
+					if(!symbol.IsPredefined)
+						return QualifiedName(symbol);
 
-			//				var code = symbol.Name;
-			//				switch(symbol.Name)
-			//				{
-			//					case "void":
-			//						break;
-			//					case "int":
-			//					case "uint":
-			//						code += "32_t";
-			//						break;
-			//					case "string":
-			//						code = "::__Adamant::Runtime::string";
-			//						break;
-			//					case "size":
-			//						code += "_t";
-			//						break;
-			//					case "offset":
-			//						code = "ptrdiff_t";
-			//						break;
-			//					default:
-			//						throw new NotImplementedException($"Predefined type '{symbol.Name}' not not implemented");
-			//				}
-			//				return code;
-			//			})
-			//			.Exhaustive();
+					var code = symbol.Name;
+					switch(symbol.Name)
+					{
+						case "void":
+							break;
+						case "int":
+						case "uint":
+							code += "32_t";
+							break;
+						case "string":
+							code = "::__Adamant::Runtime::string";
+							break;
+						case "size":
+							code += "_t";
+							break;
+						case "offset":
+							code = "ptrdiff_t";
+							break;
+						default:
+							throw new NotImplementedException($"Predefined type '{symbol.Name}' not implemented");
+					}
+					return code;
+				})
+				.Exhaustive();
 		}
 		#endregion
 

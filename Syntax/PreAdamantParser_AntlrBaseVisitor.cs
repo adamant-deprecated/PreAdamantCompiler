@@ -503,7 +503,7 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.LifetimeType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.lifetimeType"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -513,7 +513,7 @@ public partial class PreAdamantParser_AntlrBaseVisitor<Result> : AbstractParseTr
 	/// <return>The visitor result.</return>
 	public virtual Result VisitLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.RefType"/>.
+	/// Visit a parse tree produced by <see cref="PreAdamantParser_Antlr.refType"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.

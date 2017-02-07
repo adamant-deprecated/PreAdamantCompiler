@@ -598,25 +598,25 @@ public partial class PreAdamantParser_AntlrBaseListener : IPreAdamantParser_Antl
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitMaybeType([NotNull] PreAdamantParser_Antlr.MaybeTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.LifetimeType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.lifetimeType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.LifetimeType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.lifetimeType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLifetimeType([NotNull] PreAdamantParser_Antlr.LifetimeTypeContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.RefType"/>.
+	/// Enter a parse tree produced by <see cref="PreAdamantParser_Antlr.refType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterRefType([NotNull] PreAdamantParser_Antlr.RefTypeContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.RefType"/>.
+	/// Exit a parse tree produced by <see cref="PreAdamantParser_Antlr.refType"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
