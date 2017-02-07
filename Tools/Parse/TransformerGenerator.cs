@@ -31,7 +31,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 				builder.AppendLine("		{");
 				builder.AppendLine("			var children = context.children?.Select(c => c.Accept(this)).ToList() ?? NoChildren;");
 				builder.AppendLine("			var allChildren = InterleaveTriva(children);");
-				builder.AppendLine($"			return allChildren.Any() ? new {syntaxClass}(allChildren) : new {syntaxClass}(context.Start.StartIndex);");
+				builder.AppendLine($"			return allChildren.Any() ? new {syntaxClass}(context, allChildren) : new {syntaxClass}(context.Start.StartIndex);");
 				builder.AppendLine("		}");
 				builder.AppendLine();
 			}

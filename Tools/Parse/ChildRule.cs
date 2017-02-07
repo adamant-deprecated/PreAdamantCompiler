@@ -5,6 +5,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 	public class ChildRule
 	{
 		public readonly string Rule;
+		public readonly string RawLabel;
 		public readonly string Label;
 		public readonly bool Repeated;
 
@@ -12,6 +13,7 @@ namespace PreAdamant.Compiler.Tools.Parse
 		{
 			Rule = rule;
 			var property = label ?? rule;
+			RawLabel = property;
 			property = property.Pascalize();
 			if(repeated)
 				property = property.Pluralize();

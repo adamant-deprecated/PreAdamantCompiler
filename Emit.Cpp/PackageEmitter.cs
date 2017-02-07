@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PreAdamant.Compiler.Common;
 using PreAdamant.Compiler.Semantics;
+using PreAdamant.Compiler.Syntax;
 using static PreAdamant.Compiler.Syntax.PreAdamantParser;
 using Requires = PreAdamant.Compiler.Common.Requires;
 
@@ -52,8 +53,20 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#region EmitDeclaration
 		private static void EmitDeclaration(SourceFileBuilder source, IEnumerable<Symbol> symbols)
 		{
-			//foreach(var symbol in symbols)
-			//	symbol.Match()
+			foreach(var symbol in symbols)
+			{
+				if(symbol.Declarations.Count == 1)
+					symbol.Declarations[0].Match()
+						.With<FunctionDeclarationSyntax>(func =>
+						{
+							source.WriteIndentedLine(Signature(func) + ";");
+						})
+						.Exhaustive();
+				else
+					throw new NotImplementedException("Multiple or no declarations of symbol");
+			}
+
+
 			//		.With<Symbol<NamespaceDeclarationContext>>(nsSymbol =>
 			//		{
 			//			source.WriteIndentedLine($"namespace {nsSymbol.Name}");
@@ -61,11 +74,7 @@ namespace PreAdamant.Compiler.Emit.Cpp
 			//			EmitDeclaration(source, nsSymbol.Children);
 			//			source.EndBlock();
 			//		})
-			//		.With<Symbol<FunctionDeclarationContext>>(funcSymbol =>
-			//		{
-			//			var func = funcSymbol.Declarations.Single();
-			//			source.WriteIndentedLine(Signature(func) + ";");
-			//		})
+
 			//		.With<Symbol<ClassDeclarationContext>>(classSymbol =>
 			//		{
 			//			var @class = classSymbol.Declarations.Single();
@@ -277,12 +286,12 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region Signatures
-		//	private static string Signature(FunctionDeclarationContext func)
-		//	{
-		//		var @params = func.Parameters.Cast<NamedParameterContext>().Select(Signature);
-		//		// Use C++11 return types syntax becuase of problems with fully qualified method names
-		//		return $"auto {func.Name}({string.Join(", ", @params)}) -> {TypeName(func.returnType(), true)}";
-		//	}
+		private static string Signature(FunctionDeclarationSyntax func)
+		{
+			var @params = func.ParameterList.Parameters.Cast<NamedParameterSyntax>().Select(Signature);
+			// Use C++11 return types syntax becuase of problems with fully qualified method names
+			return $"auto {func.Identifier.Value}({string.Join(", ", @params)}) -> {TypeName(func.ReturnType, true)}";
+		}
 
 		//	private static string Signature(MethodContext method, bool qualified)
 		//	{
@@ -305,11 +314,10 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//		return $"{name}({string.Join(", ", @params)})";
 		//	}
 
-		//	private static string Signature(NamedParameterContext param)
-		//	{
-		//		var isVar = param.isVar != null;
-		//		return $"{TypeName(param.valueType(), isVar)} {param.identifier().GetText()}";
-		//	}
+		private static string Signature(NamedParameterSyntax param)
+		{
+			return $"{TypeName(param.ValueType, param.IsVar)} {param.Identifier.Value}";
+		}
 
 		//	private static string Signature(ClassDeclarationContext @class)
 		//	{
@@ -351,17 +359,18 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region TypeNames
-		//	private static string TypeName(ReturnTypeContext type, bool isMutable)
-		//	{
-		//		if(type.type() != null)
-		//			return TypeName(type.type(), isMutable);
+		private static string TypeName(ReturnTypeSyntax type, bool isMutable)
+		{
+			throw new NotImplementedException();
+			//if(type.type() != null)
+			//	return TypeName(type.type(), isMutable);
 
-		//		// This is the case of a non-terminating function i.e. `-> !`
-		//		if(type.GetText() == "!")
-		//			return "void";
+			//// This is the case of a non-terminating function i.e. `-> !`
+			//if(type.GetText() == "!")
+			//	return "void";
 
-		//		throw new NotImplementedException($"Return type	`{type.GetText()}` not implemented");
-		//	}
+			//throw new NotImplementedException($"Return type	`{type.GetText()}` not implemented");
+		}
 
 		//	private static string TypeName(TypeContext type, bool isMutable)
 		//	{
@@ -374,82 +383,97 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		//		throw new NotImplementedException($"Could not emit TypeName for `{type.GetText()}`");
 		//	}
 
-		//	private static string TypeName(ValueTypeContext type, bool isMutable)
-		//	{
-		//		var typeName = TypeName(type.TypeName);
-		//		var referencedSymbol = type.TypeName.ReferencedSymbol;
-		//		if(referencedSymbol == null)
-		//			throw new Exception($"TypeName not resolved to a symbol `{type.TypeName.GetText()}`");
-		//		var isReferenceType = referencedSymbol is Symbol<ClassDeclarationContext>;
-		//		if(!isReferenceType && !(referencedSymbol is Symbol<StructDeclarationContext>))
-		//			throw new Exception($"TypeName `{type.TypeName.GetText()}` references symbol that is neither class nor struct");
+		private static string TypeName(ValueTypeSyntax type, bool isMutable)
+		{
+			return type.Match().Returning<string>()
+				.With<LifetimeTypeSyntax>(t => TypeName(t, isMutable))
+				.With<RefTypeSyntax>(t => TypeName(t, isMutable))
+				.Exhaustive();
+		}
 
-		//		if(isReferenceType)
-		//			// pointer, const depends on if it is mutable i.e. `mut`
-		//			typeName += type.IsMutable ? "*" : " const *";
-		//		else if(type.IsMutable)
-		//			throw new Exception("`mut` is not valid on struct types");
+		private static string TypeName(LifetimeTypeSyntax type, bool isMutable)
+		{
+			throw new NotImplementedException();
+			//var typeName = TypeName(type.TypeName);
+			//var referencedSymbol = type.TypeName.ReferencedSymbol;
+			//if(referencedSymbol == null)
+			//	throw new Exception($"TypeName not resolved to a symbol `{type.TypeName.GetText()}`");
+			//var isReferenceType = referencedSymbol is Symbol<ClassDeclarationSyntax>;
+			//if(!isReferenceType && !(referencedSymbol is Symbol<StructDeclarationSyntax>))
+			//	throw new Exception($"TypeName `{type.TypeName.GetText()}` references symbol that is neither class nor struct");
 
-		//		// the binding is mutable i.e. `let` vs `var`
-		//		if(!isMutable)
-		//			typeName += " const";
+			//if(isReferenceType)
+			//	// pointer, const depends on if it is mutable i.e. `mut`
+			//	typeName += type.IsMutable ? "*" : " const *";
+			//else if(type.IsMutable)
+			//	throw new Exception("`mut` is not valid on struct types");
 
-		//		return typeName;
-		//	}
+			//// the binding is mutable i.e. `let` vs `var`
+			//if(!isMutable)
+			//	typeName += " const";
 
-		//	private static string TypeName(TypeNameContext type)
-		//	{
-		//		return type.Match().Returning<string>()
-		//			.With<NamedTypeContext>(namedType => TypeName(namedType.name()))
-		//			.With<PointerTypeContext>(pointerType => "*" + (pointerType.IsMutable ? "" : "const ") + TypeName(pointerType.typeName()))
-		//			.Exhaustive();
-		//	}
+			//return typeName;
+		}
 
-		//	private static string TypeName(NameContext name)
-		//	{
-		//		return name.Match().Returning<string>()
-		//			.With<UnqualifiedNameContext>(unqualifiedName => TypeName(unqualifiedName.simpleName()))
-		//			.With<QualifiedNameContext>(qualifiedName => { throw new NotImplementedException(); })
-		//			.Exhaustive();
-		//	}
+		private static string TypeName(RefTypeSyntax type, bool isMutable)
+		{
+			throw new NotImplementedException();
+		}
 
-		//	private static string TypeName(SimpleNameContext simpleName)
-		//	{
-		//		return simpleName.Match().Returning<string>()
-		//			.With<IdentifierNameContext>(identifierName =>
-		//			{
-		//				var symbol = identifierName.ReferencedSymbol;
-		//				if(identifierName.ReferencedSymbol == null)
-		//					throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
+		private static string TypeName(TypeNameSyntax type)
+		{
+			return type.Match().Returning<string>()
+				.With<NamedTypeSyntax>(namedType => TypeName(namedType.Name))
+				.With<PointerTypeSyntax>(pointerType => "*" + (pointerType.IsMutable ? "" : "const ") + TypeName(pointerType.TypeName))
+				.Exhaustive();
+		}
 
-		//				if(!symbol.IsPredefined)
-		//					return QualifiedName(symbol);
+		private static string TypeName(NameSyntax name)
+		{
+			return name.Match().Returning<string>()
+				.With<UnqualifiedNameSyntax>(unqualifiedName => TypeName(unqualifiedName.SimpleName))
+				.With<QualifiedNameSyntax>(qualifiedName => { throw new NotImplementedException(); })
+				.Exhaustive();
+		}
 
-		//				var code = symbol.Name;
-		//				switch(symbol.Name)
-		//				{
-		//					case "void":
-		//						break;
-		//					case "int":
-		//					case "uint":
-		//						code += "32_t";
-		//						break;
-		//					case "string":
-		//						code = "::__Adamant::Runtime::string";
-		//						break;
-		//					case "size":
-		//						code += "_t";
-		//						break;
-		//					case "offset":
-		//						code = "ptrdiff_t";
-		//						break;
-		//					default:
-		//						throw new NotImplementedException($"Predefined type '{symbol.Name}' not not implemented");
-		//				}
-		//				return code;
-		//			})
-		//			.Exhaustive();
-		//	}
+		private static string TypeName(SimpleNameSyntax simpleName)
+		{
+			throw new NotImplementedException();
+			//		return simpleName.Match().Returning<string>()
+			//			.With<IdentifierNameContext>(identifierName =>
+			//			{
+			//				var symbol = identifierName.ReferencedSymbol;
+			//				if(identifierName.ReferencedSymbol == null)
+			//					throw new Exception($"Identifier '{identifierName.GetText()}' not resolved to a symbol");
+
+			//				if(!symbol.IsPredefined)
+			//					return QualifiedName(symbol);
+
+			//				var code = symbol.Name;
+			//				switch(symbol.Name)
+			//				{
+			//					case "void":
+			//						break;
+			//					case "int":
+			//					case "uint":
+			//						code += "32_t";
+			//						break;
+			//					case "string":
+			//						code = "::__Adamant::Runtime::string";
+			//						break;
+			//					case "size":
+			//						code += "_t";
+			//						break;
+			//					case "offset":
+			//						code = "ptrdiff_t";
+			//						break;
+			//					default:
+			//						throw new NotImplementedException($"Predefined type '{symbol.Name}' not not implemented");
+			//				}
+			//				return code;
+			//			})
+			//			.Exhaustive();
+		}
 		#endregion
 
 		private void EmitEntryPoint(SourceFileBuilder source)

@@ -65,13 +65,13 @@ qualifiedName: name = leftName:name "." rightName:simpleName;
 // typeName
 namedType: typeName = name;
 maybeType: typeName = typeName "?";
-pointerType: typeName = "*" isMut:"mut"? typeName;
+pointerType: typeName = "*" isMutable:"mut"? typeName;
 tupleType: typeName = ("[" types:typeName{"," 1,} "]" | "[" "]");
 functionType: typeName = funcTypeParameterList "->" returnType;
 
-// valueType // these are types for which there are actual values of that type
-LifetimeType: valueType = lifetime? isMut:"mut"? typeName;
-RefType: valueType = "ref" "var"? isMut:"mut"? typeName;
+// valueType - these are types for which there are actual values of that type
+LifetimeType: valueType = lifetime? isMutable:"mut"? typeName;
+RefType: valueType = "ref" "var"? isMutable:"mut"? typeName;
 
 type = valueType | "void";
 
@@ -112,7 +112,7 @@ parameterList = "(" parameter{","} ")";
 
 // parameter
 namedParameter: parameter = isVar:"var"? modifiers:parameterModifier* identifier? ":" valueType;
-selfParameter: parameter = isRef:"ref"? isMut:"mut"? "self";
+selfParameter: parameter = isRef:"ref"? isMutable:"mut"? "self";
 
 parameterModifier = "params";
 

@@ -66,14 +66,14 @@ name
 typeName
 	: name #namedType
 	| typeName '?' #maybeType
-	| '*' (isMut='mut'?) typeName #pointerType
+	| '*' (isMutable='mut'?) typeName #pointerType
 	| ('[' (types+=typeName(','types+=typeName)*) ']' | '[' ']') #tupleType
 	| funcTypeParameterList '->' returnType #functionType
 	;
 
 valueType
-	: (lifetime?) (isMut='mut'?) typeName #LifetimeType
-	| 'ref' ('var'?) (isMut='mut'?) typeName #RefType
+	: (lifetime?) (isMutable='mut'?) typeName #LifetimeType
+	| 'ref' ('var'?) (isMutable='mut'?) typeName #RefType
 	;
 
 typeParameterConstraintClause
@@ -102,7 +102,7 @@ member
 
 parameter
 	: (isVar='var'?) (modifiers+=parameterModifier*) (identifier?) ':' valueType #namedParameter
-	| (isRef='ref'?) (isMut='mut'?) 'self' #selfParameter
+	| (isRef='ref'?) (isMutable='mut'?) 'self' #selfParameter
 	;
 
 methodBody

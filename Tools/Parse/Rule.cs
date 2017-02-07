@@ -31,6 +31,11 @@ namespace PreAdamant.Compiler.Tools.Parse
 				if(rulePattern.ruleName.Text == "EOF") return Enumerable.Empty<ChildRule>();
 				return new[] { new ChildRule(rulePattern.ruleName.Text, label, repeated) };
 			}
+			var literalPattern = context as LiteralPatternContext;
+			if(literalPattern != null && label != null)
+			{
+				return new[] { new ChildRule(null, label, repeated) };
+			}
 
 			var optionalPattern = context as OptionalPatternContext;
 			if(optionalPattern != null)

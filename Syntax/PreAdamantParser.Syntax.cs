@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using PreAdamant.Compiler.Syntax.Antlr;
 
 namespace PreAdamant.Compiler.Syntax
 {
@@ -8,7 +9,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<UsingDirectiveSyntax> UsingDirectives { get; }
 		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
 
-		public CompilationUnitSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CompilationUnitSyntax(PreAdamantParser_Antlr.CompilationUnitContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			UsingDirectives = Children.OfType<UsingDirectiveSyntax>().ToList();
@@ -25,7 +26,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public NamespaceNameSyntax NamespaceName { get; }
 
-		public UsingDirectiveSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UsingDirectiveSyntax(PreAdamantParser_Antlr.UsingDirectiveContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			NamespaceName = Children.OfType<NamespaceNameSyntax>().SingleOrDefault();
@@ -39,7 +40,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IdentifierSyntax : SyntaxNode
 	{
-		public IdentifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IdentifierSyntax(PreAdamantParser_Antlr.IdentifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -54,7 +55,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<IdentifierSyntax> Identifiers { get; }
 
-		public NamespaceNameSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NamespaceNameSyntax(PreAdamantParser_Antlr.NamespaceNameContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Identifiers = Children.OfType<IdentifierSyntax>().ToList();
@@ -72,7 +73,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<UsingDirectiveSyntax> UsingDirectives { get; }
 		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
 
-		public NamespaceDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NamespaceDeclarationSyntax(PreAdamantParser_Antlr.NamespaceDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			NamespaceName = Children.OfType<NamespaceNameSyntax>().SingleOrDefault();
@@ -98,7 +99,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
 		public IReadOnlyList<MemberSyntax> Members { get; }
 
-		public ClassDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ClassDeclarationSyntax(PreAdamantParser_Antlr.ClassDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -129,7 +130,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
 		public IReadOnlyList<MemberSyntax> Members { get; }
 
-		public StructDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public StructDeclarationSyntax(PreAdamantParser_Antlr.StructDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -156,7 +157,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ValueTypeSyntax ValueType { get; }
 		public ExpressionSyntax Expression { get; }
 
-		public VariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public VariableDeclarationSyntax(PreAdamantParser_Antlr.VariableDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -186,7 +187,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public FunctionDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public FunctionDeclarationSyntax(PreAdamantParser_Antlr.FunctionDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -212,7 +213,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<DeclarationSyntax> Declarations { get; }
 
-		public ExternalBlockDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ExternalBlockDeclarationSyntax(PreAdamantParser_Antlr.ExternalBlockDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Declarations = Children.OfType<DeclarationSyntax>().ToList();
@@ -228,7 +229,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public PreconditionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public PreconditionSyntax(PreAdamantParser_Antlr.PreconditionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -244,7 +245,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public PostconditionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public PostconditionSyntax(PreAdamantParser_Antlr.PostconditionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -261,7 +262,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IdentifierSyntax Identifier { get; }
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public AttributeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AttributeSyntax(PreAdamantParser_Antlr.AttributeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
@@ -279,7 +280,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NameSyntax BaseType { get; }
 		public IReadOnlyList<NameSyntax> Interfaces { get; }
 
-		public BaseTypesSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public BaseTypesSyntax(PreAdamantParser_Antlr.BaseTypesContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			BaseType = Children.OfType<NameSyntax>().SingleOrDefault();
@@ -294,7 +295,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AccessModifierSyntax : SyntaxNode
 	{
-		public AccessModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AccessModifierSyntax(PreAdamantParser_Antlr.AccessModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -307,7 +308,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class SafetyModifierSyntax : SyntaxNode
 	{
-		public SafetyModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public SafetyModifierSyntax(PreAdamantParser_Antlr.SafetyModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -320,7 +321,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ClassInheritanceModifierSyntax : SyntaxNode
 	{
-		public ClassInheritanceModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ClassInheritanceModifierSyntax(PreAdamantParser_Antlr.ClassInheritanceModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -333,7 +334,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class MethodInheritanceModifierSyntax : SyntaxNode
 	{
-		public MethodInheritanceModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MethodInheritanceModifierSyntax(PreAdamantParser_Antlr.MethodInheritanceModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -346,7 +347,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ExplicitModifierSyntax : SyntaxNode
 	{
-		public ExplicitModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ExplicitModifierSyntax(PreAdamantParser_Antlr.ExplicitModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -359,7 +360,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class AsyncModifierSyntax : SyntaxNode
 	{
-		public AsyncModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AsyncModifierSyntax(PreAdamantParser_Antlr.AsyncModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -374,7 +375,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<TypeParameterSyntax> TypeParameters { get; }
 
-		public TypeParametersSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeParametersSyntax(PreAdamantParser_Antlr.TypeParametersContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeParameters = Children.OfType<TypeParameterSyntax>().ToList();
@@ -388,7 +389,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeParameterSyntax : SyntaxNode
 	{
-		public TypeParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeParameterSyntax(PreAdamantParser_Antlr.TypeParameterContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -403,7 +404,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<TypeSyntax> Types { get; }
 
-		public TypeArgumentsSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeArgumentsSyntax(PreAdamantParser_Antlr.TypeArgumentsContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Types = Children.OfType<TypeSyntax>().ToList();
@@ -417,7 +418,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class IdentifierOrPredefinedTypeSyntax : SyntaxNode
 	{
-		public IdentifierOrPredefinedTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IdentifierOrPredefinedTypeSyntax(PreAdamantParser_Antlr.IdentifierOrPredefinedTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -432,7 +433,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IdentifierOrPredefinedTypeSyntax IdentifierOrPredefinedType { get; }
 
-		public IdentifierNameSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IdentifierNameSyntax(PreAdamantParser_Antlr.IdentifierNameContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			IdentifierOrPredefinedType = Children.OfType<IdentifierOrPredefinedTypeSyntax>().SingleOrDefault();
@@ -449,7 +450,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IdentifierOrPredefinedTypeSyntax IdentifierOrPredefinedType { get; }
 		public TypeArgumentsSyntax TypeArguments { get; }
 
-		public GenericNameSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public GenericNameSyntax(PreAdamantParser_Antlr.GenericNameContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			IdentifierOrPredefinedType = Children.OfType<IdentifierOrPredefinedTypeSyntax>().SingleOrDefault();
@@ -466,7 +467,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public SimpleNameSyntax SimpleName { get; }
 
-		public UnqualifiedNameSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UnqualifiedNameSyntax(PreAdamantParser_Antlr.UnqualifiedNameContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			SimpleName = Children.OfType<SimpleNameSyntax>().SingleOrDefault();
@@ -483,7 +484,7 @@ namespace PreAdamant.Compiler.Syntax
 		public NameSyntax LeftName { get; }
 		public SimpleNameSyntax RightName { get; }
 
-		public QualifiedNameSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public QualifiedNameSyntax(PreAdamantParser_Antlr.QualifiedNameContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			LeftName = Children.OfType<NameSyntax>().SingleOrDefault();
@@ -500,7 +501,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public NameSyntax Name { get; }
 
-		public NamedTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NamedTypeSyntax(PreAdamantParser_Antlr.NamedTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Name = Children.OfType<NameSyntax>().SingleOrDefault();
@@ -516,7 +517,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public TypeNameSyntax TypeName { get; }
 
-		public MaybeTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MaybeTypeSyntax(PreAdamantParser_Antlr.MaybeTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
@@ -530,11 +531,13 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class PointerTypeSyntax : TypeNameSyntax
 	{
+		public bool IsMutable { get; }
 		public TypeNameSyntax TypeName { get; }
 
-		public PointerTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public PointerTypeSyntax(PreAdamantParser_Antlr.PointerTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IsMutable = context.isMutable != null;
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
@@ -546,7 +549,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TupleTypeSyntax : TypeNameSyntax
 	{
-		public TupleTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TupleTypeSyntax(PreAdamantParser_Antlr.TupleTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -562,7 +565,7 @@ namespace PreAdamant.Compiler.Syntax
 		public FuncTypeParameterListSyntax FuncTypeParameterList { get; }
 		public ReturnTypeSyntax ReturnType { get; }
 
-		public FunctionTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public FunctionTypeSyntax(PreAdamantParser_Antlr.FunctionTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			FuncTypeParameterList = Children.OfType<FuncTypeParameterListSyntax>().SingleOrDefault();
@@ -578,12 +581,14 @@ namespace PreAdamant.Compiler.Syntax
 	public partial class LifetimeTypeSyntax : ValueTypeSyntax
 	{
 		public LifetimeSyntax Lifetime { get; }
+		public bool IsMutable { get; }
 		public TypeNameSyntax TypeName { get; }
 
-		public LifetimeTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public LifetimeTypeSyntax(PreAdamantParser_Antlr.LifetimeTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lifetime = Children.OfType<LifetimeSyntax>().SingleOrDefault();
+			IsMutable = context.isMutable != null;
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
@@ -595,11 +600,13 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class RefTypeSyntax : ValueTypeSyntax
 	{
+		public bool IsMutable { get; }
 		public TypeNameSyntax TypeName { get; }
 
-		public RefTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public RefTypeSyntax(PreAdamantParser_Antlr.RefTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IsMutable = context.isMutable != null;
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
 		}
 
@@ -611,7 +618,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class TypeSyntax : SyntaxNode
 	{
-		public TypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeSyntax(PreAdamantParser_Antlr.TypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -624,7 +631,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ReturnTypeSyntax : SyntaxNode
 	{
-		public ReturnTypeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ReturnTypeSyntax(PreAdamantParser_Antlr.ReturnTypeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -637,7 +644,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class LifetimeSyntax : SyntaxNode
 	{
-		public LifetimeSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public LifetimeSyntax(PreAdamantParser_Antlr.LifetimeContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -652,7 +659,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<FuncTypeParameterSyntax> FuncTypeParameters { get; }
 
-		public FuncTypeParameterListSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public FuncTypeParameterListSyntax(PreAdamantParser_Antlr.FuncTypeParameterListContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			FuncTypeParameters = Children.OfType<FuncTypeParameterSyntax>().ToList();
@@ -669,7 +676,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ParameterModifierSyntax> ParameterModifiers { get; }
 		public ValueTypeSyntax ValueType { get; }
 
-		public FuncTypeParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public FuncTypeParameterSyntax(PreAdamantParser_Antlr.FuncTypeParameterContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			ParameterModifiers = Children.OfType<ParameterModifierSyntax>().ToList();
@@ -684,7 +691,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConstExpressionSyntax : SyntaxNode
 	{
-		public ConstExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ConstExpressionSyntax(PreAdamantParser_Antlr.ConstExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -700,7 +707,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeParameterSyntax TypeParameter { get; }
 		public IReadOnlyList<TypeParameterConstraintSyntax> TypeParameterConstraints { get; }
 
-		public TypeParameterBoundConstraintClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeParameterBoundConstraintClauseSyntax(PreAdamantParser_Antlr.TypeParameterBoundConstraintClauseContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
@@ -718,7 +725,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeParameterSyntax TypeParameter { get; }
 		public IntLiteralToken IntLiteral { get; }
 
-		public TypeParameterRangeConstraintClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeParameterRangeConstraintClauseSyntax(PreAdamantParser_Antlr.TypeParameterRangeConstraintClauseContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
@@ -733,7 +740,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ConstructorConstraintSyntax : TypeParameterConstraintSyntax
 	{
-		public ConstructorConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ConstructorConstraintSyntax(PreAdamantParser_Antlr.ConstructorConstraintContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -748,7 +755,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public TypeNameSyntax TypeName { get; }
 
-		public TypeConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeConstraintSyntax(PreAdamantParser_Antlr.TypeConstraintContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
@@ -764,7 +771,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public TypeParameterSyntax TypeParameter { get; }
 
-		public TypeListParameterConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TypeListParameterConstraintSyntax(PreAdamantParser_Antlr.TypeListParameterConstraintContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeParameter = Children.OfType<TypeParameterSyntax>().SingleOrDefault();
@@ -789,7 +796,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public ConstructorSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ConstructorSyntax(PreAdamantParser_Antlr.ConstructorContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -823,7 +830,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public CopyConstructorSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CopyConstructorSyntax(PreAdamantParser_Antlr.CopyConstructorContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -852,7 +859,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ParameterListSyntax ParameterList { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public DestructorSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public DestructorSyntax(PreAdamantParser_Antlr.DestructorContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -881,7 +888,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public ConversionMethodSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ConversionMethodSyntax(PreAdamantParser_Antlr.ConversionMethodContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -910,7 +917,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ValueTypeSyntax ValueType { get; }
 		public ExpressionSyntax Expression { get; }
 
-		public FieldSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public FieldSyntax(PreAdamantParser_Antlr.FieldContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -941,7 +948,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public AccessorSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AccessorSyntax(PreAdamantParser_Antlr.AccessorContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -978,7 +985,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public IndexerSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IndexerSyntax(PreAdamantParser_Antlr.IndexerContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -1015,7 +1022,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public MethodSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MethodSyntax(PreAdamantParser_Antlr.MethodContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -1052,7 +1059,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<ContractSyntax> Contracts { get; }
 		public MethodBodySyntax MethodBody { get; }
 
-		public OperatorOverloadSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public OperatorOverloadSyntax(PreAdamantParser_Antlr.OperatorOverloadContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -1086,7 +1093,7 @@ namespace PreAdamant.Compiler.Syntax
 		public IReadOnlyList<TypeParameterConstraintClauseSyntax> TypeParameterConstraintClauses { get; }
 		public IReadOnlyList<MemberSyntax> Members { get; }
 
-		public NestedClassDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NestedClassDeclarationSyntax(PreAdamantParser_Antlr.NestedClassDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Attributes = Children.OfType<AttributeSyntax>().ToList();
@@ -1110,7 +1117,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<ParameterSyntax> Parameters { get; }
 
-		public ParameterListSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ParameterListSyntax(PreAdamantParser_Antlr.ParameterListContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Parameters = Children.OfType<ParameterSyntax>().ToList();
@@ -1124,13 +1131,15 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NamedParameterSyntax : ParameterSyntax
 	{
+		public bool IsVar { get; }
 		public IReadOnlyList<ParameterModifierSyntax> Modifiers { get; }
 		public IdentifierSyntax Identifier { get; }
 		public ValueTypeSyntax ValueType { get; }
 
-		public NamedParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NamedParameterSyntax(PreAdamantParser_Antlr.NamedParameterContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IsVar = context.isVar != null;
 			Modifiers = Children.OfType<ParameterModifierSyntax>().ToList();
 			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
 			ValueType = Children.OfType<ValueTypeSyntax>().SingleOrDefault();
@@ -1144,9 +1153,14 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class SelfParameterSyntax : ParameterSyntax
 	{
-		public SelfParameterSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public bool IsRef { get; }
+		public bool IsMutable { get; }
+
+		public SelfParameterSyntax(PreAdamantParser_Antlr.SelfParameterContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
+			IsRef = context.isRef != null;
+			IsMutable = context.isMutable != null;
 		}
 
 		public SelfParameterSyntax(int offset)
@@ -1157,7 +1171,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ParameterModifierSyntax : SyntaxNode
 	{
-		public ParameterModifierSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ParameterModifierSyntax(PreAdamantParser_Antlr.ParameterModifierContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1173,7 +1187,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeNameSyntax TypeName { get; }
 		public IReadOnlyList<GenericConstraintSyntax> Constraints { get; }
 
-		public WhereClauseSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public WhereClauseSyntax(PreAdamantParser_Antlr.WhereClauseContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeName = Children.OfType<TypeNameSyntax>().SingleOrDefault();
@@ -1188,7 +1202,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class GenericConstraintSyntax : SyntaxNode
 	{
-		public GenericConstraintSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public GenericConstraintSyntax(PreAdamantParser_Antlr.GenericConstraintContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1203,7 +1217,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public ConstructorInitializerSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ConstructorInitializerSyntax(PreAdamantParser_Antlr.ConstructorInitializerContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
@@ -1219,7 +1233,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<ExpressionSyntax> Expressions { get; }
 
-		public ArgumentListSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ArgumentListSyntax(PreAdamantParser_Antlr.ArgumentListContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expressions = Children.OfType<ExpressionSyntax>().ToList();
@@ -1235,7 +1249,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<StatementSyntax> Statements { get; }
 
-		public BlockMethodBodySyntax(IEnumerable<ISyntaxNode> allChildren)
+		public BlockMethodBodySyntax(PreAdamantParser_Antlr.BlockMethodBodyContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Statements = Children.OfType<StatementSyntax>().ToList();
@@ -1249,7 +1263,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NoMethodBodySyntax : MethodBodySyntax
 	{
-		public NoMethodBodySyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NoMethodBodySyntax(PreAdamantParser_Antlr.NoMethodBodyContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1262,7 +1276,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class OverloadableOperatorSyntax : SyntaxNode
 	{
-		public OverloadableOperatorSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public OverloadableOperatorSyntax(PreAdamantParser_Antlr.OverloadableOperatorContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1277,7 +1291,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<StatementSyntax> Statements { get; }
 
-		public BlockSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public BlockSyntax(PreAdamantParser_Antlr.BlockContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Statements = Children.OfType<StatementSyntax>().ToList();
@@ -1293,7 +1307,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public LocalVariableDeclarationSyntax LocalVariableDeclaration { get; }
 
-		public VariableDeclarationStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public VariableDeclarationStatementSyntax(PreAdamantParser_Antlr.VariableDeclarationStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			LocalVariableDeclaration = Children.OfType<LocalVariableDeclarationSyntax>().SingleOrDefault();
@@ -1309,7 +1323,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IReadOnlyList<StatementSyntax> Statements { get; }
 
-		public UnsafeBlockStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UnsafeBlockStatementSyntax(PreAdamantParser_Antlr.UnsafeBlockStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Statements = Children.OfType<StatementSyntax>().ToList();
@@ -1325,7 +1339,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public BlockSyntax Block { get; }
 
-		public BlockStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public BlockStatementSyntax(PreAdamantParser_Antlr.BlockStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Block = Children.OfType<BlockSyntax>().SingleOrDefault();
@@ -1339,7 +1353,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class EmptyStatementSyntax : StatementSyntax
 	{
-		public EmptyStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public EmptyStatementSyntax(PreAdamantParser_Antlr.EmptyStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1354,7 +1368,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public ExpressionStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ExpressionStatementSyntax(PreAdamantParser_Antlr.ExpressionStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1370,7 +1384,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public ReturnStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ReturnStatementSyntax(PreAdamantParser_Antlr.ReturnStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1386,7 +1400,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public ThrowStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ThrowStatementSyntax(PreAdamantParser_Antlr.ThrowStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1404,7 +1418,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BlockSyntax Then { get; }
 		public BlockSyntax Else { get; }
 
-		public IfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IfStatementSyntax(PreAdamantParser_Antlr.IfStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Condition = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1424,7 +1438,7 @@ namespace PreAdamant.Compiler.Syntax
 		public BlockSyntax Then { get; }
 		public BlockSyntax Else { get; }
 
-		public LetIfStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public LetIfStatementSyntax(PreAdamantParser_Antlr.LetIfStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			LocalVariableDeclaration = Children.OfType<LocalVariableDeclarationSyntax>().SingleOrDefault();
@@ -1443,7 +1457,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public BlockSyntax Block { get; }
 
-		public ForStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ForStatementSyntax(PreAdamantParser_Antlr.ForStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1461,7 +1475,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public BlockSyntax Block { get; }
 
-		public WhileStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public WhileStatementSyntax(PreAdamantParser_Antlr.WhileStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1478,7 +1492,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public DeleteStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public DeleteStatementSyntax(PreAdamantParser_Antlr.DeleteStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1492,7 +1506,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class ContinueStatementSyntax : StatementSyntax
 	{
-		public ContinueStatementSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ContinueStatementSyntax(PreAdamantParser_Antlr.ContinueStatementContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -1509,7 +1523,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ValueTypeSyntax ValueType { get; }
 		public ExpressionSyntax Expression { get; }
 
-		public SimpleLocalVariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public SimpleLocalVariableDeclarationSyntax(PreAdamantParser_Antlr.SimpleLocalVariableDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Identifier = Children.OfType<IdentifierSyntax>().SingleOrDefault();
@@ -1529,7 +1543,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ValueTypeSyntax ValueType { get; }
 		public ExpressionSyntax Expression { get; }
 
-		public DestructureLocalVariableDeclarationSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public DestructureLocalVariableDeclarationSyntax(PreAdamantParser_Antlr.DestructureLocalVariableDeclarationContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Identifiers = Children.OfType<IdentifierSyntax>().ToList();
@@ -1547,7 +1561,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public ParenthesizedExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ParenthesizedExpressionSyntax(PreAdamantParser_Antlr.ParenthesizedExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1563,7 +1577,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public MagnitudeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MagnitudeExpressionSyntax(PreAdamantParser_Antlr.MagnitudeExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1580,7 +1594,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public IdentifierSyntax Identifier { get; }
 
-		public MemberExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MemberExpressionSyntax(PreAdamantParser_Antlr.MemberExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1597,7 +1611,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public PlacementDeleteExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public PlacementDeleteExpressionSyntax(PreAdamantParser_Antlr.PlacementDeleteExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1614,7 +1628,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public DotDotExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public DotDotExpressionSyntax(PreAdamantParser_Antlr.DotDotExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1632,7 +1646,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax From { get; }
 		public ExpressionSyntax To { get; }
 
-		public ToExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ToExpressionSyntax(PreAdamantParser_Antlr.ToExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			From = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1650,7 +1664,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public CallExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CallExpressionSyntax(PreAdamantParser_Antlr.CallExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1668,7 +1682,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public ArrayAccessExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ArrayAccessExpressionSyntax(PreAdamantParser_Antlr.ArrayAccessExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1685,7 +1699,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public AwaitExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AwaitExpressionSyntax(PreAdamantParser_Antlr.AwaitExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1701,7 +1715,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public NullCheckExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NullCheckExpressionSyntax(PreAdamantParser_Antlr.NullCheckExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1717,7 +1731,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public UnaryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UnaryExpressionSyntax(PreAdamantParser_Antlr.UnaryExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1734,7 +1748,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public MultiplicativeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public MultiplicativeExpressionSyntax(PreAdamantParser_Antlr.MultiplicativeExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1752,7 +1766,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public AdditiveExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AdditiveExpressionSyntax(PreAdamantParser_Antlr.AdditiveExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1770,7 +1784,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public ComparativeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public ComparativeExpressionSyntax(PreAdamantParser_Antlr.ComparativeExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1788,7 +1802,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public EqualityExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public EqualityExpressionSyntax(PreAdamantParser_Antlr.EqualityExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1806,7 +1820,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public AndExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AndExpressionSyntax(PreAdamantParser_Antlr.AndExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1824,7 +1838,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public XorExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public XorExpressionSyntax(PreAdamantParser_Antlr.XorExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1842,7 +1856,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public OrExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public OrExpressionSyntax(PreAdamantParser_Antlr.OrExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1860,7 +1874,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public CoalesceExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CoalesceExpressionSyntax(PreAdamantParser_Antlr.CoalesceExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1878,7 +1892,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lhs { get; }
 		public ExpressionSyntax Rhs { get; }
 
-		public InExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public InExpressionSyntax(PreAdamantParser_Antlr.InExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lhs = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1896,7 +1910,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ArgumentListSyntax PlacementArguments { get; }
 		public ArgumentListSyntax ConstructorArguments { get; }
 
-		public NewExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NewExpressionSyntax(PreAdamantParser_Antlr.NewExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			PlacementArguments = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
@@ -1914,7 +1928,7 @@ namespace PreAdamant.Compiler.Syntax
 		public TypeArgumentsSyntax TypeArguments { get; }
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public NewMemoryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NewMemoryExpressionSyntax(PreAdamantParser_Antlr.NewMemoryExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			TypeArguments = Children.OfType<TypeArgumentsSyntax>().SingleOrDefault();
@@ -1933,7 +1947,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ArgumentListSyntax ArgumentList { get; }
 		public IReadOnlyList<MemberSyntax> Members { get; }
 
-		public NewObjectExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NewObjectExpressionSyntax(PreAdamantParser_Antlr.NewObjectExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			BaseTypes = Children.OfType<BaseTypesSyntax>().SingleOrDefault();
@@ -1951,7 +1965,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ArgumentListSyntax ArgumentList { get; }
 
-		public DeleteMemoryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public DeleteMemoryExpressionSyntax(PreAdamantParser_Antlr.DeleteMemoryExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			ArgumentList = Children.OfType<ArgumentListSyntax>().SingleOrDefault();
@@ -1968,7 +1982,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Expression { get; }
 		public TypeNameSyntax TypeName { get; }
 
-		public CastExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CastExpressionSyntax(PreAdamantParser_Antlr.CastExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -1985,7 +1999,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public TryExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public TryExpressionSyntax(PreAdamantParser_Antlr.TryExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -2003,7 +2017,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Then { get; }
 		public ExpressionSyntax Else { get; }
 
-		public IfExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IfExpressionSyntax(PreAdamantParser_Antlr.IfExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Condition = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -2022,7 +2036,7 @@ namespace PreAdamant.Compiler.Syntax
 		public ExpressionSyntax Lvalue { get; }
 		public ExpressionSyntax Rvalue { get; }
 
-		public AssignmentExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public AssignmentExpressionSyntax(PreAdamantParser_Antlr.AssignmentExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Lvalue = Children.OfType<ExpressionSyntax>().SingleOrDefault();
@@ -2037,7 +2051,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class LambdaExpressionSyntax : ExpressionSyntax
 	{
-		public LambdaExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public LambdaExpressionSyntax(PreAdamantParser_Antlr.LambdaExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -2052,7 +2066,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public SimpleNameSyntax SimpleName { get; }
 
-		public NameExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NameExpressionSyntax(PreAdamantParser_Antlr.NameExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			SimpleName = Children.OfType<SimpleNameSyntax>().SingleOrDefault();
@@ -2066,7 +2080,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class NullLiteralExpressionSyntax : ExpressionSyntax
 	{
-		public NullLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public NullLiteralExpressionSyntax(PreAdamantParser_Antlr.NullLiteralExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -2079,7 +2093,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class SelfExpressionSyntax : ExpressionSyntax
 	{
-		public SelfExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public SelfExpressionSyntax(PreAdamantParser_Antlr.SelfExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -2094,7 +2108,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public BooleanLiteralToken BooleanLiteral { get; }
 
-		public BooleanLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public BooleanLiteralExpressionSyntax(PreAdamantParser_Antlr.BooleanLiteralExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			BooleanLiteral = Children.OfType<BooleanLiteralToken>().SingleOrDefault();
@@ -2110,7 +2124,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public IntLiteralToken IntLiteral { get; }
 
-		public IntLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public IntLiteralExpressionSyntax(PreAdamantParser_Antlr.IntLiteralExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			IntLiteral = Children.OfType<IntLiteralToken>().SingleOrDefault();
@@ -2124,7 +2138,7 @@ namespace PreAdamant.Compiler.Syntax
 
 	public partial class UninitializedExpressionSyntax : ExpressionSyntax
 	{
-		public UninitializedExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UninitializedExpressionSyntax(PreAdamantParser_Antlr.UninitializedExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 		}
@@ -2139,7 +2153,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public StringLiteralToken StringLiteral { get; }
 
-		public StringLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public StringLiteralExpressionSyntax(PreAdamantParser_Antlr.StringLiteralExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			StringLiteral = Children.OfType<StringLiteralToken>().SingleOrDefault();
@@ -2155,7 +2169,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public CharLiteralToken CharLiteral { get; }
 
-		public CharLiteralExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public CharLiteralExpressionSyntax(PreAdamantParser_Antlr.CharLiteralExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			CharLiteral = Children.OfType<CharLiteralToken>().SingleOrDefault();
@@ -2171,7 +2185,7 @@ namespace PreAdamant.Compiler.Syntax
 	{
 		public ExpressionSyntax Expression { get; }
 
-		public UnsafeExpressionSyntax(IEnumerable<ISyntaxNode> allChildren)
+		public UnsafeExpressionSyntax(PreAdamantParser_Antlr.UnsafeExpressionContext context, IEnumerable<ISyntaxNode> allChildren)
 			: base(allChildren)
 		{
 			Expression = Children.OfType<ExpressionSyntax>().SingleOrDefault();

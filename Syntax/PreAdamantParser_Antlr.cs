@@ -3205,7 +3205,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 		}
 	}
 	public partial class PointerTypeContext : TypeNameContext {
-		public IToken isMut;
+		public IToken isMutable;
 		public TypeNameContext typeName() {
 			return GetRuleContext<TypeNameContext>(0);
 		}
@@ -3321,7 +3321,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 				_la = TokenStream.La(1);
 				if (_la==Mutable) {
 					{
-					State = 496; ((PointerTypeContext)_localctx).isMut = Match(Mutable);
+					State = 496; ((PointerTypeContext)_localctx).isMutable = Match(Mutable);
 					}
 				}
 
@@ -3449,7 +3449,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 		}
 	}
 	public partial class RefTypeContext : ValueTypeContext {
-		public IToken isMut;
+		public IToken isMutable;
 		public TypeNameContext typeName() {
 			return GetRuleContext<TypeNameContext>(0);
 		}
@@ -3469,7 +3469,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 		}
 	}
 	public partial class LifetimeTypeContext : ValueTypeContext {
-		public IToken isMut;
+		public IToken isMutable;
 		public TypeNameContext typeName() {
 			return GetRuleContext<TypeNameContext>(0);
 		}
@@ -3533,7 +3533,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 				_la = TokenStream.La(1);
 				if (_la==Mutable) {
 					{
-					State = 532; ((LifetimeTypeContext)_localctx).isMut = Match(Mutable);
+					State = 532; ((LifetimeTypeContext)_localctx).isMutable = Match(Mutable);
 					}
 				}
 
@@ -3561,7 +3561,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 				_la = TokenStream.La(1);
 				if (_la==Mutable) {
 					{
-					State = 540; ((RefTypeContext)_localctx).isMut = Match(Mutable);
+					State = 540; ((RefTypeContext)_localctx).isMutable = Match(Mutable);
 					}
 				}
 
@@ -5277,7 +5277,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 	}
 	public partial class SelfParameterContext : ParameterContext {
 		public IToken isRef;
-		public IToken isMut;
+		public IToken isMutable;
 		public SelfParameterContext(ParameterContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IPreAdamantParser_AntlrListener typedListener = listener as IPreAdamantParser_AntlrListener;
@@ -5371,7 +5371,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 				_la = TokenStream.La(1);
 				if (_la==Mutable) {
 					{
-					State = 914; ((SelfParameterContext)_localctx).isMut = Match(Mutable);
+					State = 914; ((SelfParameterContext)_localctx).isMutable = Match(Mutable);
 					}
 				}
 
