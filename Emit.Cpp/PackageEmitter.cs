@@ -359,29 +359,22 @@ namespace PreAdamant.Compiler.Emit.Cpp
 		#endregion
 
 		#region TypeNames
-		private static string TypeName(ReturnTypeSyntax type, bool isMutable)
+		private static string TypeName(ReturnTypeSyntax returnType, bool isMutable)
 		{
-			throw new NotImplementedException();
-			//if(type.type() != null)
-			//	return TypeName(type.type(), isMutable);
+			// This is the case of a non-terminating function i.e. `-> !`
+			if(returnType.Diverges)
+				return "void /*!*/";
 
-			//// This is the case of a non-terminating function i.e. `-> !`
-			//if(type.GetText() == "!")
-			//	return "void";
-
-			//throw new NotImplementedException($"Return type	`{type.GetText()}` not implemented");
+			return TypeName(returnType.Type, isMutable);
 		}
 
-		//	private static string TypeName(TypeContext type, bool isMutable)
-		//	{
-		//		if(type.valueType() != null)
-		//			return TypeName(type.valueType(), isMutable);
+		private static string TypeName(TypeSyntax type, bool isMutable)
+		{
+			if(type.IsVoid)
+				return "void";
 
-		//		if(type.GetText() == "void")
-		//			return "void";
-
-		//		throw new NotImplementedException($"Could not emit TypeName for `{type.GetText()}`");
-		//	}
+			return TypeName(type.ValueType, isMutable);
+		}
 
 		private static string TypeName(ValueTypeSyntax type, bool isMutable)
 		{

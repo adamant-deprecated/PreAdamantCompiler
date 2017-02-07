@@ -49,6 +49,9 @@ namespace PreAdamant.Compiler.Tools.Parse
 			var concatPattern = context as ConcatPatternContext;
 			if(concatPattern != null)
 				return BuildChildren(concatPattern.pattern(0), label, repeated).Concat(BuildChildren(concatPattern.pattern(1), label, repeated));
+			var alternationPattern = context as AlternationPatternContext;
+			if(alternationPattern != null)
+				return Distinct(BuildChildren(alternationPattern.pattern(0), label, repeated), BuildChildren(alternationPattern.pattern(1), label, repeated));
 
 			// Repetition Patterns
 			var zeroOrMorePattern = context as ZeroOrMorePatternContext;
@@ -62,10 +65,17 @@ namespace PreAdamant.Compiler.Tools.Parse
 				return BuildChildren(repititionWithPattern.pattern(), label, true);
 
 			// Skipped things
-			if(context is LiteralPatternContext || context is ITerminalNode || context is AlternationPatternContext)
+			if(context is LiteralPatternContext || context is ITerminalNode)
 				return Enumerable.Empty<ChildRule>();
 
 			throw new NotSupportedException($"Pattern {context.GetType().Name} not supported.");
+		}
+
+		private static IEnumerable<ChildRule> Distinct(IEnumerable<ChildRule> first, IEnumerable<ChildRule> second)
+		{
+			return first.Concat(second)
+				.GroupBy(r => r.Label)
+				.Select(g => g.First());
 		}
 	}
 }

@@ -73,9 +73,9 @@ functionType: typeName = funcTypeParameterList "->" returnType;
 LifetimeType: valueType = lifetime? isMutable:"mut"? typeName;
 RefType: valueType = "ref" "var"? isMutable:"mut"? typeName;
 
-type = valueType | "void";
+type = valueType | isVoid:"void";
 
-returnType =  type | "!";
+returnType =  type | diverges:"!";
 
 lifetime = "~" identifier | "~" "self" | "~" "own";
 

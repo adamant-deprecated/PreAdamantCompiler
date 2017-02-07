@@ -1190,6 +1190,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 	}
 
 	public partial class TypeContext : ParserRuleContext {
+		public IToken isVoid;
 		public ValueTypeContext valueType() {
 			return GetRuleContext<ValueTypeContext>(0);
 		}
@@ -1244,7 +1245,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 			case Void:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 201; Match(Void);
+				State = 201; _localctx.isVoid = Match(Void);
 				}
 				break;
 			default:
@@ -1263,6 +1264,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 	}
 
 	public partial class ReturnTypeContext : ParserRuleContext {
+		public IToken diverges;
 		public TypeContext type() {
 			return GetRuleContext<TypeContext>(0);
 		}
@@ -1318,7 +1320,7 @@ public partial class PreAdamantParser_Antlr : Parser {
 			case Panic:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 205; Match(Panic);
+				State = 205; _localctx.diverges = Match(Panic);
 				}
 				break;
 			default:
