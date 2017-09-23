@@ -171,7 +171,7 @@ xorExpression: expression = lhs:expression "xor" rhs:expression;
 orExpression: expression = lhs:expression "or" rhs:expression;
 coalesceExpression: expression = lhs:expression "??" rhs:expression;
 inExpression: expression = lhs:expression "in" rhs:expression;
-// Since new Class.Constructor() is indistiguishable from new Namespace.Class() we can"t parse for named constructor calls here
+// Since new Class.Constructor() is indistinguishable from new Namespace.Class() we can"t parse for named constructor calls here
 newExpression: expression = "new" ("(" placementArguments:argumentList ")"	)? (name|"copy") "(" constructorArguments:argumentList ")";
 newMemoryExpression: expression = "new" typeArguments? "(" argumentList ")";
 newObjectExpression: expression = "new" baseTypes? "(" argumentList ")" "{" member* "}";
