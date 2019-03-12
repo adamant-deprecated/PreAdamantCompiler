@@ -1,10 +1,10 @@
 # *Deprecated* Pre-Adamant Compiler
 
-In order to bootstrap the Adamant compiler, a compiler for the Pre-Adamant language is being written in C#.  The first version of the Adamant compiler will then be written in Pre-Adamant.  Pre-Adamant is a simplified, reduced feature version of the Adamant language.
+In order to bootstrap the Adamant compiler, a compiler for the Pre-Adamant language is being written in C#. The first version of the Adamant compiler will then be written in Pre-Adamant. Pre-Adamant is a simplified, reduced feature version of the Adamant language.
 
 ## Project Status: Alpha *Deprecated*
 
-This project should not be used. The current Adamant compiler is the "[adamant.tools.compiler.bootstrap](https://github.com/adamant/adamant.tools.compiler.bootstrap)" project.
+This project should not be used.
 
 ### Download and Use
 
@@ -12,7 +12,7 @@ Clone this git repo and compile using Visual Studio 2015.
 
 ## Pre-Adamant Language Features
 
-The Pre-Adamant Language is a modified form of the Adamant 1.0 Language.  The sections below describe the differences.
+The Pre-Adamant Language is a modified form of the Adamant 1.0 Language. The sections below describe the differences.
 
 ### Undecided for Pre-Adamant
 
